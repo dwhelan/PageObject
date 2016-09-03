@@ -8,7 +8,7 @@ namespace PageObjectTests
 {
     public abstract class AbstractTestPage : Page
     {
-        protected AbstractTestPage(PageSession session, string path) : base(session, "test.com", path, false)
+        protected AbstractTestPage(PageSession session, string path) : base(session, new Uri("test.com/"), path)
         {
         }
     }

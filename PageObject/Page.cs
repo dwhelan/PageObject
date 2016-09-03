@@ -1,55 +1,37 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PageObject
 {
     public abstract class Page
     {
-        public Uri Uri { get; private set; }
-        public List<string> Hosts { get; private set; }
+        public Uri Uri { get; }
+        public List<string> Hosts { get; }
+        protected readonly PageSession Session;
 
-        protected readonly PageSession Browser;
-
-        protected Page(PageSession browser, string host, string path, bool ssl=false, params string[] hostAliases)
+        protected Page(PageSession session, string url) : this(session, new Uri(url))
         {
-            Hosts = hostAliases.ToList();
-            Hosts.Add(host);
-
-            if (browser != null)
-            {
-                Browser = browser;
-                Browser.Configuration.AppHost = host;
-                Browser.Configuration.SSL = ssl;
-            }
         }
 
-        protected Page(PageSession browser, string url, params string[] hostAliases)
+        protected Page(PageSession session, Uri uri, string path) : this(session, new Uri(uri, path))
         {
-            Uri = new Uri(url);
-            if (Uri.Host.Length == 0)
-            {
-                Uri = new UriBuilder(Uri.Scheme, "localhost", Uri.Port, Uri.LocalPath).Uri;
-            }
-            Hosts = hostAliases.ToList();
-            Hosts.Add(Uri.Host);
+        }
 
-            if (browser != null)
-            {
-                Browser = browser;
-                Browser.Configuration.AppHost = Uri.Host.Length == 0 ? "localhost" : Uri.Host;
-                Browser.Configuration.SSL = Uri.Scheme == Uri.UriSchemeHttps;
-            }
+        protected Page(PageSession session, Uri uri)
+        {
+            Uri = uri;
+            Session = session;
+            Hosts = new List<string> { Uri.Host };
         }
 
         public void Visit()
         {
-            Browser.Visit(Uri.AbsoluteUri);
+            Session.Visit(Uri.AbsoluteUri);
         }
 
         public string Title
         {
-            get { return Browser.Title; }
+            get { return Session.Title; }
         }
     }
 }
