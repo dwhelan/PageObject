@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace PageObjectTests
 {
-    [TestFixture]
+    [TestFixture, Ignore]
     public class BrowserTests
     {
         private BrowserSession browserSession;

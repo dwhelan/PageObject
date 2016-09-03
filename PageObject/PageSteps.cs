@@ -22,8 +22,8 @@ namespace PageObject
         public void ThenIShouldBeOnThe(string pageName)
         {
             var expectedPage = PageFactory.Instance.Create(pageName);
-            Assert.Contains(Browser.Location.Host, expectedPage.HostAliases);
-            Assert.That(Browser.Location.LocalPath, Is.EqualTo(expectedPage.Path));
+            Assert.Contains(Browser.Location.Host, expectedPage.Hosts);
+            Assert.That(Browser.Location.LocalPath, Is.EqualTo(expectedPage.Uri.LocalPath));
             // TODO also check SSL and port
         }
 
