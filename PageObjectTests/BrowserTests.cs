@@ -14,40 +14,40 @@ namespace PageObjectTests
         [Test]
         public void Default()
         {
-            TestGoogleSearch();
+            TestBrowserInterationWith();
         }
 
         [Test]
         public void Firefox35()
         {
-            TestGoogleSearch(Browser.Firefox);
+            TestBrowserInterationWith(Browser.Firefox);
         }
 
         [Test]
         public void InternetExplorer()
         {
-            TestGoogleSearch(Browser.InternetExplorer);
+            TestBrowserInterationWith(Browser.InternetExplorer);
         }
 
         [Test, RequiresSTA]
         public void InternetExplorer_with_WatiN()
         {
-            TestGoogleSearch(Browser.InternetExplorer, typeof(WatiNDriver));
+            TestBrowserInterationWith(Browser.InternetExplorer, typeof(WatiNDriver));
         }
 
         [Test]
         public void Chrome()
         {
-            TestGoogleSearch(Browser.Chrome);
+            TestBrowserInterationWith(Browser.Chrome);
         }
 
         [Test]
         public void Phantomjs()
         {
-            TestGoogleSearch(Browser.PhantomJS);
+            TestBrowserInterationWith(Browser.PhantomJS);
         }
 
-        private void TestGoogleSearch(Browser browser = null, Type driver = null)
+        private void TestBrowserInterationWith(Browser browser = null, Type driver = null)
         {
             var configuration = new SessionConfiguration { AppHost = "google.com" };
 
