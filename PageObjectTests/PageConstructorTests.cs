@@ -22,25 +22,25 @@ namespace PageObjectTests
         [Test]
         public void Should_support_uri_only()
         {
-            Visit(new HomePage(session, HomePage.Uri));
+            EnsureHomePageIsValid(new HomePage(session, HomePage.Uri));
         }
 
         [Test]
         public void Should_support_uri_and_relative_path()
         {
-            Visit(new HomePage(session, Root.Uri, "Home.html"));
+            EnsureHomePageIsValid(new HomePage(session, Root.Uri, "Home.html"));
         }
 
         [Test]
         public void Should_support_url_only()
         {
-            Visit(new HomePage(session, HomePage.Url));
+            EnsureHomePageIsValid(new HomePage(session, HomePage.Url));
         }
 
         [Test]
         public void Should_support_url_and_relative_path()
         {
-            Visit(new HomePage(session, Root.Url, "Home.html"));
+            EnsureHomePageIsValid(new HomePage(session, Root.Url, "Home.html"));
         }
 
         [TearDown]
@@ -49,7 +49,7 @@ namespace PageObjectTests
             session?.Dispose();
         }
 
-        private void Visit(Page page)
+        private void EnsureHomePageIsValid(Page page)
         {
             Assert.That(page.Uri, Is.EqualTo(HomePage.Uri));
             Assert.That(page.Url, Is.EqualTo(HomePage.Url));

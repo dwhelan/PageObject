@@ -10,7 +10,7 @@ namespace PageObject
         public List<string> Hosts { get; }
         public string Title => Session.Title;
 
-        protected readonly PageSession Session;
+        protected PageSession Session { get; }
 
         protected Page(PageSession session, string url, string relativePath = "") : this(session, new Uri(url), relativePath)
         {
@@ -27,6 +27,5 @@ namespace PageObject
         {
             Session.Visit(Url);
         }
-
     }
 }
