@@ -74,7 +74,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageTests.cs" />
+    <Compile Include="FilePages\HomePage.cs" />
+    <Compile Include="FilePages\Root.cs" />
+    <Compile Include="PageConstructorTests.cs" />
     <Compile Include="BrowserTests.cs" />
     <Compile Include="PageFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
