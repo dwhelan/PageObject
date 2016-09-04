@@ -17,9 +17,9 @@ namespace PageObject
         {
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach (var siteClass in assembly.GetTypes().Where(IsValidPageClass))
+                foreach (var pageClass in assembly.GetTypes().Where(IsValidPageClass))
                 {
-                    Add(siteClass);
+                    Add(pageClass);
                 }
             }
         }
@@ -39,14 +39,14 @@ namespace PageObject
             return pageClasses.Contains(siteClass);
         }
 
-        public Page Create(string pageName, PageSession browser = null)
+        public Page PageFor(string pageName, PageSession session = null)
         {
-            return Create(PageClassFor(pageName), browser);
+            return PageFor(PageClassFor(pageName), session);
         }
 
-        public Page Create(Type pageClass, PageSession browser = null)
+        public Page PageFor(Type pageClass, PageSession session = null)
         {
-            return (Page) Activator.CreateInstance(pageClass, browser);
+            return (Page) Activator.CreateInstance(pageClass, session);
         }
 
         public Type PageClassFor(string pageName)
@@ -73,9 +73,9 @@ namespace PageObject
             return type.IsSubclassOf(typeof(Page)) && !type.IsAbstract;
         }
 
-        private static bool PageNameMatchesPageClass(string pageName, Type type)
+        private static bool PageNameMatchesPageClass(string pageName, Type pageClass)
         {
-            return RemovePunctuation(type.FullName).EndsWith(RemovePunctuation(pageName));
+            return RemovePunctuation(pageClass.FullName).EndsWith(RemovePunctuation(pageName));
         }
 
         private static string RemovePunctuation(string name1)

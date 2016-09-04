@@ -32,7 +32,7 @@ namespace PageObject
         }
 
         [AfterScenario]
-        public void DisposeOfSession()
+        public void DisposeSession()
         {
             session?.Dispose();
         }

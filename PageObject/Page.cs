@@ -10,10 +10,8 @@ namespace PageObject
         public string Url => Uri.AbsolutePath;
         public List<string> Hosts { get; }
         public string Title => Browser.Title;
-        protected BrowserSession Browser {
-            get { return Session.Browser; }
-        }
 
+        protected BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }
 
         protected Page(PageSession session, string url, string relativePath = "") : this(session, new Uri(url), relativePath)
@@ -30,6 +28,7 @@ namespace PageObject
         public void Visit()
         {
             Browser.Visit(Url);
+            Session.Page = this;
         }
     }
 }
