@@ -22,8 +22,8 @@ namespace PageObject
         public void ThenIShouldBeOnThe(string pageName)
         {
             var expectedPage = PageFactory.Instance.Create(pageName);
-            Assert.Contains(Browser.Location.Host, expectedPage.Hosts);
-            Assert.That(Browser.Location.LocalPath, Is.EqualTo(expectedPage.Uri.LocalPath));
+            Assert.Contains(Session.Browser.Location.Host, expectedPage.Hosts);
+            Assert.That(Session.Browser.Location.LocalPath, Is.EqualTo(expectedPage.Uri.LocalPath));
             // TODO also check SSL and port
         }
 
@@ -36,21 +36,21 @@ namespace PageObject
         [Then(@"I should see ""(.*)""")]
         public void ThenIShouldSee(string text)
         {
-            Assert.That(Browser, Shows.Content(text));
+            Assert.That(Session, Shows.Content(text));
         }
 
         // You should create a page object with this behaviour rather than using the browser directly
         [When(@"I click the ""(.*)"" button")]
         public void WhenIClickTheButton(string search)
         {
-            Browser.ClickButton(search);
+            Session.Browser.ClickButton(search);
         }
 
         // You should create a page object with this behaviour rather than using the browser directly
         [When(@"I click the ""(.*)"" link")]
         public void WhenIClickTheLink(string name)
         {
-            Browser.ClickLink(name);
+            Session.Browser.ClickLink(name);
         }
     }
 }

@@ -6,23 +6,23 @@ namespace PageObject
     public abstract class Base
     {
         protected readonly IObjectContainer ObjectContainer;
-        protected readonly PageSession Browser;
+        protected readonly PageSession Session;
 
         protected Page Page
         {
-            get { return Browser.Page; }
-            set { Browser.Page = value; }
+            get { return Session.Page; }
+            set { Session.Page = value; }
         }
 
         protected Base(IObjectContainer objectContainer)
         {
             ObjectContainer = objectContainer;
-            Browser = objectContainer.Resolve<PageSession>();
+            Session = objectContainer.Resolve<PageSession>();
         }
 
         protected Page PageFor(string pageName)
         {
-            return Page = PageFactory.Instance.Create(pageName, Browser);
+            return Page = PageFactory.Instance.Create(pageName, Session);
         }
     }
 }

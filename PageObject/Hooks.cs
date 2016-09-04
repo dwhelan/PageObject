@@ -10,7 +10,7 @@ namespace PageObject
     public class Hooks
     {
         private readonly IObjectContainer objectContainer;
-        private BrowserSession browser;
+        private PageSession session;
         private readonly List<Page> pages = new List<Page>();
 
         public Hooks(IObjectContainer objectContainer)
@@ -29,15 +29,15 @@ namespace PageObject
                 //Browser = Browser.InternetExplorer,
                 //Browser = Browser.PhantomJS,
             };
-            browser = new PageSession(configuration);
-            objectContainer.RegisterInstanceAs(browser);
+            session = new PageSession(configuration);
+            objectContainer.RegisterInstanceAs(session);
             objectContainer.RegisterInstanceAs(pages);
         }
 
         [AfterScenario]
         public void DisposeSites()
         {
-            browser.Dispose();
+            session.Dispose();
         }
     }
 }

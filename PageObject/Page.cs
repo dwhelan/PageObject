@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Coypu;
 
 namespace PageObject
 {
@@ -8,7 +9,10 @@ namespace PageObject
         public Uri Uri { get; }
         public string Url => Uri.AbsolutePath;
         public List<string> Hosts { get; }
-        public string Title => Session.Title;
+        public string Title => Browser.Title;
+        protected BrowserSession Browser {
+            get { return Session.Browser; }
+        }
 
         protected PageSession Session { get; }
 
@@ -25,7 +29,7 @@ namespace PageObject
 
         public void Visit()
         {
-            Session.Visit(Url);
+            Browser.Visit(Url);
         }
     }
 }
