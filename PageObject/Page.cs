@@ -9,17 +9,13 @@ namespace PageObject
         public List<string> Hosts { get; }
         protected readonly PageSession Session;
 
-        protected Page(PageSession session, string url) : this(session, new Uri(url))
+        protected Page(PageSession session, string url, string relativePath = "") : this(session, new Uri(url), relativePath)
         {
         }
 
-        protected Page(PageSession session, Uri uri, string path) : this(session, new Uri(uri, path))
+        protected Page(PageSession session, Uri uri, string relativePath  = "")
         {
-        }
-
-        protected Page(PageSession session, Uri uri)
-        {
-            Uri = uri;
+            Uri = new Uri(uri, relativePath );
             Session = session;
             Hosts = new List<string> { Uri.Host };
         }
