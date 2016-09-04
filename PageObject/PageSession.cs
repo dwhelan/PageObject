@@ -9,13 +9,13 @@ namespace PageObject
         public SessionConfiguration Configuration { get; }
         public Page Page { get; set; }
 
-        public PageSession(SessionConfiguration sessionConfiguration)
+        public PageSession(SessionConfiguration configuration)
         {
-            Configuration = sessionConfiguration;
-            Browser = new BrowserSession(sessionConfiguration);
+            Configuration = configuration;
+            Browser = new BrowserSession(configuration);
         }
 
-        private bool disposed = false;
+        private bool disposed;
 
         public void Dispose()
         {

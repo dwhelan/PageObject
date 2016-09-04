@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BoDi;
 using Coypu;
 using Coypu.Drivers;
@@ -11,7 +10,6 @@ namespace PageObject
     {
         private readonly IObjectContainer objectContainer;
         private PageSession session;
-        private readonly List<Page> pages = new List<Page>();
 
         public Hooks(IObjectContainer objectContainer)
         {
@@ -19,7 +17,7 @@ namespace PageObject
         }
 
         [BeforeScenario]
-        public void Before()
+        public void CreateSession()
         {
             var configuration = new SessionConfiguration
             {
@@ -31,13 +29,12 @@ namespace PageObject
             };
             session = new PageSession(configuration);
             objectContainer.RegisterInstanceAs(session);
-            objectContainer.RegisterInstanceAs(pages);
         }
 
         [AfterScenario]
-        public void DisposeSites()
+        public void DisposeOfSession()
         {
-            session.Dispose();
+            session?.Dispose();
         }
     }
 }
