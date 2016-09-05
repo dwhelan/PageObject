@@ -22,25 +22,25 @@ namespace PageObjectTests
         [Test]
         public void Should_support_uri_only()
         {
-            EnsureHomePageIsValid(new HomePage(session, HomePage.Uri));
+            EnsureHomePageIsValid(new Pages.File.HomePage(session, HomePage.Uri));
         }
 
         [Test]
         public void Should_support_uri_and_relative_path()
         {
-            EnsureHomePageIsValid(new HomePage(session, Root.Uri, "Home.html"));
+            EnsureHomePageIsValid(new Pages.File.HomePage(session, Root.Uri, "Home.html"));
         }
 
         [Test]
         public void Should_support_url_only()
         {
-            EnsureHomePageIsValid(new HomePage(session, HomePage.Url));
+            EnsureHomePageIsValid(new Pages.File.HomePage(session, Pages.File.HomePage.Url));
         }
 
         [Test]
         public void Should_support_url_and_relative_path()
         {
-            EnsureHomePageIsValid(new HomePage(session, Root.Url, "Home.html"));
+            EnsureHomePageIsValid(new Pages.File.HomePage(session, Root.Url, "Home.html"));
         }
 
         [TearDown]
@@ -51,8 +51,8 @@ namespace PageObjectTests
 
         private void EnsureHomePageIsValid(Page page)
         {
-            Assert.That(page.Uri, Is.EqualTo(HomePage.Uri));
-            Assert.That(page.Url, Is.EqualTo(HomePage.Url));
+            Assert.That(page.Uri, Is.EqualTo(Pages.File.HomePage.Uri));
+            Assert.That(page.Url, Is.EqualTo(Pages.File.HomePage.Url));
             CollectionAssert.AreEqual(page.Hosts, new List<string> { "" });
 
             page.Visit();

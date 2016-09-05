@@ -86,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomePage.feature</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Google\HomePage.cs" />
     <Compile Include="Steps\PageSteps.cs" />
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="PageConstructorTests.cs" />
@@ -110,6 +111,7 @@
   <ItemGroup>
     <Content Include="Pages\File\Home.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

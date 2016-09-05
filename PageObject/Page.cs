@@ -7,7 +7,7 @@ namespace PageObject
     public abstract class Page
     {
         public Uri Uri { get; }
-        public string Url => Uri.AbsolutePath;
+        public string Url => Uri.AbsoluteUri;
         public List<string> Hosts { get; }
         public string Title => Browser.Title;
 
@@ -23,6 +23,18 @@ namespace PageObject
             Session = session;
             Uri = new Uri(uri, relativePath );
             Hosts = new List<string> { Uri.Host };
+        }
+
+        protected Page(PageSession session)
+        {
+            Session = session;
+            Uri = UrlAttributeValue;
+            Hosts = new List<string> { Uri.Host };
+        }
+
+        private Uri UrlAttributeValue
+        {
+            get { return new Uri("http://www.google.com");  }
         }
 
         public void Visit()
