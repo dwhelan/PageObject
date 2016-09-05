@@ -79,13 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageAttributeTests.cs" />
-    <Compile Include="Pages\AttributeTests\Constants.cs" />
-    <Compile Include="Pages\AttributeTests\WithParentAndEmptyPath.cs" />
-    <Compile Include="Pages\AttributeTests\WithParentAndMissingPath.cs" />
-    <Compile Include="Pages\AttributeTests\WithParentAndNullPath.cs" />
-    <Compile Include="Pages\AttributeTests\WithParentAndPath.cs" />
-    <Compile Include="Pages\AttributeTests\WithParentThatIsNotAPage.cs" />
-    <Compile Include="Pages\AttributeTests\WithPathOnly.cs" />
     <Compile Include="Pages\File\HomePage.cs" />
     <Compile Include="Pages\File\Root.cs" />
     <Compile Include="Pages\File\HomePage.feature.cs">
@@ -94,6 +87,7 @@
       <DependentUpon>HomePage.feature</DependentUpon>
     </Compile>
     <Compile Include="Pages\Google\GooglePage.cs" />
+    <Compile Include="Pages\AttributeTestPages.cs" />
     <Compile Include="Steps\PageSteps.cs" />
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="PageConstructorTests.cs" />

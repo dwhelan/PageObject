@@ -1,41 +1,22 @@
 using System;
 using NUnit.Framework;
 using PageObject;
-using PageObjectTests.Pages.AttributeTests;
+using PageObjectTests.Pages;
 
 namespace PageObjectTests
 {
     [TestFixture]
     public class PageAttributeTests
     {
-        [Test]
-        public void Should_support_path_only()
+        [TestCase(typeof(WithPathOnly))]
+        [TestCase(typeof(WithParentAndPath))]
+        [TestCase(typeof(WithParentAndMissingPath))]
+        [TestCase(typeof(WithParentAndNullPath))]
+        [TestCase(typeof(WithParentAndEmptyPath))]
+        public void Valid_page_classes(Type pageClass)
         {
-            EnsurePageIsValid(new WithPathOnly());
-        }
-
-        [Test]
-        public void Should_support_parent_and_path()
-        {
-            EnsurePageIsValid(new WithParentAndPath());
-        }
-
-        [Test]
-        public void Should_support_parent_and_missing_path()
-        {
-            EnsurePageIsValid(new WithParentAndMissingPath());
-        }
-
-        [Test]
-        public void Should_support_parent_and_empty_path()
-        {
-            EnsurePageIsValid(new WithParentAndEmptyPath());
-        }
-
-        [Test]
-        public void Should_support_parent_and_null_path()
-        {
-            EnsurePageIsValid(new WithParentAndNullPath());
+            var page = ((Page) Activator.CreateInstance(pageClass));
+            Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
         }
 
         [Test]
@@ -67,15 +48,5 @@ namespace PageObjectTests
         {
             Assert.Fail("Not yet implemented");
         }
-
-        private void EnsurePageIsValid(Page page)
-        {
-            Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
-            //CollectionAssert.AreEqual(page.Hosts, new List<string> { "" });
-
-            //page.Visit();
-            //Assert.That(page.Title, Is.EqualTo("File Home Page"));
-        }
-
     }
 }
