@@ -1,13 +1,14 @@
 using System;
 using PageObject;
 
-namespace PageObjectTests.FilePages
+namespace PageObjectTests.Pages.File
 {
     internal class HomePage : Page
     {
         internal new static Uri Uri => new Uri(Root.Uri, "Home.html");
         internal new static string Url => Uri.AbsolutePath;
 
+        [Page("http://www.google.com")]
         public HomePage(PageSession session) : base(session, Uri)
         {
         }
@@ -28,6 +29,16 @@ namespace PageObjectTests.FilePages
 
         public HomePage(PageSession session, string url, string relativePath) : base(session, url, relativePath)
         {
+        }
+    }
+
+    internal class PageAttribute : Attribute
+    {
+        public readonly string url;
+
+        public PageAttribute(string url)
+        {
+            this.url = url;
         }
     }
 }

@@ -78,9 +78,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilePages\HomePage.cs" />
-    <Compile Include="FilePages\Root.cs" />
-    <Compile Include="FilePages\HomePage.feature.cs">
+    <Compile Include="PageAttributeTests.cs" />
+    <Compile Include="Pages\File\HomePage.cs" />
+    <Compile Include="Pages\File\Root.cs" />
+    <Compile Include="Pages\File\HomePage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HomePage.feature</DependentUpon>
@@ -94,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="FilePages\HomePage.feature">
+    <None Include="Pages\File\HomePage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>HomePage.feature.cs</LastGenOutput>
     </None>
@@ -107,7 +108,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FilePages\Home.html" />
+    <Content Include="Pages\File\Home.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

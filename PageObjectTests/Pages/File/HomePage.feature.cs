@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace PageObjectTests.FilePages
+namespace PageObjectTests.Pages.File
 {
     using TechTalk.SpecFlow;
     
@@ -72,7 +72,7 @@ namespace PageObjectTests.FilePages
 #line 3
 this.ScenarioSetup(scenarioInfo);
 #line 4
- testRunner.When("I browse to the \"Home Page\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I browse to the \"File Home Page\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 5
  testRunner.Then("The page title should be \"File Home Page\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

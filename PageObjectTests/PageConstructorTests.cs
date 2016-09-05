@@ -3,7 +3,7 @@ using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject;
-using PageObjectTests.FilePages;
+using PageObjectTests.Pages.File;
 
 namespace PageObjectTests
 {
