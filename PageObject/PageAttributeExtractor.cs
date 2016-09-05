@@ -4,7 +4,17 @@ namespace PageObject
 {
     internal class PageAttributeExtractor
     {
-        public Uri Uri => ParentUri == null ? new Uri(Path) : new Uri(ParentUri, Path);
+        public Uri Uri
+        {
+            get
+            {
+                if (ParentUri == null)
+                    return new Uri(Path);
+
+                return new Uri(ParentUri, Path);
+            }
+        }
+
         public string Path => PageAttribute.Path;
 
         private PageAttribute pageAttribute;
