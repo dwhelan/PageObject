@@ -5,18 +5,17 @@ namespace PageObject
     public class PageAttribute : Attribute
     {
         public Type ParentPageClass { get; }
-        public string Url { get; }
+        public string Path { get; }
 
-        public PageAttribute(string url)
+        public PageAttribute(string path)
         {
-            Url = url;
+            Path = path;
         }
 
-        public PageAttribute(Type parentPageClass, string url)
+        public PageAttribute(Type parentPageClass, string path)
         {
             ParentPageClass = parentPageClass;
-            Url = url;
+            Path = path;
         }
-
     }
 }

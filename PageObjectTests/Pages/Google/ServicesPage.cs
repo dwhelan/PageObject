@@ -1,15 +1,23 @@
+using System;
 using PageObject;
 
 namespace PageObjectTests.Pages.Google
 {
-    [Page(typeof(GooglePage), "services")]
-    public class ServicesPage : Page
+    public static class ServicesPage
     {
-        public ServicesPage(PageSession session = null) : base(session)
+        public static Uri Uri = new Uri("http://www.google.com/services");
+    }
+
+    [Page(typeof(GooglePage), "services")]
+    public class ServicesPageWithParentPageAndPath : Page
+    {
+        internal new static Uri Uri => new Uri("http://www.google.com/services");
+
+        public ServicesPageWithParentPageAndPath(PageSession session = null) : base(session)
         {
         }
     }
-
+ 
     [Page("http://www.google.com/services")]
     public class ServicesPageWithUrlOnly : Page
     {
