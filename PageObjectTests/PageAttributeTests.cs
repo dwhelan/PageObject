@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using NUnit.Framework;
 using PageObject;
 using PageObjectTests.Pages;
@@ -13,20 +14,26 @@ namespace PageObjectTests
         [TestCase(typeof(WithParentAndMissingPath))]
         [TestCase(typeof(WithParentAndNullPath))]
         [TestCase(typeof(WithParentAndEmptyPath))]
-        public void Valid_page_classes(Type pageClass)
+        public void Should_be_a_valid_page(Type pageClass)
         {
-            var page = ((Page) Activator.CreateInstance(pageClass));
+            var page = CreatePage(pageClass);
             Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
         }
 
-        [Test]
-        public void Should_throw_if_parent_is_not_a_subclass_of_Page()
+        [TestCase(typeof(WithParentThatIsNotAPage))]
+        public void Should_not_be_a_valid_page(Type pageClass)
         {
-            Assert.Throws<ArgumentException>(() => new WithParentThatIsNotAPage());
+            Assert.Throws<ArgumentException>(() => CreatePage(pageClass));
         }
 
         [Test, Ignore]
         public void Should_throw_if_parent_causes_circular_loop()
+        {
+            Assert.Fail("Not yet implemented");
+        }
+
+        [Test, Ignore]
+        public void Should_support_uri_only()
         {
             Assert.Fail("Not yet implemented");
         }
@@ -37,16 +44,16 @@ namespace PageObjectTests
             Assert.Fail("Not yet implemented");
         }
 
-        [Test, Ignore]
-        public void Should_support_url_only()
+        private static Page CreatePage(Type pageClass)
         {
-            Assert.Fail("Not yet implemented");
-        }
-
-        [Test, Ignore]
-        public void Should_support_url_and_relative_path()
-        {
-            Assert.Fail("Not yet implemented");
+            try
+            {
+                return (Page)Activator.CreateInstance(pageClass);
+            }
+            catch (TargetInvocationException x)
+            {
+                throw x.InnerException;
+            }
         }
     }
 }
