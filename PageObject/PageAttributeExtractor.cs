@@ -24,9 +24,18 @@ namespace PageObject
         internal PageAttributeExtractor(Type pageClass)
         {
             this.pageClass = pageClass;
+
+            if (!ValidParentPage())
+                throw new ArgumentException(string.Format("The parent page for {0}, must be a subclass of {1}", pageClass, typeof(Page)));
+
         }
 
-        private Type ParentPageClass => PageAttribute.ParentPageClass;
+        private bool ValidParentPage()
+        {
+            return ParentPageClass == null || ParentPageClass.IsSubclassOf(typeof(Page));
+        }
+
+        private Type ParentPageClass => PageAttribute.Parent;
 
         private Uri ParentUri
         {
@@ -57,7 +66,7 @@ namespace PageObject
                         return pageAttribute = (PageAttribute) attribute;
                     }
                 }
-                throw new Exception("Missing attribute value!");
+                throw new Exception(string.Format("Missing [Page] attribute for {0}", pageClass));
             }
         }
     }

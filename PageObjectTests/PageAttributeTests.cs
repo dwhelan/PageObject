@@ -5,6 +5,7 @@ using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject;
 using PageObjectTests.Pages.Google;
+using WatiN.Core.Exceptions;
 
 namespace PageObjectTests
 {
@@ -18,53 +19,56 @@ namespace PageObjectTests
         }
 
         [Test]
-        public void Should_support_parent_page_and_path()
+        public void Should_support_parent_and_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentPageAndPath());
+            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndPath());
         }
 
 
         [Test]
-        public void Should_support_parent_page_and_missing_path()
+        public void Should_support_parent_and_missing_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentPageAndMissingPath());
+            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndMissingPath());
         }
 
         [Test]
-        public void Should_support_parent_page_and_empty_path()
+        public void Should_support_parent_and_empty_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentPageAndEmptyPath());
+            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndEmptyPath());
         }
 
         [Test]
-        public void Should_support_parent_page_and_null_path()
+        public void Should_support_parent_and_null_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentPageAndNullPath());
+            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndNullPath());
         }
 
         [Test]
-        public void Should_support_uri_and_relative_path()
+        public void Should_throw_if_parent_is_not_a_subclass_of_Page()
         {
-        }
-
-        [Test]
-        public void Should_support_url_only()
-        {
-        }
-
-        [Test]
-        public void Should_support_url_and_relative_path()
-        {
+            Assert.Throws<ArgumentException>(() => new ServicesPageWithParentThatIsNotAPage());
         }
 
         [Test, Ignore]
-        public void Should_throw_if_page_class_is_not_a_subclass_of_Page()
+        public void Should_throw_if_parent_causes_circular_loop()
         {
             Assert.Fail("Not yet implemented");
         }
 
         [Test, Ignore]
-        public void Should_throw_if_page_class_causes_circular_loop()
+        public void Should_support_uri_and_relative_path()
+        {
+            Assert.Fail("Not yet implemented");
+        }
+
+        [Test, Ignore]
+        public void Should_support_url_only()
+        {
+            Assert.Fail("Not yet implemented");
+        }
+
+        [Test, Ignore]
+        public void Should_support_url_and_relative_path()
         {
             Assert.Fail("Not yet implemented");
         }

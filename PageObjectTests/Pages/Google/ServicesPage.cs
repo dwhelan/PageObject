@@ -17,34 +17,43 @@ namespace PageObjectTests.Pages.Google
     }
 
     [Page(typeof(GooglePage), "services")]
-    public class ServicesPageWithParentPageAndPath : Page
+    public class ServicesPageWithParentAndPath : Page
     {
-        public ServicesPageWithParentPageAndPath(PageSession session = null) : base(session)
+        public ServicesPageWithParentAndPath(PageSession session = null) : base(session)
         {
         }
     }
 
     [Page(typeof(ServicesPageWithPathOnly))]
-    public class ServicesPageWithParentPageAndMissingPath : Page
+    public class ServicesPageWithParentAndMissingPath : Page
     {
-        public ServicesPageWithParentPageAndMissingPath(PageSession session = null) : base(session)
+        public ServicesPageWithParentAndMissingPath(PageSession session = null) : base(session)
         {
         }
     }
 
     [Page(typeof(ServicesPageWithPathOnly), "")]
-    public class ServicesPageWithParentPageAndEmptyPath : Page
+    public class ServicesPageWithParentAndEmptyPath : Page
     {
-        public ServicesPageWithParentPageAndEmptyPath(PageSession session = null) : base(session)
+        public ServicesPageWithParentAndEmptyPath(PageSession session = null) : base(session)
         {
         }
     }
 
     [Page(typeof(ServicesPageWithPathOnly), null)]
-    public class ServicesPageWithParentPageAndNullPath : Page
+    public class ServicesPageWithParentAndNullPath : Page
     {
-        public ServicesPageWithParentPageAndNullPath(PageSession session = null) : base(session)
+        public ServicesPageWithParentAndNullPath(PageSession session = null) : base(session)
         {
         }
     }
+
+    [Page(typeof(string))]
+    public class ServicesPageWithParentThatIsNotAPage : Page
+    {
+        public ServicesPageWithParentThatIsNotAPage(PageSession session = null) : base(session)
+        {
+        }
+    }
+
 }

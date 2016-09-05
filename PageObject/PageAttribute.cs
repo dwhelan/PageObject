@@ -1,11 +1,10 @@
 using System;
-using NUnit.Framework.Constraints;
 
 namespace PageObject
 {
     public class PageAttribute : Attribute
     {
-        public Type ParentPageClass { get; }
+        public Type Parent { get; }
         public string Path { get; }
 
         public PageAttribute(string path)
@@ -13,9 +12,9 @@ namespace PageObject
             Path = path;
         }
 
-        public PageAttribute(Type parentPageClass, string path = null)
+        public PageAttribute(Type parent, string path = null)
         {
-            ParentPageClass = parentPageClass;
+            Parent = parent;
             Path = path;
         }
     }
