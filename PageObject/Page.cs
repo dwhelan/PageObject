@@ -28,13 +28,26 @@ namespace PageObject
         protected Page(PageSession session)
         {
             Session = session;
-            Uri = UrlAttributeValue;
+            Uri = new Uri(UrlAttributeValue);
             Hosts = new List<string> { Uri.Host };
         }
 
-        private Uri UrlAttributeValue
+        private string UrlAttributeValue
         {
-            get { return new Uri("http://www.google.com");  }
+            get
+            {
+                var attributes = Attribute.GetCustomAttributes(GetType());
+                foreach (var attribute in attributes)
+                {
+                    var pageAttribute = attribute as PageAttribute;
+                    if (pageAttribute != null)
+                    {
+                        return pageAttribute.url;
+                    }
+                }
+
+                throw new Exception("Missing attribute value!");
+            }
         }
 
         public void Visit()
