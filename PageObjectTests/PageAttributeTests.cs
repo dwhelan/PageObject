@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using Coypu;
-using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject;
-using PageObjectTests.Pages.Google;
-using WatiN.Core.Exceptions;
+using PageObjectTests.Pages.AttributeTests;
 
 namespace PageObjectTests
 {
@@ -15,38 +11,37 @@ namespace PageObjectTests
         [Test]
         public void Should_support_path_only()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithPathOnly());
+            EnsurePageIsValid(new WithPathOnly());
         }
 
         [Test]
         public void Should_support_parent_and_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndPath());
+            EnsurePageIsValid(new WithParentAndPath());
         }
-
 
         [Test]
         public void Should_support_parent_and_missing_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndMissingPath());
+            EnsurePageIsValid(new WithParentAndMissingPath());
         }
 
         [Test]
         public void Should_support_parent_and_empty_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndEmptyPath());
+            EnsurePageIsValid(new WithParentAndEmptyPath());
         }
 
         [Test]
         public void Should_support_parent_and_null_path()
         {
-            EnsureHomeServicesPageIsValid(new ServicesPageWithParentAndNullPath());
+            EnsurePageIsValid(new WithParentAndNullPath());
         }
 
         [Test]
         public void Should_throw_if_parent_is_not_a_subclass_of_Page()
         {
-            Assert.Throws<ArgumentException>(() => new ServicesPageWithParentThatIsNotAPage());
+            Assert.Throws<ArgumentException>(() => new WithParentThatIsNotAPage());
         }
 
         [Test, Ignore]
@@ -73,10 +68,9 @@ namespace PageObjectTests
             Assert.Fail("Not yet implemented");
         }
 
-        private void EnsureHomeServicesPageIsValid(Page page)
+        private void EnsurePageIsValid(Page page)
         {
-            Assert.That(page.Uri, Is.EqualTo(ServicesPage.Uri));
-            Assert.That(page.Url, Is.EqualTo("http://www.google.com/services"));
+            Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
             //CollectionAssert.AreEqual(page.Hosts, new List<string> { "" });
 
             //page.Visit();
