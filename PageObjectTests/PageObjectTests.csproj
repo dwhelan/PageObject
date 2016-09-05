@@ -86,7 +86,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomePage.feature</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Google\HomePage.cs" />
+    <Compile Include="Pages\Google\ServicesPage.cs" />
+    <Compile Include="Pages\Google\GooglePage.cs" />
     <Compile Include="Steps\PageSteps.cs" />
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="PageConstructorTests.cs" />

@@ -27,33 +27,48 @@ namespace PageObject
 
         protected Page(PageSession session)
         {
+            var extractor = new PageAttributeExtractor(this);
             Session = session;
-            Uri = new Uri(UrlAttributeValue);
+            Uri = new Uri(extractor.Url);
             Hosts = new List<string> { Uri.Host };
-        }
-
-        private string UrlAttributeValue
-        {
-            get
-            {
-                var attributes = Attribute.GetCustomAttributes(GetType());
-                foreach (var attribute in attributes)
-                {
-                    var pageAttribute = attribute as PageAttribute;
-                    if (pageAttribute != null)
-                    {
-                        return pageAttribute.url;
-                    }
-                }
-
-                throw new Exception("Missing attribute value!");
-            }
         }
 
         public void Visit()
         {
             Browser.Visit(Url);
             Session.Page = this;
+        }
+    }
+
+    internal class PageAttributeExtractor
+    {
+        private PageAttribute pageAttribute;
+
+        internal PageAttributeExtractor(Page page)
+        {
+            Page = page;
+        }
+
+        public Page Page { get; set; }
+        public string Url {  get { return PageAttribute.Url;  } }
+
+        internal PageAttribute PageAttribute
+        {
+            get
+            {
+                if (pageAttribute != null)
+                    return pageAttribute;
+
+                var attributes = Attribute.GetCustomAttributes(Page.GetType());
+                foreach (var attribute in attributes)
+                {
+                    if (attribute is PageAttribute)
+                    {
+                        return pageAttribute = (PageAttribute) attribute;
+                    }
+                }
+                throw new Exception("Missing attribute value!");
+            }
         }
     }
 }

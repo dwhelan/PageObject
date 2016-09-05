@@ -13,31 +13,34 @@ namespace PageObjectTests
         [Test]
         public void Should_support_uri_only()
         {
-            EnsureHomePageIsValid(new HomePage(null));
+            EnsureHomeServicesPageIsValid(new ServicesPageWithUrlOnly());
+        }
+
+        [Test, Ignore]
+        public void Should_support_parent_page_and_relative_path()
+        {
+            EnsureHomeServicesPageIsValid(new ServicesPage());
         }
 
         [Test]
         public void Should_support_uri_and_relative_path()
         {
-            //EnsureHomePageIsValid(new HomePage(session, Root.Uri, "Home.html"));
         }
 
         [Test]
         public void Should_support_url_only()
         {
-            //EnsureHomePageIsValid(new HomePage(session, HomePage.Url));
         }
 
         [Test]
         public void Should_support_url_and_relative_path()
         {
-            //EnsureHomePageIsValid(new HomePage(session, Root.Url, "Home.html"));
         }
 
-        private void EnsureHomePageIsValid(Page page)
+        private void EnsureHomeServicesPageIsValid(Page page)
         {
             //Assert.That(page.Uri, Is.EqualTo(HomePage.Uri));
-            Assert.That(page.Url, Is.EqualTo("http://www.google.com/"));
+            Assert.That(page.Url, Is.EqualTo("http://www.google.com/services"));
             //CollectionAssert.AreEqual(page.Hosts, new List<string> { "" });
 
             //page.Visit();

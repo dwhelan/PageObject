@@ -8,7 +8,6 @@ namespace PageObjectTests.Pages.File
         internal new static Uri Uri => new Uri(Root.Uri, "Home.html");
         internal new static string Url => Uri.AbsoluteUri;
 
-        [Page("http://www.google.com")]
         public HomePage(PageSession session) : base(session, Uri)
         {
         }
