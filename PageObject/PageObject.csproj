@@ -90,6 +90,7 @@
     <Compile Include="Page.cs" />
     <Compile Include="PageFactory.cs" />
     <Compile Include="PageSession.cs" />
+    <Compile Include="UriBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

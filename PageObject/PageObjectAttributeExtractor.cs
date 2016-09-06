@@ -4,12 +4,12 @@ namespace PageObject
 {
     internal class PageObjectAttributeExtractor
     {
-        public Uri Uri => BaseUri == null ? BuildUri(Path) : new Uri(BaseUri, Path);
+        public Uri Uri => BaseUri == null ? UriBuilder.Build(Path) : new Uri(BaseUri, Path);
 
+        private PageObjectAttribute PageObjectAttribute => PageObjectAttribute.For(pageClass);
         private string Path => PageObjectAttribute.Path;
         private Type BasePage => PageObjectAttribute.BasePage;
         private string BaseUrl => PageObjectAttribute.BaseUrl;
-        private PageObjectAttribute PageObjectAttribute => PageObjectAttribute.For(pageClass);
 
         private readonly Type pageClass;
         private Uri baseUri;
@@ -34,16 +34,16 @@ namespace PageObject
         {
             get
             {
-                if (baseUri != null)
-                    return baseUri;
+                if (baseUri == null)
+                {
+                    if (BasePage != null)
+                        baseUri = new PageObjectAttributeExtractor(BasePage).Uri;
 
-                if (BasePage != null)
-                    return baseUri = new PageObjectAttributeExtractor(BasePage).Uri;
+                    if (BaseUrl != null)
+                        baseUri = UriBuilder.Build(BaseUrl);
+                }
 
-                if (BaseUrl != null)
-                    return baseUri = BuildUri(BaseUrl);
-
-                return null;
+                return baseUri;
             }
         }
 
@@ -62,18 +62,6 @@ namespace PageObject
                     throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
 
                 basePage = nextBasePage;
-            }
-        }
-
-        private static Uri BuildUri(string url)
-        {
-            try
-            {
-                return new Uri(url);
-            }
-            catch (UriFormatException x)
-            {
-                throw new PageObjectException(string.Format(@"Invalid url ""{0}""", url), x);
             }
         }
     }
