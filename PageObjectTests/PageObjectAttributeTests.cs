@@ -9,22 +9,22 @@ namespace PageObjectTests
     [TestFixture]
     public class PageObjectAttributeTests
     {
-        [TestCase(typeof(WithPathOnly))]
+        [TestCase(typeof(Base))]
         public void Should_support_pages_with_a_url_only(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(WithPathAndNullBasePage))]
-        [TestCase(typeof(WithPathAndBasePage))]
-        [TestCase(typeof(WithNullPathAndBasePage))]
-        [TestCase(typeof(WithEmptyPathAndBasePage))]
+        [TestCase(typeof(WithNullBasePageAndPath))]
+        [TestCase(typeof(WithBasePageAndPath))]
+        [TestCase(typeof(WithBasePageAndNullPath))]
+        [TestCase(typeof(BasePageAndEmptyPath))]
         public void Should_support_pages_with_a_base_page(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(WithPathAndNullBaseUrl))]
+        [TestCase(typeof(WithNullBaseUrlAndPath))]
         [TestCase(typeof(WithPathAndBaseUrl))]
         [TestCase(typeof(WithNullPathAndBaseUrl))]
         [TestCase(typeof(WithEmptyPathAndBaseUrl))]
@@ -33,7 +33,7 @@ namespace PageObjectTests
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(WithBaseThatIsNotAPage))]
+        [TestCase(typeof(BaseThatIsNotAPage))]
         public void Should_ensure_that_base_is_a_Page_class(Type pageClass)
         {
             AssertPageCreationThrowsPageObjectException(pageClass, @"base page for .* must be a subclass of PageObject.Page");

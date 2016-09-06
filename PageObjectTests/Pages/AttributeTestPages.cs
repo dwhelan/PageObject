@@ -13,41 +13,41 @@ namespace PageObjectTests.Pages
     // The following pages classes should all be valid with a Uri.AbsoluteUri equal to Constants.Url
 
     [PageObject(Constants.Url)]
-    public class WithPathOnly : Page
+    public class Base : Page
     {
-        public WithPathOnly() : base(null) { }
+        public Base() : base(null) { }
     }
 
-    [PageObject(Constants.Url, (Type) null)]
-    public class WithPathAndNullBasePage : Page
+    [PageObject((Type) null, Constants.Url)]
+    public class WithNullBasePageAndPath : Page
     {
-        public WithPathAndNullBasePage() : base(null) { }
+        public WithNullBasePageAndPath() : base(null) { }
     }
 
     [PageObject(Constants.Url, (string)null)]
-    public class WithPathAndNullBaseUrl : Page
+    public class WithNullBaseUrlAndPath : Page
     {
-        public WithPathAndNullBaseUrl() : base(null) { }
+        public WithNullBaseUrlAndPath() : base(null) { }
     }
 
     // Valid page objects built with base page objects.
 
-    [PageObject(Constants.Path, typeof(WithPathOnly))]
-    public class WithPathAndBasePage : Page
+    [PageObject(typeof(Base), Constants.Path)]
+    public class WithBasePageAndPath : Page
     {
-        public WithPathAndBasePage() : base(null) { }
+        public WithBasePageAndPath() : base(null) { }
     }
 
-    [PageObject(null, typeof(WithPathOnly))]
-    public class WithNullPathAndBasePage : Page
+    [PageObject(typeof(Base), null)]
+    public class WithBasePageAndNullPath : Page
     {
-        public WithNullPathAndBasePage() : base(null) {}
+        public WithBasePageAndNullPath() : base(null) {}
     }
 
-    [PageObject("", typeof(WithPathOnly))]
-    public class WithEmptyPathAndBasePage : Page
+    [PageObject(typeof(Base), "")]
+    public class BasePageAndEmptyPath : Page
     {
-        public WithEmptyPathAndBasePage() : base(null) {}
+        public BasePageAndEmptyPath() : base(null) {}
     }
 
     // Valid page objects with base urls.
@@ -58,7 +58,7 @@ namespace PageObjectTests.Pages
         public WithPathAndBaseUrl() : base(null) { }
     }
 
-    [PageObject(null, Constants.Url)]
+    [PageObject((string) null, Constants.Url)]
     public class WithNullPathAndBaseUrl : Page
     {
         public WithNullPathAndBaseUrl() : base(null) { }
@@ -79,19 +79,19 @@ namespace PageObjectTests.Pages
         public WithInvalidUrl() : base(null) {}
     }
 
-    [PageObject(null, typeof(string))]
-    public class WithBaseThatIsNotAPage : Page
+    [PageObject(typeof(string), null)]
+    public class BaseThatIsNotAPage : Page
     {
-        public WithBaseThatIsNotAPage() : base(null) { }
+        public BaseThatIsNotAPage() : base(null) { }
     }
 
-    [PageObject(null, "invalid url")]
+    [PageObject((Type) null, "invalid url")]
     public class WithBaseThatIsNotAValidUrl : Page
     {
         public WithBaseThatIsNotAValidUrl() : base(null) { }
     }
 
-    [PageObject(null, typeof(SelfReferencingPage))]
+    [PageObject(typeof(SelfReferencingPage), null)]
     public class SelfReferencingPage : Page
     {
         public SelfReferencingPage() : base(null) { }
@@ -99,13 +99,13 @@ namespace PageObjectTests.Pages
 
     // Circular references: CircularReference1a => CircularReference1b => CircularReference1a
 
-    [PageObject(null, typeof(CircularReference1B))]
+    [PageObject(typeof(CircularReference1B), null)]
     public class CircularReference1A : Page
     {
         public CircularReference1A() : base(null) { }
     }
 
-    [PageObject(null, typeof(CircularReference1A))]
+    [PageObject(typeof(CircularReference1A), null)]
     public class CircularReference1B : Page
     {
         public CircularReference1B() : base(null) { }
@@ -113,19 +113,19 @@ namespace PageObjectTests.Pages
 
     // Circular references: CircularReference2a => CircularReference2b => CircularReference2c => CircularReference2a
 
-    [PageObject(null, typeof(CircularReference2B))]
+    [PageObject(typeof(CircularReference2B), null)]
     public class CircularReference2A : Page
     {
         public CircularReference2A() : base(null) { }
     }
 
-    [PageObject(null, typeof(CircularReference2C))]
+    [PageObject(typeof(CircularReference2C), null)]
     public class CircularReference2B : Page
     {
         public CircularReference2B() : base(null) { }
     }
 
-    [PageObject(null, typeof(CircularReference2A))]
+    [PageObject(typeof(CircularReference2A), null)]
     public class CircularReference2C : Page
     {
         public CircularReference2C() : base(null) { }

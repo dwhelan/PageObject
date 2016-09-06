@@ -9,7 +9,7 @@ namespace PageObject
         public string BaseUrl { get; }
         public string Path { get; }
 
-        public PageObjectAttribute(string path, Type basePage) : this(path)
+        public PageObjectAttribute(Type basePage, string path) : this(path)
         {
             BasePage = basePage;
         }
@@ -30,7 +30,7 @@ namespace PageObject
         {
             if (!PageObjectAttributes.ContainsKey(pageClass))
             {
-                foreach (var attribute in Attribute.GetCustomAttributes(pageClass))
+                foreach (var attribute in GetCustomAttributes(pageClass))
                 {
                     if (attribute is PageObjectAttribute)
                         PageObjectAttributes[pageClass] = (PageObjectAttribute) attribute;
