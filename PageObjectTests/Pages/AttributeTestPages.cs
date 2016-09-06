@@ -90,4 +90,22 @@ namespace PageObjectTests.Pages
     {
         public WithBaseThatIsNotAValidUrl() : base(null) { }
     }
+
+    [PageObject(null, typeof(SelfReferencingPage))]
+    public class SelfReferencingPage : Page
+    {
+        public SelfReferencingPage() : base(null) { }
+    }
+
+    [PageObject(null, typeof(PageWithCircularReference2))]
+    public class PageWithCircularReference1 : Page
+    {
+        public PageWithCircularReference1() : base(null) { }
+    }
+
+    [PageObject(null, typeof(PageWithCircularReference1))]
+    public class PageWithCircularReference2 : Page
+    {
+        public PageWithCircularReference2() : base(null) { }
+    }
 }

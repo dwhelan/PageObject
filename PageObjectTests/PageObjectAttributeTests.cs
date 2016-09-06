@@ -36,6 +36,8 @@ namespace PageObjectTests
         [TestCase(typeof(WithInvalidUrl),             @"Invalid url ""invalid url""", typeof(UriFormatException))]
         [TestCase(typeof(WithBaseThatIsNotAPage),     @"base page for .* must be a subclass of PageObject.Page", null)]
         [TestCase(typeof(WithBaseThatIsNotAValidUrl), @"Invalid url ""invalid url""", typeof(UriFormatException))]
+        [TestCase(typeof(SelfReferencingPage),        @"Page .*SelfReferencingPage cannot have itself as a base page", null)]
+        [TestCase(typeof(PageWithCircularReference1), @"Detected circular base page references with .*PageWithCircularReference1 and .*PageWithCircularReference2", null)]
         public void Should_not_be_a_valid_page(Type pageClass, string regEx, Type nestedException)
         {
             var x = Assert.Throws<PageObjectException>(() => CreatePage(pageClass));
