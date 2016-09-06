@@ -22,15 +22,14 @@ namespace PageObject
         {
             Session = session;
             Uri = new Uri(uri, relativePath );
-        
             Hosts = new List<string> { Uri.Host };
         }
 
         protected Page(PageSession session)
         {
             Session = session;
-            var extractor = new PageDescriptor(GetType());
-            Uri = extractor.Uri;
+            var descriptor = PageDescriptor.For(GetType());
+            Uri = descriptor.Uri;
             Hosts = new List<string> { Uri.Host };
         }
 

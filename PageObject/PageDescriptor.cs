@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace PageObject
 {
     internal class PageDescriptor
     {
-        public Uri Uri => BaseUri == null ? UriBuilder.Build(Path) : new Uri(BaseUri, Path);
+        internal Uri Uri => BaseUri == null ? UriBuilder.Build(Path) : new Uri(BaseUri, Path);
 
         private PageObjectAttribute PageObjectAttribute => PageObjectAttribute.For(pageClass);
         private string Path => PageObjectAttribute.Path;
@@ -22,14 +23,6 @@ namespace PageObject
             EnsureNoCircularReferencesInBasePages();
         }
 
-        private void EnsureValidBasePage()
-        {
-            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
-                return;
-
-            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
-        }
-
         private Uri BaseUri
         {
             get
@@ -37,7 +30,7 @@ namespace PageObject
                 if (baseUri == null)
                 {
                     if (BasePage != null)
-                        baseUri = new PageDescriptor(BasePage).Uri;
+                        baseUri = For(BasePage).Uri;
 
                     if (BaseUrl != null)
                         baseUri = UriBuilder.Build(BaseUrl);
@@ -45,6 +38,14 @@ namespace PageObject
 
                 return baseUri;
             }
+        }
+
+        private void EnsureValidBasePage()
+        {
+            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
+                return;
+
+            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
         }
 
         private void EnsureNoCircularReferencesInBasePages()
@@ -63,6 +64,16 @@ namespace PageObject
 
                 basePage = nextBasePage;
             }
+        }
+
+        private static readonly IDictionary<Type, PageDescriptor> PageDescriptors = new Dictionary<Type, PageDescriptor>();
+
+        internal static PageDescriptor For(Type pageClass)
+        {
+            if (!PageDescriptors.ContainsKey(pageClass))
+                PageDescriptors[pageClass] = new PageDescriptor(pageClass);
+
+            return PageDescriptors[pageClass];
         }
     }
 }
