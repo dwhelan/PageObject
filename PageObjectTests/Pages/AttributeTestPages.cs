@@ -4,7 +4,8 @@ namespace PageObjectTests.Pages
 {
     public static class Constants
     {
-        public const string Url = "file:///" + Path;
+        public const string Url = Base + Path;
+        public const string Base = "file:///";
         public const string Path = "something";
     }
 
@@ -16,29 +17,40 @@ namespace PageObjectTests.Pages
         public WithPathOnly() : base(null) { }
     }
 
+    // Valid page objects built with base page objects.
+
     [PageObject(Constants.Path, typeof(WithPathOnly))]
-    public class WithPathAndParent : Page
+    public class WithPathAndBasePage : Page
     {
-        public WithPathAndParent() : base(null) { }
+        public WithPathAndBasePage() : base(null) { }
     }
 
     [PageObject(null, typeof(WithPathOnly))]
-    public class WithNullPathAndParent : Page
+    public class WithNullPathAndBasePage : Page
     {
-        public WithNullPathAndParent() : base(null) {}
+        public WithNullPathAndBasePage() : base(null) {}
     }
 
     [PageObject("", typeof(WithPathOnly))]
-    public class WithEmptyPathAndParent : Page
+    public class WithEmptyPathAndBasePage : Page
     {
-        public WithEmptyPathAndParent() : base(null) {}
+        public WithEmptyPathAndBasePage() : base(null) {}
+    }
+
+
+    // Page objects with base page objects.
+
+    [PageObject(Constants.Path, Constants.Base)]
+    public class WithPathAndBaseUrl : Page
+    {
+        public WithPathAndBaseUrl() : base(null) { }
     }
 
     // The following page classes should all be invalid when one is attempted to be created.
 
     [PageObject(null, typeof(string))]
-    public class WithParentThatIsNotAPage : Page
+    public class WithBaseThatIsNotAPage : Page
     {
-        public WithParentThatIsNotAPage() : base(null) { }
+        public WithBaseThatIsNotAPage() : base(null) { }
     }
 }

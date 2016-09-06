@@ -10,16 +10,17 @@ namespace PageObjectTests
     public class PageObjectAttributeTests
     {
         [TestCase(typeof(WithPathOnly))]
-        [TestCase(typeof(WithPathAndParent))]
-        [TestCase(typeof(WithNullPathAndParent))]
-        [TestCase(typeof(WithEmptyPathAndParent))]
+        [TestCase(typeof(WithPathAndBasePage))]
+        [TestCase(typeof(WithNullPathAndBasePage))]
+        [TestCase(typeof(WithEmptyPathAndBasePage))]
+        [TestCase(typeof(WithPathAndBaseUrl))]
         public void Should_be_a_valid_page(Type pageClass)
         {
             var page = CreatePage(pageClass);
             Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
         }
 
-        [TestCase(typeof(WithParentThatIsNotAPage))]
+        [TestCase(typeof(WithBaseThatIsNotAPage))]
         public void Should_not_be_a_valid_page(Type pageClass)
         {
             Assert.Throws<ArgumentException>(() => CreatePage(pageClass));
@@ -45,6 +46,7 @@ namespace PageObjectTests
 
         private static Page CreatePage(Type pageClass)
         {
+
             try
             {
                 return (Page)Activator.CreateInstance(pageClass);

@@ -4,7 +4,8 @@ namespace PageObject
 {
     public class PageObjectAttribute : Attribute
     {
-        public Type Parent { get; }
+        public Type BaseParent { get; }
+        public string BaseUrl { get; }
         public string Path { get; }
 
         public PageObjectAttribute(string path)
@@ -12,9 +13,15 @@ namespace PageObject
             Path = path;
         }
 
-        public PageObjectAttribute(string path, Type parent)
+        public PageObjectAttribute(string path, Type baseParent)
         {
-            Parent = parent;
+            BaseParent = baseParent;
+            Path = path;
+        }
+
+        public PageObjectAttribute(string path, string baseUrl)
+        {
+            BaseUrl = baseUrl;
             Path = path;
         }
     }

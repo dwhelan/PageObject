@@ -22,6 +22,7 @@ namespace PageObject
         {
             Session = session;
             Uri = new Uri(uri, relativePath );
+        
             Hosts = new List<string> { Uri.Host };
         }
 

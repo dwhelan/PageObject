@@ -16,6 +16,7 @@ namespace PageObject
         }
 
         public string Path => PageObjectAttribute.Path;
+        private string BaseUrl => PageObjectAttribute.BaseUrl;
 
         private PageObjectAttribute pageObjectAttribute;
         private readonly Type pageClass;
@@ -27,7 +28,6 @@ namespace PageObject
 
             if (!ValidParentPage())
                 throw new ArgumentException(string.Format("The parent page for {0}, must be a subclass of {1}", pageClass, typeof(Page)));
-
         }
 
         private bool ValidParentPage()
@@ -35,7 +35,7 @@ namespace PageObject
             return ParentPageClass == null || ParentPageClass.IsSubclassOf(typeof(Page));
         }
 
-        private Type ParentPageClass => PageObjectAttribute.Parent;
+        private Type ParentPageClass => PageObjectAttribute.BaseParent;
 
         private Uri ParentUri
         {
@@ -46,6 +46,9 @@ namespace PageObject
 
                 if (ParentPageClass != null)
                     return parentUri = new PageAttributeExtractor(ParentPageClass).Uri;
+
+                if (BaseUrl != null)
+                    return parentUri = new Uri(BaseUrl);
 
                 return null;
             }
