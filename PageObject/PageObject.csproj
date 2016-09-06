@@ -81,7 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageAttribute.cs" />
+    <Compile Include="PageObjectAttribute.cs" />
     <Compile Include="PageAttributeExtractor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PageSteps.cs" />

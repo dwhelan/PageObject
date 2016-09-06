@@ -15,9 +15,9 @@ namespace PageObject
             }
         }
 
-        public string Path => PageAttribute.Path;
+        public string Path => PageObjectAttribute.Path;
 
-        private PageAttribute pageAttribute;
+        private PageObjectAttribute pageObjectAttribute;
         private readonly Type pageClass;
         private Uri parentUri;
 
@@ -35,7 +35,7 @@ namespace PageObject
             return ParentPageClass == null || ParentPageClass.IsSubclassOf(typeof(Page));
         }
 
-        private Type ParentPageClass => PageAttribute.Parent;
+        private Type ParentPageClass => PageObjectAttribute.Parent;
 
         private Uri ParentUri
         {
@@ -51,19 +51,19 @@ namespace PageObject
             }
         }
 
-        internal PageAttribute PageAttribute
+        internal PageObjectAttribute PageObjectAttribute
         {
             get
             {
-                if (pageAttribute != null)
-                    return pageAttribute;
+                if (pageObjectAttribute != null)
+                    return pageObjectAttribute;
 
                 var attributes = Attribute.GetCustomAttributes(pageClass);
                 foreach (var attribute in attributes)
                 {
-                    if (attribute is PageAttribute)
+                    if (attribute is PageObjectAttribute)
                     {
-                        return pageAttribute = (PageAttribute) attribute;
+                        return pageObjectAttribute = (PageObjectAttribute) attribute;
                     }
                 }
                 throw new Exception(string.Format("Missing [Page] attribute for {0}", pageClass));
