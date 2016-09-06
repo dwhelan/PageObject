@@ -9,13 +9,13 @@ namespace PageObject
         public SessionConfiguration Configuration { get; }
         public Page Page { get; set; }
 
+        private bool disposed;
+
         public PageSession(SessionConfiguration configuration)
         {
             Configuration = configuration;
             Browser = new BrowserSession(configuration);
         }
-
-        private bool disposed;
 
         public void Dispose()
         {
@@ -29,9 +29,7 @@ namespace PageObject
                 return;
 
             if (disposing)
-            {
                 Browser?.Dispose();
-            }
 
             disposed = true;
         }

@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageConstructorTests.cs" />
     <Compile Include="PageObjectAttributeTests.cs" />
     <Compile Include="Pages\File\HomePage.cs" />
     <Compile Include="Pages\File\Root.cs" />
@@ -90,7 +91,6 @@
     <Compile Include="Pages\AttributeTestPages.cs" />
     <Compile Include="Steps\PageSteps.cs" />
     <Compile Include="PageSessionTests.cs" />
-    <Compile Include="PageConstructorTests.cs" />
     <Compile Include="BrowserTests.cs" />
     <Compile Include="PageFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

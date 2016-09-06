@@ -14,6 +14,8 @@ namespace PageObject
         protected BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }
 
+        private PageDescriptor Descriptor => PageDescriptor.For(GetType());
+
         protected Page(PageSession session, string url, string relativePath = "") : this(session, new Uri(url), relativePath)
         {
         }
@@ -28,8 +30,7 @@ namespace PageObject
         protected Page(PageSession session)
         {
             Session = session;
-            var descriptor = PageDescriptor.For(GetType());
-            Uri = descriptor.Uri;
+            Uri = Descriptor.Uri;
             Hosts = new List<string> { Uri.Host };
         }
 
