@@ -18,17 +18,6 @@ namespace PageObjectTests.Pages
         public BasePage() : base(null) { }
     }
 
-    [PageObject((Type) null, Constants.Url)]
-    public class NullBasePageAndPath : Page
-    {
-        public NullBasePageAndPath() : base(null) { }
-    }
-
-    [PageObject((string) null, Constants.Url)]
-    public class NullBaseUrlAndPath : Page
-    {
-        public NullBaseUrlAndPath() : base(null) { }
-    }
 
     // Valid page objects built with base page objects.
 
@@ -47,7 +36,19 @@ namespace PageObjectTests.Pages
     [PageObject(typeof(BasePage), "")]
     public class BasePageAndEmptyPath : Page
     {
-        public BasePageAndEmptyPath() : base(null) {}
+        public BasePageAndEmptyPath() : base(null) { }
+    }
+
+    [PageObject(typeof(BasePage))]
+    public class BasePageOnly : Page
+    {
+        public BasePageOnly() : base(null) {}
+    }
+
+    [PageObject((Type)null, Constants.Url)]
+    public class NullBasePageAndPath : Page
+    {
+        public NullBasePageAndPath() : base(null) { }
     }
 
     // Valid page objects with base urls.
@@ -70,6 +71,11 @@ namespace PageObjectTests.Pages
         public BaseUrlAndEmptyPath() : base(null) { }
     }
 
+    [PageObject((string)null, Constants.Url)]
+    public class NullBaseUrlAndPath : Page
+    {
+        public NullBaseUrlAndPath() : base(null) { }
+    }
 
     // The following invalid page classes should raise a PageObjectException when instantiated.
 

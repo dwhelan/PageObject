@@ -9,7 +9,11 @@ namespace PageObject
         public string BaseUrl { get; }
         public string Path { get; }
 
-        public PageObjectAttribute(Type basePage, string path) : this(path)
+        public PageObjectAttribute(Type basePage) : this(basePage, "")
+        {
+        }
+
+       public PageObjectAttribute(Type basePage, string path) : this(path)
         {
             BasePage = basePage;
         }

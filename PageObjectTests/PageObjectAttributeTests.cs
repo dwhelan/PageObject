@@ -15,19 +15,20 @@ namespace PageObjectTests
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(NullBasePageAndPath))]
         [TestCase(typeof(BasePageAndPath))]
         [TestCase(typeof(BasePageAndNullPath))]
         [TestCase(typeof(BasePageAndEmptyPath))]
+        [TestCase(typeof(BasePageOnly))]
+        [TestCase(typeof(NullBasePageAndPath))]
         public void Should_support_pages_with_a_base_page(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(NullBaseUrlAndPath))]
         [TestCase(typeof(BaseUrlAndPath))]
         [TestCase(typeof(BaseUrlAndNullPath))]
         [TestCase(typeof(BaseUrlAndEmptyPath))]
+        [TestCase(typeof(NullBaseUrlAndPath))]
         public void Should_support_pages_with_a_base_url(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
