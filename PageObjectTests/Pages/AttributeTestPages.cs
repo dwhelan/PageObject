@@ -60,7 +60,6 @@ namespace PageObjectTests.Pages
 
     // The following invalid page classes should raise a PageObjectException when instantiated.
 
-
     [PageObject("invalid url")]
     public class WithInvalidUrl : Page
     {
