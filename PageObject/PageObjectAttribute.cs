@@ -14,7 +14,7 @@ namespace PageObject
             BasePage = basePage;
         }
 
-        public PageObjectAttribute(string path, string baseUrl) : this(path)
+        public PageObjectAttribute(string baseUrl, string path) : this(path)
         {
             BaseUrl = baseUrl;
         }

@@ -24,7 +24,7 @@ namespace PageObjectTests.Pages
         public WithNullBasePageAndPath() : base(null) { }
     }
 
-    [PageObject(Constants.Url, (string)null)]
+    [PageObject((string) null, Constants.Url)]
     public class WithNullBaseUrlAndPath : Page
     {
         public WithNullBaseUrlAndPath() : base(null) { }
@@ -52,19 +52,19 @@ namespace PageObjectTests.Pages
 
     // Valid page objects with base urls.
 
-    [PageObject(Constants.Path, Constants.BaseUrl)]
+    [PageObject(Constants.BaseUrl, Constants.Path)]
     public class WithPathAndBaseUrl : Page
     {
         public WithPathAndBaseUrl() : base(null) { }
     }
 
-    [PageObject((string) null, Constants.Url)]
+    [PageObject(Constants.Url, (string) null)]
     public class WithNullPathAndBaseUrl : Page
     {
         public WithNullPathAndBaseUrl() : base(null) { }
     }
 
-    [PageObject("", Constants.Url)]
+    [PageObject(Constants.Url, "")]
     public class WithEmptyPathAndBaseUrl : Page
     {
         public WithEmptyPathAndBaseUrl() : base(null) { }
