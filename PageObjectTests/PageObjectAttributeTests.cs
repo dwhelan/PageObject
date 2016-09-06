@@ -7,7 +7,7 @@ using PageObjectTests.Pages;
 namespace PageObjectTests
 {
     [TestFixture]
-    public class PageAttributeTests
+    public class PageObjectAttributeTests
     {
         [TestCase(typeof(WithPathOnly))]
         [TestCase(typeof(WithPathAndParent))]

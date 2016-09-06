@@ -78,7 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageAttributeTests.cs" />
+    <Compile Include="PageObjectAttributeTests.cs" />
     <Compile Include="Pages\File\HomePage.cs" />
     <Compile Include="Pages\File\Root.cs" />
     <Compile Include="Pages\File\HomePage.feature.cs">
