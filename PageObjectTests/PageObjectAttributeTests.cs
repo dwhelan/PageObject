@@ -9,25 +9,25 @@ namespace PageObjectTests
     [TestFixture]
     public class PageObjectAttributeTests
     {
-        [TestCase(typeof(Base))]
+        [TestCase(typeof(BasePage))]
         public void Should_support_pages_with_a_url_only(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(WithNullBasePageAndPath))]
-        [TestCase(typeof(WithBasePageAndPath))]
-        [TestCase(typeof(WithBasePageAndNullPath))]
+        [TestCase(typeof(NullBasePageAndPath))]
+        [TestCase(typeof(BasePageAndPath))]
+        [TestCase(typeof(BasePageAndNullPath))]
         [TestCase(typeof(BasePageAndEmptyPath))]
         public void Should_support_pages_with_a_base_page(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(WithNullBaseUrlAndPath))]
-        [TestCase(typeof(WithPathAndBaseUrl))]
-        [TestCase(typeof(WithNullPathAndBaseUrl))]
-        [TestCase(typeof(WithEmptyPathAndBaseUrl))]
+        [TestCase(typeof(NullBaseUrlAndPath))]
+        [TestCase(typeof(BaseUrlAndPath))]
+        [TestCase(typeof(BaseUrlAndNullPath))]
+        [TestCase(typeof(BaseUrlAndEmptyPath))]
         public void Should_support_pages_with_a_base_url(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
@@ -39,8 +39,8 @@ namespace PageObjectTests
             AssertPageCreationThrowsPageObjectException(pageClass, @"base page for .* must be a subclass of PageObject.Page");
         }
 
-        [TestCase(typeof(WithInvalidUrl))]
-        [TestCase(typeof(WithBaseThatIsNotAValidUrl))]
+        [TestCase(typeof(InvalidUrl))]
+        [TestCase(typeof(BaseThatIsAnInvalidUrl))]
         public void Should_ensure_a_valid_uri(Type pageClass)
         {
             var x = AssertPageCreationThrowsPageObjectException(pageClass, @"Invalid url ""invalid url""");

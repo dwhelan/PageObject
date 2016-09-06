@@ -13,38 +13,38 @@ namespace PageObjectTests.Pages
     // The following pages classes should all be valid with a Uri.AbsoluteUri equal to Constants.Url
 
     [PageObject(Constants.Url)]
-    public class Base : Page
+    public class BasePage : Page
     {
-        public Base() : base(null) { }
+        public BasePage() : base(null) { }
     }
 
     [PageObject((Type) null, Constants.Url)]
-    public class WithNullBasePageAndPath : Page
+    public class NullBasePageAndPath : Page
     {
-        public WithNullBasePageAndPath() : base(null) { }
+        public NullBasePageAndPath() : base(null) { }
     }
 
     [PageObject((string) null, Constants.Url)]
-    public class WithNullBaseUrlAndPath : Page
+    public class NullBaseUrlAndPath : Page
     {
-        public WithNullBaseUrlAndPath() : base(null) { }
+        public NullBaseUrlAndPath() : base(null) { }
     }
 
     // Valid page objects built with base page objects.
 
-    [PageObject(typeof(Base), Constants.Path)]
-    public class WithBasePageAndPath : Page
+    [PageObject(typeof(BasePage), Constants.Path)]
+    public class BasePageAndPath : Page
     {
-        public WithBasePageAndPath() : base(null) { }
+        public BasePageAndPath() : base(null) { }
     }
 
-    [PageObject(typeof(Base), null)]
-    public class WithBasePageAndNullPath : Page
+    [PageObject(typeof(BasePage), null)]
+    public class BasePageAndNullPath : Page
     {
-        public WithBasePageAndNullPath() : base(null) {}
+        public BasePageAndNullPath() : base(null) {}
     }
 
-    [PageObject(typeof(Base), "")]
+    [PageObject(typeof(BasePage), "")]
     public class BasePageAndEmptyPath : Page
     {
         public BasePageAndEmptyPath() : base(null) {}
@@ -53,30 +53,30 @@ namespace PageObjectTests.Pages
     // Valid page objects with base urls.
 
     [PageObject(Constants.BaseUrl, Constants.Path)]
-    public class WithPathAndBaseUrl : Page
+    public class BaseUrlAndPath : Page
     {
-        public WithPathAndBaseUrl() : base(null) { }
+        public BaseUrlAndPath() : base(null) { }
     }
 
     [PageObject(Constants.Url, (string) null)]
-    public class WithNullPathAndBaseUrl : Page
+    public class BaseUrlAndNullPath : Page
     {
-        public WithNullPathAndBaseUrl() : base(null) { }
+        public BaseUrlAndNullPath() : base(null) { }
     }
 
     [PageObject(Constants.Url, "")]
-    public class WithEmptyPathAndBaseUrl : Page
+    public class BaseUrlAndEmptyPath : Page
     {
-        public WithEmptyPathAndBaseUrl() : base(null) { }
+        public BaseUrlAndEmptyPath() : base(null) { }
     }
 
 
     // The following invalid page classes should raise a PageObjectException when instantiated.
 
     [PageObject("invalid url")]
-    public class WithInvalidUrl : Page
+    public class InvalidUrl : Page
     {
-        public WithInvalidUrl() : base(null) {}
+        public InvalidUrl() : base(null) {}
     }
 
     [PageObject(typeof(string), null)]
@@ -85,10 +85,10 @@ namespace PageObjectTests.Pages
         public BaseThatIsNotAPage() : base(null) { }
     }
 
-    [PageObject((Type) null, "invalid url")]
-    public class WithBaseThatIsNotAValidUrl : Page
+    [PageObject("invalid url", "path")]
+    public class BaseThatIsAnInvalidUrl : Page
     {
-        public WithBaseThatIsNotAValidUrl() : base(null) { }
+        public BaseThatIsAnInvalidUrl() : base(null) { }
     }
 
     [PageObject(typeof(SelfReferencingPage), null)]
