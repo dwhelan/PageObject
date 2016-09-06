@@ -2,7 +2,7 @@ using System;
 
 namespace PageObject
 {
-    internal class PageObjectAttributeExtractor
+    internal class PageDescriptor
     {
         public Uri Uri => BaseUri == null ? UriBuilder.Build(Path) : new Uri(BaseUri, Path);
 
@@ -14,7 +14,7 @@ namespace PageObject
         private readonly Type pageClass;
         private Uri baseUri;
 
-        internal PageObjectAttributeExtractor(Type pageClass)
+        internal PageDescriptor(Type pageClass)
         {
             this.pageClass = pageClass;
 
@@ -37,7 +37,7 @@ namespace PageObject
                 if (baseUri == null)
                 {
                     if (BasePage != null)
-                        baseUri = new PageObjectAttributeExtractor(BasePage).Uri;
+                        baseUri = new PageDescriptor(BasePage).Uri;
 
                     if (BaseUrl != null)
                         baseUri = UriBuilder.Build(BaseUrl);

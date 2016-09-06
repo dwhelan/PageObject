@@ -29,7 +29,7 @@ namespace PageObject
         protected Page(PageSession session)
         {
             Session = session;
-            var extractor = new PageObjectAttributeExtractor(GetType());
+            var extractor = new PageDescriptor(GetType());
             Uri = extractor.Uri;
             Hosts = new List<string> { Uri.Host };
         }
