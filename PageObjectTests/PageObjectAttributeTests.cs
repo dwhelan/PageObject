@@ -22,11 +22,15 @@ namespace PageObjectTests
             Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
         }
 
-        [TestCase(typeof(WithBaseThatIsNotAPage), "base page for .* must be a subclass of PageObject.Page")]
-        public void Should_not_be_a_valid_page(Type pageClass, string regEx)
+        [TestCase(typeof(WithInvalidUrl),             @"Invalid url ""invalid url""", typeof(UriFormatException))]
+        [TestCase(typeof(WithBaseThatIsNotAPage),     @"base page for .* must be a subclass of PageObject.Page", null)]
+        [TestCase(typeof(WithBaseThatIsNotAValidUrl), @"Invalid url ""invalid url""", typeof(UriFormatException))]
+        public void Should_not_be_a_valid_page(Type pageClass, string regEx, Type nestedException)
         {
             var x = Assert.Throws<PageObjectException>(() => CreatePage(pageClass));
             StringAssert.IsMatch(regEx, x.Message);
+            if (nestedException != null)
+                Assert.That(x.InnerException, Is.AssignableTo(nestedException));
         }
 
         [Test, Ignore]
@@ -37,7 +41,6 @@ namespace PageObjectTests
 
         private static Page CreatePage(Type pageClass)
         {
-
             try
             {
                 return (Page)Activator.CreateInstance(pageClass);

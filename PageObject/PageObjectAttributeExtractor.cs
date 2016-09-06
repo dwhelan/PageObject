@@ -1,10 +1,11 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PageObject
 {
     internal class PageObjectAttributeExtractor
     {
-        public Uri Uri => BaseUri == null ? new Uri(Path) : new Uri(BaseUri, Path);
+        public Uri Uri => BaseUri == null ? BuildUri(Path) : new Uri(BaseUri, Path);
 
         private string Path     => PageObjectAttribute.Path;
         private Type   BasePage => PageObjectAttribute.BasePage;
@@ -38,9 +39,21 @@ namespace PageObject
                     return baseUri = new PageObjectAttributeExtractor(BasePage).Uri;
 
                 if (BaseUrl != null)
-                    return baseUri = new Uri(BaseUrl);
+                    return baseUri = BuildUri(BaseUrl);
 
                 return null;
+            }
+        }
+
+        private static Uri BuildUri(string url)
+        {
+            try
+            {
+                return new Uri(url);
+            }
+            catch (UriFormatException x)
+            {  
+                throw new PageObjectException(string.Format(@"Invalid url ""{0}""", url), x );
             }
         }
 

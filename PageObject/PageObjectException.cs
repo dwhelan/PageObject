@@ -6,7 +6,10 @@ namespace PageObject
     {
         public PageObjectException(string message) : base(message)
         {
-            
+        }
+
+        public PageObjectException(string message, Exception innerException) : base(message, innerException)
+        {
         }
     }
 }

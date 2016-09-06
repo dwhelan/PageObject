@@ -58,11 +58,26 @@ namespace PageObjectTests.Pages
     }
 
 
-    // The following page classes should all be invalid when one is attempted to be created.
+    // The following invalid page classes should raise a PageObjectException when instantiated.
+
+
+    [PageObject("invalid url")]
+    public class WithInvalidUrl : Page
+    {
+        public WithInvalidUrl() : base(null)
+        {
+        }
+    }
 
     [PageObject(null, typeof(string))]
     public class WithBaseThatIsNotAPage : Page
     {
         public WithBaseThatIsNotAPage() : base(null) { }
+    }
+
+    [PageObject(null, "invalid url")]
+    public class WithBaseThatIsNotAValidUrl : Page
+    {
+        public WithBaseThatIsNotAValidUrl() : base(null) { }
     }
 }
