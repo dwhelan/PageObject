@@ -97,15 +97,37 @@ namespace PageObjectTests.Pages
         public SelfReferencingPage() : base(null) { }
     }
 
-    [PageObject(null, typeof(PageWithCircularReference2))]
-    public class PageWithCircularReference1 : Page
+    // Circular references: CircularReference1a => CircularReference1b => CircularReference1a
+
+    [PageObject(null, typeof(CircularReference1B))]
+    public class CircularReference1A : Page
     {
-        public PageWithCircularReference1() : base(null) { }
+        public CircularReference1A() : base(null) { }
     }
 
-    [PageObject(null, typeof(PageWithCircularReference1))]
-    public class PageWithCircularReference2 : Page
+    [PageObject(null, typeof(CircularReference1A))]
+    public class CircularReference1B : Page
     {
-        public PageWithCircularReference2() : base(null) { }
+        public CircularReference1B() : base(null) { }
+    }
+
+    // Circular references: CircularReference2a => CircularReference2b => CircularReference2c => CircularReference2a
+
+    [PageObject(null, typeof(CircularReference2B))]
+    public class CircularReference2A : Page
+    {
+        public CircularReference2A() : base(null) { }
+    }
+
+    [PageObject(null, typeof(CircularReference2C))]
+    public class CircularReference2B : Page
+    {
+        public CircularReference2B() : base(null) { }
+    }
+
+    [PageObject(null, typeof(CircularReference2A))]
+    public class CircularReference2C : Page
+    {
+        public CircularReference2C() : base(null) { }
     }
 }

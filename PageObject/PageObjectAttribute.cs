@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PageObject
 {
@@ -21,6 +22,22 @@ namespace PageObject
         public PageObjectAttribute(string path)
         {
             Path = path;
+        }
+
+        private static readonly IDictionary<Type, PageObjectAttribute> PageObjectAttributes = new Dictionary<Type, PageObjectAttribute>();
+
+        internal static PageObjectAttribute For(Type pageClass)
+        {
+            if (!PageObjectAttributes.ContainsKey(pageClass))
+            {
+                foreach (var attribute in Attribute.GetCustomAttributes(pageClass))
+                {
+                    if (attribute is PageObjectAttribute)
+                        PageObjectAttributes[pageClass] = (PageObjectAttribute) attribute;
+                }
+            }
+
+            return PageObjectAttributes[pageClass];
         }
     }
 }

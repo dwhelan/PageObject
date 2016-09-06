@@ -33,23 +33,33 @@ namespace PageObjectTests
             AssertThatPageCanBeCreated(pageClass);
         }
 
-        [TestCase(typeof(WithInvalidUrl),             @"Invalid url ""invalid url""", typeof(UriFormatException))]
-        [TestCase(typeof(WithBaseThatIsNotAPage),     @"base page for .* must be a subclass of PageObject.Page", null)]
-        [TestCase(typeof(WithBaseThatIsNotAValidUrl), @"Invalid url ""invalid url""", typeof(UriFormatException))]
-        [TestCase(typeof(SelfReferencingPage),        @"Page .*SelfReferencingPage cannot have itself as a base page", null)]
-        [TestCase(typeof(PageWithCircularReference1), @"Detected circular base page references with .*PageWithCircularReference1 and .*PageWithCircularReference2", null)]
-        public void Should_not_be_a_valid_page(Type pageClass, string regEx, Type nestedException)
+        [TestCase(typeof(WithBaseThatIsNotAPage))]
+        public void Should_ensure_that_base_is_a_Page_class(Type pageClass)
+        {
+            AssertPageCreationThrowsPageObjectException(pageClass, @"base page for .* must be a subclass of PageObject.Page");
+        }
+
+        [TestCase(typeof(WithInvalidUrl))]
+        [TestCase(typeof(WithBaseThatIsNotAValidUrl))]
+        public void Should_ensure_a_valid_uri(Type pageClass)
+        {
+            var x = AssertPageCreationThrowsPageObjectException(pageClass, @"Invalid url ""invalid url""");
+            Assert.That(x.InnerException, Is.AssignableTo(typeof(UriFormatException)));
+        }
+
+        [TestCase(typeof(SelfReferencingPage),  @"Page .*SelfReferencingPage cannot have itself as a base page")]
+        [TestCase(typeof(CircularReference1A),  @"Detected circular base page references with .*CircularReference1A and .*CircularReference1B")]
+        [TestCase(typeof(CircularReference2A),  @"Detected circular base page references with .*CircularReference2A and .*CircularReference2C")]
+        public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
+        {
+            AssertPageCreationThrowsPageObjectException(pageClass, regEx);
+        }
+
+        private Exception AssertPageCreationThrowsPageObjectException(Type pageClass, string regEx)
         {
             var x = Assert.Throws<PageObjectException>(() => CreatePage(pageClass));
             StringAssert.IsMatch(regEx, x.Message);
-            if (nestedException != null)
-                Assert.That(x.InnerException, Is.AssignableTo(nestedException));
-        }
-
-        [Test, Ignore]
-        public void Should_throw_if_parent_causes_circular_loop()
-        {
-            Assert.Fail("Not yet implemented");
+            return x;
         }
 
         private void AssertThatPageCanBeCreated(Type pageClass)
@@ -58,7 +68,7 @@ namespace PageObjectTests
             Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
         }
 
-        private Page CreatePage(Type pageClass)
+        private static Page CreatePage(Type pageClass)
         {
             try
             {

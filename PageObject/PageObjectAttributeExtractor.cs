@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Coypu.Timing;
 
 namespace PageObject
 {
@@ -11,25 +9,25 @@ namespace PageObject
         private string Path => PageObjectAttribute.Path;
         private Type BasePage => PageObjectAttribute.BasePage;
         private string BaseUrl => PageObjectAttribute.BaseUrl;
+        private PageObjectAttribute PageObjectAttribute => PageObjectAttribute.For(pageClass);
 
-        private PageObjectAttribute pageObjectAttribute;
         private readonly Type pageClass;
         private Uri baseUri;
-
 
         internal PageObjectAttributeExtractor(Type pageClass)
         {
             this.pageClass = pageClass;
 
-            if (!ValidBasePage())
-                throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
-
+            EnsureValidBasePage();
             EnsureNoCircularReferencesInBasePages();
         }
 
-        private bool ValidBasePage()
+        private void EnsureValidBasePage()
         {
-            return BasePage == null || BasePage.IsSubclassOf(typeof(Page));
+            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
+                return;
+
+            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
         }
 
         private Uri BaseUri
@@ -58,10 +56,12 @@ namespace PageObject
 
             while (basePage != null)
             {
-                if (GetPageObjectAttribute(basePage).BasePage == pageClass)
+                var nextBasePage = PageObjectAttribute.For(basePage).BasePage;
+
+                if (nextBasePage == pageClass)
                     throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
 
-                basePage = GetPageObjectAttribute(basePage).BasePage;
+                basePage = nextBasePage;
             }
         }
 
@@ -75,31 +75,6 @@ namespace PageObject
             {
                 throw new PageObjectException(string.Format(@"Invalid url ""{0}""", url), x);
             }
-        }
-
-        private PageObjectAttribute PageObjectAttribute
-        {
-            get
-            {
-                if (pageObjectAttribute == null)
-                    pageObjectAttribute = GetPageObjectAttribute(pageClass);
-
-                return pageObjectAttribute;
-            }
-        }
-
-        private static PageObjectAttribute GetPageObjectAttribute(Type pageClass)
-        {
-            foreach (var attribute in Attribute.GetCustomAttributes(pageClass))
-            {
-                if (attribute is PageObjectAttribute)
-                {
-                    return (PageObjectAttribute)attribute;
-                }
-            }
-
-            // Should never happen!
-            throw new Exception(string.Format("Missing [Page] attribute for {0}", pageClass));
         }
     }
 }
