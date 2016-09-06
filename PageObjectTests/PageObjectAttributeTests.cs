@@ -22,26 +22,15 @@ namespace PageObjectTests
             Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
         }
 
-        [TestCase(typeof(WithBaseThatIsNotAPage))]
-        public void Should_not_be_a_valid_page(Type pageClass)
+        [TestCase(typeof(WithBaseThatIsNotAPage), "base page for .* must be a subclass of PageObject.Page")]
+        public void Should_not_be_a_valid_page(Type pageClass, string regEx)
         {
-            Assert.Throws<ArgumentException>(() => CreatePage(pageClass));
+            var x = Assert.Throws<PageObjectException>(() => CreatePage(pageClass));
+            StringAssert.IsMatch(regEx, x.Message);
         }
 
         [Test, Ignore]
         public void Should_throw_if_parent_causes_circular_loop()
-        {
-            Assert.Fail("Not yet implemented");
-        }
-
-        [Test, Ignore]
-        public void Should_support_uri_only()
-        {
-            Assert.Fail("Not yet implemented");
-        }
-
-        [Test, Ignore]
-        public void Should_support_uri_and_relative_path()
         {
             Assert.Fail("Not yet implemented");
         }

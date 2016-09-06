@@ -19,7 +19,7 @@ namespace PageObject
             this.pageClass = pageClass;
 
             if (!ValidBasePage())
-                throw new ArgumentException(string.Format("The base page for {0}, must be a subclass of {1}", pageClass, typeof(Page)));
+                throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
         }
 
         private bool ValidBasePage()
