@@ -12,7 +12,7 @@ namespace PageObject
             Path = path;
         }
 
-        public PageAttribute(Type parent, string path = null)
+        public PageAttribute(string path, Type parent)
         {
             Parent = parent;
             Path = path;

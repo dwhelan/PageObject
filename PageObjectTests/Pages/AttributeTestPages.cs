@@ -16,33 +16,27 @@ namespace PageObjectTests.Pages
         public WithPathOnly() : base(null) { }
     }
 
-    [Page(typeof(WithPathOnly), Constants.Path)]
-    public class WithParentAndPath : Page
+    [Page(Constants.Path, typeof(WithPathOnly))]
+    public class WithPathAndParent : Page
     {
-        public WithParentAndPath() : base(null) { }
+        public WithPathAndParent() : base(null) { }
     }
 
-    [Page(typeof(WithPathOnly))]
-    public class WithParentAndMissingPath : Page
+    [Page(null, typeof(WithPathOnly))]
+    public class WithNullPathAndParent : Page
     {
-        public WithParentAndMissingPath() : base(null) { }
+        public WithNullPathAndParent() : base(null) {}
     }
 
-    [Page(typeof(WithPathOnly), null)]
-    public class WithParentAndNullPath : Page
+    [Page("", typeof(WithPathOnly))]
+    public class WithEmptyPathAndParent : Page
     {
-        public WithParentAndNullPath() : base(null) {}
-    }
-
-    [Page(typeof(WithPathOnly), "")]
-    public class WithParentAndEmptyPath : Page
-    {
-        public WithParentAndEmptyPath() : base(null) {}
+        public WithEmptyPathAndParent() : base(null) {}
     }
 
     // The following page classes should all be invalid when one is attempted to be created.
 
-    [Page(typeof(string))]
+    [Page(null, typeof(string))]
     public class WithParentThatIsNotAPage : Page
     {
         public WithParentThatIsNotAPage() : base(null) { }

@@ -10,10 +10,9 @@ namespace PageObjectTests
     public class PageAttributeTests
     {
         [TestCase(typeof(WithPathOnly))]
-        [TestCase(typeof(WithParentAndPath))]
-        [TestCase(typeof(WithParentAndMissingPath))]
-        [TestCase(typeof(WithParentAndNullPath))]
-        [TestCase(typeof(WithParentAndEmptyPath))]
+        [TestCase(typeof(WithPathAndParent))]
+        [TestCase(typeof(WithNullPathAndParent))]
+        [TestCase(typeof(WithEmptyPathAndParent))]
         public void Should_be_a_valid_page(Type pageClass)
         {
             var page = CreatePage(pageClass);
