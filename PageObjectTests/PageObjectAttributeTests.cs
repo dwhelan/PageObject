@@ -10,16 +10,27 @@ namespace PageObjectTests
     public class PageObjectAttributeTests
     {
         [TestCase(typeof(WithPathOnly))]
+        public void Should_support_pages_with_a_url_only(Type pageClass)
+        {
+            AssertThatPageCanBeCreated(pageClass);
+        }
+
+        [TestCase(typeof(WithPathAndNullBasePage))]
         [TestCase(typeof(WithPathAndBasePage))]
         [TestCase(typeof(WithNullPathAndBasePage))]
         [TestCase(typeof(WithEmptyPathAndBasePage))]
+        public void Should_support_pages_with_a_base_page(Type pageClass)
+        {
+            AssertThatPageCanBeCreated(pageClass);
+        }
+
+        [TestCase(typeof(WithPathAndNullBaseUrl))]
         [TestCase(typeof(WithPathAndBaseUrl))]
         [TestCase(typeof(WithNullPathAndBaseUrl))]
         [TestCase(typeof(WithEmptyPathAndBaseUrl))]
-        public void Should_be_a_valid_page(Type pageClass)
+        public void Should_support_pages_with_a_base_url(Type pageClass)
         {
-            var page = CreatePage(pageClass);
-            Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
+            AssertThatPageCanBeCreated(pageClass);
         }
 
         [TestCase(typeof(WithInvalidUrl),             @"Invalid url ""invalid url""", typeof(UriFormatException))]
@@ -39,11 +50,17 @@ namespace PageObjectTests
             Assert.Fail("Not yet implemented");
         }
 
-        private static Page CreatePage(Type pageClass)
+        private void AssertThatPageCanBeCreated(Type pageClass)
+        {
+            var page = CreatePage(pageClass);
+            Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Constants.Url));
+        }
+
+        private Page CreatePage(Type pageClass)
         {
             try
             {
-                return (Page)Activator.CreateInstance(pageClass);
+                return (Page) Activator.CreateInstance(pageClass);
             }
             catch (TargetInvocationException x)
             {

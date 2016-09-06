@@ -1,3 +1,4 @@
+using System;
 using PageObject;
 
 namespace PageObjectTests.Pages
@@ -15,6 +16,18 @@ namespace PageObjectTests.Pages
     public class WithPathOnly : Page
     {
         public WithPathOnly() : base(null) { }
+    }
+
+    [PageObject(Constants.Url, (Type) null)]
+    public class WithPathAndNullBasePage : Page
+    {
+        public WithPathAndNullBasePage() : base(null) { }
+    }
+
+    [PageObject(Constants.Url, (string)null)]
+    public class WithPathAndNullBaseUrl : Page
+    {
+        public WithPathAndNullBaseUrl() : base(null) { }
     }
 
     // Valid page objects built with base page objects.
@@ -37,7 +50,7 @@ namespace PageObjectTests.Pages
         public WithEmptyPathAndBasePage() : base(null) {}
     }
 
-    // Valid page objects with base Urls.
+    // Valid page objects with base urls.
 
     [PageObject(Constants.Path, Constants.BaseUrl)]
     public class WithPathAndBaseUrl : Page
@@ -63,9 +76,7 @@ namespace PageObjectTests.Pages
     [PageObject("invalid url")]
     public class WithInvalidUrl : Page
     {
-        public WithInvalidUrl() : base(null)
-        {
-        }
+        public WithInvalidUrl() : base(null) {}
     }
 
     [PageObject(null, typeof(string))]
