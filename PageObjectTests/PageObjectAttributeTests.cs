@@ -14,6 +14,8 @@ namespace PageObjectTests
         [TestCase(typeof(WithNullPathAndBasePage))]
         [TestCase(typeof(WithEmptyPathAndBasePage))]
         [TestCase(typeof(WithPathAndBaseUrl))]
+        [TestCase(typeof(WithNullPathAndBaseUrl))]
+        [TestCase(typeof(WithEmptyPathAndBaseUrl))]
         public void Should_be_a_valid_page(Type pageClass)
         {
             var page = CreatePage(pageClass);

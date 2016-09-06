@@ -4,8 +4,8 @@ namespace PageObjectTests.Pages
 {
     public static class Constants
     {
-        public const string Url = Base + Path;
-        public const string Base = "file:///";
+        public const string Url = BaseUrl + Path;
+        public const string BaseUrl = "file:///";
         public const string Path = "something";
     }
 
@@ -37,14 +37,26 @@ namespace PageObjectTests.Pages
         public WithEmptyPathAndBasePage() : base(null) {}
     }
 
+    // Valid page objects with base Urls.
 
-    // Page objects with base page objects.
-
-    [PageObject(Constants.Path, Constants.Base)]
+    [PageObject(Constants.Path, Constants.BaseUrl)]
     public class WithPathAndBaseUrl : Page
     {
         public WithPathAndBaseUrl() : base(null) { }
     }
+
+    [PageObject(null, Constants.Url)]
+    public class WithNullPathAndBaseUrl : Page
+    {
+        public WithNullPathAndBaseUrl() : base(null) { }
+    }
+
+    [PageObject("", Constants.Url)]
+    public class WithEmptyPathAndBaseUrl : Page
+    {
+        public WithEmptyPathAndBaseUrl() : base(null) { }
+    }
+
 
     // The following page classes should all be invalid when one is attempted to be created.
 
