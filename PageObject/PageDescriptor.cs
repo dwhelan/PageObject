@@ -5,7 +5,7 @@ namespace PageObject
 {
     internal class PageDescriptor
     {
-        internal Uri Uri => BaseUri == null ? UriBuilder.Build(Path) : new Uri(BaseUri, Path);
+        internal Uri Uri => UriBuilder.Build(BaseUri, Path);
 
         private PageAtAttribute PageAtAttribute => PageAtAttribute.For(pageClass);
         private string Path => PageAtAttribute.Path;

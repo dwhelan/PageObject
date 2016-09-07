@@ -8,17 +8,11 @@ namespace PageObject.Tests
     public class PageConstructorTests
     {
         private const string Url = BaseUrl + Path;
-        private static readonly Uri Uri = new Uri(Url);
-
         private const string BaseUrl = "file:///";
-        private static readonly Uri BaseUri = new Uri(BaseUrl);
-
         private const string Path = "something";
 
         private class TestPage : Page
         {
-            // The Following constructors are used to test PageObject construction
-
             internal TestPage(string url) : base(null, url) {}
 
             internal TestPage(Uri uri) : base(null, uri) {}
@@ -56,13 +50,11 @@ namespace PageObject.Tests
             AssertValidPage(new DependentPage(null, Url));
         }
 
-
         [Test]
         public void Should_ensure_a_valid_path_with_a_null_base_page()
         {
             AssertThrowsPageObjectException(() => new DependentPage(null, "invalid url"));
         }
-
 
         [Test]
         public void Should_support_url_only()
