@@ -13,19 +13,16 @@ namespace PageObjectTests
     [TestFixture]
     public class PageConstructorTests
     {
-        internal const string Url = BaseUrl + Path;
-        internal static readonly Uri Uri = new Uri(Url);
+        private const string Url = BaseUrl + Path;
+        private static readonly Uri Uri = new Uri(Url);
 
-        internal const string BaseUrl = "file:///";
-        internal static readonly Uri BaseUri = new Uri(BaseUrl);
+        private const string BaseUrl = "file:///";
+        private static readonly Uri BaseUri = new Uri(BaseUrl);
 
-        internal const string Path = "something";
+        private const string Path = "something";
 
-        internal class TestPage : Page
+        private class TestPage : Page
         {
-            internal new static Uri Uri => new Uri(Pages.PageConstructor.Root.Uri, "Home.html");
-            internal new static string Url => Uri.AbsoluteUri;
-
             // The Following constructors are used to test PageObject construction
 
             internal TestPage(string url) : base(null, url)
@@ -51,6 +48,12 @@ namespace PageObjectTests
             AssertValidPage(new TestPage(Url));
         }
 
+        [Test]
+        public void Should_ensure_a_valid_url()
+        {
+            AssertThrowsPageObjectException(() => new TestPage("invalid url"));
+        }
+
         [TestCase(BaseUrl, Path)]
         [TestCase(Url, "")]
         [TestCase(Url, null)]
@@ -65,6 +68,18 @@ namespace PageObjectTests
             AssertValidPage(new TestPage((string)null, Url));
         }
 
+        [Test]
+        public void Should_ensure_a_valid_base_url()
+        {
+            AssertThrowsPageObjectException(() => new TestPage("invalid url", Path));
+        }
+
+        [Test]
+        public void Should_support_uri_only()
+        {
+            AssertValidPage(new TestPage(new Uri(Url)));
+        }
+
         [TestCase(BaseUrl, Path)]
         [TestCase(Url, "")]
         [TestCase(Url, null)]
@@ -77,18 +92,6 @@ namespace PageObjectTests
         public void Should_support_a_null_base_uri_with_a_full_path_url()
         {
             AssertValidPage(new TestPage((Uri) null, Url));
-        }
-
-        [Test]
-        public void Should_ensure_a_valid_uri()
-        {
-            AssertThrowsPageObjectException(() => new TestPage("invalid url", Path));
-        }
-
-        [Test]
-        public void Should_ensure_a_valid_path()
-        {
-            AssertThrowsPageObjectException(() => new TestPage("invalid url"));
         }
 
         private static void AssertThrowsPageObjectException(Func<TestPage> func)
