@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="PageConstructorTests.cs" />
     <Compile Include="PageObjectAttributeTests.cs" />
+    <Compile Include="Pages\File\HomePage.cs" />
     <Compile Include="Pages\File\Root.cs" />
     <Compile Include="Pages\File\HomePage.feature.cs">
       <AutoGen>True</AutoGen>
@@ -87,7 +88,6 @@
       <DependentUpon>HomePage.feature</DependentUpon>
     </Compile>
     <Compile Include="Pages\Google\HomePage.cs" />
-    <Compile Include="Pages\PageObjectAttribute\TestPages.cs" />
     <Compile Include="Steps\PageSteps.cs" />
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="BrowserTests.cs" />

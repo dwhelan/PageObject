@@ -6,7 +6,6 @@ using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject;
 using PageObjectTests.Pages.File;
-using PageObjectTests.Pages.PageObjectAttribute;
 
 namespace PageObjectTests
 {
