@@ -44,10 +44,16 @@ namespace PageObject.Tests
         [TestCase(BaseUrl, Path)]
         [TestCase(Url, "")]
         [TestCase(Url, null)]
-        public void Should_support_a_base_project_and_path(string baseUrl, string path)
+        public void Should_support_a_base_page_and_path(string baseUrl, string path)
         {
             var basePage = new TestPage(baseUrl);
             AssertValidPage(new DependentPage(basePage, path));
+        }
+
+        [Test]
+        public void Should_support_a_null_base_path_with_a_full_path_url()
+        {
+            AssertValidPage(new DependentPage(null, Url));
         }
 
         [Test]

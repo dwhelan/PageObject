@@ -16,7 +16,7 @@ namespace PageObject
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
 
-        protected Page(PageSession session, Page basePage, string path = "") : this(session, basePage.Uri, path)
+        protected Page(PageSession session, Page basePage, string path = "") : this(session, basePage?.Url, path)
         {
         }
 
