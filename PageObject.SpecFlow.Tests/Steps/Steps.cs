@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
 using TechTalk.SpecFlow;
 
-namespace PageObject.Tests.Steps
+namespace PageObject.SpecFlow.Tests.Steps
 {
     [Binding]
-    public class PageSteps : PageObject.PageSteps
+    public class Steps : SpecFlow.Steps
     {
-        public PageSteps(PageSession session) : base(session)
+        public Steps(PageSession session) : base(session)
         {
         }
 

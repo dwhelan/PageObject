@@ -1,11 +1,11 @@
-namespace PageObject
+namespace PageObject.SpecFlow
 {
-    public abstract class PageSteps
+    public abstract class Steps
     {
         protected PageSession Session { get; }
         protected Page Page => Session.Page;
 
-        protected PageSteps(PageSession session)
+        protected Steps(PageSession session)
         {
             Session = session;
         }

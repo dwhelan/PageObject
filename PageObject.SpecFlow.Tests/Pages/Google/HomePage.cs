@@ -1,4 +1,4 @@
-namespace PageObject.Tests.Pages.Google
+namespace PageObject.SpecFlow.Tests.Pages.Google
 {
     [PageAt("http://www.google.com")]
     public class HomePage : Page

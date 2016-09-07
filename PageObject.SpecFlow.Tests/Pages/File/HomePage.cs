@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PageObject.Tests.Pages.File
+namespace PageObject.SpecFlow.Tests.Pages.File
 {
     internal class HomePage : Page
     {
