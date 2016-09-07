@@ -6,29 +6,22 @@ using PageObject;
 
 namespace PageObjectTests
 {
-
     [TestFixture]
     public class PageFactoryTests
     {
         public abstract class AbstractTestPage : Page
         {
-            protected AbstractTestPage(PageSession session, string path) : base(session, new Uri("test.com/"), path)
-            {
-            }
+            protected AbstractTestPage(PageSession session, string path) : base(session, new Uri("test.com/"), path) {}
         }
 
         public class TestPage : AbstractTestPage
         {
-            public TestPage(PageSession session) : base(session, "path")
-            {
-            }
+            public TestPage(PageSession session) : base(session, "path") {}
         }
 
         public class Test2Page : AbstractTestPage
         {
-            public Test2Page(PageSession session) : base(session, "path2")
-            {
-            }
+            public Test2Page(PageSession session) : base(session, "path2") {}
         }
 
         [Test]
