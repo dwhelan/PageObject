@@ -3,7 +3,7 @@ using Coypu;
 using Coypu.Drivers;
 using TechTalk.SpecFlow;
 
-namespace PageObject
+namespace PageObject.SpecFlow
 {
     [Binding]
     public class Hooks
