@@ -30,16 +30,24 @@ namespace PageObject.Tests
 
         private class DependentPage : Page
         {
-            public DependentPage(Page basePage) : base(null, basePage)
-            {
-            }
+            public DependentPage(Page basePage) : base(null, basePage) {}
+
+            public DependentPage(Page basePage, string path) : base(null, basePage, path) {}
         }
 
-
         [Test]
-        public void Should_support_page_only()
+        public void Should_support_a_page_only()
         {
             AssertValidPage(new DependentPage(new TestPage(Url)));
+        }
+
+        [TestCase(BaseUrl, Path)]
+        [TestCase(Url, "")]
+        [TestCase(Url, null)]
+        public void Should_support_a_base_project_and_path(string baseUrl, string path)
+        {
+            var basePage = new TestPage(baseUrl);
+            AssertValidPage(new DependentPage(basePage, path));
         }
 
         [Test]
@@ -57,7 +65,7 @@ namespace PageObject.Tests
         [TestCase(BaseUrl, Path)]
         [TestCase(Url, "")]
         [TestCase(Url, null)]
-        public void Should_support_a_base_url(string baseUrl, string path)
+        public void Should_support_a_base_url_and_path(string baseUrl, string path)
         {
             AssertValidPage(new TestPage(baseUrl, path));
         }

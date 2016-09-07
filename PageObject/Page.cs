@@ -16,10 +16,12 @@ namespace PageObject
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
 
-        protected Page(PageSession session, Page basePage)
+        protected Page(PageSession session, Page basePage, string path = "") : this(session, basePage.Uri, path)
         {
-            Session = session;
-            Uri = basePage.Uri;
+        }
+
+        protected Page(PageSession session, Uri uri, string path = "") : this(session, uri?.AbsoluteUri, path)
+        {
         }
 
         protected Page(PageSession session, string url, string path = "")
@@ -29,20 +31,12 @@ namespace PageObject
             Hosts = new List<string> { Uri.Host };
         }
 
-        protected Page(PageSession session, Uri uri, string path = "")
-        {
-            Session = session;
-            Uri = UriBuilder.Build(uri, path);
-            Hosts = new List<string> { Uri.Host };
-        }
-
         protected Page(PageSession session)
         {
             Session = session;
             Uri = Descriptor.Uri;
             Hosts = new List<string> { Uri.Host };
         }
-
 
         public void Visit()
         {
