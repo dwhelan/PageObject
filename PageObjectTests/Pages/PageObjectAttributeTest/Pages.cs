@@ -1,7 +1,7 @@
 using System;
 using PageObject;
 
-namespace PageObjectTests.Pages
+namespace PageObjectTests.Pages.PageObjectAttributeTest
 {
     public static class Constants
     {
@@ -51,6 +51,7 @@ namespace PageObjectTests.Pages
         public NullBasePageAndPath() : base(null) { }
     }
 
+
     // Valid page objects with base urls.
 
     [PageObject(Constants.BaseUrl, Constants.Path)]
@@ -59,7 +60,7 @@ namespace PageObjectTests.Pages
         public BaseUrlAndPath() : base(null) { }
     }
 
-    [PageObject(Constants.Url, (string) null)]
+    [PageObject(Constants.Url, null)]
     public class BaseUrlAndNullPath : Page
     {
         public BaseUrlAndNullPath() : base(null) { }
@@ -76,6 +77,7 @@ namespace PageObjectTests.Pages
     {
         public NullBaseUrlAndPath() : base(null) { }
     }
+
 
     // The following invalid page classes should raise a PageObjectException when instantiated.
 

@@ -23,7 +23,7 @@ namespace PageObject
             {
                 // Uncomment the Browser you want
                 //Browser = Browser.Firefox,
-                Browser = Browser.Chrome,
+                Browser = Browser.Chrome
                 //Browser = Browser.InternetExplorer,
                 //Browser = Browser.PhantomJS,
             };

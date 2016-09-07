@@ -3,9 +3,9 @@ using PageObject;
 namespace PageObjectTests.Pages.Google
 {
     [PageObject("http://www.google.com")]
-    public class GooglePage : Page
+    public class HomePage : Page
     {
-        public GooglePage(PageSession session) : base(session)
+        public HomePage(PageSession session) : base(session)
         {
         }
     }
