@@ -88,7 +88,7 @@
       <DependentUpon>HomePage.feature</DependentUpon>
     </Compile>
     <Compile Include="Pages\Google\HomePage.cs" />
-    <Compile Include="Pages\PageObjectAttributeTest\Pages.cs" />
+    <Compile Include="Pages\PageObjectAttribute\TestPages.cs" />
     <Compile Include="Steps\PageSteps.cs" />
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="BrowserTests.cs" />

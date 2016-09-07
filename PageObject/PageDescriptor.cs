@@ -7,10 +7,10 @@ namespace PageObject
     {
         internal Uri Uri => BaseUri == null ? UriBuilder.Build(Path) : new Uri(BaseUri, Path);
 
-        private PageObjectAttribute PageObjectAttribute => PageObjectAttribute.For(pageClass);
-        private string Path => PageObjectAttribute.Path;
-        private Type BasePage => PageObjectAttribute.BasePage;
-        private string BaseUrl => PageObjectAttribute.BaseUrl;
+        private PageAtAttribute PageAtAttribute => PageAtAttribute.For(pageClass);
+        private string Path => PageAtAttribute.Path;
+        private Type BasePage => PageAtAttribute.BasePage;
+        private string BaseUrl => PageAtAttribute.BaseUrl;
 
         private readonly Type pageClass;
         private Uri baseUri;
@@ -57,7 +57,7 @@ namespace PageObject
 
             while (basePage != null)
             {
-                var nextBasePage = PageObjectAttribute.For(basePage).BasePage;
+                var nextBasePage = PageAtAttribute.For(basePage).BasePage;
 
                 if (nextBasePage == pageClass)
                     throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));

@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using NUnit.Framework;
 using PageObject;
-using PageObjectTests.Pages.PageObjectAttributeTest;
+using PageObjectTests.Pages.PageObjectAttribute;
 
 namespace PageObjectTests
 {
