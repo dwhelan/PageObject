@@ -56,6 +56,14 @@ namespace PageObject.Tests
             AssertValidPage(new DependentPage(null, Url));
         }
 
+
+        [Test]
+        public void Should_ensure_a_valid_path_with_a_null_base_page()
+        {
+            AssertThrowsPageObjectException(() => new DependentPage(null, "invalid url"));
+        }
+
+
         [Test]
         public void Should_support_url_only()
         {
@@ -108,7 +116,7 @@ namespace PageObject.Tests
             AssertValidPage(new TestPage((Uri)null, Url));
         }
 
-        private static void AssertThrowsPageObjectException(Func<TestPage> func)
+        private static void AssertThrowsPageObjectException(Func<Page> func)
         {
             try
             {
