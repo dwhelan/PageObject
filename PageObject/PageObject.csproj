@@ -38,10 +38,6 @@
       <HintPath>..\..\atdd_training\cs\packages\Coypu.Watin.2.3.1\lib\net40\Coypu.Drivers.Watin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Coypu.NUnit, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Coypu.NUnit.1.1.0\lib\net40\Coypu.NUnit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Interop.SHDocVw, Version=1.1.0.0, Culture=neutral, PublicKeyToken=db7cfd3acb5ad44e, processorArchitecture=MSIL">
       <HintPath>..\packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
