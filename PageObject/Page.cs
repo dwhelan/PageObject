@@ -16,14 +16,17 @@ namespace PageObject
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
 
-        protected Page(PageSession session, string url, string relativePath = "") : this(session, new Uri(url), relativePath)
-        {
-        }
-
-        protected Page(PageSession session, Uri uri, string relativePath  = "")
+        protected Page(PageSession session, string url, string path = "")
         {
             Session = session;
-            Uri = new Uri(uri, relativePath );
+            Uri = UriBuilder.Build(url, path);
+            Hosts = new List<string> { Uri.Host };
+        }
+
+        protected Page(PageSession session, Uri uri, string path = "")
+        {
+            Session = session;
+            Uri = UriBuilder.Build(uri, path);
             Hosts = new List<string> { Uri.Host };
         }
 

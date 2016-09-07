@@ -18,7 +18,7 @@ namespace PageObjectTests.Pages.File
         {
         }
 
-        public HomePage(PageSession session, Uri uri, string relativePath) : base(session, uri, relativePath)
+        public HomePage(PageSession session, Uri uri, string path) : base(session, uri, path)
         {
         }
 
@@ -26,7 +26,7 @@ namespace PageObjectTests.Pages.File
         {
         }
 
-        public HomePage(PageSession session, string url, string relativePath) : base(session, url, relativePath)
+        public HomePage(PageSession session, string url, string path) : base(session, url, path)
         {
         }
     }

@@ -10,7 +10,7 @@ namespace PageObjectTests
     public class PageObjectAttributeTests
     {
         [TestCase(typeof(BasePage))]
-        public void Should_support_pages_with_a_url_only(Type pageClass)
+        public void Should_support_url_only(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
@@ -20,7 +20,7 @@ namespace PageObjectTests
         [TestCase(typeof(BasePageAndEmptyPath))]
         [TestCase(typeof(BasePageOnly))]
         [TestCase(typeof(NullBasePageAndPath))]
-        public void Should_support_pages_with_a_base_page(Type pageClass)
+        public void Should_support_a_base_page(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }
@@ -29,7 +29,7 @@ namespace PageObjectTests
         [TestCase(typeof(BaseUrlAndNullPath))]
         [TestCase(typeof(BaseUrlAndEmptyPath))]
         [TestCase(typeof(NullBaseUrlAndPath))]
-        public void Should_support_pages_with_a_base_url(Type pageClass)
+        public void Should_support_a_base_url(Type pageClass)
         {
             AssertThatPageCanBeCreated(pageClass);
         }

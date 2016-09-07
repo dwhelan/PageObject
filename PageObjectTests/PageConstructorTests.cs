@@ -1,59 +1,112 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject;
 using PageObjectTests.Pages.File;
+using PageObjectTests.Pages.PageObjectAttribute;
 
 namespace PageObjectTests
 {
     [TestFixture]
     public class PageConstructorTests
     {
-        private PageSession session;
+        internal const string Url = BaseUrl + Path;
+        internal static readonly Uri Uri = new Uri(Url);
 
-        [SetUp]
-        public void CreateSession()
-        {
-            var configuration = new SessionConfiguration{ Browser = Browser.PhantomJS };
-            session = new PageSession(configuration);
-        }
+        internal const string BaseUrl = "file:///";
+        internal static readonly Uri BaseUri = new Uri(BaseUrl);
 
-        [Test]
-        public void Should_support_uri_only()
-        {
-            EnsureHomePageIsValid(new HomePage(session, HomePage.Uri));
-        }
+        internal const string Path = "something";
 
-        [Test]
-        public void Should_support_uri_and_relative_path()
+        internal class TestPage : Page
         {
-            EnsureHomePageIsValid(new HomePage(session, Root.Uri, "Home.html"));
+            internal new static Uri Uri => new Uri(Pages.PageConstructor.Root.Uri, "Home.html");
+            internal new static string Url => Uri.AbsoluteUri;
+
+            // The Following constructors are used to test PageObject construction
+
+            internal TestPage(string url) : base(null, url)
+            {
+            }
+
+            internal TestPage(Uri uri) : base(null, uri)
+            {
+            }
+
+            internal TestPage(Uri uri, string path) : base(null, uri, path)
+            {
+            }
+
+            internal TestPage(string url, string path) : base(null, url, path)
+            {
+            }
         }
 
         [Test]
         public void Should_support_url_only()
         {
-            EnsureHomePageIsValid(new HomePage(session, HomePage.Url));
+            AssertValidPage(new TestPage(Url));
+        }
+
+        [TestCase(BaseUrl, Path)]
+        [TestCase(Url, "")]
+        [TestCase(Url, null)]
+        public void Should_support_a_base_url(string baseUrl, string path)
+        {
+            AssertValidPage(new TestPage(baseUrl, path));
         }
 
         [Test]
-        public void Should_support_url_and_relative_path()
+        public void Should_support_a_null_base_url_with_a_full_path_url()
         {
-            EnsureHomePageIsValid(new HomePage(session, Root.Url, "Home.html"));
+            AssertValidPage(new TestPage((string)null, Url));
         }
 
-        [TearDown]
-        public void DisposeSession()
+        [TestCase(BaseUrl, Path)]
+        [TestCase(Url, "")]
+        [TestCase(Url, null)]
+        public void Should_support_a_base_uri(string baseUrl, string path)
         {
-            session?.Dispose();
+            AssertValidPage(new TestPage(new Uri(baseUrl), path));
         }
 
-        private void EnsureHomePageIsValid(Page page)
+        [Test]
+        public void Should_support_a_null_base_uri_with_a_full_path_url()
         {
-            Assert.That(page.Uri, Is.EqualTo(HomePage.Uri));
-            Assert.That(page.Url, Is.EqualTo(HomePage.Url));
-            CollectionAssert.AreEqual(page.Hosts, new List<string> { "" });
+            AssertValidPage(new TestPage((Uri) null, Url));
+        }
+
+        [Test]
+        public void Should_ensure_a_valid_uri()
+        {
+            AssertThrowsPageObjectException(() => new TestPage("invalid url", Path));
+        }
+
+        [Test]
+        public void Should_ensure_a_valid_path()
+        {
+            AssertThrowsPageObjectException(() => new TestPage("invalid url"));
+        }
+
+        private static void AssertThrowsPageObjectException(Func<TestPage> func)
+        {
+            try
+            {
+                func.DynamicInvoke();
+            }
+            catch (TargetInvocationException x)
+            {
+                Assert.That(x.InnerException, Is.AssignableTo(typeof(PageObjectException)));
+                Assert.That(x.InnerException.InnerException, Is.AssignableTo(typeof(UriFormatException)));
+            }
+        }
+
+        private static void AssertValidPage(Page page)
+        {
+            Assert.That(page.Url, Is.EqualTo(Url));
         }
     }
 }

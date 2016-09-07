@@ -6,34 +6,35 @@ using PageObject;
 
 namespace PageObjectTests
 {
-    public abstract class AbstractTestPage : Page
-    {
-        protected AbstractTestPage(PageSession session, string relativePath) : base(session, new Uri("test.com/"), relativePath)
-        {
-        }
-    }
-
-    public class TestPage : AbstractTestPage
-    {
-        public TestPage(PageSession session) : base(session, "path")
-        {
-        }
-    }
-
-    public class Test2Page : AbstractTestPage
-    {
-        public Test2Page(PageSession session) : base(session, "path2")
-        {
-        }
-    }
 
     [TestFixture]
     public class PageFactoryTests
     {
+        public abstract class AbstractTestPage : Page
+        {
+            protected AbstractTestPage(PageSession session, string path) : base(session, new Uri("test.com/"), path)
+            {
+            }
+        }
+
+        public class TestPage : AbstractTestPage
+        {
+            public TestPage(PageSession session) : base(session, "path")
+            {
+            }
+        }
+
+        public class Test2Page : AbstractTestPage
+        {
+            public Test2Page(PageSession session) : base(session, "path2")
+            {
+            }
+        }
+
         [Test]
         public void Should_auto_register_sites()
         {
-            Assert.That(PageFactory.Instance.PageClassFor("TestPage"), Is.EqualTo(typeof(TestPage)));
+            Assert.That(PageFactory.Instance.PageClassFor("PageFactoryTestsTestPage"), Is.EqualTo(typeof(TestPage)));
         }
 
         [Test]
@@ -52,19 +53,19 @@ namespace PageObjectTests
         public void Find_should_throw_if_multiple_site_classes_found()
         {
             var x = Assert.Throws<ArgumentException>(() => PageFactory.Instance.PageClassFor("Page"));
-            Assert.That(x.Message, Is.StringContaining("PageObjectTests.TestPage"));
-            Assert.That(x.Message, Is.StringContaining("PageObjectTests.Test2Page"));
+            Assert.That(x.Message, Is.StringContaining("PageObjectTests.PageFactoryTests+TestPage"));
+            Assert.That(x.Message, Is.StringContaining("PageObjectTests.PageFactoryTests+Test2Page"));
         }
 
-        [TestCase("TestPage")]
-        [TestCase("PageObjectTests.TestPage")]
+        [TestCase("PageFactoryTestsTestPage")]
+        [TestCase("FactoryTestsTestPage")]
         public void Find_should_locate_with_partial_or_full_class_name_match(string siteName)
         {
             Assert.That(PageFactory.Instance.PageClassFor(siteName), Is.EqualTo(typeof(TestPage)));
         }
 
-        [TestCase(" Test Page ")]
-        [TestCase("Page Object Tests Test Page")]
+        [TestCase("Page Factory Tests Test Page")]
+        [TestCase(@"!@#$%^&*()+{}|:"";'<>?,./ Page Factory Tests Test Page ")]
         public void Find_remove_punctuation_from_site_names(string siteName)
         {
             try
