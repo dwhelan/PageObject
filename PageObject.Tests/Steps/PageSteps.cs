@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using PageObject;
 using TechTalk.SpecFlow;
 
-namespace PageObjectTests.Steps
+namespace PageObject.Tests.Steps
 {
     [Binding]
     public class PageSteps : PageObject.PageSteps

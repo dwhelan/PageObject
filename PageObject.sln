@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObject", "PageObject\PageObject.csproj", "{C1D3E486-2B8B-4A5A-8522-362EB6CC27BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObjectTests", "PageObjectTests\PageObjectTests.csproj", "{B5FA51E7-0C6A-43D8-99C8-31823126E6B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObject.Tests", "PageObject.Tests\PageObject.Tests.csproj", "{B5FA51E7-0C6A-43D8-99C8-31823126E6B1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5BA6A4F9-0DD6-4D05-862B-3EBEE9091B9E}"
 	ProjectSection(SolutionItems) = preProject

@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
 using NUnit.Framework;
-using PageObject;
 
-namespace PageObjectTests
+namespace PageObject.Tests
 {
     public static class Constants
     {

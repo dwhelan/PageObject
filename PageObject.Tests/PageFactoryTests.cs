@@ -2,9 +2,8 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 using NUnit.Framework;
-using PageObject;
 
-namespace PageObjectTests
+namespace PageObject.Tests
 {
     [TestFixture]
     public class PageFactoryTests
@@ -46,8 +45,8 @@ namespace PageObjectTests
         public void Find_should_throw_if_multiple_site_classes_found()
         {
             var x = Assert.Throws<ArgumentException>(() => PageFactory.Instance.PageClassFor("Page"));
-            Assert.That(x.Message, Is.StringContaining("PageObjectTests.PageFactoryTests+TestPage"));
-            Assert.That(x.Message, Is.StringContaining("PageObjectTests.PageFactoryTests+Test2Page"));
+            Assert.That(x.Message, Is.StringContaining("PageObject.Tests.PageFactoryTests+TestPage"));
+            Assert.That(x.Message, Is.StringContaining("PageObject.Tests.PageFactoryTests+Test2Page"));
         }
 
         [TestCase("PageFactoryTestsTestPage")]

@@ -1,7 +1,6 @@
 ﻿using System;
-using PageObject;
 
-namespace PageObjectTests.Pages.File
+namespace PageObject.Tests.Pages.File
 {
     internal class HomePage : Page
     {

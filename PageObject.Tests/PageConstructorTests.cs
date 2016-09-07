@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using Coypu;
-using Coypu.Drivers;
 using NUnit.Framework;
-using PageObject;
-using PageObjectTests.Pages.File;
 
-namespace PageObjectTests
+namespace PageObject.Tests
 {
     [TestFixture]
     public class PageConstructorTests

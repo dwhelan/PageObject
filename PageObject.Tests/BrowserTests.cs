@@ -4,7 +4,7 @@ using Coypu.Drivers;
 using Coypu.Drivers.Watin;
 using NUnit.Framework;
 
-namespace PageObjectTests
+namespace PageObject.Tests
 {
     [TestFixture, Ignore]
     public class BrowserTests

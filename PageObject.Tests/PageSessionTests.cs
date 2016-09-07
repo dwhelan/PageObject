@@ -1,9 +1,8 @@
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
-using PageObject;
 
-namespace PageObjectTests
+namespace PageObject.Tests
 {
     [TestFixture]
     public class PageSessionTests

@@ -1,5 +1,5 @@
 # PageObject
-A .Net implementation of the PageObject pattern to support web testing.
+A .Net implementation of the [PageObject pattern](http://martinfowler.com/bliki/PageObject.html) to support web testing.
 
 ## Installation
 TBD

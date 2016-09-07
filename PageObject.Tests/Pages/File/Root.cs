@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace PageObjectTests.Pages.File
+namespace PageObject.Tests.Pages.File
 {
     internal static class Root
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{B5FA51E7-0C6A-43D8-99C8-31823126E6B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PageObjectTests</RootNamespace>
-    <AssemblyName>PageObjectTests</AssemblyName>
+    <RootNamespace>PageObject.Tests</RootNamespace>
+    <AssemblyName>PageObject.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

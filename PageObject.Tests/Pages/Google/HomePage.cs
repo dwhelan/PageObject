@@ -1,6 +1,4 @@
-using PageObject;
-
-namespace PageObjectTests.Pages.Google
+namespace PageObject.Tests.Pages.Google
 {
     [PageAt("http://www.google.com")]
     public class HomePage : Page
