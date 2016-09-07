@@ -16,6 +16,12 @@ namespace PageObject
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
 
+        protected Page(PageSession session, Page basePage)
+        {
+            Session = session;
+            Uri = basePage.Uri;
+        }
+
         protected Page(PageSession session, string url, string path = "")
         {
             Session = session;
@@ -36,6 +42,7 @@ namespace PageObject
             Uri = Descriptor.Uri;
             Hosts = new List<string> { Uri.Host };
         }
+
 
         public void Visit()
         {

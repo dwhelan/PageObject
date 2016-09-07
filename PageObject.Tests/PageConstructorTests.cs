@@ -19,21 +19,27 @@ namespace PageObject.Tests
         {
             // The Following constructors are used to test PageObject construction
 
-            internal TestPage(string url) : base(null, url)
-            {
-            }
+            internal TestPage(string url) : base(null, url) {}
 
-            internal TestPage(Uri uri) : base(null, uri)
-            {
-            }
+            internal TestPage(Uri uri) : base(null, uri) {}
 
-            internal TestPage(Uri uri, string path) : base(null, uri, path)
-            {
-            }
+            internal TestPage(Uri uri, string path) : base(null, uri, path) {}
 
-            internal TestPage(string url, string path) : base(null, url, path)
+            internal TestPage(string url, string path) : base(null, url, path) {}
+        }
+
+        private class DependentPage : Page
+        {
+            public DependentPage(Page basePage) : base(null, basePage)
             {
             }
+        }
+
+
+        [Test]
+        public void Should_support_page_only()
+        {
+            AssertValidPage(new DependentPage(new TestPage(Url)));
         }
 
         [Test]
@@ -85,7 +91,7 @@ namespace PageObject.Tests
         [Test]
         public void Should_support_a_null_base_uri_with_a_full_path_url()
         {
-            AssertValidPage(new TestPage((Uri) null, Url));
+            AssertValidPage(new TestPage((Uri)null, Url));
         }
 
         private static void AssertThrowsPageObjectException(Func<TestPage> func)
