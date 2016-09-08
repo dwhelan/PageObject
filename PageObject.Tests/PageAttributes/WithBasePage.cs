@@ -70,7 +70,7 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(BaseUrlInConstructor))]
         public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
         {
-            AssertPageCreationThrows(pageClass, @"Cannot specify a base page, Uri or Url in the constructor when you have included a base (page|uri) in the PageAt\(\) attribute");
+            AssertPageCreationThrows(pageClass, @"Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt\(\) attribute");
         }
 
             [PageAt(typeof(BasePage))]

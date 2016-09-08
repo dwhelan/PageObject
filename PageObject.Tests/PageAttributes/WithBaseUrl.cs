@@ -46,6 +46,37 @@ namespace PageObject.Tests.PageAttributes
                 public NullBaseUrlAndPath() : base(null) { }
             }
 
+        [TestCase(typeof(BasePageInConstructor))]
+        [TestCase(typeof(BaseUriInConstructor))]
+        [TestCase(typeof(BaseUrlInConstructor))]
+        public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
+        {
+            AssertPageCreationThrows(pageClass, @"Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt\(\) attribute");
+        }
+
+            private class BasePage : Page
+            {
+                public BasePage() : base(null, BaseTest.Url) {}
+            }
+
+            [PageAt(BaseTest.Url, "")]
+            private class BasePageInConstructor : Page
+            {
+                public BasePageInConstructor() : base(null, new BasePage()) {}
+            }
+
+            [PageAt(BaseTest.Url, "")]
+            private class BaseUriInConstructor : Page
+            {
+                public BaseUriInConstructor() : base(null, BaseTest.Uri) {}
+            }
+
+            [PageAt(BaseTest.Url, "")]
+            private class BaseUrlInConstructor : Page
+            {
+                public BaseUrlInConstructor() : base(null, BaseTest.Url) {}
+            }
+
         [TestCase(typeof(InvalidUrl))]
         [TestCase(typeof(BaseThatIsAnInvalidUrl))]
         public void Should_ensure_a_valid_uri(Type pageClass)

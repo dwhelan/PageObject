@@ -26,10 +26,9 @@ namespace PageObject
 
         protected Page(PageSession session, string url, string path = "")
         {
-            Session = session;
-            if (url != null && Descriptor.PageAtAttribute.BasePage != null)
-                throw new PageObjectException("Cannot specify a base page, Uri or Url in the constructor when you have included a base page in the PageAt() attribute");
+            EnsureBaseIsOnlySpecifiedOnce(url);
 
+            Session = session;
             Uri = UriBuilder.Build(url, path);
             Hosts = new List<string> { Uri.Host };
         }
@@ -45,6 +44,20 @@ namespace PageObject
         {
             Browser.Visit(Url);
             Session.Page = this;
+        }
+
+        private void EnsureBaseIsOnlySpecifiedOnce(string url)
+        {
+            if (url == null)
+                return;
+
+            if (Descriptor.PageAtAttribute.BasePage != null)
+                throw new PageObjectException(
+                    "Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt() attribute");
+
+            if (Descriptor.PageAtAttribute.BaseUrl != null)
+                throw new PageObjectException(
+                    "Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt() attribute");
         }
     }
 }
