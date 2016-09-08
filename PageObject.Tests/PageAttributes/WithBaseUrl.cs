@@ -4,8 +4,9 @@ using NUnit.Framework;
 namespace PageObject.Tests.PageAttributes
 {
     [TestFixture]
-    public class PageObjectAttributeTests : BaseTest
+    public class WithBaseUrl : BaseTest
     {
+        [TestCase(typeof(BaseUrlOnly))]
         [TestCase(typeof(BaseUrlAndPath))]
         [TestCase(typeof(BaseUrlAndNullPath))]
         [TestCase(typeof(BaseUrlAndEmptyPath))]
@@ -14,6 +15,12 @@ namespace PageObject.Tests.PageAttributes
         {
             AssertThatPageCanBeCreated(pageClass);
         }
+
+            [PageAt(BaseTest.Url)]
+            private class BaseUrlOnly : Page
+            {
+                public BaseUrlOnly() : base(null) { }
+            }
 
             [PageAt(BaseUrl, Path)]
             private class BaseUrlAndPath : Page

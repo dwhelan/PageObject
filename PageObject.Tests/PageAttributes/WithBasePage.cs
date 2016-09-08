@@ -6,10 +6,10 @@ namespace PageObject.Tests.PageAttributes
     [TestFixture]
     public class WithBasePage : BaseTest
     {
+        [TestCase(typeof(BasePageOnly))]
         [TestCase(typeof(BasePageAndPath))]
         [TestCase(typeof(BasePageAndNullPath))]
         [TestCase(typeof(BasePageAndEmptyPath))]
-        [TestCase(typeof(BasePageOnly))]
         [TestCase(typeof(NullBasePageAndPath))]
         public void Should_support_a_base_page(Type pageClass)
         {
@@ -20,6 +20,12 @@ namespace PageObject.Tests.PageAttributes
             private class BasePage : Page
             {
                 public BasePage() : base(null) { }
+            }
+
+            [PageAt(typeof(BasePage))]
+            private class BasePageOnly : Page
+            {
+                public BasePageOnly() : base(null) { }
             }
 
             [PageAt(typeof(BasePage), Path)]
@@ -38,12 +44,6 @@ namespace PageObject.Tests.PageAttributes
             private class BasePageAndEmptyPath : Page
             {
                 public BasePageAndEmptyPath() : base(null) { }
-            }
-
-            [PageAt(typeof(BasePage))]
-            private class BasePageOnly : Page
-            {
-                public BasePageOnly() : base(null) { }
             }
 
             [PageAt((Type)null, BaseTest.Url)]
@@ -65,8 +65,8 @@ namespace PageObject.Tests.PageAttributes
             }
 
         [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
-        [TestCase(typeof(CircularReference1A), @"Detected circular base page references with .*CircularReference1A and .*CircularReference1B")]
-        [TestCase(typeof(CircularReference2A), @"Detected circular base page references with .*CircularReference2A and .*CircularReference2C")]
+        [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 and .*CircularReference1B")]
+        [TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
         public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
         {
             AssertPageCreationThrowsPageObjectException(pageClass, regEx);
@@ -78,26 +78,26 @@ namespace PageObject.Tests.PageAttributes
                 public SelfReferencingPage() : base(null) { }
             }
 
-            // Circular references: CircularReference1a => CircularReference1b => CircularReference1a
+            // Circular references: CircularReference1 => CircularReference1B => CircularReference1
 
             [PageAt(typeof(CircularReference1B), null)]
-            private class CircularReference1A : Page
+            private class CircularReference1 : Page
             {
-                public CircularReference1A() : base(null) { }
+                public CircularReference1() : base(null) { }
             }
 
-            [PageAt(typeof(CircularReference1A), null)]
+            [PageAt(typeof(CircularReference1), null)]
             private class CircularReference1B : Page
             {
                 public CircularReference1B() : base(null) { }
             }
 
-            // Circular references: CircularReference2a => CircularReference2b => CircularReference2c => CircularReference2a
+            // Circular references: CircularReference2 => CircularReference2B => CircularReference2C => CircularReference2
 
             [PageAt(typeof(CircularReference2B), null)]
-            private class CircularReference2A : Page
+            private class CircularReference2 : Page
             {
-                public CircularReference2A() : base(null) { }
+                public CircularReference2() : base(null) { }
             }
 
             [PageAt(typeof(CircularReference2C), null)]
@@ -106,7 +106,7 @@ namespace PageObject.Tests.PageAttributes
                 public CircularReference2B() : base(null) { }
             }
 
-            [PageAt(typeof(CircularReference2A), null)]
+            [PageAt(typeof(CircularReference2), null)]
             private class CircularReference2C : Page
             {
                 public CircularReference2C() : base(null) { }
