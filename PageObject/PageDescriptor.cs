@@ -5,6 +5,7 @@ namespace PageObject
 {
     internal class PageDescriptor
     {
+        internal bool HasBase => BasePage != null || BaseUrl != null;
         internal Uri Uri => UriBuilder.Build(BaseUri, Path);
 
         internal PageAtAttribute PageAtAttribute => PageAtAttribute.For(pageClass);
@@ -39,6 +40,7 @@ namespace PageObject
                 return baseUri;
             }
         }
+
 
         private void EnsureValidBasePage()
         {

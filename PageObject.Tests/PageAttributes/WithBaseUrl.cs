@@ -46,6 +46,17 @@ namespace PageObject.Tests.PageAttributes
                 public NullBaseUrlAndPath() : base(null) { }
             }
 
+        [Test]
+        public void Should_allow_a_relative_path_in_the_constructor()
+        {
+            AssertThatPageCanBeCreated(typeof(PathInConstructor));
+        }
+            [PageAt(typeof(BasePage))]
+            private class PathInConstructor : Page
+            {
+                public PathInConstructor() : base(null, Path) { }
+            }
+
         [TestCase(typeof(BasePageInConstructor))]
         [TestCase(typeof(BaseUriInConstructor))]
         [TestCase(typeof(BaseUrlInConstructor))]
@@ -54,9 +65,10 @@ namespace PageObject.Tests.PageAttributes
             AssertPageCreationThrows(pageClass, @"Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt\(\) attribute");
         }
 
+            [PageAt(BaseTest.Url)]
             private class BasePage : Page
             {
-                public BasePage() : base(null, BaseTest.Url) {}
+                public BasePage() : base(null) {}
             }
 
             [PageAt(BaseTest.Url, "")]

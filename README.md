@@ -1,12 +1,15 @@
 # PageObject
 A .Net implementation of the [PageObject pattern](http://martinfowler.com/bliki/PageObject.html) to support web testing.
+The implementation is essentially a thin wrapper around [Coypu](https://github.com/featurist/coypu) which provides access to a browser and the underlying
+elements on web pages.
 
 ## Installation
 TBD
 
 ## Usage
 
-You typically declare page objects by subclassing from the `Page` class using the `PageAt` attribute to describe its Url.
+### Creating Pages
+You declare page objects by subclassing from the `Page` class using the `PageAt` attribute.
 The class **must** have a public constructor that accepts a `PageSession` object which you should pass to the base constructor. 
 
 ```cs
@@ -23,4 +26,18 @@ namespace PageObject.Examples
     }
 }
 ```
+
+See more examples at [Creating Page wiki page](https://github.com/dwhelan/PageObject/wiki/Creating-Pages)
+
+## To Do
+ = update PageDescriptor to extract Uri from constructed Page if no PageAt attribute
+ - host aliases
+ - path aliases 
+ - ability to check if the browser is on a specific page
+ - push to NuGet
+ - support different .Net versions
+    - support different Coypu versions (may be necessary for different .Net versions)
+ - create PageObject.NUnit with page matchers
+ - support MSTest
+ - support xUnit  
 

@@ -25,8 +25,13 @@ namespace PageObject
                 if ((object) url == null)
                     throw new PageObjectException($@"Invalid url ""{path}""", x);
                 else
-                   throw new PageObjectException($@"Invalid url ""{(object) url}/{path}""", x);
+                   throw new PageObjectException($@"Invalid url ""{url}/{path}""", x);
             }
+        }
+
+        public static bool AbsoluteUrl(string url)
+        {
+            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
         }
     }
 }

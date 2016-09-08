@@ -24,11 +24,32 @@ namespace PageObject
         {
         }
 
-        protected Page(PageSession session, string url, string path = "")
+        protected Page(PageSession session, string urlOrPath)
         {
-            EnsureBaseIsOnlySpecifiedOnce(url);
-
             Session = session;
+
+            if (UriBuilder.AbsoluteUrl(urlOrPath))
+            {
+                EnsureBaseIsOnlySpecifiedOnce(urlOrPath);
+                Uri = UriBuilder.Build(urlOrPath);
+            }
+            else if (Descriptor.HasBase)
+            {
+                Uri = UriBuilder.Build(Descriptor.Uri, urlOrPath);
+            }
+            else
+            {
+                Uri = UriBuilder.Build(urlOrPath);
+            }
+
+            Hosts = new List<string> { Uri.Host };
+        }
+
+        protected Page(PageSession session, string url, string path)
+        {
+            Session = session;
+
+            EnsureBaseIsOnlySpecifiedOnce(url);
             Uri = UriBuilder.Build(url, path);
             Hosts = new List<string> { Uri.Host };
         }
@@ -48,7 +69,7 @@ namespace PageObject
 
         private void EnsureBaseIsOnlySpecifiedOnce(string url)
         {
-            if (url == null)
+            if (string.IsNullOrEmpty(url))
                 return;
 
             if (Descriptor.PageAtAttribute.BasePage != null)

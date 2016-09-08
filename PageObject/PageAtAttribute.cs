@@ -8,6 +8,9 @@ namespace PageObject
         public Type BasePage { get; }
         public string BaseUrl { get; }
         public string Path { get; }
+        public bool HasABase => BasePage != null || BaseUrl != null;
+
+        internal static PageAtAttribute NullPageAttribute = new PageAtAttribute();
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
@@ -49,7 +52,5 @@ namespace PageObject
 
             return PageObjectAttributes[pageClass] = NullPageAttribute;
         }
-
-        public static PageAtAttribute NullPageAttribute = new PageAtAttribute();
     }
 }
