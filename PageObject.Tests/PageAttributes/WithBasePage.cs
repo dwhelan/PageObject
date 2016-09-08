@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using PageObject.Tests.PageConstructor;
 
 namespace PageObject.Tests.PageAttributes
 {
@@ -55,7 +56,7 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(BaseThatIsNotAPage))]
         public void Should_ensure_that_base_is_a_Page_class(Type pageClass)
         {
-            AssertPageCreationThrowsPageObjectException(pageClass, @"base page for .* must be a subclass of PageObject.Page");
+            AssertPageCreationThrows(pageClass, @"base page for .* must be a subclass of PageObject.Page");
         }
 
             [PageAt(typeof(string), null)]
@@ -64,12 +65,38 @@ namespace PageObject.Tests.PageAttributes
                 public BaseThatIsNotAPage() : base(null) { }
             }
 
+        [TestCase(typeof(BasePageInConstructor))]
+        [TestCase(typeof(BaseUriInConstructor))]
+        [TestCase(typeof(BaseUrlInConstructor))]
+        public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
+        {
+            AssertPageCreationThrows(pageClass, @"Cannot specify a base page, Uri or Url in the constructor when you have included a base (page|uri) in the PageAt\(\) attribute");
+        }
+
+            [PageAt(typeof(BasePage))]
+            private class BasePageInConstructor : Page
+            {
+                public BasePageInConstructor() : base(null, new BasePage()) { }
+            }
+
+            [PageAt(typeof(BasePage))]
+            private class BaseUriInConstructor : Page
+            {
+                public BaseUriInConstructor() : base(null, new Uri("http://host")) { }
+            }
+
+            [PageAt(typeof(BasePage))]
+            private class BaseUrlInConstructor : Page
+            {
+                public BaseUrlInConstructor() : base(null, "http://host") { }
+            }
+
         [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
         [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 and .*CircularReference1B")]
         [TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
         public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
         {
-            AssertPageCreationThrowsPageObjectException(pageClass, regEx);
+            AssertPageCreationThrows(pageClass, regEx);
         }
 
             [PageAt(typeof(SelfReferencingPage), null)]

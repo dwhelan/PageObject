@@ -27,6 +27,9 @@ namespace PageObject
         protected Page(PageSession session, string url, string path = "")
         {
             Session = session;
+            if (url != null && Descriptor.PageAtAttribute.BasePage != null)
+                throw new PageObjectException("Cannot specify a base page, Uri or Url in the constructor when you have included a base page in the PageAt() attribute");
+
             Uri = UriBuilder.Build(url, path);
             Hosts = new List<string> { Uri.Host };
         }

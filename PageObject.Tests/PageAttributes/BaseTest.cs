@@ -6,11 +6,13 @@ namespace PageObject.Tests.PageAttributes
 {
     public abstract class BaseTest
     {
+        protected static Uri Uri = new Uri(Url);
+
         protected const string Url = BaseUrl + Path;
         protected const string BaseUrl = "file:///";
         protected const string Path = "something";
 
-        protected Exception AssertPageCreationThrowsPageObjectException(Type pageClass, string regEx)
+        protected Exception AssertPageCreationThrows(Type pageClass, string regEx)
         {
             var x = Assert.Throws<PageObjectException>(() => CreatePage(pageClass));
             StringAssert.IsMatch(regEx, x.Message);

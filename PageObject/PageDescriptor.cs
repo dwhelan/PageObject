@@ -7,7 +7,7 @@ namespace PageObject
     {
         internal Uri Uri => UriBuilder.Build(BaseUri, Path);
 
-        private PageAtAttribute PageAtAttribute => PageAtAttribute.For(pageClass);
+        internal PageAtAttribute PageAtAttribute => PageAtAttribute.For(pageClass);
         private string Path => PageAtAttribute.Path;
         private Type BasePage => PageAtAttribute.BasePage;
         private string BaseUrl => PageAtAttribute.BaseUrl;

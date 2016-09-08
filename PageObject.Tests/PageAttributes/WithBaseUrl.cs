@@ -50,7 +50,7 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(BaseThatIsAnInvalidUrl))]
         public void Should_ensure_a_valid_uri(Type pageClass)
         {
-            var x = AssertPageCreationThrowsPageObjectException(pageClass, @"Invalid url ""invalid url""");
+            var x = AssertPageCreationThrows(pageClass, @"Invalid url ""invalid url""");
             Assert.That(x.InnerException, Is.AssignableTo(typeof(UriFormatException)));
         }
 

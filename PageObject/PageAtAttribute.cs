@@ -13,7 +13,7 @@ namespace PageObject
         {
         }
 
-       public PageAtAttribute(Type basePage, string path) : this(path)
+        public PageAtAttribute(Type basePage, string path) : this(path)
         {
             BasePage = basePage;
         }
@@ -28,20 +28,28 @@ namespace PageObject
             Path = path;
         }
 
+        private PageAtAttribute()
+        {
+        }
+
         private static readonly IDictionary<Type, PageAtAttribute> PageObjectAttributes = new Dictionary<Type, PageAtAttribute>();
 
         internal static PageAtAttribute For(Type pageClass)
         {
-            if (!PageObjectAttributes.ContainsKey(pageClass))
+            if (PageObjectAttributes.ContainsKey(pageClass))
+                return PageObjectAttributes[pageClass];
+
             {
                 foreach (var attribute in GetCustomAttributes(pageClass))
                 {
                     if (attribute is PageAtAttribute)
-                        PageObjectAttributes[pageClass] = (PageAtAttribute) attribute;
+                        return PageObjectAttributes[pageClass] = (PageAtAttribute)attribute;
                 }
             }
 
-            return PageObjectAttributes[pageClass];
+            return PageObjectAttributes[pageClass] = NullPageAttribute;
         }
+
+        public static PageAtAttribute NullPageAttribute = new PageAtAttribute();
     }
 }

@@ -15,7 +15,7 @@ namespace PageObject.Tests.PageConstructor
         [Test]
         public void Should_support_a_page_only()
         {
-            AssertValidPage(new WithBasePage.DependentPage(new TestPage(Url)));
+            AssertValidPage(new DependentPage(new TestPage(Url)));
         }
 
         [TestCase(BaseUrl, Path)]
@@ -24,19 +24,19 @@ namespace PageObject.Tests.PageConstructor
         public void Should_support_a_base_page_and_path(string baseUrl, string path)
         {
             var basePage = new TestPage(baseUrl);
-            AssertValidPage(new WithBasePage.DependentPage(basePage, path));
+            AssertValidPage(new DependentPage(basePage, path));
         }
 
         [Test]
         public void Should_support_a_null_base_path_with_a_full_path_url()
         {
-            AssertValidPage(new WithBasePage.DependentPage(null, Url));
+            AssertValidPage(new DependentPage(null, Url));
         }
 
         [Test]
         public void Should_ensure_a_valid_path_with_a_null_base_page()
         {
-            AssertThrowsPageObjectException(() => new WithBasePage.DependentPage(null, "invalid url"));
+            AssertThrowsPageObjectException(() => new DependentPage(null, "invalid url"));
         }
     }
 }
