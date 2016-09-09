@@ -72,11 +72,11 @@ namespace PageObject
             if (string.IsNullOrEmpty(url))
                 return;
 
-            if (Descriptor.PageAtAttribute.BasePage != null)
+            if (Descriptor.Attribute.BasePage != null)
                 throw new PageObjectException(
                     "Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt() attribute");
 
-            if (Descriptor.PageAtAttribute.BaseUrl != null)
+            if (Descriptor.Attribute.BaseUrl != null)
                 throw new PageObjectException(
                     "Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt() attribute");
         }

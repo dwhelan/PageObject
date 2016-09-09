@@ -8,10 +8,10 @@ namespace PageObject
         internal bool HasBase => BasePage != null || BaseUrl != null;
         internal Uri Uri => UriBuilder.Build(BaseUri, Path);
 
-        internal PageAtAttribute PageAtAttribute => PageAtAttribute.For(pageClass);
-        private string Path => PageAtAttribute.Path;
-        private Type BasePage => PageAtAttribute.BasePage;
-        private string BaseUrl => PageAtAttribute.BaseUrl;
+        internal PageAtAttribute Attribute => PageAtAttribute.For(pageClass);
+        private string Path => Attribute.Path;
+        private Type BasePage => Attribute.BasePage;
+        private string BaseUrl => Attribute.BaseUrl;
 
         private readonly Type pageClass;
         private Uri baseUri;
