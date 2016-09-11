@@ -66,7 +66,16 @@ namespace PageObject
         protected Page(PageSession session, Type basePage, string path = "")
         {
             Session = session;
-            Uri = UriBuilder.Build(PageDescriptor.For(basePage).Uri, path);
+
+            if (basePage == null)
+            {
+                Uri = UriBuilder.Build(path);
+            }
+            else
+            {
+                Uri = UriBuilder.Build(PageDescriptor.For(basePage).Uri, path);
+            }
+
             Hosts = new List<string> { Uri.Host };
         }
 

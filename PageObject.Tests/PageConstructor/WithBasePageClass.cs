@@ -28,16 +28,16 @@ namespace PageObject.Tests.PageConstructor
         [Test]
         public void Should_support_a_base_page_and_path()
         {
-            AssertValidPage(new DependentPage(typeof(BasePage), "foo"));
+            AssertValidPage(new DependentPage(typeof(BasePage), Path));
+        }
+
+        [Test]
+        public void Should_support_a_null_base_page_with_a_full_path_url()
+        {
+            AssertValidPage(new DependentPage(null, Url));
         }
 
         /*
-                [Test]
-                public void Should_support_a_null_base_path_with_a_full_path_url()
-                {
-                    AssertValidPage(new DependentPage(null, Url));
-                }
-
                 [Test]
                 public void Should_ensure_a_valid_path_with_a_null_base_page()
                 {
