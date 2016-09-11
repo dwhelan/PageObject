@@ -5,17 +5,24 @@ namespace PageObject
 {
     internal class PageDescriptor
     {
-        internal bool HasBase => BasePage != null || BaseUrl != null;
-        internal Uri Uri => UriBuilder.Build(BaseUri, Path);
+        internal bool HasBase => Attribute.BasePage != null || Attribute.BaseUrl != null;
+        internal Uri Uri => UriBuilder.Build(BaseUri, Attribute.Path);
 
         internal PageAtAttribute Attribute => PageAtAttribute.For(pageClass);
-        private string Path => Attribute.Path;
-        private Type BasePage => Attribute.BasePage;
-        private string BaseUrl => Attribute.BaseUrl;
 
         private readonly Type pageClass;
         private Uri baseUri;
 
+        internal void EnsureNoBase()
+        {
+            if (Attribute.BasePage != null)
+                throw new PageObjectException(
+                    "Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt() attribute");
+
+            if (Attribute.BaseUrl != null)
+                throw new PageObjectException(
+                    "Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt() attribute");
+        }
         internal PageDescriptor(Type pageClass)
         {
             this.pageClass = pageClass;
@@ -30,21 +37,20 @@ namespace PageObject
             {
                 if (baseUri == null)
                 {
-                    if (BasePage != null)
-                        baseUri = For(BasePage).Uri;
+                    if (Attribute.BasePage != null)
+                        baseUri = For(Attribute.BasePage).Uri;
 
-                    if (BaseUrl != null)
-                        baseUri = UriBuilder.Build(BaseUrl);
+                    if (Attribute.BaseUrl != null)
+                        baseUri = UriBuilder.Build(Attribute.BaseUrl);
                 }
 
                 return baseUri;
             }
         }
 
-
         private void EnsureValidBasePage()
         {
-            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
+            if (Attribute.BasePage == null || Attribute.BasePage.IsSubclassOf(typeof(Page)))
                 return;
 
             throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
@@ -52,10 +58,10 @@ namespace PageObject
 
         private void EnsureNoCircularReferencesInBasePages()
         {
-            if (BasePage == pageClass)
+            if (Attribute.BasePage == pageClass)
                 throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", pageClass));
 
-            var basePage = BasePage;
+            var basePage = Attribute.BasePage;
 
             while (basePage != null)
             {

@@ -30,7 +30,7 @@ namespace PageObject
 
             if (UriBuilder.AbsoluteUrl(urlOrPath))
             {
-                EnsureBaseIsOnlySpecifiedOnce(urlOrPath);
+                Descriptor.EnsureNoBase();
                 Uri = UriBuilder.Build(urlOrPath);
             }
             else if (Descriptor.HasBase)
@@ -49,7 +49,9 @@ namespace PageObject
         {
             Session = session;
 
-            EnsureBaseIsOnlySpecifiedOnce(url);
+            if (!string.IsNullOrEmpty(url))
+                Descriptor.EnsureNoBase();
+
             Uri = UriBuilder.Build(url, path);
             Hosts = new List<string> { Uri.Host };
         }
@@ -61,24 +63,17 @@ namespace PageObject
             Hosts = new List<string> { Uri.Host };
         }
 
+        protected Page(PageSession session, Type basePage)
+        {
+            Session = session;
+            Uri = PageDescriptor.For(basePage).Uri;
+            Hosts = new List<string> { Uri.Host };
+        }
+
         public void Visit()
         {
             Browser.Visit(Url);
             Session.Page = this;
-        }
-
-        private void EnsureBaseIsOnlySpecifiedOnce(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return;
-
-            if (Descriptor.Attribute.BasePage != null)
-                throw new PageObjectException(
-                    "Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt() attribute");
-
-            if (Descriptor.Attribute.BaseUrl != null)
-                throw new PageObjectException(
-                    "Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt() attribute");
         }
     }
 }
