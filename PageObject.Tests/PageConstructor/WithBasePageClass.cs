@@ -6,32 +6,32 @@ namespace PageObject.Tests.PageConstructor
     [TestFixture]
     public class WithBasePageClass : BaseTest
     {
-        internal class DependentPage : Page
+        [PageAt(BaseTest.Url)]
+        private class BasePage : Page
         {
-            internal DependentPage(Type basePage) : base(null, basePage)
-            {
-            }
-
-            internal DependentPage(Page basePage, string path) : base(null, basePage, path)
-            {
-            }
+            public BasePage() : base(null) {}
         }
 
-        [Test, Ignore]
+        private class DependentPage : Page
+        {
+            internal DependentPage() : base(null, typeof(BasePage)) { }
+            internal DependentPage(Type basePage) : base(null, basePage) { }
+            internal DependentPage(Type basePage, string path) : base(null, basePage, path) {}
+        }
+
+        [Test]
         public void Should_support_a_page_only()
         {
-            AssertValidPage(new DependentPage(typeof(TestPage)));
+            AssertValidPage(new DependentPage(typeof(BasePage)));
         }
-        /*
-                [TestCase(BaseUrl, Path)]
-                [TestCase(Url, "")]
-                [TestCase(Url, null)]
-                public void Should_support_a_base_page_and_path(string baseUrl, string path)
-                {
-                    var basePage = new TestPage(baseUrl);
-                    AssertValidPage(new DependentPage(basePage, path));
-                }
 
+        [Test]
+        public void Should_support_a_base_page_and_path()
+        {
+            AssertValidPage(new DependentPage(typeof(BasePage), "foo"));
+        }
+
+        /*
                 [Test]
                 public void Should_support_a_null_base_path_with_a_full_path_url()
                 {

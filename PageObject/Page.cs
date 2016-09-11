@@ -63,10 +63,10 @@ namespace PageObject
             Hosts = new List<string> { Uri.Host };
         }
 
-        protected Page(PageSession session, Type basePage)
+        protected Page(PageSession session, Type basePage, string path = "")
         {
             Session = session;
-            Uri = PageDescriptor.For(basePage).Uri;
+            Uri = UriBuilder.Build(PageDescriptor.For(basePage).Uri, path);
             Hosts = new List<string> { Uri.Host };
         }
 
