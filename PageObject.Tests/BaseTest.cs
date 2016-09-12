@@ -2,13 +2,22 @@ using System;
 using System.Reflection;
 using NUnit.Framework;
 
-namespace PageObject.Tests.PageConstructor
+namespace PageObject.Tests
 {
     public abstract class BaseTest
     {
+        protected static Uri Uri = new Uri(Url);
+
         internal const string Url = BaseUrl + Path;
         internal const string BaseUrl = "file:///";
         internal const string Path = "something";
+
+        protected T AssertInvokeThrows<T>(Func<Page> func, string messageRegEx) where T : Exception
+        {
+            var x = AssertInvokeThrows<T>(func);
+            StringAssert.IsMatch(messageRegEx, x.Message);
+            return x;
+        }
 
         protected static T AssertInvokeThrows<T>(Func<Page> func) where T : Exception
         {
@@ -27,6 +36,18 @@ namespace PageObject.Tests.PageConstructor
         protected static void AssertValidPage(Page page)
         {
             Assert.That(page.Url, Is.EqualTo(Url));
+        }
+
+        protected Page CreatePage(Type pageClass)
+        {
+            try
+            {
+                return (Page) Activator.CreateInstance(pageClass);
+            }
+            catch (TargetInvocationException x)
+            {
+                throw x.InnerException;
+            }
         }
     }
 }

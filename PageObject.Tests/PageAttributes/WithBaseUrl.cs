@@ -16,7 +16,7 @@ namespace PageObject.Tests.PageAttributes
             AssertThatPageCanBeCreated(pageClass);
         }
 
-            [PageAt(BaseTest.Url)]
+            [PageAt(Tests.BaseTest.Url)]
             private class BaseUrlOnly : Page
             {
                 public BaseUrlOnly() : base(null) { }
@@ -28,19 +28,19 @@ namespace PageObject.Tests.PageAttributes
                 public BaseUrlAndPath() : base(null) { }
             }
 
-            [PageAt(BaseTest.Url, null)]
+            [PageAt(Tests.BaseTest.Url, null)]
             private class BaseUrlAndNullPath : Page
             {
                 public BaseUrlAndNullPath() : base(null) { }
             }
 
-            [PageAt(BaseTest.Url, "")]
+            [PageAt(Tests.BaseTest.Url, "")]
             private class BaseUrlAndEmptyPath : Page
             {
                 public BaseUrlAndEmptyPath() : base(null) { }
             }
 
-            [PageAt((string)null, BaseTest.Url)]
+            [PageAt((string)null, Tests.BaseTest.Url)]
             private class NullBaseUrlAndPath : Page
             {
                 public NullBaseUrlAndPath() : base(null) { }
@@ -62,39 +62,38 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(BaseUrlInConstructor))]
         public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
         {
-            AssertPageCreationThrows(pageClass, @"Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt\(\) attribute");
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"Cannot specify a base Page, Uri or url in the constructor when you have included a base url in the PageAt\(\) attribute");
         }
 
-            [PageAt(BaseTest.Url)]
+            [PageAt(Tests.BaseTest.Url)]
             private class BasePage : Page
             {
                 public BasePage() : base(null) {}
             }
 
-            [PageAt(BaseTest.Url, "")]
+            [PageAt(Tests.BaseTest.Url, "")]
             private class BasePageInConstructor : Page
             {
                 public BasePageInConstructor() : base(null, new BasePage()) {}
             }
 
-            [PageAt(BaseTest.Url, "")]
+            [PageAt(Tests.BaseTest.Url, "")]
             private class BaseUriInConstructor : Page
             {
-                public BaseUriInConstructor() : base(null, BaseTest.Uri) {}
+                public BaseUriInConstructor() : base(null, Tests.BaseTest.Uri) {}
             }
 
-            [PageAt(BaseTest.Url, "")]
+            [PageAt(Tests.BaseTest.Url, "")]
             private class BaseUrlInConstructor : Page
             {
-                public BaseUrlInConstructor() : base(null, BaseTest.Url) {}
+                public BaseUrlInConstructor() : base(null, Tests.BaseTest.Url) {}
             }
 
         [TestCase(typeof(InvalidUrl))]
         [TestCase(typeof(BaseThatIsAnInvalidUrl))]
         public void Should_ensure_a_valid_uri(Type pageClass)
         {
-            var x = AssertPageCreationThrows(pageClass, @"Invalid url ""invalid url""");
-            Assert.That(x.InnerException, Is.AssignableTo(typeof(UriFormatException)));
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"Invalid url ""invalid url""");
         }
 
             [PageAt("invalid url")]

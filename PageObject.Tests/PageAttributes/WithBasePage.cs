@@ -1,6 +1,5 @@
 using System;
 using NUnit.Framework;
-using PageObject.Tests.PageConstructor;
 
 namespace PageObject.Tests.PageAttributes
 {
@@ -17,7 +16,7 @@ namespace PageObject.Tests.PageAttributes
             AssertThatPageCanBeCreated(pageClass);
         }
 
-            [PageAt(BaseTest.Url)]
+            [PageAt(Tests.BaseTest.Url)]
             private class BasePage : Page
             {
                 public BasePage() : base(null) { }
@@ -47,7 +46,7 @@ namespace PageObject.Tests.PageAttributes
                 public BasePageAndEmptyPath() : base(null) { }
             }
 
-            [PageAt((Type)null, BaseTest.Url)]
+            [PageAt((Type)null, Tests.BaseTest.Url)]
             private class NullBasePageAndPath : Page
             {
                 public NullBasePageAndPath() : base(null) { }
@@ -56,10 +55,10 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(BaseThatIsNotAPage))]
         public void Should_ensure_that_base_is_a_Page_class(Type pageClass)
         {
-            AssertPageCreationThrows(pageClass, @"base page for .* must be a subclass of PageObject.Page");
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"base page for .* must be a subclass of PageObject.Page");
         }
 
-            [PageAt(typeof(string), null)]
+        [PageAt(typeof(string), null)]
             private class BaseThatIsNotAPage : Page
             {
                 public BaseThatIsNotAPage() : base(null) { }
@@ -70,7 +69,7 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(BaseUrlInConstructor))]
         public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
         {
-            AssertPageCreationThrows(pageClass, @"Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt\(\) attribute");
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt\(\) attribute");
         }
 
             [PageAt(typeof(BasePage))]
@@ -96,7 +95,7 @@ namespace PageObject.Tests.PageAttributes
         [TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
         public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
         {
-            AssertPageCreationThrows(pageClass, regEx);
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), regEx);
         }
 
             [PageAt(typeof(SelfReferencingPage), null)]

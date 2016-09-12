@@ -74,10 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTest.cs" />
     <Compile Include="PageAttributes\BaseTest.cs" />
     <Compile Include="PageAttributes\WithBaseUrl.cs" />
     <Compile Include="PageAttributes\WithBasePage.cs" />
-    <Compile Include="PageConstructor\BaseTest.cs" />
     <Compile Include="PageConstructor\WithBasePageClass.cs" />
     <Compile Include="PageConstructor\WithBaseUri.cs" />
     <Compile Include="PageConstructor\TestPage.cs" />
