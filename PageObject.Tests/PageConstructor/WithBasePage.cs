@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace PageObject.Tests.PageConstructor
@@ -36,7 +37,7 @@ namespace PageObject.Tests.PageConstructor
         [Test]
         public void Should_ensure_a_valid_path_with_a_null_base_page()
         {
-            AssertThrowsPageObjectException(() => new DependentPage(null, "invalid url"));
+            AssertInvokeThrows<PageObjectException, UriFormatException>(() => new DependentPage(null, "invalid url"));
         }
     }
 }

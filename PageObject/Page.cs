@@ -66,6 +66,9 @@ namespace PageObject
 
         protected Page(PageSession session, Type basePage, string path = "")
         {
+            if (basePage == GetType())
+                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", basePage));
+
             Session = session;
 
             if (basePage == null)

@@ -10,17 +10,18 @@ namespace PageObject.Tests.PageConstructor
         internal const string BaseUrl = "file:///";
         internal const string Path = "something";
 
-        protected static void AssertThrowsPageObjectException(Func<Page> func)
+        protected static T AssertInvokeThrows<T>(Func<Page> func) where T : Exception
         {
-            try
-            {
-                func.DynamicInvoke();
-            }
-            catch (TargetInvocationException x)
-            {
-                Assert.That(x.InnerException, Is.AssignableTo(typeof(PageObjectException)));
-                Assert.That(x.InnerException.InnerException, Is.AssignableTo(typeof(UriFormatException)));
-            }
+            var x = Assert.Throws<TargetInvocationException>(() => func.DynamicInvoke());
+            Assert.That(x.InnerException, Is.AssignableTo(typeof(PageObjectException)));
+            return (T) x.InnerException;
+        }
+
+        protected static T2 AssertInvokeThrows<T1, T2>(Func<Page> func) where T1 : Exception where T2 : Exception
+        {
+            var x = AssertInvokeThrows<T1>((func));
+            Assert.That(x.InnerException, Is.AssignableTo(typeof(T2)));
+            return (T2) x.InnerException;
         }
 
         protected static void AssertValidPage(Page page)

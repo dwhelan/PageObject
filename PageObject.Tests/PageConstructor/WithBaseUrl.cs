@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace PageObject.Tests.PageConstructor
@@ -14,7 +15,7 @@ namespace PageObject.Tests.PageConstructor
         [Test]
         public void Should_ensure_a_valid_path()
         {
-            AssertThrowsPageObjectException(() => new TestPage("invalid url"));
+            AssertInvokeThrows<PageObjectException, UriFormatException>(() => new TestPage("invalid url"));
         }
 
         [TestCase(BaseUrl, Path)]
@@ -34,7 +35,7 @@ namespace PageObject.Tests.PageConstructor
         [Test]
         public void Should_ensure_a_valid_base_url()
         {
-            AssertThrowsPageObjectException(() => new TestPage("invalid url", Path));
+            AssertInvokeThrows<PageObjectException, UriFormatException>(() => new TestPage("invalid url", Path));
         }
     }
 }
