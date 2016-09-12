@@ -19,38 +19,38 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(Tests.BaseTest.Url)]
             private class BasePage : Page
             {
-                public BasePage() : base(null) { }
+                public BasePage(PageSession session = null) : base(session) { }
             }
 
             [PageAt(typeof(BasePage))]
             private class BasePageOnly : Page
             {
-                public BasePageOnly() : base(null) { }
-            }
+                public BasePageOnly(PageSession session = null) : base(session) { }
+        }
 
             [PageAt(typeof(BasePage), Path)]
             private class BasePageAndPath : Page
             {
-                public BasePageAndPath() : base(null) { }
-            }
+                public BasePageAndPath(PageSession session = null) : base(session) { }
+        }
 
             [PageAt(typeof(BasePage), null)]
             private class BasePageAndNullPath : Page
             {
-                public BasePageAndNullPath() : base(null) { }
-            }
+                public BasePageAndNullPath(PageSession session = null) : base(session) { }
+        }
 
             [PageAt(typeof(BasePage), "")]
             private class BasePageAndEmptyPath : Page
             {
-                public BasePageAndEmptyPath() : base(null) { }
-            }
+                public BasePageAndEmptyPath(PageSession session = null) : base(session) { }
+        }
 
             [PageAt((Type)null, Tests.BaseTest.Url)]
             private class NullBasePageAndPath : Page
             {
-                public NullBasePageAndPath() : base(null) { }
-            }
+                public NullBasePageAndPath(PageSession session = null) : base(session) { }
+        }
 
         [TestCase(typeof(BaseThatIsNotAPage))]
         public void Should_ensure_that_base_is_a_Page_class(Type pageClass)
@@ -61,8 +61,8 @@ namespace PageObject.Tests.PageAttributes
         [PageAt(typeof(string), null)]
             private class BaseThatIsNotAPage : Page
             {
-                public BaseThatIsNotAPage() : base(null) { }
-            }
+                public BaseThatIsNotAPage(PageSession session = null) : base(session) { }
+        }
 
         [TestCase(typeof(BasePageInConstructor))]
         [TestCase(typeof(BaseUriInConstructor))]
@@ -75,19 +75,19 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(typeof(BasePage))]
             private class BasePageInConstructor : Page
             {
-                public BasePageInConstructor() : base(null, new BasePage()) { }
+                public BasePageInConstructor(PageSession session = null) : base(session, new BasePage()) { }
             }
 
             [PageAt(typeof(BasePage))]
             private class BaseUriInConstructor : Page
             {
-                public BaseUriInConstructor() : base(null, new Uri("http://host")) { }
+                public BaseUriInConstructor(PageSession session = null) : base(session, new Uri("http://host")) { }
             }
 
             [PageAt(typeof(BasePage))]
             private class BaseUrlInConstructor : Page
             {
-                public BaseUrlInConstructor() : base(null, "http://host") { }
+                public BaseUrlInConstructor(PageSession session = null) : base(session, "http://host") { }
             }
 
         [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
@@ -101,41 +101,41 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(typeof(SelfReferencingPage), null)]
             private class SelfReferencingPage : Page
             {
-                public SelfReferencingPage() : base(null) { }
-            }
+                public SelfReferencingPage(PageSession session = null) : base(session) { }
+        }
 
             // Circular references: CircularReference1 => CircularReference1B => CircularReference1
 
             [PageAt(typeof(CircularReference1B), null)]
             private class CircularReference1 : Page
             {
-                public CircularReference1() : base(null) { }
-            }
+                public CircularReference1(PageSession session = null) : base(session) { }
+        }
 
             [PageAt(typeof(CircularReference1), null)]
             private class CircularReference1B : Page
             {
-                public CircularReference1B() : base(null) { }
-            }
+                public CircularReference1B(PageSession session = null) : base(session) { }
+        }
 
             // Circular references: CircularReference2 => CircularReference2B => CircularReference2C => CircularReference2
 
             [PageAt(typeof(CircularReference2B), null)]
             private class CircularReference2 : Page
             {
-                public CircularReference2() : base(null) { }
-            }
+                public CircularReference2(PageSession session = null) : base(session) { }
+        }
 
             [PageAt(typeof(CircularReference2C), null)]
             private class CircularReference2B : Page
             {
-                public CircularReference2B() : base(null) { }
-            }
+                public CircularReference2B(PageSession session = null) : base(session) { }
+        }
 
             [PageAt(typeof(CircularReference2), null)]
             private class CircularReference2C : Page
             {
-                public CircularReference2C() : base(null) { }
-            }
+                public CircularReference2C(PageSession session = null) : base(session) { }
+        }
     }
 }

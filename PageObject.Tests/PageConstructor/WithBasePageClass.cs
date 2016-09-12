@@ -45,25 +45,44 @@ namespace PageObject.Tests.PageConstructor
         }
 
         [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
-        [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1A")]
-        //[TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
+        [TestCase(typeof(CircularReference1), @"Detected circular base page references")]
+        [TestCase(typeof(CircularReference2), @"Detected circular base page references")]
         public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
         {
             AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), regEx);
         }
             private class SelfReferencingPage : Page
             {
-                public SelfReferencingPage(PageSession sesssion = null) : base(sesssion, typeof(SelfReferencingPage)) {}
+                public SelfReferencingPage(PageSession session = null) : base(session, typeof(SelfReferencingPage)) {}
             }
+
+            // Circular references: CircularReference1 => CircularReference1A
 
             public class CircularReference1 : Page
             {
-                public CircularReference1(PageSession sesssion = null) : base(sesssion, typeof(CircularReference1A)) {}
+                public CircularReference1(PageSession session = null) : base(session, typeof(CircularReference1A)) {}
             }
 
             private class CircularReference1A : Page
             { 
-                public CircularReference1A(PageSession sesssion = null) : base(sesssion, typeof(CircularReference1)) {}
+                public CircularReference1A(PageSession session = null) : base(session, typeof(CircularReference1)) {}
             }
+
+            // Circular references: CircularReference2 => CircularReference2A => CircularReference2B => CircularReference2
+
+            private class CircularReference2 : Page
+            {
+                public CircularReference2(PageSession session = null) : base(session, typeof(CircularReference2A)) { }
+        }
+
+            private class CircularReference2A : Page
+            {
+                public CircularReference2A(PageSession session = null) : base(session, typeof(CircularReference2B)) { }
+        }
+
+            private class CircularReference2B : Page
+            {
+                public CircularReference2B(PageSession session = null) : base(session, typeof(CircularReference2)) { }
+        }
     }
 }

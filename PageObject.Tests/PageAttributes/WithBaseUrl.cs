@@ -19,31 +19,31 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(Tests.BaseTest.Url)]
             private class BaseUrlOnly : Page
             {
-                public BaseUrlOnly() : base(null) { }
+                public BaseUrlOnly(PageSession session = null) : base(session) { }
             }
 
             [PageAt(BaseUrl, Path)]
             private class BaseUrlAndPath : Page
             {
-                public BaseUrlAndPath() : base(null) { }
+                public BaseUrlAndPath(PageSession session = null) : base(session) { }
             }
 
             [PageAt(Tests.BaseTest.Url, null)]
             private class BaseUrlAndNullPath : Page
             {
-                public BaseUrlAndNullPath() : base(null) { }
+                public BaseUrlAndNullPath(PageSession session = null) : base(session) { }
             }
 
             [PageAt(Tests.BaseTest.Url, "")]
             private class BaseUrlAndEmptyPath : Page
             {
-                public BaseUrlAndEmptyPath() : base(null) { }
+                public BaseUrlAndEmptyPath(PageSession session = null) : base(session) { }
             }
 
             [PageAt((string)null, Tests.BaseTest.Url)]
             private class NullBaseUrlAndPath : Page
             {
-                public NullBaseUrlAndPath() : base(null) { }
+                public NullBaseUrlAndPath(PageSession session = null) : base(session) { }
             }
 
         [Test]
@@ -54,7 +54,7 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(typeof(BasePage))]
             private class PathInConstructor : Page
             {
-                public PathInConstructor() : base(null, Path) { }
+                public PathInConstructor(PageSession session = null) : base(session, Path) { }
             }
 
         [TestCase(typeof(BasePageInConstructor))]
@@ -68,25 +68,25 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(Tests.BaseTest.Url)]
             private class BasePage : Page
             {
-                public BasePage() : base(null) {}
+                public BasePage(PageSession session = null) : base(session) {}
             }
 
             [PageAt(Tests.BaseTest.Url, "")]
             private class BasePageInConstructor : Page
             {
-                public BasePageInConstructor() : base(null, new BasePage()) {}
+                public BasePageInConstructor(PageSession session = null) : base(session, new BasePage()) {}
             }
 
             [PageAt(Tests.BaseTest.Url, "")]
             private class BaseUriInConstructor : Page
             {
-                public BaseUriInConstructor() : base(null, Tests.BaseTest.Uri) {}
+                public BaseUriInConstructor(PageSession session = null) : base(session, Tests.BaseTest.Uri) {}
             }
 
             [PageAt(Tests.BaseTest.Url, "")]
             private class BaseUrlInConstructor : Page
             {
-                public BaseUrlInConstructor() : base(null, Tests.BaseTest.Url) {}
+                public BaseUrlInConstructor(PageSession session = null) : base(session, Tests.BaseTest.Url) {}
             }
 
         [TestCase(typeof(InvalidUrl))]
@@ -99,13 +99,13 @@ namespace PageObject.Tests.PageAttributes
             [PageAt("invalid url")]
             private class InvalidUrl : Page
             {
-                public InvalidUrl() : base(null) { }
+                public InvalidUrl(PageSession session = null) : base(session ) { }
             }
 
             [PageAt("invalid url", "path")]
             private class BaseThatIsAnInvalidUrl : Page
             {
-                public BaseThatIsAnInvalidUrl() : base(null) { }
+                public BaseThatIsAnInvalidUrl(PageSession session = null) : base(session) { }
             }
     }
 }
