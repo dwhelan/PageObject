@@ -85,7 +85,7 @@ namespace PageObject
         private static Page For(Type pageClass)
         {
             if (!BasePages.ContainsKey(pageClass))
-                BasePages[pageClass] = (Page)Activator.CreateInstance(pageClass);
+                BasePages[pageClass] = (Page) Activator.CreateInstance(pageClass, null);
 
             return BasePages[pageClass];
         }

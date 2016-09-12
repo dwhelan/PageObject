@@ -9,7 +9,8 @@ namespace PageObject.Tests.PageConstructor
         [PageAt(BaseTest.Url)]
         private class BasePage : Page
         {
-            public BasePage() : base(null) {}
+            public BasePage() : base(null) { }
+            public BasePage(PageSession session) : base(session) { }
         }
 
         private class DependentPage : Page
@@ -37,13 +38,13 @@ namespace PageObject.Tests.PageConstructor
             AssertValidPage(new DependentPage(null, Url));
         }
 
-        /*
-                [Test]
-                public void Should_ensure_a_valid_path_with_a_null_base_page()
-                {
-                    AssertThrowsPageObjectException(() => new DependentPage(null, "invalid url"));
-                }
+        [Test]
+        public void Should_ensure_a_valid_path_with_a_null_base_page()
+        {
+            AssertThrowsPageObjectException(() => new DependentPage(null, "invalid url"));
+        }
 
+        /*
                 //[TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
                 ////[TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 and .*CircularReference1B")]
                 ////[TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
