@@ -45,25 +45,25 @@ namespace PageObject.Tests.PageConstructor
         }
 
         [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
-        [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 and .*CircularReference1B")]
+        [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1A")]
         //[TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
         public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
         {
-            AssertInvokeThrows<PageObjectException>(() => new SelfReferencingPage());
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), regEx);
         }
             private class SelfReferencingPage : Page
             {
-                public SelfReferencingPage() : base(null, typeof(SelfReferencingPage)) {}
+                public SelfReferencingPage(PageSession sesssion = null) : base(sesssion, typeof(SelfReferencingPage)) {}
             }
 
-            private class CircularReference1 : Page
+            public class CircularReference1 : Page
             {
-                public CircularReference1() : base(null, typeof(CircularReference1B)) {}
+                public CircularReference1(PageSession sesssion = null) : base(sesssion, typeof(CircularReference1A)) {}
             }
 
-            private class CircularReference1B : Page
+            private class CircularReference1A : Page
             { 
-                public CircularReference1B() : base(null, typeof(CircularReference1)) {}
+                public CircularReference1A(PageSession sesssion = null) : base(sesssion, typeof(CircularReference1)) {}
             }
     }
 }

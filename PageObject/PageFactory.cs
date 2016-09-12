@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace PageObject
@@ -46,7 +48,16 @@ namespace PageObject
 
         public Page PageFor(Type pageClass, PageSession session = null)
         {
-            return (Page) Activator.CreateInstance(pageClass, session);
+            var bindingFlags = BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance | BindingFlags.OptionalParamBinding;
+
+            try
+            {
+                return (Page) Activator.CreateInstance(pageClass, bindingFlags, null, new object[] { session }, CultureInfo.CurrentCulture);
+            }
+            catch (TargetInvocationException x)
+            {
+                throw x.InnerException;
+            }
         }
 
         public Type PageClassFor(string pageName)

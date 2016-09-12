@@ -42,7 +42,7 @@ namespace PageObject.Tests
         {
             try
             {
-                return (Page) Activator.CreateInstance(pageClass);
+                return PageFactory.Instance.PageFor(pageClass);
             }
             catch (TargetInvocationException x)
             {

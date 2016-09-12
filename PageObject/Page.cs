@@ -66,8 +66,9 @@ namespace PageObject
 
         protected Page(PageSession session, Type basePage, string path = "")
         {
-            if (basePage == GetType())
-                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", basePage));
+            BasePage = basePage;
+
+            EnsureNoCircularReferencesInBasePages();
 
             Session = session;
 
@@ -83,12 +84,39 @@ namespace PageObject
             Hosts = new List<string> { Uri.Host };
         }
 
+        private void EnsureNoCircularReferencesInBasePages()
+        {
+            var basePage = BasePage;
+
+            if (BasePage == GetType())
+                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", basePage));
+
+            while (basePage != null)
+            {
+                var nextBasePage = For(basePage).BasePage;
+
+                if (nextBasePage == GetType())
+                    throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", GetType(), basePage));
+
+                basePage = nextBasePage;
+            }
+        }
+
+        public Type BasePage { get; }
+
         private static readonly IDictionary<Type, Page> BasePages = new Dictionary<Type, Page>();
 
         private static Page For(Type pageClass)
         {
             if (!BasePages.ContainsKey(pageClass))
-                BasePages[pageClass] = (Page) Activator.CreateInstance(pageClass, null);
+            {
+                BasePages[pageClass] = null;
+                BasePages[pageClass] = PageFactory.Instance.PageFor(pageClass);
+            }
+            else if (BasePages[pageClass] == null)
+            {
+                throw new PageObjectException(string.Format("Detected circular base page references with {0}", pageClass));
+            }
 
             return BasePages[pageClass];
         }
