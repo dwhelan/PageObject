@@ -18,6 +18,7 @@ namespace PageObject
 
         protected Page(PageSession session, Page basePage, string path = "") : this(session, basePage?.Url, path)
         {
+
         }
 
         protected Page(PageSession session, Uri uri, string path = "") : this(session, uri?.AbsoluteUri, path)
@@ -73,10 +74,20 @@ namespace PageObject
             }
             else
             {
-                Uri = UriBuilder.Build(PageDescriptor.For(basePage).Uri, path);
+                Uri = UriBuilder.Build(For(basePage).Uri, path);
             }
 
             Hosts = new List<string> { Uri.Host };
+        }
+
+        private static readonly IDictionary<Type, Page> BasePages = new Dictionary<Type, Page>();
+
+        private static Page For(Type pageClass)
+        {
+            if (!BasePages.ContainsKey(pageClass))
+                BasePages[pageClass] = (Page)Activator.CreateInstance(pageClass);
+
+            return BasePages[pageClass];
         }
 
         public void Visit()
