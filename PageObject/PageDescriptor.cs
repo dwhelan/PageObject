@@ -53,13 +53,13 @@ namespace PageObject
             if (Attribute.BasePage == null || Attribute.BasePage.IsSubclassOf(typeof(Page)))
                 return;
 
-            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
+            throw new PageObjectException(String.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
         }
 
         private void EnsureNoCircularReferencesInBasePages()
         {
             if (Attribute.BasePage == pageClass)
-                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", pageClass));
+                throw new PageObjectException(String.Format("Page {0} cannot have itself as a base page", pageClass));
 
             var basePage = Attribute.BasePage;
 
@@ -68,13 +68,14 @@ namespace PageObject
                 var nextBasePage = PageAtAttribute.For(basePage).BasePage;
 
                 if (nextBasePage == pageClass)
-                    throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
+                    throw new PageObjectException(String.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
 
                 basePage = nextBasePage;
             }
         }
 
         private static readonly IDictionary<Type, PageDescriptor> PageDescriptors = new Dictionary<Type, PageDescriptor>();
+        internal static readonly IDictionary<Type, Page> BasePages = new Dictionary<Type, Page>();
 
         internal static PageDescriptor For(Type pageClass)
         {
@@ -82,6 +83,21 @@ namespace PageObject
                 PageDescriptors[pageClass] = new PageDescriptor(pageClass);
 
             return PageDescriptors[pageClass];
+        }
+
+        internal static Page PageFor(Type pageClass)
+        {
+            if (!BasePages.ContainsKey(pageClass))
+            {
+                BasePages[pageClass] = null;
+                BasePages[pageClass] = PageFactory.Instance.PageFor(pageClass);
+            }
+            else if (BasePages[pageClass] == null)
+            {
+                throw new PageObjectException(String.Format("Detected circular base page references with {0}", pageClass));
+            }
+
+            return BasePages[pageClass];
         }
     }
 }

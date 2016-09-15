@@ -73,7 +73,6 @@ namespace PageObject
             {
                 var matchingClassNames = string.Join(", ", matches.Select(pageClass => pageClass.FullName));
                 throw new ArgumentException(string.Format("Found multiple page classes matching '{0}': {1}.", pageName, matchingClassNames));
-
             }
 
             return matches.First();
