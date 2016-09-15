@@ -18,7 +18,6 @@ namespace PageObject
 
         protected Page(PageSession session, Page basePage, string path = "") : this(session, basePage?.Url, path)
         {
-
         }
 
         protected Page(PageSession session, Uri uri, string path = "") : this(session, uri?.AbsoluteUri, path)
@@ -68,7 +67,7 @@ namespace PageObject
         {
             BasePage = basePage;
 
-            EnsureNoCircularReferencesInBasePages();
+            PageDescriptor.EnsureNoCircularReferencesInBasePages(this);
 
             Session = session;
 
@@ -82,24 +81,6 @@ namespace PageObject
             }
 
             Hosts = new List<string> { Uri.Host };
-        }
-
-        private void EnsureNoCircularReferencesInBasePages()
-        {
-            var basePage = BasePage;
-
-            if (BasePage == GetType())
-                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", basePage));
-
-            while (basePage != null)
-            {
-                var nextBasePage = PageDescriptor.PageFor(basePage).BasePage;
-
-                if (nextBasePage == GetType())
-                    throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", GetType(), basePage));
-
-                basePage = nextBasePage;
-            }
         }
 
         public Type BasePage { get; }

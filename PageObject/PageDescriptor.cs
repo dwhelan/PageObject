@@ -99,5 +99,23 @@ namespace PageObject
 
             return BasePages[pageClass];
         }
+
+        internal static void EnsureNoCircularReferencesInBasePages(Page page)
+        {
+            if (page.GetType() == page.BasePage)
+                throw new PageObjectException(String.Format("Page {0} cannot have itself as a base page", page.GetType()));
+
+            var basePage = page.BasePage;
+
+            while (basePage != null)
+            {
+                var nextBasePage = PageFor(basePage).BasePage;
+
+                if (nextBasePage ==page.GetType())
+                    throw new PageObjectException(String.Format("Detected circular base page references with {0} and {1}", page.GetType(), basePage));
+
+                basePage = nextBasePage;
+            }
+        }
     }
 }
