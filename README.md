@@ -30,7 +30,6 @@ namespace PageObject.Examples
 See more examples at [Creating Page wiki page](https://github.com/dwhelan/PageObject/wiki/Creating-Pages)
 
 ## To Do
- = update PageDescriptor to extract Uri from constructed Page if no PageAt attribute
  - host aliases
  - path aliases 
  - ability to check if the browser is on a specific page
