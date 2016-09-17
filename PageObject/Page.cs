@@ -63,26 +63,6 @@ namespace PageObject
             Hosts = new List<string> { Uri.Host };
         }
 
-        protected Page(PageSession session, Type basePage, string path = "")
-        {
-            BasePage = basePage;
-
-            PageDescriptor.EnsureNoCircularReferencesInBasePages(this);
-
-            Session = session;
-
-            if (basePage == null)
-            {
-                Uri = UriBuilder.Build(path);
-            }
-            else
-            {
-                Uri = UriBuilder.Build(PageDescriptor.PageFor(basePage).Uri, path);
-            }
-
-            Hosts = new List<string> { Uri.Host };
-        }
-
         public Type BasePage { get; }
 
         public void Visit()
