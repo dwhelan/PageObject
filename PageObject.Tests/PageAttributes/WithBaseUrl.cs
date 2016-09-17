@@ -57,7 +57,6 @@ namespace PageObject.Tests.PageAttributes
                 public PathInConstructor(PageSession session = null) : base(session, Path) { }
             }
 
-        [TestCase(typeof(BasePageInConstructor))]
         [TestCase(typeof(BaseUriInConstructor))]
         [TestCase(typeof(BaseUrlInConstructor))]
         public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
@@ -69,12 +68,6 @@ namespace PageObject.Tests.PageAttributes
             private class BasePage : Page
             {
                 public BasePage(PageSession session = null) : base(session) {}
-            }
-
-            [PageAt(Tests.BaseTest.Url, "")]
-            private class BasePageInConstructor : Page
-            {
-                public BasePageInConstructor(PageSession session = null) : base(session, new BasePage()) {}
             }
 
             [PageAt(Tests.BaseTest.Url, "")]

@@ -64,19 +64,12 @@ namespace PageObject.Tests.PageAttributes
                 public BaseThatIsNotAPage(PageSession session = null) : base(session) { }
         }
 
-        [TestCase(typeof(BasePageInConstructor))]
         [TestCase(typeof(BaseUriInConstructor))]
         [TestCase(typeof(BaseUrlInConstructor))]
         public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
         {
             AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt\(\) attribute");
         }
-
-            [PageAt(typeof(BasePage))]
-            private class BasePageInConstructor : Page
-            {
-                public BasePageInConstructor(PageSession session = null) : base(session, new BasePage()) { }
-            }
 
             [PageAt(typeof(BasePage))]
             private class BaseUriInConstructor : Page
