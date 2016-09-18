@@ -16,27 +16,6 @@ namespace PageObject
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
 
-        protected Page(PageSession session, string urlOrPath)
-        {
-            Session = session;
-
-            if (UriBuilder.AbsoluteUrl(urlOrPath))
-            {
-                Descriptor.EnsureNoBase();
-                Uri = UriBuilder.Build(urlOrPath);
-            }
-            else if (Descriptor.HasBase)
-            {
-                Uri = UriBuilder.Build(Descriptor.Uri, urlOrPath);
-            }
-            else
-            {
-                Uri = UriBuilder.Build(urlOrPath);
-            }
-
-            Hosts = new List<string> { Uri.Host };
-        }
-
         protected Page(PageSession session)
         {
             Session = session;

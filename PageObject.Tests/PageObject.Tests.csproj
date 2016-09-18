@@ -80,7 +80,6 @@
     <Compile Include="PageAttributes\WithBasePage.cs" />
     <Compile Include="PageAttributes\WithUrl.cs" />
     <Compile Include="PageConstructor\WithBasePageClass.cs" />
-    <Compile Include="PageConstructor\TestPage.cs" />
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="BrowserTests.cs" />
     <Compile Include="PageFactoryTests.cs" />
