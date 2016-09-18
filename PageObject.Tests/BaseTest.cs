@@ -12,6 +12,12 @@ namespace PageObject.Tests
         internal const string BaseUrl = "file:///";
         internal const string Path = "something";
 
+        protected void AssertThatPageCanBeCreated(Type pageClass)
+        {
+            var page = CreatePage(pageClass);
+            Assert.That(page.Uri.AbsoluteUri, Is.EqualTo(Url));
+        }
+
         protected T AssertInvokeThrows<T>(Func<Page> func, string messageRegEx) where T : Exception
         {
             var x = AssertInvokeThrows<T>(func);

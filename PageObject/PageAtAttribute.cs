@@ -11,8 +11,6 @@ namespace PageObject
         public string Path { get; }
         public bool HasABase => BasePage != null || BaseUrl != null;
 
-        internal static PageAtAttribute NullPageAttribute = new PageAtAttribute();
-
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
         }
@@ -32,10 +30,6 @@ namespace PageObject
             Path = path;
         }
 
-        private PageAtAttribute()
-        {
-        }
-
         private static readonly IDictionary<Type, PageAtAttribute> PageObjectAttributes = new Dictionary<Type, PageAtAttribute>();
 
         internal static PageAtAttribute For(Type pageClass)
@@ -51,7 +45,7 @@ namespace PageObject
                 }
             }
 
-            return PageObjectAttributes[pageClass] = NullPageAttribute;
+            throw new PageObjectException(string.Format("Missing [PageAt(...))] attribute for {0}", pageClass));
         }
     }
 }
