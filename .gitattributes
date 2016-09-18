@@ -1,2 +1,3 @@
 # Preserve CFR + LF in text files
-* text=text eol=crlf
+#* text=text eol=crlf
+

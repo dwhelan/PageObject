@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace PageObject
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class PageAtAttribute : Attribute
     {
         public Type BasePage { get; }

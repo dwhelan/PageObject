@@ -78,6 +78,7 @@
     <Compile Include="PageAttributes\BaseTest.cs" />
     <Compile Include="PageAttributes\WithBaseUrl.cs" />
     <Compile Include="PageAttributes\WithBasePage.cs" />
+    <Compile Include="PageAttributes\WithUrl.cs" />
     <Compile Include="PageConstructor\WithBasePageClass.cs" />
     <Compile Include="PageConstructor\WithBaseUri.cs" />
     <Compile Include="PageConstructor\TestPage.cs" />
