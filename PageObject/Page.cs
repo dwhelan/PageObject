@@ -37,17 +37,6 @@ namespace PageObject
             Hosts = new List<string> { Uri.Host };
         }
 
-        protected Page(PageSession session, string url, string path)
-        {
-            Session = session;
-
-            if (!string.IsNullOrEmpty(url))
-                Descriptor.EnsureNoBase();
-
-            Uri = UriBuilder.Build(url, path);
-            Hosts = new List<string> { Uri.Host };
-        }
-
         protected Page(PageSession session)
         {
             Session = session;
