@@ -75,7 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="PageAttributes\BaseTest.cs" />
     <Compile Include="PageAttributes\WithBaseUrl.cs" />
     <Compile Include="PageAttributes\WithBasePage.cs" />
     <Compile Include="PageAttributes\WithUrl.cs" />

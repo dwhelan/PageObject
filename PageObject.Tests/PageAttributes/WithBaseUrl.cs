@@ -16,7 +16,7 @@ namespace PageObject.Tests.PageAttributes
             AssertThatPageCanBeCreated(pageClass);
         }
 
-            [PageAt(Tests.BaseTest.Url)]
+            [PageAt(BaseTest.Url)]
             private class BaseUrlOnly : Page
             {
                 public BaseUrlOnly(PageSession session = null) : base(session) { }
@@ -28,19 +28,19 @@ namespace PageObject.Tests.PageAttributes
                 public BaseUrlAndPath(PageSession session = null) : base(session) { }
             }
 
-            [PageAt(Tests.BaseTest.Url, null)]
+            [PageAt(BaseTest.Url, null)]
             private class BaseUrlAndNullPath : Page
             {
                 public BaseUrlAndNullPath(PageSession session = null) : base(session) { }
             }
 
-            [PageAt(Tests.BaseTest.Url, "")]
+            [PageAt(BaseTest.Url, "")]
             private class BaseUrlAndEmptyPath : Page
             {
                 public BaseUrlAndEmptyPath(PageSession session = null) : base(session) { }
             }
 
-            [PageAt((string)null, Tests.BaseTest.Url)]
+            [PageAt((string)null, BaseTest.Url)]
             private class NullBaseUrlAndPath : Page
             {
                 public NullBaseUrlAndPath(PageSession session = null) : base(session) { }

@@ -8,19 +8,19 @@ namespace PageObject.Tests
     [TestFixture]
     public class PageFactoryTests
     {
-        [PageAtAttribute("http://www.test.com")]
+        [PageAt("http://www.test.com")]
         public abstract class AbstractTestPage : Page
         {
             protected AbstractTestPage(PageSession session) : base(session) {}
         }
 
-        [PageAtAttribute("http://www.test.com", "path")]
+        [PageAt("http://www.test.com", "path")]
         public class TestPage : AbstractTestPage
         {
             public TestPage(PageSession session) : base(session) {}
         }
 
-        [PageAtAttribute("http://www.test.com", "path2")]
+        [PageAt("http://www.test.com", "path2")]
         public class Test2Page : AbstractTestPage
         {
             public Test2Page(PageSession session) : base(session) {}

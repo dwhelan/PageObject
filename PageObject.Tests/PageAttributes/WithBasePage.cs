@@ -16,7 +16,7 @@ namespace PageObject.Tests.PageAttributes
             AssertThatPageCanBeCreated(pageClass);
         }
 
-            [PageAt(Tests.BaseTest.Url)]
+            [PageAt(BaseTest.Url)]
             private class BasePage : Page
             {
                 public BasePage(PageSession session = null) : base(session) { }
@@ -46,16 +46,16 @@ namespace PageObject.Tests.PageAttributes
                 public BasePageAndEmptyPath(PageSession session = null) : base(session) { }
             }
 
-            [PageAt((Type)null, Tests.BaseTest.Url)]
+            [PageAt((Type)null, BaseTest.Url)]
             private class NullBasePageAndPath : Page
             {
                 public NullBasePageAndPath(PageSession session = null) : base(session) { }
             }
 
-        [TestCase(typeof(BaseThatIsNotAPage))]
-        public void Should_ensure_that_base_is_a_Page_class(Type pageClass)
+        [Test]
+        public void Should_ensure_that_base_is_a_Page_class()
         {
-            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"base page for .* must be a subclass of PageObject.Page");
+            AssertInvokeThrows<PageObjectException>(() => CreatePage(typeof(BaseThatIsNotAPage)), @"base page for .*BaseThatIsNotAPage must be a subclass of PageObject.Page");
         }
 
             [PageAt(typeof(string), null)]

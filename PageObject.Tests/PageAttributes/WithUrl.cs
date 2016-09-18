@@ -12,7 +12,7 @@ namespace PageObject.Tests.PageAttributes
             AssertThatPageCanBeCreated(pageClass);
         }
 
-            [PageAt(Tests.BaseTest.Url)]
+            [PageAt(BaseTest.Url)]
             private class BaseUrlOnly : Page
             {
                 public BaseUrlOnly(PageSession session = null) : base(session) { }
