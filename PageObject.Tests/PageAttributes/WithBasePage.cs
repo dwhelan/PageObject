@@ -64,25 +64,6 @@ namespace PageObject.Tests.PageAttributes
                 public BaseThatIsNotAPage(PageSession session = null) : base(session) { }
         }
 
-        [TestCase(typeof(BaseUriInConstructor))]
-        [TestCase(typeof(BaseUrlInConstructor))]
-        public void Should_ensure_that_base_page_is_not_allowed_in_constructor(Type pageClass)
-        {
-            AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), @"Cannot specify a base Page, Uri or url in the constructor when you have included a base Page in the PageAt\(\) attribute");
-        }
-
-            [PageAt(typeof(BasePage))]
-            private class BaseUriInConstructor : Page
-            {
-                public BaseUriInConstructor(PageSession session = null) : base(session, new Uri("http://host")) { }
-            }
-
-            [PageAt(typeof(BasePage))]
-            private class BaseUrlInConstructor : Page
-            {
-                public BaseUrlInConstructor(PageSession session = null) : base(session, "http://host") { }
-            }
-
         [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
         [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 and .*CircularReference1B")]
         [TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]

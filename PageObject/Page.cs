@@ -16,10 +16,6 @@ namespace PageObject
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
 
-        protected Page(PageSession session, Uri uri, string path = "") : this(session, uri?.AbsoluteUri, path)
-        {
-        }
-
         protected Page(PageSession session, string urlOrPath)
         {
             Session = session;
