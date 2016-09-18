@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PageObject
 {
@@ -9,7 +10,6 @@ namespace PageObject
         public Type BasePage { get; }
         public string BaseUrl { get; }
         public string Path { get; }
-        public bool HasABase => BasePage != null || BaseUrl != null;
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
@@ -37,15 +37,20 @@ namespace PageObject
             if (PageObjectAttributes.ContainsKey(pageClass))
                 return PageObjectAttributes[pageClass];
 
-            {
-                foreach (var attribute in GetCustomAttributes(pageClass))
-                {
-                    if (attribute is PageAtAttribute)
-                        return PageObjectAttributes[pageClass] = (PageAtAttribute)attribute;
-                }
-            }
+            var attribute = GetCustomAttributes(pageClass).FirstOrDefault(a => a is PageAtAttribute);
 
-            throw new PageObjectException(string.Format("Missing [PageAt(...))] attribute for {0}", pageClass));
+            if (attribute == null)
+                throw new PageObjectException(string.Format("Missing [PageAt(...))] attribute for {0}", pageClass));
+
+            return PageObjectAttributes[pageClass] = (PageAtAttribute) attribute;
+        }
+
+        internal void EnsureValidBasePage(Type pageClass)
+        {
+            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
+                return;
+
+            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
         }
     }
 }
