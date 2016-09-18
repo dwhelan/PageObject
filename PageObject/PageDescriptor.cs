@@ -12,7 +12,6 @@ namespace PageObject
         internal PageDescriptor(Type pageClass)
         {
             Attribute = PageAtAttribute.For(pageClass);
-            Attribute.EnsureValidBasePage(pageClass);
             EnsureNoCircularReferencesInBasePages(pageClass);
         }
 

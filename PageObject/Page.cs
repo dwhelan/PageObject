@@ -15,9 +15,12 @@ namespace PageObject
         protected PageSession Session { get; }
 
         private PageDescriptor Descriptor => PageDescriptor.For(GetType());
+        private PageAtAttribute Attribute => PageAtAttribute.For(GetType());
 
         protected Page(PageSession session)
         {
+            Attribute.EnsureValidBasePage(GetType());
+
             Session = session;
             Uri = Descriptor.Uri;
             Hosts = new List<string> { Uri.Host };
