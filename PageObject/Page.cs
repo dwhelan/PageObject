@@ -20,6 +20,7 @@ namespace PageObject
         protected Page(PageSession session)
         {
             Attribute.EnsureValidBasePage(GetType());
+            Attribute.EnsureNoCircularReferencesInBasePages(GetType());
 
             Session = session;
             Uri = Descriptor.Uri;

@@ -47,6 +47,24 @@ namespace PageObject
             }
         }
 
+        internal void EnsureNoCircularReferencesInBasePages(Type pageClass)
+        {
+            if (BasePage == pageClass)
+                throw new PageObjectException(String.Format("Page {0} cannot have itself as a base page", pageClass));
+
+            var basePage = BasePage;
+
+            while (basePage != null)
+            {
+                var nextBasePage = For(basePage).BasePage;
+
+                if (nextBasePage == pageClass)
+                    throw new PageObjectException(String.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
+
+                basePage = nextBasePage;
+            }
+        }
+
         private static readonly IDictionary<Type, PageAtAttribute> PageObjectAttributes = new Dictionary<Type, PageAtAttribute>();
 
         internal static PageAtAttribute For(Type pageClass)
