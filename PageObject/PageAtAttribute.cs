@@ -11,6 +11,8 @@ namespace PageObject
         public string BaseUrl { get; }
         public string Path { get; }
 
+        internal Uri Uri => UriBuilder.Build(BaseUri, Path);
+
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
         }
@@ -28,6 +30,21 @@ namespace PageObject
         public PageAtAttribute(string path)
         {
             Path = path;
+        }
+
+
+        internal Uri BaseUri
+        {
+            get
+            {
+                if (BasePage != null)
+                    return For(BasePage).Uri;
+
+                if (BaseUrl != null)
+                    return UriBuilder.Build(BaseUrl);
+
+                return null;
+            }
         }
 
         private static readonly IDictionary<Type, PageAtAttribute> PageObjectAttributes = new Dictionary<Type, PageAtAttribute>();

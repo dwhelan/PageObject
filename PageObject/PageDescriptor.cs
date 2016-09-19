@@ -5,7 +5,7 @@ namespace PageObject
 {
     internal class PageDescriptor
     {
-        internal Uri Uri => UriBuilder.Build(BaseUri, Attribute.Path);
+        internal Uri Uri => UriBuilder.Build(Attribute.BaseUri, Attribute.Path);
 
         private PageAtAttribute Attribute { get; }
 
@@ -13,20 +13,6 @@ namespace PageObject
         {
             Attribute = PageAtAttribute.For(pageClass);
             EnsureNoCircularReferencesInBasePages(pageClass);
-        }
-
-        private Uri BaseUri
-        {
-            get
-            {
-                if (Attribute.BasePage != null)
-                    return For(Attribute.BasePage).Uri;
-
-                if (Attribute.BaseUrl != null)
-                    return UriBuilder.Build(Attribute.BaseUrl);
-
-                return null;
-            }
         }
 
         private void EnsureNoCircularReferencesInBasePages(Type pageClass)
