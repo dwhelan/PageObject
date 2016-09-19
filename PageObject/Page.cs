@@ -25,5 +25,11 @@ namespace PageObject
             Browser.Visit(Url);
             Session.Page = this;
         }
+
+        public bool IsActive
+        {
+            get { return Browser.Location == Uri; }
+        }
+
     }
 }

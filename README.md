@@ -30,13 +30,13 @@ namespace PageObject.Examples
 See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/wiki/Creating-Pages) wiki page.
 
 ## To Do
- - host aliases
- - path aliases 
  - ability to check if the browser is on a specific page
+   - host match
+   - path match
  - push to NuGet
  - support different .Net versions
     - support different Coypu versions (may be necessary for different .Net versions)
- - create PageObject.NUnit with page matchers
+ - create PageObject.NUnit with page matchers and page object attributes
  - support MSTest
  - support xUnit  
 

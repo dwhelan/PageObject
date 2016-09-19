@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OnPageTests.cs" />
     <Compile Include="PageConstruction\BaseTest.cs" />
     <Compile Include="PageConstruction\WithBasePage.cs" />
     <Compile Include="PageConstruction\WithoutPageAtAttribute.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="BrowserTests.cs" />
     <Compile Include="PageFactoryTests.cs" />
+    <Compile Include="Pages\File\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +96,9 @@
       <Name>PageObject</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Pages\File\Home.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

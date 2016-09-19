@@ -6,6 +6,8 @@ using NUnit.Framework;
 
 namespace PageObject.Tests
 {
+    // These testa are intended to help people see what browsers are supported on their local machine. As a result they are ignore by default.
+    // To use these locally, remove the ", Ignore" below and run the tests.
     [TestFixture, Ignore]
     public class BrowserTests
     {
