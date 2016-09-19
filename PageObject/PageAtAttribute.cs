@@ -47,7 +47,22 @@ namespace PageObject
             }
         }
 
-        internal void EnsureNoCircularReferencesInBasePages(Type pageClass)
+
+        internal void Validate(Type pageClass)
+        {
+            EnsureValidBasePage(pageClass);
+            EnsureNoCircularReferencesInBasePages(pageClass);
+        }
+
+        private void EnsureValidBasePage(Type pageClass)
+        {
+            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
+                return;
+
+            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
+        }
+
+        private void EnsureNoCircularReferencesInBasePages(Type pageClass)
         {
             if (BasePage == pageClass)
                 throw new PageObjectException(String.Format("Page {0} cannot have itself as a base page", pageClass));
@@ -80,12 +95,5 @@ namespace PageObject
             return PageObjectAttributes[pageClass] = (PageAtAttribute) attribute;
         }
 
-        internal void EnsureValidBasePage(Type pageClass)
-        {
-            if (BasePage == null || BasePage.IsSubclassOf(typeof(Page)))
-                return;
-
-            throw new PageObjectException(string.Format("The base page for {0} must be a subclass of {1}", pageClass, typeof(Page)));
-        }
     }
 }

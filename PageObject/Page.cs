@@ -14,16 +14,14 @@ namespace PageObject
         protected BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }
 
-        private PageDescriptor Descriptor => PageDescriptor.For(GetType());
         private PageAtAttribute Attribute => PageAtAttribute.For(GetType());
 
         protected Page(PageSession session)
         {
-            Attribute.EnsureValidBasePage(GetType());
-            Attribute.EnsureNoCircularReferencesInBasePages(GetType());
+            Attribute.Validate(GetType());
 
             Session = session;
-            Uri = Descriptor.Uri;
+            Uri = Attribute.Uri;
             Hosts = new List<string> { Uri.Host };
         }
 
