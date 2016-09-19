@@ -64,9 +64,9 @@ namespace PageObject.Tests.PageConstruction
                 public BaseThatIsNotAPage(PageSession session = null) : base(session) { }
             }
 
-        [TestCase(typeof(SelfReferencingPage), @"Page .*SelfReferencingPage cannot have itself as a base page")]
-        [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 and .*CircularReference1B")]
-        [TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 and .*CircularReference2C")]
+        [TestCase(typeof(SelfReferencingPage), @"Detected circular base page references with .*SelfReferencingPage => .*SelfReferencingPage")]
+        [TestCase(typeof(CircularReference1), @"Detected circular base page references with .*CircularReference1 => .*CircularReference1A => .*CircularReference1")]
+        [TestCase(typeof(CircularReference2), @"Detected circular base page references with .*CircularReference2 => .*CircularReference2A => .*CircularReference2B => .*CircularReference2")]
         public void Should_detect_circular_references_in_base_pages(Type pageClass, string regEx)
         {
             AssertInvokeThrows<PageObjectException>(() => CreatePage(pageClass), regEx);
@@ -80,36 +80,36 @@ namespace PageObject.Tests.PageConstruction
 
             // Circular references: CircularReference1 => CircularReference1B => CircularReference1
 
-            [PageAt(typeof(CircularReference1B), null)]
+            [PageAt(typeof(CircularReference1A), null)]
             private class CircularReference1 : Page
             {
                 public CircularReference1(PageSession session = null) : base(session) { }
             }
 
             [PageAt(typeof(CircularReference1), null)]
-            private class CircularReference1B : Page
+            private class CircularReference1A : Page
             {
-                public CircularReference1B(PageSession session = null) : base(session) { }
+                public CircularReference1A(PageSession session = null) : base(session) { }
             }
 
             // Circular references: CircularReference2 => CircularReference2B => CircularReference2C => CircularReference2
 
-            [PageAt(typeof(CircularReference2B), null)]
+            [PageAt(typeof(CircularReference2A), null)]
             private class CircularReference2 : Page
             {
                 public CircularReference2(PageSession session = null) : base(session) { }
             }
 
-            [PageAt(typeof(CircularReference2C), null)]
-            private class CircularReference2B : Page
+            [PageAt(typeof(CircularReference2B), null)]
+            private class CircularReference2A : Page
             {
-                public CircularReference2B(PageSession session = null) : base(session) { }
+                public CircularReference2A(PageSession session = null) : base(session) { }
             }
 
             [PageAt(typeof(CircularReference2), null)]
-            private class CircularReference2C : Page
+            private class CircularReference2B : Page
             {
-                public CircularReference2C(PageSession session = null) : base(session) { }
+                public CircularReference2B(PageSession session = null) : base(session) { }
             }
     }
 }

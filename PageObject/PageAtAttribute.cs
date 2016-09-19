@@ -63,19 +63,23 @@ namespace PageObject
 
         private void EnsureNoCircularReferencesInBasePages(Type pageClass)
         {
-            if (BasePage == pageClass)
-                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", pageClass));
+            EnsureNoCircularReferencesInBasePages(pageClass, new List<Type>());
+        }
 
-            var basePage = BasePage;
-
-            while (basePage != null)
+        private void EnsureNoCircularReferencesInBasePages(Type pageClass, IList<Type> basePages)
+        {
+            if (basePages.Contains(pageClass))
             {
-                var nextBasePage = For(basePage).BasePage;
+                basePages.Add(pageClass);
+                throw new PageObjectException(string.Format("Detected circular base page references with {0}", string.Join(" => ", basePages.Select(p => p.FullName))));
+            }
 
-                if (nextBasePage == pageClass)
-                    throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
+            var basePage = For(pageClass).BasePage;
 
-                basePage = nextBasePage;
+            if (basePage != null)
+            {
+                basePages.Add(pageClass);
+                EnsureNoCircularReferencesInBasePages(basePage, basePages);
             }
         }
 
