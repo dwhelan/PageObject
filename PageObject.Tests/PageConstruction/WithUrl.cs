@@ -1,15 +1,15 @@
 using System;
 using NUnit.Framework;
 
-namespace PageObject.Tests.PageAttributes
+namespace PageObject.Tests.PageConstruction
 {
     [TestFixture]
     public class WithUrl : BaseTest
     {
-        [TestCase(typeof(BaseUrlOnly))]
-        public void Should_support_a_base_url(Type pageClass)
+        [Test]
+        public void Should_support_a_base_url()
         {
-            AssertThatPageCanBeCreated(pageClass);
+            AssertThatPageCanBeCreated(typeof(BaseUrlOnly));
         }
 
             [PageAt(BaseTest.Url)]

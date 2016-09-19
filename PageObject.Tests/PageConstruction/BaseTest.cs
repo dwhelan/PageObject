@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using NUnit.Framework;
 
-namespace PageObject.Tests
+namespace PageObject.Tests.PageConstruction
 {
     public abstract class BaseTest
     {

@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace PageObject.Tests.PageAttributes
+namespace PageObject.Tests.PageConstruction
 {
     [TestFixture]
     public class WithBasePage : BaseTest

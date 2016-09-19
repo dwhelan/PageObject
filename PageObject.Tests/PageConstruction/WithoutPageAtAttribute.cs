@@ -1,9 +1,9 @@
 using NUnit.Framework;
 
-namespace PageObject.Tests.PageConstructor
+namespace PageObject.Tests.PageConstruction
 {
     [TestFixture]
-    public class WithBasePageClass : BaseTest
+    public class WithoutPageAtAttribute : BaseTest
     {
         [Test]
         public void Should_throw_if_page_attribute_missing()

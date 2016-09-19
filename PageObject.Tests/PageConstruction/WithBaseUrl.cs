@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace PageObject.Tests.PageAttributes
+namespace PageObject.Tests.PageConstruction
 {
     [TestFixture]
     public class WithBaseUrl : BaseTest
@@ -19,31 +19,31 @@ namespace PageObject.Tests.PageAttributes
             [PageAt(BaseTest.Url)]
             private class BaseUrlOnly : Page
             {
-                public BaseUrlOnly(PageSession session = null) : base(session) { }
+                public BaseUrlOnly(PageSession session) : base(session) { }
             }
 
             [PageAt(BaseUrl, Path)]
             private class BaseUrlAndPath : Page
             {
-                public BaseUrlAndPath(PageSession session = null) : base(session) { }
+                public BaseUrlAndPath(PageSession session) : base(session) { }
             }
 
             [PageAt(BaseTest.Url, null)]
             private class BaseUrlAndNullPath : Page
             {
-                public BaseUrlAndNullPath(PageSession session = null) : base(session) { }
+                public BaseUrlAndNullPath(PageSession session) : base(session) { }
             }
 
             [PageAt(BaseTest.Url, "")]
             private class BaseUrlAndEmptyPath : Page
             {
-                public BaseUrlAndEmptyPath(PageSession session = null) : base(session) { }
+                public BaseUrlAndEmptyPath(PageSession session) : base(session) { }
             }
 
             [PageAt((string)null, BaseTest.Url)]
             private class NullBaseUrlAndPath : Page
             {
-                public NullBaseUrlAndPath(PageSession session = null) : base(session) { }
+                public NullBaseUrlAndPath(PageSession session) : base(session) { }
             }
 
         [TestCase(typeof(InvalidUrl))]
@@ -56,13 +56,13 @@ namespace PageObject.Tests.PageAttributes
             [PageAt("invalid url")]
             private class InvalidUrl : Page
             {
-                public InvalidUrl(PageSession session = null) : base(session ) { }
+                public InvalidUrl(PageSession session) : base(session ) { }
             }
 
             [PageAt("invalid url", "path")]
             private class BaseThatIsAnInvalidUrl : Page
             {
-                public BaseThatIsAnInvalidUrl(PageSession session = null) : base(session) { }
+                public BaseThatIsAnInvalidUrl(PageSession session) : base(session) { }
             }
     }
 }
