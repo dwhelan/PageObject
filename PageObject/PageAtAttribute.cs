@@ -13,6 +13,7 @@ namespace PageObject
         private string BaseUrl { get; }
         private string Path { get; }
         public string HostMatch { get; set; }
+        public string PathMatch { get; set; }
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
@@ -46,7 +47,6 @@ namespace PageObject
                 return null;
             }
         }
-
 
         internal void Validate(Type pageClass)
         {

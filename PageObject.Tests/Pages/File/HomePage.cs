@@ -23,4 +23,12 @@
         {
         }
     }
+
+    [PageAt("file:///Z:/code/cs/PageObject/PageObject.Tests/Pages/File2/Home.html", PathMatch= @"Z:/code/cs/PageObject/PageObject.Tests/Pages/File\d?/Home.html")]
+    internal class HomePage4 : Page
+    {
+        public HomePage4(PageSession session) : base(session)
+        {
+        }
+    }
 }

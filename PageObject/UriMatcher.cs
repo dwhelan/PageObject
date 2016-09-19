@@ -14,28 +14,11 @@ namespace PageObject
             this.location = location;
         }
 
-        internal bool Matches()
-        {
-            return SchemeMatches() && HostMatches() && PathMatches();
-        }
+        internal bool Matches() => SchemeMatches && HostMatches && PathMatches;
 
-        private bool SchemeMatches()
-        {
-            return page.Uri.Scheme.Equals(location.Scheme);
-        }
-
-        private bool HostMatches()
-        {
-            if (page.Uri.Host.Equals(location.Host))
-                return true;
-
-            return Regex.IsMatch(location.Host, page.Attribute.HostMatch);
-        }
-
-        private bool PathMatches()
-        {
-            return Path(page.Uri).Equals(Path(location));
-        }
+        private bool SchemeMatches => page.Uri.Scheme.Equals(location.Scheme);
+        private bool HostMatches => page.Uri.Host.Equals(location.Host) || Regex.IsMatch(location.Host, page.Attribute.HostMatch);
+        private bool PathMatches => Path(location).Equals(Path(location)) || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
 
         private static string Path(Uri location)
         {

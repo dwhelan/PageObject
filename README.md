@@ -31,7 +31,6 @@ See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/
 
 ## To Do
  - ability to check if the browser is on a specific page
-   - host match
    - path match
  - push to NuGet
  - support different .Net versions
