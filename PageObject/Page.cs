@@ -8,7 +8,6 @@ namespace PageObject
     {
         public Uri Uri { get; }
         public string Url => Uri.AbsoluteUri;
-        public List<string> Hosts { get; }
         public string Title => Browser.Title;
 
         protected BrowserSession Browser => Session.Browser;
@@ -22,10 +21,7 @@ namespace PageObject
 
             Session = session;
             Uri = Attribute.Uri;
-            Hosts = new List<string> { Uri.Host };
         }
-
-        public Type BasePage { get; }
 
         public void Visit()
         {

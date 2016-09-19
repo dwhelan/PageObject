@@ -7,11 +7,11 @@ namespace PageObject
     [AttributeUsage(AttributeTargets.Class)]
     public class PageAtAttribute : Attribute
     {
-        public Type BasePage { get; }
-        public string BaseUrl { get; }
-        public string Path { get; }
-
         internal Uri Uri => UriBuilder.Build(BaseUri, Path);
+
+        private Type BasePage { get; }
+        private string BaseUrl { get; }
+        private string Path { get; }
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
@@ -47,7 +47,6 @@ namespace PageObject
             }
         }
 
-
         internal void Validate(Type pageClass)
         {
             EnsureValidBasePage(pageClass);
@@ -65,7 +64,7 @@ namespace PageObject
         private void EnsureNoCircularReferencesInBasePages(Type pageClass)
         {
             if (BasePage == pageClass)
-                throw new PageObjectException(String.Format("Page {0} cannot have itself as a base page", pageClass));
+                throw new PageObjectException(string.Format("Page {0} cannot have itself as a base page", pageClass));
 
             var basePage = BasePage;
 
@@ -74,7 +73,7 @@ namespace PageObject
                 var nextBasePage = For(basePage).BasePage;
 
                 if (nextBasePage == pageClass)
-                    throw new PageObjectException(String.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
+                    throw new PageObjectException(string.Format("Detected circular base page references with {0} and {1}", pageClass, basePage));
 
                 basePage = nextBasePage;
             }
@@ -94,6 +93,5 @@ namespace PageObject
 
             return PageObjectAttributes[pageClass] = (PageAtAttribute) attribute;
         }
-
     }
 }
