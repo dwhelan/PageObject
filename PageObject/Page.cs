@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using Coypu;
 
 namespace PageObject
 {
     public abstract class Page
     {
-        public Uri Uri { get; }
+        public Uri Uri => Attribute.Uri;
         public string Url => Uri.AbsoluteUri;
         public string Title => Browser.Title;
 
@@ -17,10 +16,8 @@ namespace PageObject
 
         protected Page(PageSession session)
         {
-            Attribute.Validate(GetType());
-
             Session = session;
-            Uri = Attribute.Uri;
+            Attribute.Validate(GetType());
         }
 
         public void Visit()

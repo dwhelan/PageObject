@@ -32,7 +32,6 @@ namespace PageObject
             Path = path;
         }
 
-
         internal Uri BaseUri
         {
             get
@@ -51,6 +50,7 @@ namespace PageObject
         {
             EnsureValidBasePage(pageClass);
             EnsureNoCircularReferencesInBasePages(pageClass);
+            EnsureValidUri();
         }
 
         private void EnsureValidBasePage(Type pageClass)
@@ -77,6 +77,11 @@ namespace PageObject
 
                 basePage = nextBasePage;
             }
+        }
+
+        private void EnsureValidUri()
+        {
+            UriBuilder.Build(BaseUri, Path);
         }
 
         private static readonly IDictionary<Type, PageAtAttribute> PageObjectAttributes = new Dictionary<Type, PageAtAttribute>();
