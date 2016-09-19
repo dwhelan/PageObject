@@ -27,7 +27,7 @@ namespace PageObject.Examples
 }
 ```
 
-See more examples at [Creating Page wiki page](https://github.com/dwhelan/PageObject/wiki/Creating-Pages)
+See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/wiki/Creating-Pages) wiki page.
 
 ## To Do
  - host aliases
