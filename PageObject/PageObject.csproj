@@ -76,6 +76,7 @@
     <Compile Include="PageFactory.cs" />
     <Compile Include="PageSession.cs" />
     <Compile Include="UriBuilder.cs" />
+    <Compile Include="UriMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

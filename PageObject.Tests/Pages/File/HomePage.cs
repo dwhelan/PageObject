@@ -15,4 +15,12 @@
         {
         }
     }
+
+    [PageAt("file://localhost/Z:/code/cs/PageObject/PageObject.Tests/Pages/File/Home.html", HostMatch=".*")]
+    internal class HomePage3 : Page
+    {
+        public HomePage3(PageSession session) : base(session)
+        {
+        }
+    }
 }

@@ -43,6 +43,14 @@ namespace PageObject.Tests
             Assert.That(anotherPage.IsActive);
         }
 
+        [Test]
+        public void Another_page_with_same_path_and_matching_host_should_be_active()
+        {
+            var anotherPage = new HomePage3(session);
+        
+            Assert.That(anotherPage.IsActive);
+        }
+
         [TestFixtureTearDown]
         public void DisposeSession()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Coypu;
 
 namespace PageObject
@@ -12,7 +13,7 @@ namespace PageObject
         protected BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }
 
-        private PageAtAttribute Attribute => PageAtAttribute.For(GetType());
+        internal PageAtAttribute Attribute => PageAtAttribute.For(GetType());
 
         protected Page(PageSession session)
         {
@@ -28,8 +29,9 @@ namespace PageObject
 
         public bool IsActive
         {
-            get { return Browser.Location == Uri; }
+            get {
+                return UriMatcher.UriMatches(this, Browser.Location);
+            }
         }
-
     }
 }
