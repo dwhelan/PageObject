@@ -3,31 +3,28 @@ using System.Text.RegularExpressions;
 
 namespace PageObject
 {
-    internal static class UriMatcher
+    internal class UriMatcher
     {
-        internal static bool UriMatches(Page page, Uri location)
+        private readonly Page page;
+        private readonly Uri location;
+
+        internal UriMatcher(Page page, Uri location)
         {
-            return SchemeMatches(page, location) && HostMatches(page, location) && PathMatches(page, location);
-            //var uri = page.Uri;
-            //if (location == uri)
-            //    return true;
-
-            //var hostMatches = HostMatches(page, location);
-
-            //if (SchemeMatches(page, location) && hostMatches)
-            //{
-            //    return PathMatches(page, location);
-            //}
-
-            //return false;
+            this.page = page;
+            this.location = location;
         }
 
-        private static bool SchemeMatches(Page page, Uri location)
+        internal bool Matches()
+        {
+            return SchemeMatches() && HostMatches() && PathMatches();
+        }
+
+        private bool SchemeMatches()
         {
             return page.Uri.Scheme.Equals(location.Scheme);
         }
 
-        private static bool HostMatches(Page page, Uri location)
+        private bool HostMatches()
         {
             if (page.Uri.Host.Equals(location.Host))
                 return true;
@@ -35,7 +32,7 @@ namespace PageObject
             return Regex.IsMatch(location.Host, page.Attribute.HostMatch);
         }
 
-        private static bool PathMatches(Page page, Uri location)
+        private bool PathMatches()
         {
             return Path(page.Uri).Equals(Path(location));
         }

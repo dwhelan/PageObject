@@ -10,6 +10,8 @@ namespace PageObject
         public string Url => Uri.AbsoluteUri;
         public string Title => Browser.Title;
 
+        public bool IsActive => new UriMatcher(this, Browser.Location).Matches();
+
         protected BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }
 
@@ -25,13 +27,6 @@ namespace PageObject
         {
             Browser.Visit(Url);
             Session.Page = this;
-        }
-
-        public bool IsActive
-        {
-            get {
-                return UriMatcher.UriMatches(this, Browser.Location);
-            }
         }
     }
 }
