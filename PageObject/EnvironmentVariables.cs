@@ -32,7 +32,7 @@ namespace PageObject
                     return Environment.GetEnvironmentVariable(value, target);
             }
 
-            return "foo";
+            return "{" + value + "}";
         }
 
         private static IEnumerable<EnvironmentVariableTarget> EnvironmentTargets()

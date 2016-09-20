@@ -52,5 +52,11 @@ namespace PageObject.Tests
         {
             Assert.That(EnvironmentVariables.Expand("{cd}-{cd}"), Is.EqualTo(cd + "-" + cd));
         }
+
+        [Test]
+        public void Should_throw_if_environment_variable_not_found()
+        {
+            Assert.That(EnvironmentVariables.Expand("{should not find me}"), Is.EqualTo("{should not find me}"));
+        }
     }
 }
