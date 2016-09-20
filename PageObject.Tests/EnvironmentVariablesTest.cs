@@ -12,13 +12,13 @@ namespace PageObject.Tests
         [Test]
         public void Should_expand_cd_with_current_directory()
         {
-            Assert.That(EnvironmentVariables.Expand("{cd}"), Is.EqualTo(Cd));
+            Assert.That(EnvironmentVariables.Expand("${cd}"), Is.EqualTo(Cd));
         }
 
         [Test]
         public void Should_expand_CD_with_current_directory()
         {
-            Assert.That(EnvironmentVariables.Expand("{CD}"), Is.EqualTo(Cd));
+            Assert.That(EnvironmentVariables.Expand("${CD}"), Is.EqualTo(Cd));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace PageObject.Tests
             try
             {
                 Environment.SetEnvironmentVariable("<test-process>", "test-process", EnvironmentVariableTarget.Process);
-                Assert.That(EnvironmentVariables.Expand("{<test-process>}"), Is.EqualTo("test-process"));
+                Assert.That(EnvironmentVariables.Expand("${<test-process>}"), Is.EqualTo("test-process"));
             }
             finally
             {
@@ -40,37 +40,37 @@ namespace PageObject.Tests
         [Test]
         public void Should_expand_user_environment_variable()
         {
-            Assert.That(EnvironmentVariables.Expand("{Temp}"), Is.EqualTo(Temp));
+            Assert.That(EnvironmentVariables.Expand("${Temp}"), Is.EqualTo(Temp));
         }
 
         [Test]
         public void Should_expand_machine_environment_variable()
         {
-            Assert.That(EnvironmentVariables.Expand("{OS}"), Is.EqualTo(Environment.GetEnvironmentVariable("OS", EnvironmentVariableTarget.Machine)));
+            Assert.That(EnvironmentVariables.Expand("${OS}"), Is.EqualTo(Environment.GetEnvironmentVariable("OS", EnvironmentVariableTarget.Machine)));
         }
 
         [Test]
         public void Should_expand_app_config_variable()
         {
-            Assert.That(EnvironmentVariables.Expand("{test-app-config}"), Is.EqualTo(new AppSettingsReader().GetValue("test-app-config", typeof(string))));
+            Assert.That(EnvironmentVariables.Expand("${test-app-config}"), Is.EqualTo(new AppSettingsReader().GetValue("test-app-config", typeof(string))));
         }
 
         [Test]
         public void Should_expand_multiple_variables()
         {
-            Assert.That(EnvironmentVariables.Expand("{cd}-{cd}"), Is.EqualTo(Cd + "-" + Cd));
+            Assert.That(EnvironmentVariables.Expand("${cd}-${cd}"), Is.EqualTo(Cd + "-" + Cd));
         }
 
         [Test]
         public void Should_be_case_insensitive()
         {
-            Assert.That(EnvironmentVariables.Expand("{temp}"), Is.EqualTo(Temp));
+            Assert.That(EnvironmentVariables.Expand("${temp}"), Is.EqualTo(Temp));
         }
 
         [Test]
         public void Should_retain_original_input_if_variable_is_not_found()
         {
-            Assert.That(EnvironmentVariables.Expand("{should not find me}"), Is.EqualTo("{should not find me}"));
+            Assert.That(EnvironmentVariables.Expand("${should not find me}"), Is.EqualTo("${should not find me}"));
         }
     }
 }

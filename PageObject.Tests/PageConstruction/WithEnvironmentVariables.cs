@@ -31,19 +31,19 @@ namespace PageObject.Tests.PageConstruction
             var page = CreatePage(pageClass);
             Assert.That(page.Url, Is.EqualTo("http://host/path"));
         }
-            [PageAt("http://{<host>}/{<path>}")]
+            [PageAt("http://${<host>}/${<path>}")]
             private class PageWithEnvironmentVariableInPath : Page
             {
                 public PageWithEnvironmentVariableInPath(PageSession session) : base(session) { }
             }
 
-            [PageAt("http://{<host>}/{<path>}", "")]
+            [PageAt("http://${<host>}/${<path>}", "")]
             private class PageWithEnvironmentVariableInUrl : Page
             {
                 public PageWithEnvironmentVariableInUrl(PageSession session) : base(session) { }
             }
 
-            [PageAt("http://{<host>}", "{<path>}")]
+            [PageAt("http://${<host>}", "${<path>}")]
             private class PageWithEnvironmentVariableInUrlAndPath : Page
             {
                 public PageWithEnvironmentVariableInUrlAndPath(PageSession session) : base(session) { }

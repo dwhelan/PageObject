@@ -8,7 +8,7 @@ namespace PageObject
 {
     public class EnvironmentVariables
     {
-        private static readonly Regex VariableRegex = new Regex(@"(?<={).*?(?=})");
+        private static readonly Regex VariableRegex = new Regex(@"(?<=\${).*?(?=})");
 
         public static string Expand(string text)
         {
@@ -20,7 +20,7 @@ namespace PageObject
             {
                 string newValue;
                 if (Lookup(match.Value, out newValue))
-                    result = result.Replace("{" + match.Value + "}", newValue);
+                    result = result.Replace("${" + match.Value + "}", newValue);
             }
 
             return result;
@@ -76,6 +76,7 @@ namespace PageObject
             {
                 return false;
             }
+            
         }
 
         private static IEnumerable<EnvironmentVariableTarget> EnvironmentTargets()
