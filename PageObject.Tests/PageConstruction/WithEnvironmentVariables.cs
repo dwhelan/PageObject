@@ -6,6 +6,9 @@ namespace PageObject.Tests.PageConstruction
     [TestFixture]
     public class WithEnvironmentVariables : BaseTest
     {
+        // Use environment variables with angle brackets to reduce liklihood of affecting
+        // the environment variables that could be used elsewhere.
+
         [TestFixtureSetUp]
         public void SetEnvironmentVariables()
         {
