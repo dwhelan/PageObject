@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using NUnit.Framework;
 namespace PageObject.Tests
 { 
@@ -49,6 +50,12 @@ namespace PageObject.Tests
         }
 
         [Test]
+        public void Should_expand_app_config_variable()
+        {
+            Assert.That(EnvironmentVariables.Expand("{test-app-config}"), Is.EqualTo(new AppSettingsReader().GetValue("test-app-config", typeof(string))));
+        }
+
+        [Test]
         public void Should_expand_multiple_variables()
         {
             Assert.That(EnvironmentVariables.Expand("{cd}-{cd}"), Is.EqualTo(Cd + "-" + Cd));
@@ -61,7 +68,7 @@ namespace PageObject.Tests
         }
 
         [Test]
-        public void Should_throw_if_environment_variable_not_found()
+        public void Should_retain_original_input_if_variable_is_not_found()
         {
             Assert.That(EnvironmentVariables.Expand("{should not find me}"), Is.EqualTo("{should not find me}"));
         }

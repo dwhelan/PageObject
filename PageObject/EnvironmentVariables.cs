@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -16,23 +17,65 @@ namespace PageObject
             var result = text;
 
             foreach (Match match in VariableRegex.Matches(result))
-                result = result.Replace("{" + match.Value + "}", Lookup(match.Value));
+            {
+                string newValue;
+                if (Lookup(match.Value, out newValue))
+                    result = result.Replace("{" + match.Value + "}", newValue);
+            }
 
             return result;
         }
 
-        private static string Lookup(string value)
+        private static bool Lookup(string name, out string value)
         {
-            if (value.Equals("cd", StringComparison.CurrentCultureIgnoreCase))
-                return Environment.CurrentDirectory;
+            value = name;
 
+            if (LoadFromBuiltInVariables(name, ref value)) return true;
+            if (LoadFromEnvironmentVariables(name, ref value)) return true;
+            if (LoadFromAppConfig(name, ref value)) return true;
+
+            return false;
+        }
+
+        private static bool LoadFromEnvironmentVariables(string name, ref string value)
+        {
             foreach (var target in EnvironmentTargets())
             {
-                if (Environment.GetEnvironmentVariable(value, target) != null)
-                    return Environment.GetEnvironmentVariable(value, target);
+                if (Environment.GetEnvironmentVariable(name, target) != null)
+                {
+                    value = Environment.GetEnvironmentVariable(name, target);
+                    return true;
+                }
             }
+            return false;
+        }
 
-            return "{" + value + "}";
+        private static readonly IDictionary<string, string> BuiltInVariables = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "cd",  Environment.CurrentDirectory }
+        };
+
+        private static bool LoadFromBuiltInVariables(string name, ref string value)
+        {
+            if (BuiltInVariables.ContainsKey(name))
+            {
+                value = BuiltInVariables[name];
+                return true;
+            }
+            return false;
+        }
+
+        private static bool LoadFromAppConfig(string name, ref string value)
+        {
+            try
+            {
+                value = (string) new AppSettingsReader().GetValue(name, typeof(string));
+                return true;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
         }
 
         private static IEnumerable<EnvironmentVariableTarget> EnvironmentTargets()
