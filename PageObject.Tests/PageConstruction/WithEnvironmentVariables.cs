@@ -4,32 +4,34 @@ using NUnit.Framework;
 namespace PageObject.Tests.PageConstruction
 {
     [TestFixture]
-    public class WithEnvironmentVariables
+    public class WithEnvironmentVariables : BaseTest
     {
-        [Test]
-        public void Should_expand_cd_with_current_directory()
+        private static readonly string CurrentDirectoryPath = Environment.CurrentDirectory.Replace('\\', '/');
+
+        [TestCase(typeof(PageWithEnvironmentVariableInPath))]
+        [TestCase(typeof(PageWithEnvironmentVariableInUrl))]
+        [TestCase(typeof(PageWithEnvironmentVariableInUrlAndPath))]
+        public void Should_expand_environment_variable_in_path(Type pageClass)
         {
-            var page = new PageWithCd(null);
-            var cd = Environment.CurrentDirectory.Replace('\\', '/');
-            Assert.That(page.Url, Is.EqualTo(string.Format("file:///{0}/", cd)));
+            var page = CreatePage(pageClass);
+            Assert.That(page.Url, Is.EqualTo(string.Format("file:///{0}/", CurrentDirectoryPath)));
         }
             [PageAt("file:///{cd}/")]
-            private class PageWithCd : Page
+            private class PageWithEnvironmentVariableInPath : Page
             {
-                public PageWithCd(PageSession session) : base(session) { }
+                public PageWithEnvironmentVariableInPath(PageSession session) : base(session) { }
             }
 
-        [Test]
-        public void Should_expand_CD_with_current_directory()
-        {
-            var page = new PageWithCD(null);
-            var cd = Environment.CurrentDirectory.Replace('\\', '/');
-            Assert.That(page.Url, Is.EqualTo(string.Format("file:///{0}/", cd)));
-        }
-            [PageAt("file:///{CD}/")]
-            private class PageWithCD : Page
+            [PageAt("file:///{CD}/", "")]
+            private class PageWithEnvironmentVariableInUrl : Page
             {
-                public PageWithCD(PageSession session) : base(session) { }
+                public PageWithEnvironmentVariableInUrl(PageSession session) : base(session) { }
+            }
+
+            [PageAt("file:///", "{CD}/")]
+            private class PageWithEnvironmentVariableInUrlAndPath : Page
+            {
+                public PageWithEnvironmentVariableInUrlAndPath(PageSession session) : base(session) { }
             }
     }
 }

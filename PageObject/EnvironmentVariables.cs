@@ -9,6 +9,8 @@ namespace PageObject
 
         public static string Expand(string text)
         {
+            if (text == null) return null;
+
             var result = text;
 
             foreach (Match match in VariableRegex.Matches(result))

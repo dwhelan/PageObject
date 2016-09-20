@@ -1,10 +1,36 @@
-﻿using Coypu;
+﻿using System;
+using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
-using PageObject.Tests.Pages.File;
 
 namespace PageObject.Tests
 {
+    [PageAt("file:///{cd}/../../Pages/File/Home.html")]
+    internal class HomePage : Page
+    {
+        public HomePage(PageSession session) : base(session) {}
+    }
+
+    [PageAt("file:///{cd}/../../Pages/File/Home.html")]
+    internal class HomePage2 : Page
+    {
+        public HomePage2(PageSession session) : base(session) { }
+    }
+
+    [PageAt("file://localhost/{cd}/../../Pages/File/Home.html", HostMatch = ".*")]
+    internal class HomePage3 : Page
+    {
+        public HomePage3(PageSession session) : base(session) { }
+    }
+
+    [PageAt("file:///{cd}/../../Pages/File2/Home.html", PathMatch = @"Z:/code/cs/PageObject/PageObject.Tests/Pages/File\d?/Home.html")]
+    internal class HomePage4 : Page
+    {
+        public HomePage4(PageSession session) : base(session)
+        {
+        }
+    }
+
     [TestFixture]
     public class OnPageTests
     {

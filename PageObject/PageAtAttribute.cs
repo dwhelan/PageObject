@@ -26,12 +26,12 @@ namespace PageObject
 
         public PageAtAttribute(string baseUrl, string path) : this(path)
         {
-            BaseUrl = baseUrl;
+            BaseUrl = EnvironmentVariables.Expand(baseUrl);
         }
 
         public PageAtAttribute(string path)
         {
-            Path = path == null ? "" : EnvironmentVariables.Expand(path);
+            Path = EnvironmentVariables.Expand(path);
         }
 
         internal Uri BaseUri

@@ -84,7 +84,6 @@
     <Compile Include="PageSessionTests.cs" />
     <Compile Include="BrowserTests.cs" />
     <Compile Include="PageFactoryTests.cs" />
-    <Compile Include="Pages\File\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EnvironmentVariablesTest.cs" />
   </ItemGroup>
