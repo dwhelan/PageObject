@@ -31,7 +31,7 @@ namespace PageObject
 
         public PageAtAttribute(string path)
         {
-            Path = path;
+            Path = path == null ? "" : EnvironmentVariables.Expand(path);
         }
 
         internal Uri BaseUri

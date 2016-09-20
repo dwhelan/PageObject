@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnvironmentVariables.cs" />
     <Compile Include="PageAtAttribute.cs" />
     <Compile Include="PageObjectException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
