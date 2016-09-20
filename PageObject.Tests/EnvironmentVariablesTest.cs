@@ -5,18 +5,19 @@ namespace PageObject.Tests
     [TestFixture]
     public class EnvironmentVariablesTest
     {
-        private readonly string cd = Environment.CurrentDirectory;
+        private static readonly string Cd = Environment.CurrentDirectory;
+        private static readonly string Temp = Environment.GetEnvironmentVariable("Temp", EnvironmentVariableTarget.User);
 
         [Test]
         public void Should_expand_cd_with_current_directory()
         {
-            Assert.That(EnvironmentVariables.Expand("{cd}"), Is.EqualTo(cd));
+            Assert.That(EnvironmentVariables.Expand("{cd}"), Is.EqualTo(Cd));
         }
 
         [Test]
         public void Should_expand_CD_with_current_directory()
         {
-            Assert.That(EnvironmentVariables.Expand("{CD}"), Is.EqualTo(cd));
+            Assert.That(EnvironmentVariables.Expand("{CD}"), Is.EqualTo(Cd));
         }
 
         [Test]
@@ -38,7 +39,7 @@ namespace PageObject.Tests
         [Test]
         public void Should_expand_user_environment_variable()
         {
-            Assert.That(EnvironmentVariables.Expand("{Temp}"), Is.EqualTo(Environment.GetEnvironmentVariable("Temp", EnvironmentVariableTarget.User)));
+            Assert.That(EnvironmentVariables.Expand("{Temp}"), Is.EqualTo(Temp));
         }
 
         [Test]
@@ -50,7 +51,13 @@ namespace PageObject.Tests
         [Test]
         public void Should_expand_multiple_variables()
         {
-            Assert.That(EnvironmentVariables.Expand("{cd}-{cd}"), Is.EqualTo(cd + "-" + cd));
+            Assert.That(EnvironmentVariables.Expand("{cd}-{cd}"), Is.EqualTo(Cd + "-" + Cd));
+        }
+
+        [Test]
+        public void Should_be_case_insensitive()
+        {
+            Assert.That(EnvironmentVariables.Expand("{temp}"), Is.EqualTo(Temp));
         }
 
         [Test]
