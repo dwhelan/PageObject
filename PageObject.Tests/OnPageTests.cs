@@ -45,31 +45,31 @@ namespace PageObject.Tests
         }
 
             [PageAt(HomePage.FullUrl)]
-            internal class SameUrl : Page
+            private class SameUrl : Page
             {
                 public SameUrl(PageSession session) : base(session) { }
             }
 
             [PageAt("file2://" + HomePage.Host + "/" + HomePage.Path, SchemeMatch = new[]{"file"})]
-            internal class MatchingScheme : Page
+            private class MatchingScheme : Page
             {
                 public MatchingScheme(PageSession session) : base(session) { }
             }
 
             [PageAt("http://localhost:80/" + HomePage.Path, SchemeMatch = new[] { "file" }, HostMatch = ".*", PortMatch = new[]{-1})]
-            internal class MatchingPort : Page
+            private class MatchingPort : Page
             {
                 public MatchingPort(PageSession session) : base(session) { }
             }
 
             [PageAt("file://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*")]
-            internal class MatchingHost : Page
+            private class MatchingHost : Page
             {
                 public MatchingHost(PageSession session) : base(session) { }
             }
 
             [PageAt("file:///${cd}/../../Pages/File2/Home.html", PathMatch = @"Pages/File\d?/Home.html")]
-            internal class MatchingPath : Page
+            private class MatchingPath : Page
             {
                 public MatchingPath(PageSession session) : base(session)
                 {
@@ -78,6 +78,8 @@ namespace PageObject.Tests
 
         [TestCase(typeof(DifferentUrl))]
         [TestCase(typeof(DifferentScheme))]
+        [TestCase(typeof(DifferentHost))]
+        [TestCase(typeof(DifferentPath))]
         public void Should_not_be_on_pages_that_dont_match(Type pageClass)
         {
             var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
@@ -86,25 +88,25 @@ namespace PageObject.Tests
         }
 
             [PageAt("file:///a_different_url")]
-            internal class DifferentUrl : Page
+            private class DifferentUrl : Page
             {
                 public DifferentUrl(PageSession session) : base(session) { }
             }
 
             [PageAt("file2://" + HomePage.Host + HomePage.Port + "/" + HomePage.Path)]
-            internal class DifferentScheme : Page
+            private class DifferentScheme : Page
             {
                 public DifferentScheme(PageSession session) : base(session) { }
             }
 
             [PageAt("file://" + "different_host" + HomePage.Port + "/" + HomePage.Path)]
-            internal class DifferentHost : Page
+            private class DifferentHost : Page
             {
                 public DifferentHost(PageSession session) : base(session) { }
             }
 
             [PageAt("file://" + HomePage.Host + HomePage.Port + "/" + "different_path")]
-            internal class DifferentPath : Page
+            private class DifferentPath : Page
             {
                 public DifferentPath(PageSession session) : base(session) { }
             }

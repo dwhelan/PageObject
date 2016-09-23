@@ -8,6 +8,8 @@ namespace PageObject
     {
         private readonly Page page;
         private readonly Uri location;
+        private PageAtAttribute Attribute => page.Attribute;
+        private Uri Uri => page.Uri;
 
         internal UriMatcher(Page page, Uri location)
         {
@@ -17,14 +19,14 @@ namespace PageObject
 
         internal bool Matches() => SchemeMatches && PortMatches && HostMatches && PathMatches;
 
-        private bool SchemeMatches => page.Uri.Scheme.Equals(location.Scheme) || page.Attribute.SchemeMatch.Contains(location.Scheme);
-        private bool PortMatches => page.Uri.Port.Equals(location.Port)       || page.Attribute.PortMatch.Contains(location.Port);
-        private bool HostMatches => page.Uri.Host.Equals(location.Host)       || Regex.IsMatch(location.Host, page.Attribute.HostMatch);
-        private bool PathMatches => Path(page.Uri).Equals(Path(location))     || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
+        private bool SchemeMatches => Uri.Scheme.Equals(location.Scheme)    || Attribute.SchemeMatch.Contains(location.Scheme);
+        private bool PortMatches   => Uri.Port.Equals(location.Port)        || Attribute.PortMatch.Contains(location.Port);
+        private bool HostMatches   => Uri.Host.Equals(location.Host)        || Regex.IsMatch(location.Host, Attribute.HostMatch);
+        private bool PathMatches   => Path(page.Uri).Equals(Path(location)) || Regex.IsMatch(Path(location), Attribute.PathMatch);
 
-        private static string Path(Uri location)
+        private static string Path(Uri uri)
         {
-            var path = location.AbsolutePath;
+            var path = uri.AbsolutePath;
             return path.StartsWith("/") ? path.Substring(1) : path;
         }
     }
