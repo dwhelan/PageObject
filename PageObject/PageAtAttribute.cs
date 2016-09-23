@@ -12,6 +12,9 @@ namespace PageObject
         private Type BasePage { get; }
         private string BaseUrl { get; }
         private string Path { get; }
+
+        public string[] SchemeMatch { get; set; }
+        public int[] PortMatch { get; set; }
         public string HostMatch { get; set; }
         public string PathMatch { get; set; }
 
@@ -34,7 +37,8 @@ namespace PageObject
         public PageAtAttribute(string path)
         {
             Path = EnvironmentVariables.Expand(path);
-            PathMatch = MatchNothing;
+            HostMatch = PathMatch = MatchNothing;
+            SchemeMatch = new string[0];
         }
 
         internal Uri BaseUri

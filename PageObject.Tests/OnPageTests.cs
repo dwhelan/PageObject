@@ -27,13 +27,16 @@ namespace PageObject.Tests
         {
             var configuration = new SessionConfiguration { Browser = Browser.PhantomJS };
             session = new PageSession(configuration);
-            new HomePage(session).Visit();
+            var page = new HomePage(session);
+            page.Visit();
         }
 
         [TestCase(typeof(HomePage))]
         [TestCase(typeof(SameUrl))]
-        [TestCase(typeof(MatchingHostAndSamePath))]
-        [TestCase(typeof(SameHostAndMatchingPath))]
+        //[TestCase(typeof(MatchingPort))]
+        [TestCase(typeof(MatchingScheme))]
+        [TestCase(typeof(MatchingHost))]
+        [TestCase(typeof(MatchingPath))]
         public void Should_be_on_pages_that_match(Type pageClass)
         {
             var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
@@ -41,22 +44,34 @@ namespace PageObject.Tests
             Assert.That(anotherPage.IsActive, Is.True);
         }
 
-            [PageAt("file:///" + HomePage.Path)]
+            [PageAt(HomePage.FullUrl)]
             internal class SameUrl : Page
             {
                 public SameUrl(PageSession session) : base(session) { }
             }
 
-            [PageAt("file://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*")]
-            internal class MatchingHostAndSamePath : Page
+            [PageAt("file2://" + HomePage.Host + "/" + HomePage.Path, SchemeMatch = new[]{"file"})]
+            internal class MatchingScheme : Page
             {
-                public MatchingHostAndSamePath(PageSession session) : base(session) { }
+                public MatchingScheme(PageSession session) : base(session) { }
+            }
+
+            [PageAt("http://localhost:80/" + HomePage.Path, PortMatch = new[]{80})]
+            internal class MatchingPort : Page
+            {
+                public MatchingPort(PageSession session) : base(session) { }
+            }
+
+            [PageAt("file://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*")]
+            internal class MatchingHost : Page
+            {
+                public MatchingHost(PageSession session) : base(session) { }
             }
 
             [PageAt("file:///${cd}/../../Pages/File2/Home.html", PathMatch = @"Pages/File\d?/Home.html")]
-            internal class SameHostAndMatchingPath : Page
+            internal class MatchingPath : Page
             {
-                public SameHostAndMatchingPath(PageSession session) : base(session)
+                public MatchingPath(PageSession session) : base(session)
                 {
                 }
             }

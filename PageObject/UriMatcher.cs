@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace PageObject
@@ -16,9 +17,9 @@ namespace PageObject
 
         internal bool Matches() => SchemeMatches && HostMatches && PathMatches;
 
-        private bool SchemeMatches => page.Uri.Scheme.Equals(location.Scheme);
-        private bool HostMatches => page.Uri.Host.Equals(location.Host) || Regex.IsMatch(location.Host, page.Attribute.HostMatch);
-        private bool PathMatches => Path(page.Uri).Equals(Path(location)) || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
+        private bool SchemeMatches => page.Uri.Scheme.Equals(location.Scheme) || page.Attribute.SchemeMatch.Contains(location.Scheme);
+        private bool HostMatches => page.Uri.Host.Equals(location.Host)       || Regex.IsMatch(location.Host, page.Attribute.HostMatch);
+        private bool PathMatches => Path(page.Uri).Equals(Path(location))     || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
 
         private static string Path(Uri location)
         {
