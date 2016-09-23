@@ -9,7 +9,7 @@ namespace PageObject
         public string Url => Uri.AbsoluteUri;
         public string Title => Browser.Title;
 
-        public bool IsActive => new UriMatcher(this, Browser.Location).Matches();
+        public bool IsActive => new UriMatcher(this, Browser.Location).Matches;
 
         protected BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }

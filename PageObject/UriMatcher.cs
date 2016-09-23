@@ -17,7 +17,7 @@ namespace PageObject
             this.location = location;
         }
 
-        internal bool Matches() => SchemeMatches && PortMatches && HostMatches && PathMatches;
+        internal bool Matches => SchemeMatches && PortMatches && HostMatches && PathMatches;
 
         private bool SchemeMatches => Uri.Scheme.Equals(location.Scheme)    || Attribute.SchemeMatch.Contains(location.Scheme);
         private bool PortMatches   => Uri.Port.Equals(location.Port)        || Attribute.PortMatch.Contains(location.Port);
