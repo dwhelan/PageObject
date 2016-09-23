@@ -70,7 +70,7 @@ namespace PageObject.Tests
             Assert.That(anotherPage.IsActive, Is.False);
         }
 
-            [PageAt("file:///a different url")]
+            [PageAt("file:///a_different_url")]
             internal class DifferentUrl : Page
             {
                 public DifferentUrl(PageSession session) : base(session) { }
@@ -80,6 +80,18 @@ namespace PageObject.Tests
             internal class DifferentScheme : Page
             {
                 public DifferentScheme(PageSession session) : base(session) { }
+            }
+
+            [PageAt("file://" + "different_host" + HomePage.Port + "/" + HomePage.Path)]
+            internal class DifferentHost : Page
+            {
+                public DifferentHost(PageSession session) : base(session) { }
+            }
+
+            [PageAt("file://" + HomePage.Host + HomePage.Port + "/" + "different_path")]
+            internal class DifferentPath : Page
+            {
+                public DifferentPath(PageSession session) : base(session) { }
             }
 
         [TestFixtureTearDown]
