@@ -18,7 +18,7 @@ namespace PageObject
 
         private bool SchemeMatches => page.Uri.Scheme.Equals(location.Scheme);
         private bool HostMatches => page.Uri.Host.Equals(location.Host) || Regex.IsMatch(location.Host, page.Attribute.HostMatch);
-        private bool PathMatches => Path(location).Equals(Path(location)) || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
+        private bool PathMatches => Path(page.Uri).Equals(Path(location)) || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
 
         private static string Path(Uri location)
         {

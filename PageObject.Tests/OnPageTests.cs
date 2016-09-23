@@ -5,9 +5,15 @@ using NUnit.Framework;
 
 namespace PageObject.Tests
 {
-    [PageAt("file:///${cd}/../../Pages/File/Home.html")]
+    [PageAt(FullUrl)]
     internal class HomePage : Page
     {
+        internal const string FullUrl = Scheme + "://" + Host + Port + "/" + Path;
+        internal const string Scheme = "file";
+        internal const string Host = "";
+        internal const string Port = "";
+        internal const string Path = "${cd}/../../Pages/File/Home.html";
+
         public HomePage(PageSession session) : base(session) {}
     }
 
@@ -25,35 +31,57 @@ namespace PageObject.Tests
         }
 
         [TestCase(typeof(HomePage))]
-        [TestCase(typeof(PageWithSameUrl))]
-        [TestCase(typeof(PageWithMatchingHostAndSamePath))]
-        [TestCase(typeof(PageWithSameHostAndMatchingPath))]
-        public void Should_be_on_matching_pages(Type pageClass)
+        [TestCase(typeof(SameUrl))]
+        [TestCase(typeof(MatchingHostAndSamePath))]
+        [TestCase(typeof(SameHostAndMatchingPath))]
+        public void Should_be_on_pages_that_match(Type pageClass)
         {
             var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
 
-            Assert.That(anotherPage.IsActive);
+            Assert.That(anotherPage.IsActive, Is.True);
         }
 
-            [PageAt("file:///${cd}/../../Pages/File/Home.html")]
-            internal class PageWithSameUrl : Page
+            [PageAt("file:///" + HomePage.Path)]
+            internal class SameUrl : Page
             {
-                public PageWithSameUrl(PageSession session) : base(session) { }
+                public SameUrl(PageSession session) : base(session) { }
             }
 
             [PageAt("file://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*")]
-            internal class PageWithMatchingHostAndSamePath : Page
+            internal class MatchingHostAndSamePath : Page
             {
-                public PageWithMatchingHostAndSamePath(PageSession session) : base(session) { }
+                public MatchingHostAndSamePath(PageSession session) : base(session) { }
             }
 
-            [PageAt("file:///${cd}/../../Pages/File2/Home.html", PathMatch = @"Z:/code/cs/PageObject/PageObject.Tests/Pages/File\d?/Home.html")]
-            internal class PageWithSameHostAndMatchingPath : Page
+            [PageAt("file:///${cd}/../../Pages/File2/Home.html", PathMatch = @"Pages/File\d?/Home.html")]
+            internal class SameHostAndMatchingPath : Page
             {
-                public PageWithSameHostAndMatchingPath(PageSession session) : base(session)
+                public SameHostAndMatchingPath(PageSession session) : base(session)
                 {
                 }
             }
+
+        [TestCase(typeof(DifferentUrl))]
+        [TestCase(typeof(DifferentScheme))]
+        public void Should_not_be_on_pages_that_dont_match(Type pageClass)
+        {
+            var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
+
+            Assert.That(anotherPage.IsActive, Is.False);
+        }
+
+            [PageAt("file:///a different url")]
+            internal class DifferentUrl : Page
+            {
+                public DifferentUrl(PageSession session) : base(session) { }
+            }
+
+            [PageAt("file2://" + HomePage.Host + HomePage.Port + "/" + HomePage.Path)]
+            internal class DifferentScheme : Page
+            {
+                public DifferentScheme(PageSession session) : base(session) { }
+            }
+
         [TestFixtureTearDown]
         public void DisposeSession()
         {

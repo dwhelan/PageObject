@@ -15,6 +15,8 @@ namespace PageObject
         public string HostMatch { get; set; }
         public string PathMatch { get; set; }
 
+        private static readonly string MatchNothing = "(?!.*)";
+
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
         }
@@ -32,6 +34,7 @@ namespace PageObject
         public PageAtAttribute(string path)
         {
             Path = EnvironmentVariables.Expand(path);
+            PathMatch = MatchNothing;
         }
 
         internal Uri BaseUri
