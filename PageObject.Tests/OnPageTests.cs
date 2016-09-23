@@ -33,7 +33,7 @@ namespace PageObject.Tests
 
         [TestCase(typeof(HomePage))]
         [TestCase(typeof(SameUrl))]
-        //[TestCase(typeof(MatchingPort))]
+        [TestCase(typeof(MatchingPort))]
         [TestCase(typeof(MatchingScheme))]
         [TestCase(typeof(MatchingHost))]
         [TestCase(typeof(MatchingPath))]
@@ -56,7 +56,7 @@ namespace PageObject.Tests
                 public MatchingScheme(PageSession session) : base(session) { }
             }
 
-            [PageAt("http://localhost:80/" + HomePage.Path, PortMatch = new[]{80})]
+            [PageAt("http://localhost:80/" + HomePage.Path, SchemeMatch = new[] { "file" }, HostMatch = ".*", PortMatch = new[]{-1})]
             internal class MatchingPort : Page
             {
                 public MatchingPort(PageSession session) : base(session) { }

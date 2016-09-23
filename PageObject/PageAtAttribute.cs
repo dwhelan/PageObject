@@ -39,6 +39,7 @@ namespace PageObject
             Path = EnvironmentVariables.Expand(path);
             HostMatch = PathMatch = MatchNothing;
             SchemeMatch = new string[0];
+            PortMatch = new int[0];
         }
 
         internal Uri BaseUri

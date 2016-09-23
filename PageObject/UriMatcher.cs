@@ -15,9 +15,10 @@ namespace PageObject
             this.location = location;
         }
 
-        internal bool Matches() => SchemeMatches && HostMatches && PathMatches;
+        internal bool Matches() => SchemeMatches && PortMatches && HostMatches && PathMatches;
 
         private bool SchemeMatches => page.Uri.Scheme.Equals(location.Scheme) || page.Attribute.SchemeMatch.Contains(location.Scheme);
+        private bool PortMatches => page.Uri.Port.Equals(location.Port)       || page.Attribute.PortMatch.Contains(location.Port);
         private bool HostMatches => page.Uri.Host.Equals(location.Host)       || Regex.IsMatch(location.Host, page.Attribute.HostMatch);
         private bool PathMatches => Path(page.Uri).Equals(Path(location))     || Regex.IsMatch(Path(location), page.Attribute.PathMatch);
 
