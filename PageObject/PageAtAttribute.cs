@@ -43,17 +43,9 @@ namespace PageObject
 
         private string hostMatch = MatchNothing;
 
-        public string PathMatch
-        {
-            get { return ShouldUseBasePagePathMatch ? For(BasePage).PathMatch : pathMatch; }
-            set { pathMatch = value; }
-        }
+        public string PathMatch { get; set; } = MatchNothing;
 
-        public bool ShouldUseBasePagePathMatch => pathMatch.Equals(MatchNothing) && BasePage != null;
-
-        private string pathMatch = MatchNothing;
-
-        private static readonly string MatchNothing = "(?!.*)";
+        private const string MatchNothing = "(?!.*)";
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {

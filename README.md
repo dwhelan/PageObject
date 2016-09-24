@@ -30,8 +30,6 @@ namespace PageObject.Examples
 See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/wiki/Creating-Pages) wiki page.
 
 ## To Do
- - support environment variables in urls e.g. `{cd}` for current working directory
- - support config settings in urls e.g. `[setting]`
  - push to NuGet
  - support different .Net versions
     - support different Coypu versions (may be necessary for different .Net versions)

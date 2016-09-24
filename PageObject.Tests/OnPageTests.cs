@@ -112,16 +112,44 @@ namespace PageObject.Tests
             }
 
         [Test]
-        [TestCase(typeof(Child))]
-        [TestCase(typeof(Grandchild))]
-        public void Should_inherit_base_matching(Type pageClass)
+        [TestCase(typeof(SchemeChild))]
+        [TestCase(typeof(SchemeGrandchild))]
+        public void Should_inherit_base_scheme_matching(Type pageClass)
         {
             var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
 
             Assert.That(anotherPage.IsActive, Is.True);
         }
 
-            [PageAt("http://localhost/${cd}/../../Pages/File2/Home.html", SchemeMatch = new[] { "file" }, PortMatch = new[] { -1 }, HostMatch = ".*", PathMatch = @"Pages/File\d?/Home.html")]
+            [PageAt("file2:///${cd}/../../Pages/File/Home.html", SchemeMatch = new[] { "file" })]
+            private class SchemeParent : Page
+            {
+                public SchemeParent(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(SchemeParent))]
+            private class SchemeChild : Page
+            {
+                public SchemeChild(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(SchemeChild))]
+            private class SchemeGrandchild : Page
+            {
+                public SchemeGrandchild(PageSession session) : base(session) { }
+            }
+
+        [Test]
+        [TestCase(typeof(Child))]
+        [TestCase(typeof(Grandchild))]
+        public void Should_inherit_base_host_matching(Type pageClass)
+        {
+            var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
+
+            Assert.That(anotherPage.IsActive, Is.True);
+        }
+
+            [PageAt("file://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*")]
             private class Parent : Page
             {
                 public Parent(PageSession session) : base(session) { }
@@ -138,6 +166,64 @@ namespace PageObject.Tests
             {
                 public Grandchild(PageSession session) : base(session) { }
             }
+
+
+        [Test]
+        [TestCase(typeof(PortChild))]
+        [TestCase(typeof(PortGrandchild))]
+        public void Should_inherit_base_port_matching(Type pageClass)
+        {
+            var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
+
+            Assert.That(anotherPage.IsActive, Is.True);
+        }
+
+            [PageAt("http://localhost:80/${cd}/../../Pages/File/Home.html", SchemeMatch = new[] { "file" }, HostMatch = ".*", PortMatch = new[] { -1 })]
+            private class PortParent : Page
+            {
+                public PortParent(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(PortParent))]
+            private class PortChild : Page
+            {
+                public PortChild(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(PortChild))]
+            private class PortGrandchild : Page
+            {
+                public PortGrandchild(PageSession session) : base(session) { }
+            }
+
+        [Test]
+        [TestCase(typeof(PathChild))]
+        [TestCase(typeof(PathGrandchild))]
+        public void Should_not_inherit_base_path_matching(Type pageClass)
+        {
+            var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
+
+            Assert.That(anotherPage.IsActive, Is.False);
+        }
+
+            [PageAt(HomePage.FullUrl, PathMatch = ".*")]
+            private class PathParent : Page
+            {
+                public PathParent(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(PathParent), "/child")]
+            private class PathChild : Page
+            {
+                public PathChild(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(PathChild), "/grand-child")]
+            private class PathGrandchild : Page
+            {
+                public PathGrandchild(PageSession session) : base(session) { }
+            }
+
 
         [TestFixtureTearDown]
         public void DisposeSession()
