@@ -120,9 +120,10 @@ namespace PageObject.Tests
 
             Assert.That(anotherPage.IsActive, Is.True);
         }
-//        [PageAt("file2://" + HomePage.Host + "/" + HomePage.Path, SchemeMatch = new[] { "file" })]
+        //        [PageAt("file2://" + HomePage.Host + "/" + HomePage.Path, SchemeMatch = new[] { "file" })]
+        //            [PageAt("http://localhost:80/" + HomePage.Path, SchemeMatch = new[] { "file" }, HostMatch = ".*", PortMatch = new[]{-1})]
 
-        [PageAt("file2://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*", SchemeMatch = new[] { "file" })]
+        [PageAt("http://localhost/${cd}/../../Pages/File/Home.html", SchemeMatch = new[] { "file" }, PortMatch = new[] { -1 }, HostMatch = ".*")]
             private class Parent : Page
             {
                 public Parent(PageSession session) : base(session) { }

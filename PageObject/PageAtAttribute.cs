@@ -13,30 +13,40 @@ namespace PageObject
         private string BaseUrl { get; }
         private string Path { get; }
 
-        private string hostMatch;
-        private string[] schemeMatch;
-
         public string[] SchemeMatch
         {
             get { return ShouldUseBasePageSchemeMatch ? For(BasePage).SchemeMatch : schemeMatch; }
             set { schemeMatch = value; }            
         }
 
- 
-        public int[] PortMatch { get; set; }
+        private bool ShouldUseBasePageSchemeMatch => schemeMatch.Length == 0 && BasePage != null;
+
+        private string[] schemeMatch;
+
+        public int[] PortMatch
+        {
+            get { return ShouldUseBasePagePortMatch? For(BasePage).PortMatch : portMatch; }
+            set { portMatch = value; }            
+        }
+
+        private bool ShouldUseBasePagePortMatch => portMatch.Length == 0 && BasePage != null;
+
+        private int[] portMatch;
+
         public string HostMatch
         {
             get { return ShouldUseBasePageHostMatch ? For(BasePage).HostMatch : hostMatch; }
             set { hostMatch = value; }
         }
 
+        private bool ShouldUseBasePageHostMatch => hostMatch.Equals(MatchNothing) && BasePage != null;
+
+        private string hostMatch;
 
         public string PathMatch { get; set; }
 
         private static readonly string MatchNothing = "(?!.*)";
 
-        private bool ShouldUseBasePageSchemeMatch => schemeMatch.Length == 0 && BasePage != null;
-        private bool ShouldUseBasePageHostMatch => hostMatch.Equals(MatchNothing) && BasePage != null;
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
