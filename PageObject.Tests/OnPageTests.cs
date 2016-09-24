@@ -114,16 +114,14 @@ namespace PageObject.Tests
         [Test]
         [TestCase(typeof(Child))]
         [TestCase(typeof(Grandchild))]
-        public void Should_inherit_base_page_match(Type pageClass)
+        public void Should_inherit_base_matching(Type pageClass)
         {
             var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
 
             Assert.That(anotherPage.IsActive, Is.True);
         }
-        //        [PageAt("file2://" + HomePage.Host + "/" + HomePage.Path, SchemeMatch = new[] { "file" })]
-        //            [PageAt("http://localhost:80/" + HomePage.Path, SchemeMatch = new[] { "file" }, HostMatch = ".*", PortMatch = new[]{-1})]
 
-        [PageAt("http://localhost/${cd}/../../Pages/File/Home.html", SchemeMatch = new[] { "file" }, PortMatch = new[] { -1 }, HostMatch = ".*")]
+            [PageAt("http://localhost/${cd}/../../Pages/File2/Home.html", SchemeMatch = new[] { "file" }, PortMatch = new[] { -1 }, HostMatch = ".*", PathMatch = @"Pages/File\d?/Home.html")]
             private class Parent : Page
             {
                 public Parent(PageSession session) : base(session) { }
