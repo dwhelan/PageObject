@@ -18,19 +18,25 @@ namespace PageObject
 
         public string[] SchemeMatch
         {
-            get { return schemeMatch.Length == 0 && BasePage != null ? For(BasePage).SchemeMatch : schemeMatch; }
-            set { schemeMatch = value; }
-            
+            get { return ShouldUseBasePageSchemeMatch ? For(BasePage).SchemeMatch : schemeMatch; }
+            set { schemeMatch = value; }            
         }
+
+ 
         public int[] PortMatch { get; set; }
         public string HostMatch
         {
-            get { return hostMatch.Equals(MatchNothing) && BasePage != null ? For(BasePage).HostMatch : hostMatch; }
+            get { return ShouldUseBasePageHostMatch ? For(BasePage).HostMatch : hostMatch; }
             set { hostMatch = value; }
         }
+
+
         public string PathMatch { get; set; }
 
         private static readonly string MatchNothing = "(?!.*)";
+
+        private bool ShouldUseBasePageSchemeMatch => schemeMatch.Length == 0 && BasePage != null;
+        private bool ShouldUseBasePageHostMatch => hostMatch.Equals(MatchNothing) && BasePage != null;
 
         public PageAtAttribute(Type basePage) : this(basePage, "")
         {
