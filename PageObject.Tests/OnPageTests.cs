@@ -111,6 +111,35 @@ namespace PageObject.Tests
                 public DifferentPath(PageSession session) : base(session) { }
             }
 
+        [Test]
+        [TestCase(typeof(Child))]
+        [TestCase(typeof(Grandchild))]
+        public void Should_inherit_base_page_match(Type pageClass)
+        {
+            var anotherPage = PageFactory.Instance.PageFor(pageClass, session);
+
+            Assert.That(anotherPage.IsActive, Is.True);
+        }
+//        [PageAt("file2://" + HomePage.Host + "/" + HomePage.Path, SchemeMatch = new[] { "file" })]
+
+        [PageAt("file2://localhost/${cd}/../../Pages/File/Home.html", HostMatch = ".*", SchemeMatch = new[] { "file" })]
+            private class Parent : Page
+            {
+                public Parent(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(Parent))]
+            private class Child : Page
+            {
+                public Child(PageSession session) : base(session) { }
+            }
+
+            [PageAt(typeof(Child))]
+            private class Grandchild : Page
+            {
+                public Grandchild(PageSession session) : base(session) { }
+            }
+
         [TestFixtureTearDown]
         public void DisposeSession()
         {

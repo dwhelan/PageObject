@@ -13,9 +13,21 @@ namespace PageObject
         private string BaseUrl { get; }
         private string Path { get; }
 
-        public string[] SchemeMatch { get; set; }
+        private string hostMatch;
+        private string[] schemeMatch;
+
+        public string[] SchemeMatch
+        {
+            get { return schemeMatch.Length == 0 && BasePage != null ? For(BasePage).SchemeMatch : schemeMatch; }
+            set { schemeMatch = value; }
+            
+        }
         public int[] PortMatch { get; set; }
-        public string HostMatch { get; set; }
+        public string HostMatch
+        {
+            get { return hostMatch.Equals(MatchNothing) && BasePage != null ? For(BasePage).HostMatch : hostMatch; }
+            set { hostMatch = value; }
+        }
         public string PathMatch { get; set; }
 
         private static readonly string MatchNothing = "(?!.*)";
