@@ -21,7 +21,7 @@ namespace PageObject
 
         private bool ShouldUseBasePageSchemeMatch => schemeMatch.Length == 0 && BasePage != null;
 
-        private string[] schemeMatch;
+        private string[] schemeMatch = new string[0];
 
         public int[] PortMatch
         {
@@ -31,7 +31,7 @@ namespace PageObject
 
         private bool ShouldUseBasePagePortMatch => portMatch.Length == 0 && BasePage != null;
 
-        private int[] portMatch;
+        private int[] portMatch = new int[0];
 
         public string HostMatch
         {
@@ -41,7 +41,7 @@ namespace PageObject
 
         private bool ShouldUseBasePageHostMatch => hostMatch.Equals(MatchNothing) && BasePage != null;
 
-        private string hostMatch;
+        private string hostMatch = MatchNothing;
 
         public string PathMatch
         {
@@ -50,7 +50,8 @@ namespace PageObject
         }
 
         public bool ShouldUseBasePagePathMatch => pathMatch.Equals(MatchNothing) && BasePage != null;
-        private string pathMatch;
+
+        private string pathMatch = MatchNothing;
 
         private static readonly string MatchNothing = "(?!.*)";
 
@@ -71,9 +72,6 @@ namespace PageObject
         public PageAtAttribute(string path)
         {
             Path = EnvironmentVariables.Expand(path);
-            HostMatch = PathMatch = MatchNothing;
-            SchemeMatch = new string[0];
-            PortMatch = new int[0];
         }
 
         internal Uri BaseUri
