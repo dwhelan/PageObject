@@ -111,7 +111,6 @@ namespace PageObject.Tests
                 public DifferentPath(PageSession session) : base(session) { }
             }
 
-        [Test]
         [TestCase(typeof(SchemeChild))]
         [TestCase(typeof(SchemeGrandchild))]
         public void Should_inherit_base_scheme_matching(Type pageClass)
@@ -223,7 +222,6 @@ namespace PageObject.Tests
             {
                 public PathGrandchild(PageSession session) : base(session) { }
             }
-
 
         [TestFixtureTearDown]
         public void DisposeSession()
