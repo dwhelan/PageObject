@@ -44,7 +44,7 @@ namespace PageObject.Tests
         }
 
         [Test]
-        public void Phantomjs()
+        public void PhantomJs()
         {
             TestBrowserInterationWith(Browser.PhantomJS);
         }

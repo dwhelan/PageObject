@@ -1,5 +1,7 @@
 using System;
+using System.Runtime.CompilerServices;
 using Coypu;
+using PageObject.Elements;
 
 namespace PageObject
 {
@@ -26,6 +28,24 @@ namespace PageObject
         {
             Browser.Visit(Url);
             Session.Page = this;
+        }
+
+        protected ElementScope FindField([CallerMemberName]string propertyName = "")
+        {
+            var attribute = PageAttribute(propertyName);
+            return Browser.FindField(attribute.Locator);
+        }
+
+        protected FillInWith FillIn([CallerMemberName]string propertyName = "")
+        {
+            var attribute = PageAttribute(propertyName);
+            return Browser.FillIn(attribute.Locator);
+        }
+
+        protected PageElementAttribute PageAttribute(string propertyName)
+        {
+            var property = GetType().GetProperty(propertyName);
+            return (PageElementAttribute) property.GetCustomAttributes(typeof(PageElementAttribute), true)[0];
         }
     }
 }
