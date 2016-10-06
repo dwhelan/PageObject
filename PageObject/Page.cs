@@ -13,7 +13,7 @@ namespace PageObject
 
         public bool IsActive => new UriMatcher(this, Browser.Location).Matches;
 
-        protected BrowserSession Browser => Session.Browser;
+        protected internal BrowserSession Browser => Session.Browser;
         protected PageSession Session { get; }
 
         internal PageAtAttribute Attribute => PageAtAttribute.For(GetType());
@@ -30,22 +30,9 @@ namespace PageObject
             Session.Page = this;
         }
 
-        protected ElementScope FindField([CallerMemberName]string propertyName = "")
+        public T Element<T>([CallerMemberName]string propertyName = "") where T : Elements.Element
         {
-            var attribute = PageAttribute(propertyName);
-            return Browser.FindField(attribute.Locator);
-        }
-
-        protected FillInWith FillIn([CallerMemberName]string propertyName = "")
-        {
-            var attribute = PageAttribute(propertyName);
-            return Browser.FillIn(attribute.Locator);
-        }
-
-        protected PageElementAttribute PageAttribute(string propertyName)
-        {
-            var property = GetType().GetProperty(propertyName);
-            return (PageElementAttribute) property.GetCustomAttributes(typeof(PageElementAttribute), true)[0];
+            return ElementFactory.ElementFor<T>(this, propertyName);
         }
     }
 }

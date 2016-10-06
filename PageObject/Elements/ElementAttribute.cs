@@ -3,11 +3,11 @@
 namespace PageObject.Elements
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class PageElementAttribute : Attribute
+    public class ElementAttribute : Attribute
     {
         public string Locator { get; }
 
-        public PageElementAttribute(string locator)
+        public ElementAttribute(string locator)
         {
             Locator = locator;
         }
