@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Text = PageObject.Elements.Text;
 
 namespace PageObject.Tests.Elements.TextElement
@@ -6,12 +7,8 @@ namespace PageObject.Tests.Elements.TextElement
     [TestFixture]
     public class Test : ElementTest
     {
+        protected override Type PageType => typeof(TestPage);
         private Text Element => ((TestPage) Page).Element;
-
-        protected override Page CreatePage(PageSession session)
-        {
-            return new TestPage(session);
-        }
 
         [Test]
         public void Should_get_value()

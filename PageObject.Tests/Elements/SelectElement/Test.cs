@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PageObject.Elements;
 
 namespace PageObject.Tests.Elements.SelectElement
@@ -6,12 +7,8 @@ namespace PageObject.Tests.Elements.SelectElement
     [TestFixture]
     public class Test : ElementTest
     {
-        private Select Element => ((TestPage) Page).Element;
-
-        protected override Page CreatePage(PageSession session)
-        {
-            return new TestPage(session);
-        }
+        protected override Type PageType => typeof(TestPage);
+        private Select Element => ((TestPage)Page).Element;
 
         [Test]
         public void Should_be_able_to_select_option_by_value()
