@@ -8,6 +8,6 @@ namespace PageObject.Tests.Elements.SelectElement
         public TestPage(PageSession session) : base(session) {}
 
         [Element("name")]
-        public Select Select => Element<Select>();
+        public Select Element => Element<Select>();
     }
 }

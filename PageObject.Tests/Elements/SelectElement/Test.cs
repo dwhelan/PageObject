@@ -6,7 +6,7 @@ namespace PageObject.Tests.Elements.SelectElement
     [TestFixture]
     public class Test : ElementTest
     {
-        private Select Select => ((TestPage) Page).Select;
+        private Select Element => ((TestPage) Page).Element;
 
         protected override Page CreatePage(PageSession session)
         {
@@ -16,15 +16,15 @@ namespace PageObject.Tests.Elements.SelectElement
         [Test]
         public void Should_be_able_to_select_option_by_value()
         {
-            Select.Selected = "one";
-            Assert.That(Select.Value, Is.EqualTo("one"));
+            Element.Selected = "one";
+            Assert.That(Element.Value, Is.EqualTo("one"));
         }
 
         [Test]
         public void Should_be_able_to_select_option_by_text()
         {
-            Select.Selected = "Second option";
-            Assert.That(Select.Selected, Is.EqualTo("Second option"));
+            Element.Selected = "Second option";
+            Assert.That(Element.Selected, Is.EqualTo("Second option"));
         }
     }
 }

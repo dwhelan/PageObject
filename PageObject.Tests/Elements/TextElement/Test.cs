@@ -6,7 +6,7 @@ namespace PageObject.Tests.Elements.TextElement
     [TestFixture]
     public class Test : ElementTest
     {
-        private Text Text => ((TestPage) Page).Text;
+        private Text Element => ((TestPage) Page).Element;
 
         protected override Page CreatePage(PageSession session)
         {
@@ -16,14 +16,14 @@ namespace PageObject.Tests.Elements.TextElement
         [Test]
         public void Should_get_value()
         {
-            Assert.That(Text.Value, Is.EqualTo("initial password"));
+            Assert.That(Element.Value, Is.EqualTo("initial password"));
         }
 
         [Test]
         public void Should_set_value()
         {
-            Text.Value = "new password";
-            Assert.That(Text.Value, Is.EqualTo("new password"));
+            Element.Value = "new password";
+            Assert.That(Element.Value, Is.EqualTo("new password"));
         }
     }
 }

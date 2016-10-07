@@ -8,6 +8,6 @@ namespace PageObject.Tests.Elements.TextElement
         public TestPage(PageSession session) : base(session) {}
 
         [Element("name")]
-        public Text Text => Element<Text>();
+        public Text Element => Element<Text>();
     }
 }
