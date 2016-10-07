@@ -75,6 +75,7 @@
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
     <Compile Include="Elements\ElementAttribute.cs" />
+    <Compile Include="Elements\Select.cs" />
     <Compile Include="Elements\Text.cs" />
     <Compile Include="EnvironmentVariables.cs" />
     <Compile Include="PageAtAttribute.cs" />

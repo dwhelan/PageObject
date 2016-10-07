@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\ElementTest.cs" />
+    <Compile Include="Elements\SelectElement\Test.cs" />
+    <Compile Include="Elements\SelectElement\TestPage.cs" />
     <Compile Include="Elements\TextElement\Test.cs" />
     <Compile Include="Elements\TextElement\TestPage.cs" />
     <Compile Include="OnPageTests.cs" />
@@ -104,6 +106,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Elements\SelectElement\TestPage.html" />
     <Content Include="Elements\TextElement\TestPage.html" />
     <Content Include="Pages\File\Home.html" />
   </ItemGroup>

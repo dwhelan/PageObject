@@ -7,7 +7,11 @@ namespace PageObject.Elements
         public static T ElementFor<T>(Page page, string propertyName) where T : Element
         {
             var attribute = PropertyAttribute(page.GetType(), propertyName);
-            return (T)(object) new Text(attribute, page.Browser);
+            if (typeof(T) == typeof(Text))
+            {
+                return (T)(object)new Text(attribute, page.Browser);
+            }
+            return (T)(object)new Select(attribute, page.Browser);
         }
 
         private static ElementAttribute PropertyAttribute(Type type, string name)
