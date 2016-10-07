@@ -14,23 +14,17 @@ namespace PageObject.Tests.Elements.SelectElement
         }
 
         [Test]
-        public void Should_get_value()
+        public void Should_be_able_to_select_option_by_value()
         {
+            Select.Selected = "one";
             Assert.That(Select.Value, Is.EqualTo("one"));
         }
 
         [Test]
-        public void Should_get_selected()
+        public void Should_be_able_to_select_option_by_text()
         {
-            Assert.That(Select.Selected, Is.EqualTo("First option"));
-        }
-
-        [Test]
-        [Ignore]
-        public void Should_set_value()
-        {
-            Select.Value = "new password";
-            Assert.That(Select.Value, Is.EqualTo("new password"));
+            Select.Selected = "Second option";
+            Assert.That(Select.Selected, Is.EqualTo("Second option"));
         }
     }
 }

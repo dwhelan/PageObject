@@ -11,7 +11,7 @@ namespace PageObject.Elements
         public string Value
         {
             get { return FindField().Value; }
-            set { FillIn(value); }
+            set { Browser.Select("Second option"); }
         }
 
         private void FillIn(string value)
@@ -24,6 +24,10 @@ namespace PageObject.Elements
            return Browser.FindField(Locator);
         }
 
-        public string Selected => FindField().SelectedOption;
+        public string Selected
+        {
+            get { return FindField().SelectedOption; }
+            set { Browser.Select(value).From(Locator); }
+        }
     }
 }
