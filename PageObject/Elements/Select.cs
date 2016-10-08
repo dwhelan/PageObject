@@ -14,12 +14,7 @@ namespace PageObject.Elements
             set { Browser.Select("Second option"); }
         }
 
-        private void FillIn(string value)
-        {
-            Browser.FillIn(Locator).With(value);
-        }
-
-        private ElementScope FindField()
+        protected ElementScope FindField()
         {
            return Browser.FindField(Locator);
         }

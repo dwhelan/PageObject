@@ -23,7 +23,14 @@ namespace PageObject.Tests.Elements
         public void Should_be_able_to_select_option_by_text()
         {
             Element.Selected = "Second option";
-            Assert.That(Element.Selected, Is.EqualTo("Second option"));
+            Assert.That(Element.Value, Is.EqualTo("two"));
+        }
+
+        [Test]
+        public void Should_be_able_to_get_selected_option()
+        {
+            Element.Selected = "one";
+            Assert.That(Element.Selected, Is.EqualTo("First option"));
         }
     }
 }
