@@ -5,7 +5,7 @@ using Text = PageObject.Elements.Text;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class TextTest : Test<TestPage<Text>, Text>
+    public class TextTest : ElementTest<TestPage<Text>, Text>
     {
         protected override string ElementHtml => "<input type='text' name='name' value='initial'>text</input>";
 
@@ -37,7 +37,7 @@ namespace PageObject.Tests.Elements
     }
 
     [TestFixture]
-    public class DisabledTextTest : Test<TestPage<Text>, Text>
+    public class DisabledTextTest : ElementTest<TestPage<Text>, Text>
     {
         protected override string ElementHtml => "<input type='text' name='name' disabled>";
 

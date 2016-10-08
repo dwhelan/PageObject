@@ -12,7 +12,7 @@ namespace PageObject.Tests.Elements
         internal const string HtmlFileName = "ElementTestPage.html";
     }
 
-    public abstract class Test<TP, TE> where TP : TestPage<TE> where TE : Element
+    public abstract class ElementTest<TP, TE> where TP : TestPage<TE> where TE : Element
     {
         protected TE Element => page.Element;
         protected abstract string ElementHtml { get; }
