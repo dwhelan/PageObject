@@ -3,6 +3,7 @@ using System.IO;
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
+using Element = PageObject.Elements.Element;
 
 namespace PageObject.Tests.Elements
 {
@@ -11,7 +12,7 @@ namespace PageObject.Tests.Elements
         internal const string HtmlFileName = "ElementTestPage.html";
     }
 
-    public abstract class ElementTest<TP, TE> where TP : BasePage<TE> where TE : PageObject.Elements.Element
+    public abstract class Test<TP, TE> where TP : TestPage<TE> where TE : Element
     {
         protected TE Element => page.Element;
         protected abstract string ElementHtml { get; }

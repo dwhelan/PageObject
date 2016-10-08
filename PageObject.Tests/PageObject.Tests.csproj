@@ -77,8 +77,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements\ElementTest.cs" />
-    <Compile Include="Elements\BasePage.cs" />
+    <Compile Include="Elements\Test.cs" />
+    <Compile Include="Elements\TestPage.cs" />
     <Compile Include="Elements\SelectTest.cs" />
     <Compile Include="Elements\TextTest.cs" />
     <Compile Include="OnPageTests.cs" />

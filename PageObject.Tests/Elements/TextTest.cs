@@ -4,7 +4,7 @@ using Text = PageObject.Elements.Text;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class TextTest : ElementTest<BasePage<Text>, Text>
+    public class TextTest : Test<TestPage<Text>, Text>
     {
         protected override string ElementHtml => "<input type='text' name='name' value='initial password'>";
 

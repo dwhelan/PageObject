@@ -5,8 +5,9 @@ namespace PageObject.Elements
     public abstract class Element
     {
         protected BrowserSession Browser { get; }
-        private ElementAttribute Attribute { get; }
         protected string Locator => Attribute.Locator;
+
+        private ElementAttribute Attribute { get; }
 
         protected Element(ElementAttribute attribute, BrowserSession browser)
         {
