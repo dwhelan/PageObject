@@ -6,8 +6,5 @@ namespace PageObject.Tests.Elements.TextElement
     public class TestPage : BasePage<Text>
     {
         public TestPage(PageSession session) : base(session) {}
-
-        [Element("name")]
-        public override Text TestElement => Element<Text>();
     }
 }

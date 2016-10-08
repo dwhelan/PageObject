@@ -6,6 +6,7 @@ namespace PageObject.Tests.Elements
     {
         protected BasePage(PageSession session) : base(session) {}
 
-        public abstract T TestElement { get; }
+        [Element("name")]
+        public T Element => Element<T>();
     }
 }

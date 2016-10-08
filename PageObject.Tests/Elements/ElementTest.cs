@@ -17,7 +17,7 @@ namespace PageObject.Tests.Elements
         protected TP Page;
         private PageSession session;
 
-        protected TE Element => Page.TestElement;
+        protected TE Element => Page.Element;
 
         [TestFixtureSetUp]
         public void CreatePage()

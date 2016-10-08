@@ -6,8 +6,5 @@ namespace PageObject.Tests.Elements.SelectElement
     public class TestPage : BasePage<Select>
     {
         public TestPage(PageSession session) : base(session) {}
-
-        [Element("name")]
-        public override Select TestElement => Element<Select>();
     }
 }
