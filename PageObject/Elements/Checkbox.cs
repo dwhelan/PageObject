@@ -8,6 +8,8 @@ namespace PageObject.Elements
         {
         }
 
+        public string Text => FindField().OuterScope.Text;
+
         public void Check()
         {
             Browser.Check(Locator);

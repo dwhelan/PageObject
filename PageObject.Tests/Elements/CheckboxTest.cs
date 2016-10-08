@@ -6,7 +6,7 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class CheckboxTest : Test<TestPage<Checkbox>, Checkbox>
     {
-        protected override string ElementHtml => @"<input type='checkbox' name='name'>";
+        protected override string ElementHtml => @"<input type='checkbox' name='name'>text</input>";
 
         [Test]
         public void Should_be_able_to_check()
@@ -20,6 +20,12 @@ namespace PageObject.Tests.Elements
         {
             Element.Uncheck();
             Assert.That(Element.Checked, Is.False);
+        }
+
+        [Test]
+        public void Should_provide_checkbox_text()
+        {
+            Assert.That(Element.Text, Is.EqualTo("text"));
         }
     }
 }
