@@ -8,12 +8,6 @@ namespace PageObject.Elements
         {
             var attribute = PropertyAttribute(page.GetType(), propertyName);
             return (T)Activator.CreateInstance(typeof(T), attribute, page.Browser);
-
-            if (typeof(T) == typeof(Text))
-            {
-                return (T)(object)new Text(attribute, page.Browser);
-            }
-            return (T)(object)new Select(attribute, page.Browser);
         }
 
         private static ElementAttribute PropertyAttribute(Type type, string name)

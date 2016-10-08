@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\CheckboxTest.cs" />
     <Compile Include="Elements\Test.cs" />
     <Compile Include="Elements\TestPage.cs" />
     <Compile Include="Elements\SelectTest.cs" />
