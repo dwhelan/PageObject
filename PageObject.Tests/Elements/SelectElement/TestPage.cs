@@ -1,13 +1,14 @@
-﻿using PageObject.Elements;
+﻿using System;
+using PageObject.Elements;
 
 namespace PageObject.Tests.Elements.SelectElement
 {
-    [PageAt(ElementTest.ElementsFolder + @"SelectElement\TestPage.html")]
-    internal class TestPage : Page
+    [PageAt(Foo.ElementsFolder + @"SelectElement\TestPage.html")]
+    public class TestPage : BasePage<Select>
     {
         public TestPage(PageSession session) : base(session) {}
 
         [Element("name")]
-        public Select Element => Element<Select>();
+        public override Select TestElement => Element<Select>();
     }
 }

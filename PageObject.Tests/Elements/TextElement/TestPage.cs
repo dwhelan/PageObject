@@ -2,12 +2,12 @@
 
 namespace PageObject.Tests.Elements.TextElement
 {
-    [PageAt(ElementTest.ElementsFolder + @"TextElement\TestPage.html")]
-    internal class TestPage : Page
+    [PageAt(Foo.ElementsFolder + @"TextElement\TestPage.html")]
+    public class TestPage : BasePage<Text>
     {
         public TestPage(PageSession session) : base(session) {}
 
         [Element("name")]
-        public Text Element => Element<Text>();
+        public override Text TestElement => Element<Text>();
     }
 }

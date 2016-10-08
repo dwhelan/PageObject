@@ -5,19 +5,26 @@ using NUnit.Framework;
 
 namespace PageObject.Tests.Elements
 {
-    public abstract class ElementTest
+    public class Foo
+    {
+        protected internal const string ElementsFolder = "file:///${cd}/../../Elements/";
+    }
+
+    public abstract class ElementTest<TP, TE> where TP : BasePage<TE> where TE : PageObject.Elements.Element
     {
         protected internal const string ElementsFolder = "file:///${cd}/../../Elements/";
         protected abstract Type PageType { get; }
 
-        protected Page Page;
+        protected TP Page;
         private PageSession session;
+
+        protected TE Element => Page.TestElement;
 
         [TestFixtureSetUp]
         public void CreatePage()
         {
             CreateSession();
-            Page = (Page)Activator.CreateInstance(PageType, session);
+            Page = (TP) Activator.CreateInstance(typeof(TP), session);
             Page.Visit();
         }
 

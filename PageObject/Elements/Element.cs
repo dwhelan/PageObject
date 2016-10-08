@@ -8,7 +8,7 @@ namespace PageObject.Elements
         protected ElementAttribute Attribute { get; }
         protected string Locator => Attribute.Locator;
 
-        public Element(ElementAttribute attribute, BrowserSession browser)
+        protected Element(ElementAttribute attribute, BrowserSession browser)
         {
             Attribute = attribute;
             Browser = browser;

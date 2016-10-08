@@ -5,10 +5,10 @@ using Text = PageObject.Elements.Text;
 namespace PageObject.Tests.Elements.TextElement
 {
     [TestFixture]
-    public class Test : ElementTest
+    public class Test : ElementTest<TestPage, Text>
     {
         protected override Type PageType => typeof(TestPage);
-        private Text Element => ((TestPage) Page).Element;
+       // private Text Element => ((TestPage) Page).Element;
 
         [Test]
         public void Should_get_value()
