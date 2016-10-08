@@ -1,5 +1,4 @@
-﻿using System;
-using PageObject.Elements;
+﻿using PageObject.Elements;
 
 namespace PageObject.Tests.Elements.SelectElement
 {
