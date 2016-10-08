@@ -105,8 +105,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Elements\SelectElement\TestPage.html" />
-    <Content Include="Elements\TextElement\TestPage.html" />
     <Content Include="Pages\File\Home.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

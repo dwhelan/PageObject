@@ -26,6 +26,5 @@ namespace PageObject.Tests.Elements.SelectElement
             Element.Selected = "Second option";
             Assert.That(Element.Selected, Is.EqualTo("Second option"));
         }
-
     }
 }

@@ -6,32 +6,31 @@ using NUnit.Framework;
 
 namespace PageObject.Tests.Elements
 {
-    public class Foo
+    public static class TestConstants
     {
-        protected internal const string ElementsFolder = "file:///${cd}/../../Elements/";
+        internal const string HtmlFileName = "ElementTestPage.html";
     }
 
     public abstract class ElementTest<TP, TE> where TP : BasePage<TE> where TE : PageObject.Elements.Element
     {
-        protected TE Element => Page.Element;
-
-        protected TP Page;
-        private PageSession session;
-
+        protected TE Element => page.Element;
         protected abstract string ElementHtml { get; }
+
+        private PageSession session;
+        private TP page;
 
         [TestFixtureSetUp]
         public void VisitPage()
         {
             session = CreateSession();
-            Page = CreatePage(session);
+            page = CreatePage(session);
             WriteHtml();
-            Page.Visit();
+            page.Visit();
         }
 
         private void WriteHtml()
         {
-            using (var writer = new StreamWriter("ElementTestPage.html"))
+            using (var writer = new StreamWriter(TestConstants.HtmlFileName))
             {
                 writer.WriteLine(ElementHtml);
             }
@@ -45,7 +44,7 @@ namespace PageObject.Tests.Elements
 
         private static TP CreatePage(PageSession session)
         {
-            return (TP) Activator.CreateInstance(typeof(TP), session);
+            return (TP)Activator.CreateInstance(typeof(TP), session);
         }
 
         [TestFixtureTearDown]
