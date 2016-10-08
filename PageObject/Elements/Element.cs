@@ -8,6 +8,7 @@ namespace PageObject.Elements
         protected string Locator => Attribute.Locator;
 
         private ElementAttribute Attribute { get; }
+        public string Text => FindField().OuterScope.Text;
 
         protected Element(ElementAttribute attribute, BrowserSession browser)
         {

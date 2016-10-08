@@ -23,7 +23,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Should_provide_checkbox_text()
+        public void Should_provide_text()
         {
             Assert.That(Element.Text, Is.EqualTo("text"));
         }
