@@ -7,9 +7,6 @@ namespace PageObject.Tests.Elements.TextElement
     [TestFixture]
     public class Test : ElementTest<TestPage, Text>
     {
-        protected override Type PageType => typeof(TestPage);
-       // private Text Element => ((TestPage) Page).Element;
-
         [Test]
         public void Should_get_value()
         {

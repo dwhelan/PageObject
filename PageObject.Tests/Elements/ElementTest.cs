@@ -12,8 +12,6 @@ namespace PageObject.Tests.Elements
 
     public abstract class ElementTest<TP, TE> where TP : BasePage<TE> where TE : PageObject.Elements.Element
     {
-        protected abstract Type PageType { get; }
-
         protected TP Page;
         private PageSession session;
 
