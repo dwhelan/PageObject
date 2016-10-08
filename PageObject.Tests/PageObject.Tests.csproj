@@ -78,9 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\ElementTest.cs" />
-    <Compile Include="Elements\SelectElement\Test.cs" />
     <Compile Include="Elements\BasePage.cs" />
-    <Compile Include="Elements\TextElement\Test.cs" />
+    <Compile Include="Elements\SelectTest.cs" />
+    <Compile Include="Elements\TextTest.cs" />
     <Compile Include="OnPageTests.cs" />
     <Compile Include="PageConstruction\BaseTest.cs" />
     <Compile Include="PageConstruction\WithBasePage.cs" />
@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\File\Home.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Elements\SelectElement\" />
+    <Folder Include="Elements\TextElement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

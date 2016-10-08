@@ -1,11 +1,10 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Text = PageObject.Elements.Text;
 
-namespace PageObject.Tests.Elements.TextElement
+namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class Test : ElementTest<BasePage<Text>, Text>
+    public class TextTest : ElementTest<BasePage<Text>, Text>
     {
         protected override string ElementHtml => "<input type='text' name='name' value='initial password'>";
 

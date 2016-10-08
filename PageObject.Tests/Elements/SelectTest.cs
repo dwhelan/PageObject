@@ -1,11 +1,10 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PageObject.Elements;
 
-namespace PageObject.Tests.Elements.SelectElement
+namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class Test : ElementTest<BasePage<Select>, Select>
+    public class SelectTest : ElementTest<BasePage<Select>, Select>
     {
         protected override string ElementHtml =>
                                     @"<select name='name'>
