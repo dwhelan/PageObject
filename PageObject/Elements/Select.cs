@@ -8,11 +8,7 @@ namespace PageObject.Elements
         {
         }
 
-        public string Value
-        {
-            get { return FindField().Value; }
-            set { Browser.Select("Second option"); }
-        }
+        public string Value => FindField().Value;
 
         public string Selected
         {
