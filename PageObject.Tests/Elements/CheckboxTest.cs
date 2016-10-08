@@ -23,6 +23,20 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Should_be_able_to_check_by_setting_value_to_true()
+        {
+            Element.Value = true;
+            Assert.That(Element.Checked, Is.True);
+        }
+
+        [Test]
+        public void Should_be_able_to_uncheck_by_setting_value_to_false()
+        {
+            Element.Value = false;
+            Assert.That(Element.Checked, Is.False);
+        }
+
+        [Test]
         public void Should_provide_text()
         {
             Assert.That(Element.Text, Is.EqualTo("text"));

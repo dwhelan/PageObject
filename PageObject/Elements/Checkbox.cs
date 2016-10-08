@@ -8,6 +8,12 @@ namespace PageObject.Elements
         {
         }
 
+        public bool Value
+        {
+            get { return Checked();}
+            set { if (value) Check(); else Uncheck(); }
+        }
+
         public void Check()
         {
             Browser.Check(Locator);

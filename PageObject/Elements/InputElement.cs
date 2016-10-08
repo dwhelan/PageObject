@@ -10,5 +10,6 @@ namespace PageObject.Elements
 
         public bool Disabled => FindField().Disabled;
         public bool Enabled => !Disabled;
+        public string Text => FindField().OuterScope.Text;
     }
 }

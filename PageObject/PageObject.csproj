@@ -78,7 +78,7 @@
     <Compile Include="Elements\ElementAttribute.cs" />
     <Compile Include="Elements\Select.cs" />
     <Compile Include="Elements\Checkbox.cs" />
-    <Compile Include="Elements\Text.cs" />
+    <Compile Include="Elements\TextElement.cs" />
     <Compile Include="EnvironmentVariables.cs" />
     <Compile Include="PageAtAttribute.cs" />
     <Compile Include="PageObjectException.cs" />

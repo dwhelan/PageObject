@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
-using Text = PageObject.Elements.Text;
+using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class TextTest : Test<TestPage<Text>, Text>
+    public class TextTest : Test<TestPage<TextElement>, TextElement>
     {
         protected override string ElementHtml => "<input type='text' name='name' value='initial'>text</input>";
 
         [Test]
-        public void Should_get_value()
+        public void Should_get_initial_value()
         {
             Assert.That(Element.Value, Is.EqualTo("initial"));
         }
@@ -22,7 +22,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Should_provide_text()
+        public void Should_get_text()
         {
             Assert.That(Element.Text, Is.EqualTo("text"));
         }
@@ -36,7 +36,7 @@ namespace PageObject.Tests.Elements
     }
 
     [TestFixture]
-    public class DisabledTextTest : Test<TestPage<Text>, Text>
+    public class DisabledTextTest : Test<TestPage<TextElement>, TextElement>
     {
         protected override string ElementHtml => "<input type='text' name='name' disabled>";
 

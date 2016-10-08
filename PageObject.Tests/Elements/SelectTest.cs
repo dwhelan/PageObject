@@ -8,29 +8,50 @@ namespace PageObject.Tests.Elements
     {
         protected override string ElementHtml =>
                                     @"<select name='name'>
-                                        <option value='one'>First option</option>
+                                        <option value='one' selected>First option</option>
                                         <option value='two'>Second option</option>
                                       </select>";
 
         [Test]
-        public void Should_be_able_to_select_option_by_value()
+        public void Should_be_able_to_get_value()
         {
-            Element.Selected = "one";
-            Assert.That(Element.Value, Is.EqualTo("one"));
+            Assert.That(Element.Value, Is.EqualTo("First option"));
         }
 
         [Test]
-        public void Should_be_able_to_select_option_by_text()
+        public void Should_be_able_to_set_value()
         {
-            Element.Selected = "Second option";
-            Assert.That(Element.Value, Is.EqualTo("two"));
+            Element.Value = "Second option";
+            Assert.That(Element.Value, Is.EqualTo("Second option"));
         }
 
         [Test]
-        public void Should_be_able_to_get_selected_option()
+        public void Should_get_text()
         {
-            Element.Selected = "one";
-            Assert.That(Element.Selected, Is.EqualTo("First option"));
+            Assert.That(Element.Text, Is.StringMatching(@"^\s*First option\s*Second option\s*$"));
+        }
+
+        [Test]
+        public void Should_be_enabled()
+        {
+            Assert.That(Element.Enabled, Is.True);
+            Assert.That(Element.Disabled, Is.False);
+        }
+    }
+
+    [TestFixture]
+    public class DisabledSelectTest : Test<TestPage<Select>, Select>
+    {
+        protected override string ElementHtml =>
+                                    @"<select name='name' disabled>
+                                        <option value='one' selected>First option</option>
+                                        <option value='two'>Second option</option>
+                                      </select>";
+        [Test]
+        public void Should_be_disabled()
+        {
+            Assert.That(Element.Enabled, Is.False);
+            Assert.That(Element.Disabled, Is.True);
         }
     }
 }
