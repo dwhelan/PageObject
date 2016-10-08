@@ -26,5 +26,23 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(Element.Text, Is.EqualTo("text"));
         }
+
+        [Test]
+        public void Should_be_enabled()
+        {
+            Assert.That(Element.Enabled, Is.True);
+            Assert.That(Element.Disabled, Is.False);
+        }
+    }
+    [TestFixture]
+    public class DisabledTextTest : Test<TestPage<Text>, Text>
+    {
+        protected override string ElementHtml => "<input type='text' name='name' disabled>";
+
+        [Test]
+        public void Should_be_disabled()
+        {
+            Assert.That(Element.Enabled, Is.False);
+        }
     }
 }
