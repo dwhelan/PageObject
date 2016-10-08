@@ -14,11 +14,6 @@ namespace PageObject.Elements
             set { Browser.Select("Second option"); }
         }
 
-        protected ElementScope FindField()
-        {
-           return Browser.FindField(Locator);
-        }
-
         public string Selected
         {
             get { return FindField().SelectedOption; }

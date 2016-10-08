@@ -18,10 +18,5 @@ namespace PageObject.Elements
         {
             Browser.FillIn(Locator).With(value);
         }
-
-        private ElementScope FindField()
-        {
-           return Browser.FindField(Locator);
-        }
     }
 }

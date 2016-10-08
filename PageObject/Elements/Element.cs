@@ -13,5 +13,10 @@ namespace PageObject.Elements
             Attribute = attribute;
             Browser = browser;
         }
+
+        protected ElementScope FindField()
+        {
+            return Browser.FindField(Locator);
+        }
     }
 }
