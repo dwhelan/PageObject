@@ -5,8 +5,14 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements.SelectElement
 {
     [TestFixture]
-    public class Test : ElementTest<TestPage, Select>
+    public class Test : ElementTest<BasePage<Select>, Select>
     {
+        protected override string ElementHtml =>
+                                    @"<select name='name'>
+                                        <option value='one'>First option</option>
+                                        <option value='two'>Second option</option>
+                                      </select>";
+
         [Test]
         public void Should_be_able_to_select_option_by_value()
         {
@@ -20,5 +26,6 @@ namespace PageObject.Tests.Elements.SelectElement
             Element.Selected = "Second option";
             Assert.That(Element.Selected, Is.EqualTo("Second option"));
         }
+
     }
 }

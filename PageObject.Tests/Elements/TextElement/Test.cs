@@ -5,8 +5,10 @@ using Text = PageObject.Elements.Text;
 namespace PageObject.Tests.Elements.TextElement
 {
     [TestFixture]
-    public class Test : ElementTest<TestPage, Text>
+    public class Test : ElementTest<BasePage<Text>, Text>
     {
+        protected override string ElementHtml => "<input type='text' name='name' value='initial password'>";
+
         [Test]
         public void Should_get_value()
         {

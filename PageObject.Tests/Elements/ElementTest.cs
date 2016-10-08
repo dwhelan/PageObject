@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
@@ -17,12 +18,23 @@ namespace PageObject.Tests.Elements
         protected TP Page;
         private PageSession session;
 
+        protected abstract string ElementHtml { get; }
+
         [TestFixtureSetUp]
         public void VisitPage()
         {
             session = CreateSession();
             Page = CreatePage(session);
+            WriteHtml();
             Page.Visit();
+        }
+
+        private void WriteHtml()
+        {
+            using (var writer = new StreamWriter("ElementTestPage.html"))
+            {
+                writer.WriteLine(ElementHtml);
+            }
         }
 
         private static PageSession CreateSession()

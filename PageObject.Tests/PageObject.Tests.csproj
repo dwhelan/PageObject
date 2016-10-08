@@ -79,10 +79,8 @@
   <ItemGroup>
     <Compile Include="Elements\ElementTest.cs" />
     <Compile Include="Elements\SelectElement\Test.cs" />
-    <Compile Include="Elements\SelectElement\TestPage.cs" />
     <Compile Include="Elements\BasePage.cs" />
     <Compile Include="Elements\TextElement\Test.cs" />
-    <Compile Include="Elements\TextElement\TestPage.cs" />
     <Compile Include="OnPageTests.cs" />
     <Compile Include="PageConstruction\BaseTest.cs" />
     <Compile Include="PageConstruction\WithBasePage.cs" />
