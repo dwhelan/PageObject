@@ -27,5 +27,27 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(Element.Text, Is.EqualTo("text"));
         }
+
+        [Test]
+        public void Should_be_enabled()
+        {
+            Assert.That(Element.Enabled, Is.True);
+            Assert.That(Element.Disabled, Is.False);
+        }
     }
+
+
+    [TestFixture]
+    public class DisabledCheckboxTest : Test<TestPage<Checkbox>, Checkbox>
+    {
+        protected override string ElementHtml => @"<input type='checkbox' name='name' disabled>text</input>";
+
+        [Test]
+        public void Should_be_disabled()
+        {
+            Assert.That(Element.Enabled, Is.False);
+            Assert.That(Element.Disabled, Is.True);
+        }
+    }
+
 }

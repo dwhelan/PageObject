@@ -34,6 +34,7 @@ namespace PageObject.Tests.Elements
             Assert.That(Element.Disabled, Is.False);
         }
     }
+
     [TestFixture]
     public class DisabledTextTest : Test<TestPage<Text>, Text>
     {
@@ -43,6 +44,7 @@ namespace PageObject.Tests.Elements
         public void Should_be_disabled()
         {
             Assert.That(Element.Enabled, Is.False);
+            Assert.That(Element.Disabled, Is.True);
         }
     }
 }

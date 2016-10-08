@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\InputElement.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
     <Compile Include="Elements\ElementAttribute.cs" />

@@ -2,14 +2,11 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class Text : Element
+    public class Text : InputElement
     {
         public Text(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {
         }
-
-        public bool Disabled => FindField().Disabled;
-        public bool Enabled => !Disabled;
 
         public string Value
         {
