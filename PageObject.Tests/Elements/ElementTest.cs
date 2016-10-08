@@ -12,23 +12,28 @@ namespace PageObject.Tests.Elements
 
     public abstract class ElementTest<TP, TE> where TP : BasePage<TE> where TE : PageObject.Elements.Element
     {
+        protected TE Element => Page.Element;
+
         protected TP Page;
         private PageSession session;
 
-        protected TE Element => Page.Element;
-
         [TestFixtureSetUp]
-        public void CreatePage()
+        public void VisitPage()
         {
-            CreateSession();
-            Page = (TP) Activator.CreateInstance(typeof(TP), session);
+            session = CreateSession();
+            Page = CreatePage(session);
             Page.Visit();
         }
 
-        private void CreateSession()
+        private static PageSession CreateSession()
         {
-            var configuration = new SessionConfiguration {Browser = Browser.PhantomJS};
-            session = new PageSession(configuration);
+            var configuration = new SessionConfiguration { Browser = Browser.PhantomJS };
+            return new PageSession(configuration);
+        }
+
+        private static TP CreatePage(PageSession session)
+        {
+            return (TP) Activator.CreateInstance(typeof(TP), session);
         }
 
         [TestFixtureTearDown]
