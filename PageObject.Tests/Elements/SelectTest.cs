@@ -44,7 +44,7 @@ namespace PageObject.Tests.Elements
     {
         protected override string ElementHtml =>
                                     @"<select name='name' disabled>
-                                        <option value='one' selected>First option</option>
+                                        <option value='one'>First option</option>
                                         <option value='two'>Second option</option>
                                       </select>";
         [Test]

@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Elements\CheckboxTest.cs" />
     <Compile Include="Elements\ElementTest.cs" />
+    <Compile Include="Elements\MultiSelectTest.cs" />
     <Compile Include="Elements\TestPage.cs" />
     <Compile Include="Elements\SelectTest.cs" />
     <Compile Include="Elements\TextTest.cs" />
