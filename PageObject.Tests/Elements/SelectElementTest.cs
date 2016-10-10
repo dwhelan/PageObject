@@ -48,18 +48,18 @@ namespace PageObject.Tests.Elements
             Assert.That(Element.Enabled, Is.True);
             Assert.That(Element.Disabled, Is.False);
         }
-    }
 
-    [TestFixture]
-    public class DisabledSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
-    {
-        protected override string ElementHtml => @"<select name='name' disabled/>";
-
-        [Test]
-        public void Should_be_disabled()
+        [TestFixture]
+        public class DisabledSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
         {
-            Assert.That(Element.Enabled, Is.False);
-            Assert.That(Element.Disabled, Is.True);
+            protected override string ElementHtml => @"<select name='name' disabled/>";
+
+            [Test]
+            public void Should_be_disabled()
+            {
+                Assert.That(Element.Enabled, Is.False);
+                Assert.That(Element.Disabled, Is.True);
+            }
         }
     }
 }

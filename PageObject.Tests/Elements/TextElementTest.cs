@@ -33,18 +33,18 @@ namespace PageObject.Tests.Elements
             Assert.That(Element.Enabled, Is.True);
             Assert.That(Element.Disabled, Is.False);
         }
-    }
 
-    [TestFixture]
-    public class DisabledTextElementTest : ElementTest<TestPage<TextElement>, TextElement>
-    {
-        protected override string ElementHtml => "<input type='text' name='name' disabled>";
-
-        [Test]
-        public void Should_be_disabled()
+        [TestFixture]
+        public class DisabledTextElementTest : ElementTest<TestPage<TextElement>, TextElement>
         {
-            Assert.That(Element.Enabled, Is.False);
-            Assert.That(Element.Disabled, Is.True);
+            protected override string ElementHtml => "<input type='text' name='name' disabled>";
+
+            [Test]
+            public void Should_be_disabled()
+            {
+                Assert.That(Element.Enabled, Is.False);
+                Assert.That(Element.Disabled, Is.True);
+            }
         }
     }
 }
