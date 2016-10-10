@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject.Elements;
 
@@ -7,10 +8,13 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class MultiSelectTest : ElementTest<TestPage<MultiSelect>, MultiSelect>
     {
+        protected override Browser Browser => Browser.Firefox;
+
         protected override string ElementHtml =>
                                     @"<select name='name' multiple>
-                                        <option value='one'>First option</option>
-                                        <option value='two'>Second option</option>
+                                        <option value='one'>First</option>
+                                        <option value='two'>Second</option>
+                                        <option value='three'>Three</option>
                                       </select>";
 
         [Test]
@@ -24,7 +28,7 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Value_should_be_single_option_when_one_options_is_selected()
         {
-            var selected = new List<string> { "First option" };
+            var selected = new List<string> { "First" };
             Element.Value = selected;
             Assert.That(Element.Value, Is.EqualTo(selected));
         }
@@ -32,7 +36,7 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Value_should_be_multiple_options_when_multiple_options_are_selected()
         {
-            var selected = new List<string> { "First option", "Second option" };
+            var selected = new List<string> { "First", "Second" };
             Element.Value = selected;
             Assert.That(Element.Value, Is.EqualTo(selected));
         }
@@ -40,7 +44,7 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Should_get_text()
         {
-            Assert.That(Element.Text, Is.StringMatching(@"^\s*First option\s*Second option\s*$"));
+            Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Three\s*$"));
         }
 
         [Test]
@@ -52,12 +56,12 @@ namespace PageObject.Tests.Elements
     }
 
     [TestFixture]
-    public class DisabledMultiSelectTest : ElementTest<TestPage<Select>, Select>
+    public class DisabledMultiSelectTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
         protected override string ElementHtml =>
                                     @"<select name='name' disabled multiple>
-                                        <option value='one'>First option</option>
-                                        <option value='two'>Second option</option>
+                                        <option value='one'>First</option>
+                                        <option value='two'>Second</option>
                                       </select>";
         [Test]
         public void Should_be_disabled()

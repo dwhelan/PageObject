@@ -14,6 +14,8 @@ namespace PageObject.Tests.Elements
 
     public abstract class ElementTest<TP, TE> where TP : TestPage<TE> where TE : Element
     {
+        protected virtual Browser Browser => Browser.PhantomJS;
+
         protected TE Element => page.Element;
         protected abstract string ElementHtml { get; }
 
@@ -37,9 +39,9 @@ namespace PageObject.Tests.Elements
             }
         }
 
-        private static PageSession CreateSession()
+        private PageSession CreateSession()
         {
-            var configuration = new SessionConfiguration { Browser = Browser.PhantomJS };
+            var configuration = new SessionConfiguration { Browser = Browser };
             return new PageSession(configuration);
         }
 
