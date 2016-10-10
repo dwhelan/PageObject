@@ -2,9 +2,9 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public abstract class Input : Element
+    public abstract class InputElement : Element
     {
-        protected Input(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
+        protected InputElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {
         }
 

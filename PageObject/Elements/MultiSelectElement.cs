@@ -4,7 +4,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class MultiSelectElement : Input
+    public class MultiSelectElement : InputElement
     {
         public MultiSelectElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {

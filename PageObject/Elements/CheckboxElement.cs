@@ -2,7 +2,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class CheckboxElement : Input
+    public class CheckboxElement : InputElement
     {
         public CheckboxElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {

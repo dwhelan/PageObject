@@ -2,7 +2,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class TextElement : Input
+    public class TextElement : InputElement
     {
         public TextElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {
