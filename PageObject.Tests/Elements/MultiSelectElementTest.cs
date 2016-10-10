@@ -6,7 +6,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class MultiSelectTest : ElementTest<TestPage<MultiSelect>, MultiSelect>
+    public class MultiSelectElementTest : ElementTest<TestPage<MultiSelectElement>, MultiSelectElement>
     {
         protected override string ElementHtml =>
                                     @"<select name='name' multiple>
@@ -80,7 +80,7 @@ namespace PageObject.Tests.Elements
     }
 
     [TestFixture]
-    public class DisabledMultiSelectTest : ElementTest<TestPage<SelectElement>, SelectElement>
+    public class DisabledMultiSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
         protected override string ElementHtml => @"<select name='name' multiple disabled/>";
 
