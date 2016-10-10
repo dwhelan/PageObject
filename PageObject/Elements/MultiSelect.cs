@@ -21,9 +21,14 @@ namespace PageObject.Elements
                 foreach (var option in Options)
                 {
                     if (value.Contains(option.Text) != option.Selected)
-                        Browser.Select(option.Text).From(Locator);
+                        Select(option.Text);
                 }
             }
+        }
+
+        public void Select(string option)
+        {
+            Browser.Select(option).From(Locator);
         }
 
         private IEnumerable<SnapshotElementScope> Options => FindField().FindAllCss("option");

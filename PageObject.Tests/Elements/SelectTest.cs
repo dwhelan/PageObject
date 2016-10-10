@@ -53,11 +53,8 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class DisabledSelectTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
-        protected override string ElementHtml =>
-                                    @"<select name='name' disabled>
-                                        <option value='one'>First</option>
-                                        <option value='two'>Second</option>
-                                      </select>";
+        protected override string ElementHtml => @"<select name='name' disabled/>";
+
         [Test]
         public void Should_be_disabled()
         {

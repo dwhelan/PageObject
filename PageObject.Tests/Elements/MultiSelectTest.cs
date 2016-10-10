@@ -8,13 +8,11 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class MultiSelectTest : ElementTest<TestPage<MultiSelect>, MultiSelect>
     {
-        protected override Browser Browser => Browser.Firefox;
-
         protected override string ElementHtml =>
                                     @"<select name='name' multiple>
                                         <option value='one'>First</option>
                                         <option value='two'>Second</option>
-                                        <option value='three'>Three</option>
+                                        <option value='three'>Third</option>
                                       </select>";
 
         [Test]
@@ -26,7 +24,18 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Value_should_be_single_option_when_one_options_is_selected()
+        public void Setting_value_to_an_empty_list_should_deselect_previously_selected_options()
+        {
+            Element.Select("First");
+            Element.Select("Second");
+            Element.Select("Third");
+
+            Element.Value = new List<string>();
+            Assert.That(Element.Value, Is.Empty);
+        }
+
+        [Test]
+        public void Value_should_be_single_option_when_one_option_is_selected()
         {
             var selected = new List<string> { "First" };
             Element.Value = selected;
@@ -42,9 +51,24 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Select_should_select_a_previously_unselected_option()
+        {
+            Element.Select("First");
+            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+        }
+
+        [Test]
+        public void Select_should_deselect_a_previously_selected_option()
+        {
+            Element.Select("First");
+            Element.Select("First");
+            Assert.That(Element.Value, Is.Empty);
+        }
+
+        [Test]
         public void Should_get_text()
         {
-            Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Three\s*$"));
+            Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Third\s*$"));
         }
 
         [Test]
@@ -58,11 +82,8 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class DisabledMultiSelectTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
-        protected override string ElementHtml =>
-                                    @"<select name='name' disabled multiple>
-                                        <option value='one'>First</option>
-                                        <option value='two'>Second</option>
-                                      </select>";
+        protected override string ElementHtml => @"<select name='name' multiple disabled/>";
+
         [Test]
         public void Should_be_disabled()
         {
