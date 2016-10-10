@@ -9,11 +9,11 @@ namespace PageObject.Tests.Elements
     public class MultiSelectElementTest : ElementTest<TestPage<MultiSelectElement>, MultiSelectElement>
     {
         protected override string ElementHtml =>
-                                    @"<select name='name' multiple>
-                                        <option value='one'>First</option>
-                                        <option value='two'>Second</option>
-                                        <option value='three'>Third</option>
-                                      </select>";
+            @"<select name='name' multiple>
+                <option value='one'>First</option>
+                <option value='two'>Second</option>
+                <option value='three'>Third</option>
+                </select>";
 
         [Test]
         public void Value_should_be_empty_when_no_options_are_selected()

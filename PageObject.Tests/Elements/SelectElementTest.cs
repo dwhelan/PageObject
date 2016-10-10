@@ -8,11 +8,11 @@ namespace PageObject.Tests.Elements
     public class SelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
         protected override string ElementHtml =>
-                                    @"<select name='name'>
-                                        <option value='one'>First</option>
-                                        <option value='two'>Second</option>
-                                        <option value='three'>Three</option>
-                                      </select>";
+            @"<select name='name'>
+                <option value='one'>First</option>
+                <option value='two'>Second</option>
+                <option value='three'>Three</option>
+                </select>";
 
         [Test]
         public void Setting_Value_should_select_option()
