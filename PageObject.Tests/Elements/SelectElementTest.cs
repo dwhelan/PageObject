@@ -5,7 +5,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class SelectTest : ElementTest<TestPage<SelectElement>, SelectElement>
+    public class SelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
         protected override string ElementHtml =>
                                     @"<select name='name'>
@@ -51,7 +51,7 @@ namespace PageObject.Tests.Elements
     }
 
     [TestFixture]
-    public class DisabledSelectTest : ElementTest<TestPage<SelectElement>, SelectElement>
+    public class DisabledSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
         protected override string ElementHtml => @"<select name='name' disabled/>";
 
