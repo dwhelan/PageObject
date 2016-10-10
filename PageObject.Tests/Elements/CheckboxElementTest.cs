@@ -4,7 +4,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class CheckboxTest : ElementTest<TestPage<Checkbox>, Checkbox>
+    public class CheckboxElementTest : ElementTest<TestPage<CheckboxElement>, CheckboxElement>
     {
         protected override string ElementHtml => @"<input type='checkbox' name='name'>text</input>";
 
@@ -52,7 +52,7 @@ namespace PageObject.Tests.Elements
 
 
     [TestFixture]
-    public class DisabledCheckboxTest : ElementTest<TestPage<Checkbox>, Checkbox>
+    public class DisabledCheckboxElementTest : ElementTest<TestPage<CheckboxElement>, CheckboxElement>
     {
         protected override string ElementHtml => @"<input type='checkbox' name='name' disabled>text</input>";
 
