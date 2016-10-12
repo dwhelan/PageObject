@@ -13,10 +13,5 @@ namespace PageObject.Elements
             get { return FindField().SelectedOption; }
             set { Browser.Select(value).From(Locator); }
         }
-
-        public void Select(string option)
-        {
-            Browser.Select(option).From(Locator);
-        }
     }
 }

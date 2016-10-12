@@ -22,13 +22,6 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Select_should_select_option()
-        {
-            Element.Select("Second");
-            Assert.That(Element.Value, Is.EqualTo("Second"));
-        }
-
-        [Test]
         public void Should_keep_option_selected_when_selected_multiple_times()
         {
             Element.Value = "First";
