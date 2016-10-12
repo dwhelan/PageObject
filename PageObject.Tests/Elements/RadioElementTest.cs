@@ -19,6 +19,13 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Value_should_reflect_whether_button_was_chosen()
+        {
+            Element.Choose();
+            Assert.That(Element.Value, Is.True);
+        }
+
+        [Test]
         public void Should_be_able_to_unchoose_by_choosing_another_radio_button()
         {
             Element.Choose();

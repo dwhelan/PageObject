@@ -23,11 +23,16 @@ namespace PageObject.Tests.Elements
         private TP page;
 
         [TestFixtureSetUp]
-        public void VisitPage()
+        public void CreatePage()
         {
             session = CreateSession();
             page = CreatePage(session);
             WriteHtml();
+        }
+
+        [SetUp]
+        public void VisitPage()
+        {
             page.Visit();
         }
 

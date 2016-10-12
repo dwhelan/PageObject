@@ -1,3 +1,4 @@
+using System;
 using Coypu;
 
 namespace PageObject.Elements
@@ -7,6 +8,8 @@ namespace PageObject.Elements
         public RadioElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {
         }
+
+        public bool Value => Selected;
 
         public void Choose()
         {

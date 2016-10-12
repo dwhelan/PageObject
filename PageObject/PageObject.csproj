@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\RadioSelectElement.cs" />
     <Compile Include="Elements\RadioElement.cs" />
     <Compile Include="Elements\InputElement.cs" />
     <Compile Include="Elements\Element.cs" />
