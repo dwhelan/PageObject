@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using Coypu;
 
 namespace PageObject.Elements
@@ -10,24 +11,15 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get
-            {
-                foreach (var radioButton in FindAllRadioButtons())
-                {
-                    if (radioButton.Selected)
-                        return radioButton.Value;
-                }
-                return "";
-            }
-            set
-            {
-                Browser.Driver.Choose(FindRadioButton(value));
-            }
+            get { return Selection == null ? "" : Selection.Value; }
+            set { Browser.Driver.Choose(FindRadioButton(value)); }
         }
 
         public IList<string> Options => FindAllRadioButtons().Select(radioButton => radioButton.Value).ToList();
 
-        private IList<SnapshotElementScope> FindAllRadioButtons()
+        private SnapshotElementScope Selection => FindAllRadioButtons().FirstOrDefault(r => r.Selected);
+
+        private IEnumerable<SnapshotElementScope> FindAllRadioButtons()
         {
             var scopes = Browser.FindAllXPath($"//input[{RadioViaLocator(Locator)}]").ToList();
             if (scopes.Count == 0)
