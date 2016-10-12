@@ -11,34 +11,37 @@ namespace PageObject.Elements
         public string Value
         {
             get { return Selection == null ? "" : Selection.Value; }
-            set { Browser.Driver.Choose(RadioButtonFor(value)); }
+            set { Driver.Choose(RadioButtonFor(value)); }
         }
 
         public IList<string> Options => RadioButtons.Select(radioButton => radioButton.Value).ToList();
 
-        private SnapshotElementScope Selection => RadioButtons.FirstOrDefault(r => r.Selected);
+        private Driver Driver => Browser.Driver;
 
-        private IEnumerable<SnapshotElementScope> RadioButtons
+        private IEnumerable<ElementScope> RadioButtons => FindOrThrow(RadioButtonsXpath());
+
+        private ElementScope Selection => RadioButtons.FirstOrDefault(radioButton => radioButton.Selected);
+
+        private IEnumerable<ElementScope> FindOrThrow(string xPath)
         {
-            get
+            var scopes = Scope.FindAllXPath(xPath).ToList();
+            if (scopes.Count == 0)
             {
-                var scopes = Browser.FindAllXPath(RadioButtonXpath()).ToList();
-                if (scopes.Count == 0)
-                {
-                    Browser.FindXPath(RadioButtonXpath()).HasValue("");
-                }
-                return scopes;
+                throw new MissingHtmlException($"Could not find radio button via xpath {xPath}");
             }
+            return scopes;
         }
+
+        private Scope Scope => Browser;
 
         private ElementScope RadioButtonFor(string value)
         {
-            return Browser.FindXPath(RadioButtonXpath($"and ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})"));
+            return Scope.FindXPath(RadioButtonsXpath($"and ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})"));
         }
 
-        private string RadioButtonXpath(string contraints = "")
+        private string RadioButtonsXpath(string contraints = "")
         {
-            return $"//input[{RadioViaLocator(Locator)} {contraints}]";
+            return $".//input[{RadioViaLocator(Locator)} {contraints}]";
         }
 
         private string RadioViaLocator(string name) => $"@type='radio' and @name='{name}'";
