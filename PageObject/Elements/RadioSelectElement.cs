@@ -27,17 +27,17 @@ namespace PageObject.Elements
             }
         }
 
-        private List<SnapshotElementScope> FindAllRadioButtons()
+        private IEnumerable<SnapshotElementScope> FindAllRadioButtons()
         {
-            var scopes = Browser.FindAllXPath($"//input[{RadioViaLocatorXPath}]").ToList();
-            if (scopes.Count == 0)
+            var scopes = Browser.FindAllXPath($"//input[{RadioViaLocatorXPath(Locator)}]");
+            if (scopes.ToList().Count == 0)
             {
-                var x = Browser.FindXPath($"//input[{RadioViaLocatorXPath}]").Text;
+                Browser.FindXPath($"//input[{RadioViaLocatorXPath(Locator)}]").HasValue("");
             }
             return scopes;
         }
 
-        private string RadioViaLocatorXPath => $"@type='radio' and @name='{Locator}'";
+        private string RadioViaLocatorXPath(string name) => $"@type='radio' and @name='{name}'";
         private string WithId(string id) { return $@"@id = '{id}'"; }
         private string WithValue(string value) { return $@"@value = '{value}'"; }
         private string WithAncestorLabel(string text) { return $@"ancestor::label[contains(normalize-space(text()),'{text}')]"; }
@@ -47,7 +47,7 @@ namespace PageObject.Elements
         {
             var xpath = $@"//input
                 [
-                    {RadioViaLocatorXPath} and 
+                    {RadioViaLocatorXPath(Locator)} and 
                     ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})
                 ]";
             return Browser.FindXPath(xpath);
