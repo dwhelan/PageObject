@@ -8,9 +8,7 @@ namespace PageObject.Elements
 {
     public class RadioSelectElement : InputElement
     {
-        public RadioSelectElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
-        {
-        }
+        public RadioSelectElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
         public string Value
         {
@@ -25,31 +23,34 @@ namespace PageObject.Elements
             }
             set
             {
-                foreach (var radioButton in FindRadioButton(value))
-                {
-                    Browser.Driver.Choose(radioButton);
-                }
+                Browser.Driver.Choose(FindRadioButton(value));
             }
         }
 
-        private IEnumerable<SnapshotElementScope> FindAllRadioButtons()
+        private List<SnapshotElementScope> FindAllRadioButtons()
         {
-            return Browser.FindAllXPath($"//input[@type='radio' and @name='{Locator}']");
+            var scopes = Browser.FindAllXPath($"//input[{RadioViaLocatorXPath}]").ToList();
+            if (scopes.Count == 0)
+            {
+                var x = Browser.FindXPath($"//input[{RadioViaLocatorXPath}]").Text;
+            }
+            return scopes;
         }
 
-        private IEnumerable<SnapshotElementScope> FindRadioButton(string value)
-        {
-            var xpath = $@"//input[@type='radio' and @name='{Locator}' and 
-                    (@id='{value}' or @value='{value}' 
-                     or ancestor::label[contains(normalize-space(text()),'{value}')]
-                     or @id = //label[contains(normalize-space(),'{value}')]/@for
-                    )]";
-            return Browser.FindAllXPath(xpath);
-        }
+        private string RadioViaLocatorXPath => $"@type='radio' and @name='{Locator}'";
+        private string WithId(string id) { return $@"@id = '{id}'"; }
+        private string WithValue(string value) { return $@"@value = '{value}'"; }
+        private string WithAncestorLabel(string text) { return $@"ancestor::label[contains(normalize-space(text()),'{text}')]"; }
+        private string WithLabelFor(string id) { return $@"@id = //label[contains(normalize-space(),'{id}')]/@for"; }
 
-        public void Choose(string option)
+        private ElementScope FindRadioButton(string value)
         {
-            Browser.Choose(option);
+            var xpath = $@"//input
+                [
+                    {RadioViaLocatorXPath} and 
+                    ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})
+                ]";
+            return Browser.FindXPath(xpath);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Coypu.Drivers;
+﻿using Coypu;
 using NUnit.Framework;
 using PageObject.Elements;
 
@@ -35,24 +35,47 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Should_choose_by_enclosing_label()
+        public void Should_choose_by_ancestor_label()
         {
             Element.Value = "label1";
             Assert.That(Element.Value, Is.EqualTo("first"));
         }
 
         [Test]
-        public void Should_choose_by_related_label()
+        public void Should_choose_by_label_for()
         {
             Element.Value = "label2";
             Assert.That(Element.Value, Is.EqualTo("second"));
         }
 
-        [Test]
-        public void Should_be_able_to_choose_second_checkbox()
+        [TestFixture]
+        public class NoRadioButtonsTest : ElementTest<TestPage<RadioSelectElement>, RadioSelectElement>
         {
-            Element.Choose("second");
-            Assert.That(Element.Value, Is.EqualTo("second"));
+            protected override string ElementHtml => "";
+
+            [Test]
+            public void Getting_value_should_throw()
+            {
+                Assert.Throws<MissingHtmlException>(() => { var x = Element.Value; });
+            }
+
+            [Test]
+            public void Setting_value_should_throw()
+            {
+                Assert.Throws<MissingHtmlException>(() => { Element.Value = ""; });
+            }
+        }
+
+        [TestFixture]
+        public class NoMatchingValueTest : ElementTest<TestPage<RadioSelectElement>, RadioSelectElement>
+        {
+            protected override string ElementHtml => "<input type='radio' name='name' value='value'/>";
+
+            [Test]
+            public void Setting_value_should_throw_()
+            {
+                Assert.Throws<MissingHtmlException>(() => { Element.Value = "bad value"; });
+            }
         }
     }
 }
