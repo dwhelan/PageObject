@@ -29,15 +29,15 @@ namespace PageObject.Elements
 
         private IEnumerable<SnapshotElementScope> FindAllRadioButtons()
         {
-            var scopes = Browser.FindAllXPath($"//input[{RadioViaLocatorXPath(Locator)}]");
-            if (scopes.ToList().Count == 0)
+            var scopes = Browser.FindAllXPath($"//input[{RadioViaLocator(Locator)}]").ToList();
+            if (scopes.Count == 0)
             {
-                Browser.FindXPath($"//input[{RadioViaLocatorXPath(Locator)}]").HasValue("");
+                Browser.FindXPath($"//input[{RadioViaLocator(Locator)}]").HasValue("");
             }
             return scopes;
         }
 
-        private string RadioViaLocatorXPath(string name) => $"@type='radio' and @name='{name}'";
+        private string RadioViaLocator(string name) => $"@type='radio' and @name='{name}'";
         private string WithId(string id) { return $@"@id = '{id}'"; }
         private string WithValue(string value) { return $@"@value = '{value}'"; }
         private string WithAncestorLabel(string text) { return $@"ancestor::label[contains(normalize-space(text()),'{text}')]"; }
@@ -47,7 +47,7 @@ namespace PageObject.Elements
         {
             var xpath = $@"//input
                 [
-                    {RadioViaLocatorXPath(Locator)} and 
+                    {RadioViaLocator(Locator)} and 
                     ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})
                 ]";
             return Browser.FindXPath(xpath);
