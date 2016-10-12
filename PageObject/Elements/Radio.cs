@@ -25,7 +25,9 @@ namespace PageObject.Elements
             }
         }
 
-        private IEnumerable<SnapshotElementScope> FindAllRadioButtons()
+        public IList<string> Options => FindAllRadioButtons().Select(radioButton => radioButton.Value).ToList();
+
+        private IList<SnapshotElementScope> FindAllRadioButtons()
         {
             var scopes = Browser.FindAllXPath($"//input[{RadioViaLocator(Locator)}]").ToList();
             if (scopes.Count == 0)

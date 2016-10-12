@@ -1,4 +1,5 @@
-﻿using Coypu;
+﻿using System.Collections.Generic;
+using Coypu;
 using NUnit.Framework;
 using PageObject.Elements;
 
@@ -48,6 +49,11 @@ namespace PageObject.Tests.Elements
             Assert.That(Element.Value, Is.EqualTo("second"));
         }
 
+        [Test]
+        public void Options_should_return_all_values()
+        {
+            Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second"}));
+        }
         [TestFixture]
         public class NoRadioButtonsTest : ElementTest<TestPage<Radio>, Radio>
         {
