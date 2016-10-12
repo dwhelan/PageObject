@@ -10,7 +10,8 @@ namespace PageObject.Tests.Elements
         protected override string ElementHtml => @"
             <label><input type='radio' name='other' id='id1' value='first'/>lother label1</label>
             <label><input type='radio' name='name' id='id1' value='first'/>label1</label>
-            <input type='radio' name='name' value='second'/>
+            <input type='radio' name='name' id='id2' value='second'/>
+            <label for='id2'>label2</label>
         ";
 
         [Test]
@@ -34,11 +35,17 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        //[Ignore]
         public void Should_choose_by_enclosing_label()
         {
             Element.Value = "label1";
             Assert.That(Element.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Should_choose_by_related_label()
+        {
+            Element.Value = "label2";
+            Assert.That(Element.Value, Is.EqualTo("second"));
         }
 
         [Test]

@@ -45,7 +45,11 @@ namespace PageObject.Elements
                     $"or (((@type = \"radio\")) and (@id = \"{Locator}\" or contains(@placeholder,\"{Locator}\"))) " +
                     $"or ((@type = \"radio\") and @value = \"{Locator}\" ))]";
 
-            var xpath = $"//input[@type='radio' and @name='{Locator}' and (@id='{value}' or @value='{value}' or ancestor::label[contains(normalize-space(text()),'{value}')])]";
+            var xpath = $@"//input[@type='radio' and @name='{Locator}' and 
+                    (@id='{value}' or @value='{value}' 
+                     or ancestor::label[contains(normalize-space(text()),'{value}')]
+                     or @id = //label[contains(normalize-space(),'{value}')]/@for
+                    )]";
             return Browser.FindAllXPath(xpath);
         }
 
