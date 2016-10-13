@@ -10,9 +10,12 @@ namespace PageObject.Tests.Elements
     {
         protected override string ElementHtml => @"
             <label><input type='radio' name='other' id='id1' value='first'/>lother label1</label>
+
             <label><input type='radio' name='name' id='id1' value='first'/>label1</label>
+            
             <input type='radio' name='name' id='id2' value='second'/>
             <label for='id2'>label2</label>
+            <label for='id2'>label2a</label>
         ";
 
         [Test]
@@ -46,6 +49,13 @@ namespace PageObject.Tests.Elements
         public void Should_choose_by_label_for()
         {
             Element.Value = "label2";
+            Assert.That(Element.Value, Is.EqualTo("second"));
+        }
+
+        [Test]
+        public void Should_choose_by_multiple_labels_for()
+        {
+            Element.Value = "label2a";
             Assert.That(Element.Value, Is.EqualTo("second"));
         }
 
