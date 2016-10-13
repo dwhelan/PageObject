@@ -4,14 +4,14 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class Radio : Input
+    public class RadioButtons : Input
     {
-        public Radio(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
+        public RadioButtons(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
         public string Value
         {
             get { return ValueOf(Selection); }
-            set { Driver.Choose(RadioButtonWith(value)); }
+            set { Driver.Choose(ButtonWith(value)); }
         }
 
         private string ValueOf(ElementScope radioButton)
@@ -30,18 +30,18 @@ namespace PageObject.Elements
             return string.Join(" ", labels.Select(label => label.Text));
         }
 
-        public IList<string> Options => RadioButtons.Select(radioButton => ValueOf(radioButton)).ToList();
+        public IList<string> Options => Buttons.Select(radioButton => ValueOf(radioButton)).ToList();
 
-        private IEnumerable<ElementScope> RadioButtons => FindAllXPathOrThrow(RadioButtonsXpath(), "radio button");
+        private IEnumerable<ElementScope> Buttons => FindAllXPathOrThrow(ButtonsXpath(), "radio button");
 
-        private ElementScope Selection => RadioButtons.FirstOrDefault(radioButton => radioButton.Selected);
+        private ElementScope Selection => Buttons.FirstOrDefault(radioButton => radioButton.Selected);
 
-        private ElementScope RadioButtonWith(string value)
+        private ElementScope ButtonWith(string value)
         {
-            return FindXPath(RadioButtonsXpath($"and ( {WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
+            return FindXPath(ButtonsXpath($"and ( {WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
         }
 
-        private string RadioButtonsXpath(string constraints = "")
+        private string ButtonsXpath(string constraints = "")
         {
             return InputXPath("radio", $" and @name='{Locator}' {constraints}");
         }

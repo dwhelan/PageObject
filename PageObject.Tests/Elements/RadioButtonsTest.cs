@@ -6,7 +6,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class RadioTest : ElementTest<TestPage<Radio>, Radio>
+    public class RadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
     {
         protected override string ElementHtml => $@"
             {OtherRadioButton}<br/>
@@ -126,7 +126,7 @@ namespace PageObject.Tests.Elements
         }
 
         [TestFixture]
-        public class NoRadioButtonsTest : ElementTest<TestPage<Radio>, Radio>
+        public class NoRadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
         {
             protected override string ElementHtml => "";
 
