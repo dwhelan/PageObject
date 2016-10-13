@@ -1,10 +1,11 @@
 ﻿using NUnit.Framework;
 using PageObject.Elements;
+using Text = PageObject.Elements.Text;
 
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class TextElementTest : ElementTest<TestPage<TextElement>, TextElement>
+    public class TextElementTest : ElementTest<TestPage<Text>, Text>
     {
         protected override string ElementHtml => "<input type='text' name='name' value='initial'>text</input>";
 
@@ -35,7 +36,7 @@ namespace PageObject.Tests.Elements
         }
 
         [TestFixture]
-        public class DisabledTextElementTest : ElementTest<TestPage<TextElement>, TextElement>
+        public class DisabledTextElementTest : ElementTest<TestPage<Text>, Text>
         {
             protected override string ElementHtml => "<input type='text' name='name' disabled>";
 

@@ -61,14 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\Radio.cs" />
-    <Compile Include="Elements\InputElement.cs" />
+    <Compile Include="Elements\Input.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
     <Compile Include="Elements\ElementAttribute.cs" />
-    <Compile Include="Elements\MultiSelectElement.cs" />
+    <Compile Include="Elements\MultiSelect.cs" />
     <Compile Include="Elements\Select.cs" />
-    <Compile Include="Elements\CheckboxElement.cs" />
-    <Compile Include="Elements\TextElement.cs" />
+    <Compile Include="Elements\Checkbox.cs" />
+    <Compile Include="Elements\Text.cs" />
     <Compile Include="EnvironmentVariables.cs" />
     <Compile Include="PageAtAttribute.cs" />
     <Compile Include="PageObjectException.cs" />

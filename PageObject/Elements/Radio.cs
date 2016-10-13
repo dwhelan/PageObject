@@ -4,7 +4,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class Radio : InputElement
+    public class Radio : Input
     {
         public Radio(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 

@@ -3,7 +3,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class Select : InputElement
+    public class Select : Input
     {
         public Select(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {
