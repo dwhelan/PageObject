@@ -14,11 +14,6 @@ namespace PageObject.Elements
             Browser = browser;
         }
 
-        protected ElementScope FindField()
-        {
-            return Scope.FindField(Locator);
-        }
-
         private ElementAttribute Attribute { get; }
         protected Scope Scope => Browser;
     }

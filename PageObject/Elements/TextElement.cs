@@ -10,7 +10,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return FindField().Value; }
+            get { return Element.Value; }
             set { Scope.FillIn(Locator).With(value);}
         }
     }

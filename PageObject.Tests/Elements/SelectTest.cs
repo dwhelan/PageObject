@@ -1,4 +1,5 @@
-﻿using Coypu.Drivers;
+﻿using System.Collections.Generic;
+using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject.Elements;
 
@@ -9,30 +10,30 @@ namespace PageObject.Tests.Elements
     {
         protected override string ElementHtml =>
             @"<select name='name'>
-                <option value='one'>First</option>
-                <option value='two'>Second</option>
-                <option value='three'>Three</option>
+                <option value='one'>first</option>
+                <option value='two'>second</option>
+                <option value='three'>third</option>
                 </select>";
 
         [Test]
         public void Setting_Value_should_select_option()
         {
-            Element.Value = "First";
-            Assert.That(Element.Value, Is.EqualTo("First"));
+            Element.Value = "first";
+            Assert.That(Element.Value, Is.EqualTo("first"));
         }
 
         [Test]
         public void Should_keep_option_selected_when_selected_multiple_times()
         {
-            Element.Value = "First";
-            Element.Value = "First";
-            Assert.That(Element.Value, Is.EqualTo("First"));
+            Element.Value = "first";
+            Element.Value = "first";
+            Assert.That(Element.Value, Is.EqualTo("first"));
         }
 
         [Test]
         public void Should_get_text()
         {
-            Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Three\s*$"));
+            Assert.That(Element.Text, Is.StringMatching(@"^\s*first\s*second\s*third\s*$"));
         }
 
         [Test]
@@ -40,6 +41,13 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(Element.Enabled, Is.True);
             Assert.That(Element.Disabled, Is.False);
+        }
+
+        [Test]
+        [Ignore]
+        public void Options_should_return_all_values()
+        {
+            Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second", "third" }));
         }
 
         [TestFixture]

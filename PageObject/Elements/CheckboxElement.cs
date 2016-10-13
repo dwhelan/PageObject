@@ -26,7 +26,7 @@ namespace PageObject.Elements
 
         public bool Checked()
         {
-            return FindField().Selected;
+            return Element.Selected;
         }
     }
 }

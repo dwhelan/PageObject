@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Coypu;
 
 namespace PageObject.Elements
@@ -10,8 +11,10 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return FindField().SelectedOption; }
+            get { return Element.SelectedOption; }
             set { Scope.Select(value).From(Locator); }
         }
+
+        public IList<string> Options => new List<string>();
     }
 }

@@ -31,6 +31,6 @@ namespace PageObject.Elements
             Scope.Select(option).From(Locator);
         }
 
-        private IEnumerable<SnapshotElementScope> Options => FindField().FindAllCss("option");
+        private IEnumerable<SnapshotElementScope> Options => Element.FindAllCss("option");
     }
 }

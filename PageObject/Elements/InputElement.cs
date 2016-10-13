@@ -8,8 +8,10 @@ namespace PageObject.Elements
         {
         }
 
-        public bool Disabled => FindField().Disabled;
+        public bool Disabled => Element.Disabled;
         public bool Enabled => !Disabled;
-        public string Text => FindField().OuterScope.Text;
+        public string Text => Element.OuterScope.Text;
+
+        protected ElementScope Element => Scope.FindField(Locator);
     }
 }
