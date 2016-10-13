@@ -10,8 +10,23 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { var selection = Selection; return selection == null ? "" : selection.Value; }
+            get { return SelectionValue; }
             set { Driver.Choose(RadioButtonFor(value)); }
+        }
+
+        private string SelectionValue
+        {
+            get
+            {
+                var selection = Selection;
+
+                if (selection == null)
+                    return "";
+
+                var labels = selection.FindAllXPath($"//label[@for='{selection.Id}'] | .//parent::label");
+                var text = string.Join(" ", labels.Select(label => label.Text));
+                return text;
+            }
         }
 
         public IList<string> Options => RadioButtons.Select(radioButton => radioButton.Value).ToList();
