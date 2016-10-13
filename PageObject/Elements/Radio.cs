@@ -22,7 +22,7 @@ namespace PageObject.Elements
 
         private ElementScope RadioButtonFor(string value)
         {
-            return FindXPath(RadioButtonsXpath($"and ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})"));
+            return FindXPath(RadioButtonsXpath($"and ( {WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
         }
 
         private string RadioButtonsXpath(string constraints = "")

@@ -9,7 +9,7 @@ namespace PageObject.Tests.Elements
     public class RadioTest : ElementTest<TestPage<Radio>, Radio>
     {
         protected override string ElementHtml => @"
-            <label><input type='radio' name='other' id='id1' value='first'/>lother label1</label>
+            <label><input type='radio' name='other' id='id1' value='first'/>other label1</label>
 
             <label><input type='radio' name='name' id='id1' value='first'/>label1</label>
             
