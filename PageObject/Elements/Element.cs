@@ -26,8 +26,9 @@ namespace PageObject.Elements
 
         protected string WithId(string id)              { return $"@id = '{id}'"; }
         protected string WithValue(string value)        { return $"@value = '{value}'"; }
-        protected string WithAncestorLabel(string text) { return $"ancestor::label[contains(normalize-space(text()),'{text}')]"; }
+        protected string WithAncestorLabel(string text) { return $"ancestor::label[{WithText(text)}]"; }
         protected string WithLabelFor(string id)        { return $"@id = //label[contains(normalize-space(),'{id}')]/@for"; }
+        protected string WithText(string text)          { return $"contains(translate(normalize-space(), ' &#9;&#10;&#13', ''),'{text}')"; }
 
         protected IEnumerable<ElementScope> FindAllXPathOrThrow(string xPath, string elementDescription="element")
         {
