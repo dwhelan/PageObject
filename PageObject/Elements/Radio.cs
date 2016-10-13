@@ -16,8 +16,6 @@ namespace PageObject.Elements
 
         public IList<string> Options => RadioButtons.Select(radioButton => radioButton.Value).ToList();
 
-        private Driver Driver => Browser.Driver;
-
         private IEnumerable<ElementScope> RadioButtons => FindOrThrow(RadioButtonsXpath());
 
         private ElementScope Selection => RadioButtons.FirstOrDefault(radioButton => radioButton.Selected);

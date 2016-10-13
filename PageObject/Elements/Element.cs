@@ -4,11 +4,10 @@ namespace PageObject.Elements
 {
     public abstract class Element
     {
-        public BrowserSession Browser { get; }
+        protected BrowserSession Browser { get; }
+        protected Driver Driver => Browser.Driver;
         protected string Locator => Attribute.Locator;
 
-        private ElementAttribute Attribute { get; }
- 
         protected Element(ElementAttribute attribute, BrowserSession browser)
         {
             Attribute = attribute;
@@ -19,5 +18,7 @@ namespace PageObject.Elements
         {
             return Browser.FindField(Locator);
         }
+
+        private ElementAttribute Attribute { get; }
     }
 }
