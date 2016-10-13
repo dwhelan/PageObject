@@ -4,14 +4,17 @@ namespace PageObject.Elements
 {
     public abstract class InputElement : Element
     {
-        protected InputElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
-        {
-        }
+        protected InputElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
-        public bool Disabled => Element.Disabled;
         public bool Enabled => !Disabled;
+        public bool Disabled => Element.Disabled;
         public string Text => Element.OuterScope.Text;
 
         protected ElementScope Element => Scope.FindField(Locator);
+
+        protected string InputXPath(string type, string contraints = "")
+        {
+            return $".//input[@type='{type}' {contraints}]";
+        }
     }
 }

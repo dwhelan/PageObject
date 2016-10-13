@@ -10,40 +10,24 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Selection == null ? "" : Selection.Value; }
+            get { var selection = Selection; return selection == null ? "" : selection.Value; }
             set { Driver.Choose(RadioButtonFor(value)); }
         }
 
         public IList<string> Options => RadioButtons.Select(radioButton => radioButton.Value).ToList();
 
-        private IEnumerable<ElementScope> RadioButtons => FindOrThrow(RadioButtonsXpath());
+        private IEnumerable<ElementScope> RadioButtons => FindAllXPathOrThrow(RadioButtonsXpath(), "radio button");
 
         private ElementScope Selection => RadioButtons.FirstOrDefault(radioButton => radioButton.Selected);
 
-        private IEnumerable<ElementScope> FindOrThrow(string xPath)
-        {
-            var scopes = Scope.FindAllXPath(xPath).ToList();
-            if (scopes.Count == 0)
-            {
-                throw new MissingHtmlException($"Could not find radio button via xpath {xPath}");
-            }
-            return scopes;
-        }
-
         private ElementScope RadioButtonFor(string value)
         {
-            return Scope.FindXPath(RadioButtonsXpath($"and ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})"));
+            return FindXPath(RadioButtonsXpath($"and ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})"));
         }
 
-        private string RadioButtonsXpath(string contraints = "")
+        private string RadioButtonsXpath(string constraints = "")
         {
-            return $".//input[{RadioViaLocator(Locator)} {contraints}]";
+            return InputXPath("radio", $" and @name='{Locator}' {constraints}");
         }
-
-        private string RadioViaLocator(string name) => $"@type='radio' and @name='{name}'";
-        private string WithId(string id) { return $@"@id = '{id}'"; }
-        private string WithValue(string value) { return $@"@value = '{value}'"; }
-        private string WithAncestorLabel(string text) { return $@"ancestor::label[contains(normalize-space(text()),'{text}')]"; }
-        private string WithLabelFor(string id) { return $@"@id = //label[contains(normalize-space(),'{id}')]/@for"; }
     }
 }
