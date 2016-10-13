@@ -79,7 +79,7 @@ namespace PageObject.Tests.Elements
         }
 
         [TestFixture]
-        public class DisabledMultiSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
+        public class DisabledMultiSelectElementTest : ElementTest<TestPage<Select>, Select>
         {
             protected override string ElementHtml => @"<select name='name' multiple disabled/>";
 
