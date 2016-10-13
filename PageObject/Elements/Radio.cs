@@ -23,10 +23,16 @@ namespace PageObject.Elements
                 if (selection == null)
                     return "";
 
-                var labels = selection.FindAllXPath($"//label[@for='{selection.Id}'] | .//parent::label");
-                var text = string.Join(" ", labels.Select(label => label.Text));
-                return text;
+                var label = LabelTextFor(selection);
+
+                return string.IsNullOrEmpty(label) ? selection.Value : label;
             }
+        }
+
+        private static string LabelTextFor(ElementScope selection)
+        {
+            var labels = selection.FindAllXPath($"//label[@for='{selection.Id}'] | .//parent::label");
+            return string.Join(" ", labels.Select(label => label.Text));
         }
 
         public IList<string> Options => RadioButtons.Select(radioButton => radioButton.Value).ToList();

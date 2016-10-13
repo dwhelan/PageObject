@@ -20,6 +20,10 @@ namespace PageObject.Tests.Elements
             <label for='id3'>label3</label>
             <label><input type='radio' name='name' id='id3' value='value3'/>third</label>
             <label for='id3'>label3a</label>
+
+            <input type='radio' name='name' id='id4' value='value4'/>
+
+            <input type='radio' name='name' id='id5'/>
         ";
 
         [Test]
@@ -68,6 +72,20 @@ namespace PageObject.Tests.Elements
         {
             Element.Value = "label3";
             Assert.That(Element.Value, Is.EqualTo("label3 third label3a"));
+        }
+
+        [Test]
+        public void Value_should_return_value_attribute_if_no_labels_exist()
+        {
+            Element.Value = "id4";
+            Assert.That(Element.Value, Is.EqualTo("value4"));
+        }
+
+        [Test]
+        public void Value_should_return_on_if_no_value_attribute_if_no_labels_exist()
+        {
+            Element.Value = "id5";
+            Assert.That(Element.Value, Is.EqualTo("on"));
         }
 
         [Test]
