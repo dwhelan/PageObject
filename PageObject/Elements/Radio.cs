@@ -21,7 +21,7 @@ namespace PageObject.Elements
 
             var labelText = LabelTextFor(radioButton);
 
-            return string.IsNullOrEmpty(labelText) ? radioButton.Value : labelText;
+            return string.IsNullOrEmpty(labelText) ?  radioButton.Value : labelText;
         }
 
         private static string LabelTextFor(ElementScope element)
@@ -30,7 +30,7 @@ namespace PageObject.Elements
             return string.Join(" ", labels.Select(label => label.Text));
         }
 
-        public IList<string> Options => RadioButtons.Select(radioButton => radioButton.Value).ToList();
+        public IList<string> Options => RadioButtons.Select(radioButton => ValueOf(radioButton)).ToList();
 
         private IEnumerable<ElementScope> RadioButtons => FindAllXPathOrThrow(RadioButtonsXpath(), "radio button");
 

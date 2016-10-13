@@ -82,7 +82,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Value_should_return_on_if_no_value_attribute_if_no_labels_exist()
+        public void Value_should_return_on_if_selected_and_no_value_attribute_if_no_labels_exist()
         {
             Element.Value = "id5";
             Assert.That(Element.Value, Is.EqualTo("on"));
@@ -91,7 +91,7 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Options_should_return_all_values()
         {
-            Assert.That(Element.Options, Is.EqualTo(new List<string> { "value1", "value2", "value3"}));
+            Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "label2 label2a", "label3 third label3a", "value4", "on"}));
         }
 
         [TestFixture]
@@ -106,19 +106,7 @@ namespace PageObject.Tests.Elements
             }
 
             [Test]
-            public void Setting_value_should_throw()
-            {
-                Assert.Throws<MissingHtmlException>(() => { Element.Value = ""; });
-            }
-        }
-
-        [TestFixture]
-        public class NoMatchingValueTest : ElementTest<TestPage<Radio>, Radio>
-        {
-            protected override string ElementHtml => "<input type='radio' name='name' value='value'/>";
-
-            [Test]
-            public void Setting_value_should_throw_()
+            public void Setting_bad_value_should_throw()
             {
                 Assert.Throws<MissingHtmlException>(() => { Element.Value = "bad value"; });
             }
