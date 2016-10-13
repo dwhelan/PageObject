@@ -11,7 +11,7 @@ namespace PageObject.Elements
         public string Value
         {
             get { return FindField().SelectedOption; }
-            set { Browser.Select(value).From(Locator); }
+            set { Scope.Select(value).From(Locator); }
         }
     }
 }

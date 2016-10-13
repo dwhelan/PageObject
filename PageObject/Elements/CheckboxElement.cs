@@ -16,12 +16,12 @@ namespace PageObject.Elements
 
         public void Check()
         {
-            Browser.Check(Locator);
+            Scope.Check(Locator);
         }
 
         public void Uncheck()
         {
-            Browser.Uncheck(Locator);
+            Scope.Uncheck(Locator);
         }
 
         public bool Checked()

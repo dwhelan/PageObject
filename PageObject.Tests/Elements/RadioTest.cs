@@ -54,6 +54,7 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second"}));
         }
+
         [TestFixture]
         public class NoRadioButtonsTest : ElementTest<TestPage<Radio>, Radio>
         {

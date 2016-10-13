@@ -28,7 +28,7 @@ namespace PageObject.Elements
 
         public void Select(string option)
         {
-            Browser.Select(option).From(Locator);
+            Scope.Select(option).From(Locator);
         }
 
         private IEnumerable<SnapshotElementScope> Options => FindField().FindAllCss("option");

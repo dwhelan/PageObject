@@ -30,8 +30,6 @@ namespace PageObject.Elements
             return scopes;
         }
 
-        private Scope Scope => Browser;
-
         private ElementScope RadioButtonFor(string value)
         {
             return Scope.FindXPath(RadioButtonsXpath($"and ({WithId(value)} or {WithValue(value)} or {WithAncestorLabel(value)} or {WithLabelFor(value)})"));

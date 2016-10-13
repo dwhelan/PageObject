@@ -11,7 +11,7 @@ namespace PageObject.Elements
         public string Value
         {
             get { return FindField().Value; }
-            set { Browser.FillIn(Locator).With(value);}
+            set { Scope.FillIn(Locator).With(value);}
         }
     }
 }
