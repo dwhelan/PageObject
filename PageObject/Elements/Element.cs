@@ -19,9 +19,9 @@ namespace PageObject.Elements
         private ElementAttribute Attribute { get; }
         protected Scope Scope => Browser;
 
-        protected ElementScope FindXPath(string xPath)
+        protected ElementScope FindXPath(string xPath, Options options=null)
         {
-            return Scope.FindXPath(xPath);
+            return Scope.FindXPath(xPath, options);
         }
 
         protected string WithId(string id)              { return $"@id = '{id}'"; }
