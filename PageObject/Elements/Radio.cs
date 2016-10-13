@@ -10,28 +10,23 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return SelectionValue; }
-            set { Driver.Choose(RadioButtonFor(value)); }
+            get { return ValueOf(Selection); }
+            set { Driver.Choose(RadioButtonWith(value)); }
         }
 
-        private string SelectionValue
+        private string ValueOf(ElementScope radioButton)
         {
-            get
-            {
-                var selection = Selection;
+            if (radioButton == null)
+                return "";
 
-                if (selection == null)
-                    return "";
+            var labelText = LabelTextFor(radioButton);
 
-                var label = LabelTextFor(selection);
-
-                return string.IsNullOrEmpty(label) ? selection.Value : label;
-            }
+            return string.IsNullOrEmpty(labelText) ? radioButton.Value : labelText;
         }
 
-        private static string LabelTextFor(ElementScope selection)
+        private static string LabelTextFor(ElementScope element)
         {
-            var labels = selection.FindAllXPath($"//label[@for='{selection.Id}'] | .//parent::label");
+            var labels = element.FindAllXPath($"//label[@for='{element.Id}'] | .//parent::label");
             return string.Join(" ", labels.Select(label => label.Text));
         }
 
@@ -41,7 +36,7 @@ namespace PageObject.Elements
 
         private ElementScope Selection => RadioButtons.FirstOrDefault(radioButton => radioButton.Selected);
 
-        private ElementScope RadioButtonFor(string value)
+        private ElementScope RadioButtonWith(string value)
         {
             return FindXPath(RadioButtonsXpath($"and ( {WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
         }
