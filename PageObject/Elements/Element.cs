@@ -51,9 +51,9 @@ namespace PageObject.Elements
             return elements.FirstOrDefault(element => element.Selected);
         }
 
-        protected void Choose(Coypu.Element radioButton)
+        protected void Choose(Coypu.Element element)
         {
-            Driver.Choose(radioButton);
+            Driver.Choose(element);
         }
 
         protected string StripWhitespace(string text)

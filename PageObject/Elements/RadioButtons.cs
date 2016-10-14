@@ -14,11 +14,13 @@ namespace PageObject.Elements
             set { Choose(value); }
         }
 
+        public IList<string> Options => Buttons.Select(ValueOf).ToList();
+
         private void Choose(string value)
         {
             try
             {
-               Choose(ButtonWith(value));
+                Choose(ButtonWith(value));
             }
             catch (MissingHtmlException)
             {
@@ -26,8 +28,6 @@ namespace PageObject.Elements
                 Choose(radioButton);
             }
         }
-
-        public IList<string> Options => Buttons.Select(ValueOf).ToList();
 
         private string ValueOf(ElementScope radioButton)
         {
