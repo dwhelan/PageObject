@@ -52,7 +52,7 @@ namespace PageObject.Elements
 
         private IEnumerable<ElementScope> Buttons => FindAllXPathOrThrow(ButtonsXpath(), "radio button");
 
-        private ElementScope SelectedButton => Buttons.FirstOrDefault(radioButton => radioButton.Selected);
+        private ElementScope SelectedButton => SelectedOrNull(Buttons);
 
         private ElementScope ButtonWith(string value)
         {

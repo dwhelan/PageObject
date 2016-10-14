@@ -44,5 +44,10 @@ namespace PageObject.Elements
             var allLabels = element.FindAllXPath($"//label[@for='{element.Id}'] | .//parent::label");
             return string.Join(" ", allLabels.Select(label => label.Text));
         }
+
+        protected ElementScope SelectedOrNull(IEnumerable<ElementScope> elements)
+        {
+            return elements.FirstOrDefault(element => element.Selected);
+        }
     }
 }
