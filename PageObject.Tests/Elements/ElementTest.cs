@@ -52,7 +52,7 @@ namespace PageObject.Tests.Elements
 
         private static TP CreatePage(PageSession session)
         {
-            return (TP)Activator.CreateInstance(typeof(TP), session);
+            return (TP) Activator.CreateInstance(typeof(TP), session);
         }
 
         [TestFixtureTearDown]
