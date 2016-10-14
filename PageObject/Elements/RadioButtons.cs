@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
@@ -11,7 +10,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return ValueOf(SelectedButton); }
+            get { return ValueOf(SelectedOrNull(Buttons)); }
             set { Choose(value); }
         }
 
@@ -28,11 +27,6 @@ namespace PageObject.Elements
             }
         }
 
-        public string StripWhitespace(string text)
-        {
-            return text.Replace(" ", "");
-        }
-
         public IList<string> Options => Buttons.Select(ValueOf).ToList();
 
         private string ValueOf(ElementScope radioButton)
@@ -42,12 +36,10 @@ namespace PageObject.Elements
 
             var labelText = LabelTextFor(radioButton);
 
-            return string.IsNullOrEmpty(labelText) ?  radioButton.Value : labelText;
+            return string.IsNullOrEmpty(labelText) ? radioButton.Value : labelText;
         }
 
         private IEnumerable<ElementScope> Buttons => FindAllXPathOrThrow(ButtonsXpath(), "radio button");
-
-        private ElementScope SelectedButton => SelectedOrNull(Buttons);
 
         private ElementScope ButtonWith(string value)
         {

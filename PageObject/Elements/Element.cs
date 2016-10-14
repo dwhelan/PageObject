@@ -54,5 +54,10 @@ namespace PageObject.Elements
         {
             Driver.Choose(radioButton);
         }
+
+        protected string StripWhitespace(string text)
+        {
+            return text.Replace(" ", "");
+        }
     }
 }
