@@ -6,14 +6,22 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class SelectTest : ElementTest<TestPage<Select>, Select>
+    public class SelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
     {
-        protected override string ElementHtml =>
-            @"<select name='name'>
+        protected override string ElementHtml => @"
+            <select name='name'>
                 <option value='one'>first</option>
                 <option value='two'>second</option>
                 <option value='three'>third</option>
-                </select>";
+            </select>
+        ";
+
+        [Test]
+        public void Select_should_select_option()
+        {
+            Element.Select("first");
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
 
         [Test]
         public void Setting_value_should_select_option()
@@ -51,7 +59,7 @@ namespace PageObject.Tests.Elements
         }
 
         [TestFixture]
-        public class DisabledSelectElementTest : ElementTest<TestPage<Select>, Select>
+        public class DisabledSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
         {
             protected override string ElementHtml => @"<select name='name' disabled/>";
 

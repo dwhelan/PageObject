@@ -82,7 +82,7 @@
     <Compile Include="Elements\ElementTest.cs" />
     <Compile Include="Elements\MultiSelectElementTest.cs" />
     <Compile Include="Elements\TestPage.cs" />
-    <Compile Include="Elements\SelectTest.cs" />
+    <Compile Include="Elements\SelectElementTest.cs" />
     <Compile Include="Elements\TextElementTest.cs" />
     <Compile Include="OnPageTests.cs" />
     <Compile Include="PageConstruction\BaseTest.cs" />
