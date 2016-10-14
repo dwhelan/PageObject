@@ -35,7 +35,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Value_should_be_single_option_when_one_option_is_selected()
+        public void Setting_value_should_allow_single_option_to_be_set()
         {
             var selected = new List<string> { "First" };
             Element.Value = selected;
@@ -43,11 +43,19 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Value_should_be_multiple_options_when_multiple_options_are_selected()
+        public void Setting_value_should_allow_multiple_options_to_be_set()
         {
             var selected = new List<string> { "First", "Second" };
             Element.Value = selected;
             Assert.That(Element.Value, Is.EqualTo(selected));
+        }
+
+        [Test]
+        public void Setting_empty_value_should_deselect_all_selections()
+        {
+            Element.Value = new List<string> { "First", "Second" };
+            Element.Value = new List<string>();
+            Assert.That(Element.Value, Is.Empty);
         }
 
         [Test]
@@ -58,10 +66,27 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Select_should_deselect_a_previously_selected_option()
+        public void Select_should_be_idempotent()
         {
             Element.Select("First");
             Element.Select("First");
+            Assert.That(Element.Value, Has.Exactly(1).EqualTo("First"));
+        }
+
+        [Test]
+        public void Deselect_should_select_a_previously_unselected_option()
+        {
+            Element.Select("First");
+            Element.Deselect("First");
+            Assert.That(Element.Value, Is.Empty);
+        }
+
+        [Test]
+        public void Deselect_should_be_idempotent()
+        {
+            Element.Select("First");
+            Element.Deselect("First");
+            Element.Deselect("First");
             Assert.That(Element.Value, Is.Empty);
         }
 
@@ -79,7 +104,7 @@ namespace PageObject.Tests.Elements
         }
 
         [TestFixture]
-        public class DisabledMultiSelectElementTest : ElementTest<TestPage<Select>, Select>
+        public class DisabledTest : ElementTest<TestPage<Select>, Select>
         {
             protected override string ElementHtml => @"<select name='name' multiple disabled/>";
 

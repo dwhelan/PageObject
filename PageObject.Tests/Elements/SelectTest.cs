@@ -16,7 +16,7 @@ namespace PageObject.Tests.Elements
                 </select>";
 
         [Test]
-        public void Setting_Value_should_select_option()
+        public void Setting_value_should_select_option()
         {
             Element.Value = "first";
             Assert.That(Element.Value, Is.EqualTo("first"));
