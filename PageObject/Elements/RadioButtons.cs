@@ -40,7 +40,7 @@ namespace PageObject.Elements
 
         public IList<string> Options => Buttons.Select(ValueOf).ToList();
 
-        private static string ValueOf(ElementScope radioButton)
+        private string ValueOf(ElementScope radioButton)
         {
             if (radioButton == null)
                 return "";
@@ -48,12 +48,6 @@ namespace PageObject.Elements
             var labelText = LabelTextFor(radioButton);
 
             return string.IsNullOrEmpty(labelText) ?  radioButton.Value : labelText;
-        }
-
-        private static string LabelTextFor(ElementScope radioButton)
-        {
-            var allLabels = radioButton.FindAllXPath($"//label[@for='{radioButton.Id}'] | .//parent::label");
-            return string.Join(" ", allLabels.Select(label => label.Text));
         }
 
         private IEnumerable<ElementScope> Buttons => FindAllXPathOrThrow(ButtonsXpath(), "radio button");

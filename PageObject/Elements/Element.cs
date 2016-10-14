@@ -38,5 +38,11 @@ namespace PageObject.Elements
 
             return elements;
         }
+
+        protected string LabelTextFor(ElementScope element)
+        {
+            var allLabels = element.FindAllXPath($"//label[@for='{element.Id}'] | .//parent::label");
+            return string.Join(" ", allLabels.Select(label => label.Text));
+        }
     }
 }
