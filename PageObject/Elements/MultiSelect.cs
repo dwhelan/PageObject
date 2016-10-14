@@ -29,6 +29,8 @@ namespace PageObject.Elements
                 Toggle(option);
         }
 
+        public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
+
         public void Deselect(string option)
         {
             if (Selected(option))

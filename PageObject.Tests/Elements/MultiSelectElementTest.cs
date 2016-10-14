@@ -91,6 +91,12 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Options_should_return_all_options()
+        {
+            Assert.That(Element.Options, Is.EqualTo(new List<string> { "First", "Second", "Third"}));
+        }
+
+        [Test]
         public void Should_get_text()
         {
             Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Third\s*$"));
