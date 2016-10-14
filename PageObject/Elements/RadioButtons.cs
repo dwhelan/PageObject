@@ -28,11 +28,6 @@ namespace PageObject.Elements
             }
         }
 
-        protected void Choose(Coypu.Element radioButton)
-        {
-            Driver.Choose(radioButton);
-        }
-
         public string StripWhitespace(string text)
         {
             return text.Replace(" ", "");

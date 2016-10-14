@@ -49,5 +49,10 @@ namespace PageObject.Elements
         {
             return elements.FirstOrDefault(element => element.Selected);
         }
+
+        protected void Choose(Coypu.Element radioButton)
+        {
+            Driver.Choose(radioButton);
+        }
     }
 }
