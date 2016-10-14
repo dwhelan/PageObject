@@ -12,10 +12,7 @@ namespace PageObject.Elements
 
         public IList<string> Value
         {
-            get
-            {
-                return (from option in Options where option.Selected select option.Text).ToList();
-            }
+            get { return (from option in Options where option.Selected select option.Text).ToList(); }
             set
             {
                 foreach (var option in Options)
@@ -31,6 +28,7 @@ namespace PageObject.Elements
             Scope.Select(option).From(Locator);
         }
 
-        private IEnumerable<SnapshotElementScope> Options => Element.FindAllCss("option");
+//        private IEnumerable<SnapshotElementScope> Options => Element.FindAllCss("option");
+        private IEnumerable<ElementScope> Options => FindAllXPathOrThrow(".//option", "option");
     }
 }
