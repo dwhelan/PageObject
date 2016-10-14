@@ -9,12 +9,12 @@ namespace PageObject.Tests.Elements
     public class RadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
     {
         protected override string ElementHtml => $@"
-            {OtherRadioButton}<br/>
             {RadioButton1}<br/> 
             {RadioButton2}<br/> 
             {RadioButton3}<br/> 
             {RadioButton4}<br/> 
             {RadioButton5}<br/> 
+            {OtherRadioButton}<br/>
         ";
 
         private const string OtherRadioButton = @"
@@ -91,10 +91,16 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        [Explicit]
         public void Should_choose_by_all_labels_together()
         {
             Element.Value = "second otherSecond";
+            Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
+        }
+
+        [Test]
+        public void Should_choose_by_all_labels_together_removing_spaces()
+        {
+            Element.Value = " second   otherSecond  ";
             Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
         }
 

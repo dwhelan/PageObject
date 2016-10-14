@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
@@ -10,11 +11,36 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return ValueOf(Selection); }
-            set { Driver.Choose(ButtonWith(value)); }
+            get { return ValueOf(SelectedButton); }
+            set { Choose(value); }
         }
 
-        private string ValueOf(ElementScope radioButton)
+        private void Choose(string value)
+        {
+            try
+            {
+               Choose(ButtonWith(value));
+            }
+            catch (MissingHtmlException)
+            {
+                var radioButton = Buttons.First(button => StripWhitespace(LabelTextFor(button)).Equals(StripWhitespace(value)));
+                Choose(radioButton);
+            }
+        }
+
+        protected void Choose(Coypu.Element radioButton)
+        {
+            Driver.Choose(radioButton);
+        }
+
+        public string StripWhitespace(string text)
+        {
+            return text.Replace(" ", "");
+        }
+
+        public IList<string> Options => Buttons.Select(ValueOf).ToList();
+
+        private static string ValueOf(ElementScope radioButton)
         {
             if (radioButton == null)
                 return "";
@@ -24,17 +50,15 @@ namespace PageObject.Elements
             return string.IsNullOrEmpty(labelText) ?  radioButton.Value : labelText;
         }
 
-        private static string LabelTextFor(ElementScope element)
+        private static string LabelTextFor(ElementScope radioButton)
         {
-            var labels = element.FindAllXPath($"//label[@for='{element.Id}'] | .//parent::label");
-            return string.Join(" ", labels.Select(label => label.Text));
+            var allLabels = radioButton.FindAllXPath($"//label[@for='{radioButton.Id}'] | .//parent::label");
+            return string.Join(" ", allLabels.Select(label => label.Text));
         }
-
-        public IList<string> Options => Buttons.Select(radioButton => ValueOf(radioButton)).ToList();
 
         private IEnumerable<ElementScope> Buttons => FindAllXPathOrThrow(ButtonsXpath(), "radio button");
 
-        private ElementScope Selection => Buttons.FirstOrDefault(radioButton => radioButton.Selected);
+        private ElementScope SelectedButton => Buttons.FirstOrDefault(radioButton => radioButton.Selected);
 
         private ElementScope ButtonWith(string value)
         {
