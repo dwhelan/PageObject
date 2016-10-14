@@ -100,7 +100,7 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Should_choose_by_all_labels_together_removing_spaces()
         {
-            Element.Value = " second   otherSecond  ";
+            Element.Value = " \n\tsecond   otherSecond  ";
             Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
         }
 

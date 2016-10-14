@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Coypu;
 
 namespace PageObject.Elements
@@ -57,7 +58,7 @@ namespace PageObject.Elements
 
         protected string StripWhitespace(string text)
         {
-            return text.Replace(" ", "");
+            return Regex.Replace(text, @"\s+", "");
         }
     }
 }
