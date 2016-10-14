@@ -4,29 +4,22 @@ namespace PageObject.Elements
 {
     public class Checkbox : Input
     {
-        public Checkbox(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
-        {
-        }
+        public Checkbox(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
         public bool Value
         {
-            get { return Checked();}
-            set { if (value) Check(); else Uncheck(); }
+            get { return Element.Selected;}
+            set { if (value) Select(); else Deselect(); }
         }
 
-        public void Check()
+        public void Select()
         {
             Scope.Check(Locator);
         }
 
-        public void Uncheck()
+        public void Deselect()
         {
             Scope.Uncheck(Locator);
-        }
-
-        public bool Checked()
-        {
-            return Element.Selected;
         }
     }
 }
