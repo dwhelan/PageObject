@@ -11,12 +11,12 @@ namespace PageObject.Elements
         public string Value
         {
             get { return ValueOf(SelectedOrNull(Buttons)); }
-            set { Choose(value); }
+            set { Select(value); }
         }
 
         public IList<string> Options => Buttons.Select(ValueOf).ToList();
 
-        private void Choose(string value)
+        public void Select(string value)
         {
             try
             {

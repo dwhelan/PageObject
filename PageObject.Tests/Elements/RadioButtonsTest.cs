@@ -56,49 +56,56 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Should_set_by_value_attribute()
+        public void Select_should_select()
+        {
+            Element.Select("value1");
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Setting_value_should_select_by_value_attribute()
         {
             Element.Value = "value1";
             Assert.That(Element.Value, Is.EqualTo("first"));
         }
 
         [Test]
-        public void Should_set_by_id_attribute()
+        public void Setting_value_should_select_by_id_attribute()
         {
             Element.Value = "id1";
             Assert.That(Element.Value, Is.EqualTo("first"));
         }
 
         [Test]
-        public void Should_choose_by_parent_label()
+        public void Setting_value_should_select_by_parent_label()
         {
             Element.Value = "first";
             Assert.That(Element.Value, Is.EqualTo("first"));
         }
 
         [Test]
-        public void Should_choose_by_label()
+        public void Setting_value_should_select_by_label()
         {
             Element.Value = "second";
             Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
-        public void Should_choose_by_any_label()
+        public void Setting_value_should_select_by_any_label()
         {
             Element.Value = "otherSecond";
             Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
-        public void Should_choose_by_all_labels_together()
+        public void Setting_value_should_select_by_all_labels_together()
         {
             Element.Value = "second otherSecond";
             Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
-        public void Should_choose_by_all_labels_together_removing_spaces()
+        public void Setting_value_should_select_by_all_labels_together_removing_spaces()
         {
             Element.Value = " \n\tsecond   otherSecond  ";
             Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
