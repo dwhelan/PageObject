@@ -4,7 +4,7 @@ using Text = PageObject.Elements.Text;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class TextTest : ElementTest<TestPage<Text>, Text>
+    public class TextTest : InputTest<TestPage<Text>, Text>
     {
         protected override string ElementHtml => "<input type='text' name='name' value='initial'>text</input>";
 
@@ -25,26 +25,6 @@ namespace PageObject.Tests.Elements
         public void Should_get_text()
         {
             Assert.That(Element.Text, Is.EqualTo("text"));
-        }
-
-        [Test]
-        public void Should_be_enabled()
-        {
-            Assert.That(Element.Enabled, Is.True);
-            Assert.That(Element.Disabled, Is.False);
-        }
-
-        [TestFixture]
-        public class DisabledTextElementTest : ElementTest<TestPage<Text>, Text>
-        {
-            protected override string ElementHtml => "<input type='text' name='name' disabled>";
-
-            [Test]
-            public void Should_be_disabled()
-            {
-                Assert.That(Element.Enabled, Is.False);
-                Assert.That(Element.Disabled, Is.True);
-            }
         }
     }
 }

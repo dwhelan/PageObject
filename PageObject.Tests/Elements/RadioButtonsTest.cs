@@ -6,21 +6,16 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class RadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
+    public class RadioButtonsTest : InputTest<TestPage<RadioButtons>, RadioButtons>
     {
         protected override string ElementHtml => $@"
+            {RadioButtonForInputTests}Must be first!!!<br/>
             {RadioButton1}<br/> 
             {RadioButton2}<br/> 
             {RadioButton3}<br/> 
             {RadioButton4}<br/> 
             {RadioButton5}<br/> 
             {OtherRadioButton}<br/>
-        ";
-
-        private const string OtherRadioButton = @"
-            <label>
-                <input type='radio' name='other' id='id1' value='value1'/>other label1
-            </label>
         ";
 
         private const string RadioButton1 = @"
@@ -47,6 +42,18 @@ namespace PageObject.Tests.Elements
 
         private const string RadioButton5 = @"
              <input type='radio' name='name' id='id5'/>
+        ";
+
+        private const string OtherRadioButton = @"
+            <label>
+                <input type='radio' name='other' id='id1' value='value1'/>other label1
+            </label>
+        ";
+
+        private const string RadioButtonForInputTests = @"
+            <label>
+                <input type='radio' name='other' id='name' value='value1'/>other label1
+            </label>
         ";
 
         [Test]
@@ -138,22 +145,12 @@ namespace PageObject.Tests.Elements
             Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second otherSecond", "third otherThird yetAnotherThird", "value4", "on"}));
         }
 
-        [TestFixture]
-        public class NoRadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
+        [Test]
+        public new void Should_be_disabled()
         {
-            protected override string ElementHtml => "";
-
-            [Test]
-            public void Getting_value_should_throw()
-            {
-                Assert.Throws<MissingHtmlException>(() => { var x = Element.Value; });
-            }
-
-            [Test]
-            public void Setting_bad_value_should_throw()
-            {
-                Assert.Throws<MissingHtmlException>(() => { Element.Value = "bad value"; });
-            }
+            Session.Browser.ExecuteScript("document.getElementsByName('name')[0].disabled=true");
+            Assert.That(Element.Enabled, Is.False);
+            Assert.That(Element.Disabled, Is.True);
         }
     }
 }

@@ -19,14 +19,14 @@ namespace PageObject.Tests.Elements
         protected TE Element => page.Element;
         protected abstract string ElementHtml { get; }
 
-        private PageSession session;
+        protected PageSession Session { get; private set; }
         private TP page;
 
         [TestFixtureSetUp]
         public void CreatePage()
         {
-            session = CreateSession();
-            page = CreatePage(session);
+            Session = CreateSession();
+            page = CreatePage(Session);
             WriteHtml();
         }
 
@@ -58,7 +58,7 @@ namespace PageObject.Tests.Elements
         [TestFixtureTearDown]
         public void DisposeSession()
         {
-            session?.Dispose();
+            Session?.Dispose();
         }
     }
 }

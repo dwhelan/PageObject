@@ -5,7 +5,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class MultiSelectTest : ElementTest<TestPage<MultiSelect>, MultiSelect>
+    public class MultiSelectTest : InputTest<TestPage<MultiSelect>, MultiSelect>
     {
         protected override string ElementHtml =>
             @"<select name='name' multiple>
@@ -99,26 +99,6 @@ namespace PageObject.Tests.Elements
         public void Should_get_text()
         {
             Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Third\s*$"));
-        }
-
-        [Test]
-        public void Should_be_enabled()
-        {
-            Assert.That(Element.Enabled, Is.True);
-            Assert.That(Element.Disabled, Is.False);
-        }
-
-        [TestFixture]
-        public class DisabledTest : ElementTest<TestPage<MultiSelect>, MultiSelect>
-        {
-            protected override string ElementHtml => @"<select name='name' multiple disabled/>";
-
-            [Test]
-            public void Should_be_disabled()
-            {
-                Assert.That(Element.Enabled, Is.False);
-                Assert.That(Element.Disabled, Is.True);
-            }
         }
     }
 }

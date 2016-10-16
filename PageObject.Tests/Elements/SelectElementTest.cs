@@ -5,7 +5,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class SelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
+    public class SelectElementTest : InputTest<TestPage<SelectElement>, SelectElement>
     {
         protected override string ElementHtml => @"
             <select name='name'>
@@ -55,19 +55,6 @@ namespace PageObject.Tests.Elements
         public void Options_should_return_all_values()
         {
             Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second", "third" }));
-        }
-
-        [TestFixture]
-        public class DisabledSelectElementTest : ElementTest<TestPage<SelectElement>, SelectElement>
-        {
-            protected override string ElementHtml => @"<select name='name' disabled/>";
-
-            [Test]
-            public void Should_be_disabled()
-            {
-                Assert.That(Element.Enabled, Is.False);
-                Assert.That(Element.Disabled, Is.True);
-            }
         }
     }
 }
