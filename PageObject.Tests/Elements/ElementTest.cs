@@ -12,7 +12,7 @@ namespace PageObject.Tests.Elements
         internal const string HtmlFileName = "ElementTestPage.html";
     }
 
-    public abstract class ElementTest<TP, TE> where TP : TestPage<TE> where TE : HtmlElement
+    public abstract class ElementTest<TP, TE> where TP : TestPage<TE> where TE : PageObject.Elements.Element
     {
         protected virtual Browser Browser => Browser.PhantomJS;
 
@@ -59,23 +59,6 @@ namespace PageObject.Tests.Elements
         public void DisposeSession()
         {
             Session?.Dispose();
-        }
-
-        [Test]
-        public virtual void Should_provide_text()
-        {
-            Assert.That(Element.Text, Is.EqualTo(Element.Base.Text));
-        }
-
-        [Test]
-        public virtual void Base_should_provide_lower_level_access_to_the_page_element()
-        {
-            Assert.That(Element.Base.OuterHTML, Is.EqualTo(NormalizeHtml(ElementHtml)));
-        }
-
-        protected static string NormalizeHtml(string html)
-        {
-            return html.Trim().Replace("'", "\"");
         }
     }
 }

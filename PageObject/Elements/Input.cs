@@ -8,11 +8,10 @@ namespace PageObject.Elements
 
         public bool Enabled => !Disabled;
         public bool Disabled => Base.Disabled;
-        public string Text => Base.OuterScope.Text;
 
-        protected string InputXPath(string type, string contraints = "")
+        protected string InputXPath(string type, string constraints = "")
         {
-            return $".//input[@type='{type}' {contraints}]";
+            return $".//input[@type='{type}' {constraints}]";
         }
     }
 }

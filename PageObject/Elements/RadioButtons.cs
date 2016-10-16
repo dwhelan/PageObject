@@ -4,7 +4,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class RadioButtons : Input
+    public class RadioButtons : Element
     {
         public RadioButtons(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
@@ -33,8 +33,6 @@ namespace PageObject.Elements
             }
         }
 
-        public override ElementScope Base => null;
-
         private string ValueOf(ElementScope radioButton)
         {
             var labelText = LabelTextFor(radioButton);
@@ -50,13 +48,12 @@ namespace PageObject.Elements
 
         private string ButtonsXpath(string constraints = "")
         {
-            return InputXPath("radio", $" and @name='{Locator}' {constraints}");
+            return $".//input[@type='radio'and @name='{Locator}' {constraints}]";
         }
 
         private void Choose(Coypu.Element element)
         {
             Driver.Choose(element);
         }
-
     }
 }

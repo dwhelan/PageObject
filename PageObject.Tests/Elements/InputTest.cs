@@ -7,7 +7,7 @@ using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
-    public abstract class InputTest<TP, TE> : ElementTest<TP, TE> where TP : TestPage<TE> where TE : Input
+    public abstract class InputTest<TP, TE> : HtmlElementTest<TP, TE> where TP : TestPage<TE> where TE : Input
     {
         [Test]
         public void Should_be_enabled()

@@ -146,19 +146,5 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second otherSecond", "third otherThird yetAnotherThird", "value4", "on"}));
         }
-
-        [Test]
-        [Ignore("There is no base element")]
-        public override void Base_should_provide_lower_level_access_to_the_page_element()
-        {
-            Assert.That(Element.Base, Is.EqualTo(Element.Scope));
-        }
-
-        [Test]
-        [Ignore("There is no base element")]
-        public override void Should_provide_text()
-        {
-            Assert.That(Element.Text, Is.EqualTo(Element.Base.Text));
-        }
     }
 }
