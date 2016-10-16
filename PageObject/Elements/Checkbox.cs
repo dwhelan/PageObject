@@ -8,18 +8,18 @@ namespace PageObject.Elements
 
         public bool Value
         {
-            get { return Base.Selected;}
+            get { return Scope.Selected;}
             set { if (value) Select(); else Deselect(); }
         }
 
         public void Select()
         {
-            Scope.Check(Locator);
+            SearchScope.Check(Locator);
         }
 
         public void Deselect()
         {
-            Scope.Uncheck(Locator);
+            SearchScope.Uncheck(Locator);
         }
     }
 }

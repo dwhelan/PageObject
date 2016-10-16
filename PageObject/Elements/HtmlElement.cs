@@ -8,7 +8,7 @@ namespace PageObject.Elements
         {
         }
 
-        public virtual ElementScope Base => Scope.FindField(Locator);
-        public string Text => Base.Text;
+        public virtual ElementScope Scope => SearchScope.FindField(Locator);
+        public string Text => Scope.Text;
     }
 }

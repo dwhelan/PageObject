@@ -9,13 +9,13 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Base.SelectedOption; }
+            get { return Scope.SelectedOption; }
             set { Select(value); }
         }
 
         public void Select(string value)
         {
-            Scope.Select(value).From(Locator);
+            SearchScope.Select(value).From(Locator);
         }
 
         public IList<string> Options => new List<string>();

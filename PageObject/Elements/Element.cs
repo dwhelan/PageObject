@@ -17,7 +17,7 @@ namespace PageObject.Elements
             Browser = browser;
         }
 
-        public Scope Scope => Browser;
+        public Scope SearchScope => Browser;
 
         private ElementAttribute Attribute { get; }
 
@@ -29,7 +29,7 @@ namespace PageObject.Elements
 
         protected ElementScope FindXPath(string xPath, Options options = null)
         {
-            return Scope.FindXPath(xPath, options);
+            return SearchScope.FindXPath(xPath, options);
         }
 
         protected string WithId(string id) { return $"@id = '{id}'"; }
@@ -40,7 +40,7 @@ namespace PageObject.Elements
 
         protected IEnumerable<ElementScope> FindAllXPathOrThrow(string xPath, string elementDescription = "element")
         {
-            var elements = Scope.FindAllXPath(xPath).ToList();
+            var elements = SearchScope.FindAllXPath(xPath).ToList();
             if (elements.Count == 0)
                 throw new MissingHtmlException($"Could not find {elementDescription} via xpath {xPath}");
 

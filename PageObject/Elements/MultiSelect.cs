@@ -39,7 +39,7 @@ namespace PageObject.Elements
 
         private void Toggle(string option)
         {
-            Scope.Select(option).From(Locator);
+            SearchScope.Select(option).From(Locator);
         }
 
         private bool Selected(string option)
