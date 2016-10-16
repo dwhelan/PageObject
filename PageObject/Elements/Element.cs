@@ -17,11 +17,13 @@ namespace PageObject.Elements
             Browser = browser;
         }
 
-        private ElementAttribute Attribute { get; }
-        protected Scope Scope => Browser;
         public ElementScope Base => Scope.FindField(Locator);
 
         public string Text => Base.Text;
+
+        private ElementAttribute Attribute { get; }
+
+        protected Scope Scope => Browser;
 
         protected string LabelTextFor(ElementScope element)
         {
@@ -29,10 +31,6 @@ namespace PageObject.Elements
             return string.Join(" ", allLabels.Select(label => label.Text));
         }
 
-        protected ElementScope SelectedOrNull(IEnumerable<ElementScope> elements)
-        {
-            return elements.FirstOrDefault(element => element.Selected);
-        }
 
         protected void Choose(Coypu.Element element)
         {

@@ -59,7 +59,7 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Value_should_be_an_empty_string_when_no_radio_buttons_chosen()
         {
-            Assert.That(Element.Value, Is.EqualTo(""));
+            Assert.That(Element.Value, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -146,7 +146,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        [Ignore("There is no foo")]
+        [Ignore("There is no base element")]
         public override void Base_should_provide_lower_level_access_to_the_page_element()
         {
             Assert.That(Element.Base.OuterHTML, Is.EqualTo(NormalizeHtml(ElementHtml)));

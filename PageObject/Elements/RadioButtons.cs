@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
@@ -10,7 +11,11 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return ValueOf(SelectedOrNull(Buttons)); }
+            get
+            {
+                var button = Buttons.FirstOrDefault(radioButton => radioButton.Selected);
+                return button == null ? string.Empty : ValueOf(button);
+            }
             set { Select(value); }
         }
 
@@ -31,11 +36,7 @@ namespace PageObject.Elements
 
         private string ValueOf(ElementScope radioButton)
         {
-            if (radioButton == null)
-                return "";
-
             var labelText = LabelTextFor(radioButton);
-
             return string.IsNullOrEmpty(labelText) ? radioButton.Value : labelText;
         }
 
