@@ -17,24 +17,14 @@ namespace PageObject.Elements
             Browser = browser;
         }
 
-        public ElementScope Base => Scope.FindField(Locator);
-
-        public string Text => Base.Text;
+        public Scope Scope => Browser;
 
         private ElementAttribute Attribute { get; }
-
-        protected Scope Scope => Browser;
 
         protected string LabelTextFor(ElementScope element)
         {
             var allLabels = element.FindAllXPath($"//label[@for='{element.Id}'] | .//parent::label");
             return string.Join(" ", allLabels.Select(label => label.Text));
-        }
-
-
-        protected void Choose(Coypu.Element element)
-        {
-            Driver.Choose(element);
         }
 
         protected ElementScope FindXPath(string xPath, Options options = null)

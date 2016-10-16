@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
@@ -34,6 +33,8 @@ namespace PageObject.Elements
             }
         }
 
+        public override ElementScope Base => null;
+
         private string ValueOf(ElementScope radioButton)
         {
             var labelText = LabelTextFor(radioButton);
@@ -51,5 +52,11 @@ namespace PageObject.Elements
         {
             return InputXPath("radio", $" and @name='{Locator}' {constraints}");
         }
+
+        private void Choose(Coypu.Element element)
+        {
+            Driver.Choose(element);
+        }
+
     }
 }

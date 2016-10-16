@@ -4,7 +4,6 @@ using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject.Elements;
-using Element = PageObject.Elements.Element;
 
 namespace PageObject.Tests.Elements
 {

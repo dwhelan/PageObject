@@ -6,16 +6,18 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class RadioButtonsTest : InputTest<TestPage<RadioButtons>, RadioButtons>
+    public class RadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
     {
         protected override string ElementHtml => $@"
-            {RadioButtonForInputTests}Must be first!!!<br/>
-            {RadioButton1}<br/> 
-            {RadioButton2}<br/> 
-            {RadioButton3}<br/> 
-            {RadioButton4}<br/> 
-            {RadioButton5}<br/> 
-            {OtherRadioButton}<br/>
+            <div>
+                {RadioButtonForInputTests}Must be first!!!<br/>
+                {RadioButton1}<br/> 
+                {RadioButton2}<br/> 
+                {RadioButton3}<br/> 
+                {RadioButton4}<br/> 
+                {RadioButton5}<br/> 
+                {OtherRadioButton}<br/>
+            </div>
         ";
 
         private const string RadioButton1 = @"
@@ -149,7 +151,14 @@ namespace PageObject.Tests.Elements
         [Ignore("There is no base element")]
         public override void Base_should_provide_lower_level_access_to_the_page_element()
         {
-            Assert.That(Element.Base.OuterHTML, Is.EqualTo(NormalizeHtml(ElementHtml)));
+            Assert.That(Element.Base, Is.EqualTo(Element.Scope));
+        }
+
+        [Test]
+        [Ignore("There is no base element")]
+        public override void Should_provide_text()
+        {
+            Assert.That(Element.Text, Is.EqualTo(Element.Base.Text));
         }
     }
 }

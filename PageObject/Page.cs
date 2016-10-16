@@ -30,7 +30,7 @@ namespace PageObject
             Session.Page = this;
         }
 
-        public T Element<T>([CallerMemberName]string propertyName = "") where T : Elements.Element
+        public T Element<T>([CallerMemberName]string propertyName = "") where T : Elements.HtmlElement
         {
             return ElementFactory.ElementFor<T>(this, propertyName);
         }

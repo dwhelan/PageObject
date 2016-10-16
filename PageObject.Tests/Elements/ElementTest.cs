@@ -3,7 +3,7 @@ using System.IO;
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
-using Element = PageObject.Elements.Element;
+using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
@@ -12,7 +12,7 @@ namespace PageObject.Tests.Elements
         internal const string HtmlFileName = "ElementTestPage.html";
     }
 
-    public abstract class ElementTest<TP, TE> where TP : TestPage<TE> where TE : Element
+    public abstract class ElementTest<TP, TE> where TP : TestPage<TE> where TE : HtmlElement
     {
         protected virtual Browser Browser => Browser.PhantomJS;
 
@@ -62,7 +62,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Should_provide_text()
+        public virtual void Should_provide_text()
         {
             Assert.That(Element.Text, Is.EqualTo(Element.Base.Text));
         }
