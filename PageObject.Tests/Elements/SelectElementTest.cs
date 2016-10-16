@@ -44,6 +44,20 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Should_be_able_to_select_by_clicking()
+        {
+            Element.Click("first");
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
+
+        public void Should_keep_option_selected_when_clicked_multiple_times()
+        {
+            Element.Click("first");
+            Element.Click("first");
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
         [Ignore]
         public void Options_should_return_all_values()
         {

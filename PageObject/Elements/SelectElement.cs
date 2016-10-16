@@ -10,14 +10,19 @@ namespace PageObject.Elements
         public string Value
         {
             get { return Scope.SelectedOption; }
-            set { Select(value); }
+            set { Click(value); }
         }
 
         public void Select(string value)
         {
-            SearchScope.Select(value).From(Locator);
+            Click(value);
         }
 
         public IList<string> Options => new List<string>();
+
+        public void Click(string value)
+        {
+            SearchScope.Select(value).From(Locator);
+        }
     }
 }
