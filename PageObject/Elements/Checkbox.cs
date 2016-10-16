@@ -8,7 +8,7 @@ namespace PageObject.Elements
 
         public bool Value
         {
-            get { return Element.Selected;}
+            get { return Base.Selected;}
             set { if (value) Select(); else Deselect(); }
         }
 

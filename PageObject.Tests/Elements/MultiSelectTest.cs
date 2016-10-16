@@ -8,7 +8,7 @@ namespace PageObject.Tests.Elements
     public class MultiSelectTest : InputTest<TestPage<MultiSelect>, MultiSelect>
     {
         protected override string ElementHtml =>
-            @"<select name='name' multiple>
+            @"<select name='name' multiple=''>
                 <option value='one'>First</option>
                 <option value='two'>Second</option>
                 <option value='three'>Third</option>

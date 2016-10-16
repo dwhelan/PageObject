@@ -44,13 +44,6 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Should_be_enabled()
-        {
-            Assert.That(Element.Enabled, Is.True);
-            Assert.That(Element.Disabled, Is.False);
-        }
-
-        [Test]
         [Ignore]
         public void Options_should_return_all_values()
         {

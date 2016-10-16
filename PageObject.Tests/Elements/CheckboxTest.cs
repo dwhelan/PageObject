@@ -6,7 +6,7 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class CheckboxTest : InputTest<TestPage<Checkbox>, Checkbox>
     {
-        protected override string ElementHtml => @"<input type='checkbox' name='name'>text</input>";
+        protected override string ElementHtml => @"<input type='checkbox' name='name'>";
 
         [Test]
         public void Should_be_able_to_select()
@@ -50,12 +50,6 @@ namespace PageObject.Tests.Elements
         {
             Element.Value = false;
             Assert.That(Element.Value, Is.False);
-        }
-
-        [Test]
-        public void Should_provide_text()
-        {
-            Assert.That(Element.Text, Is.EqualTo("text"));
         }
     }
 }

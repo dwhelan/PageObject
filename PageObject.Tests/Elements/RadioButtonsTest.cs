@@ -146,11 +146,10 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public new void Should_be_disabled()
+        [Ignore("There is no foo")]
+        public override void Base_should_provide_lower_level_access_to_the_page_element()
         {
-            Session.Browser.ExecuteScript("document.getElementsByName('name')[0].disabled=true");
-            Assert.That(Element.Enabled, Is.False);
-            Assert.That(Element.Disabled, Is.True);
+            Assert.That(Element.Base.OuterHTML, Is.EqualTo(NormalizeHtml(ElementHtml)));
         }
     }
 }

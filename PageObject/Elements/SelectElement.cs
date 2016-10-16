@@ -9,7 +9,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Element.SelectedOption; }
+            get { return Base.SelectedOption; }
             set { Select(value); }
         }
 

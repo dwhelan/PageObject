@@ -19,6 +19,9 @@ namespace PageObject.Elements
 
         private ElementAttribute Attribute { get; }
         protected Scope Scope => Browser;
+        public ElementScope Base => Scope.FindField(Locator);
+
+        public string Text => Base.Text;
 
         protected string LabelTextFor(ElementScope element)
         {
