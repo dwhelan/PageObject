@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Coypu;
 
 namespace PageObject.Elements
@@ -18,7 +19,7 @@ namespace PageObject.Elements
             Click(value);
         }
 
-        public IList<string> Options => new List<string>();
+        public IList<string> Options => FindAllXPathOrThrow(".//option", "option").Select(option => option.Text).ToList();
 
         public void Click(string value)
         {

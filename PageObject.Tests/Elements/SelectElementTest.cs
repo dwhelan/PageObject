@@ -58,7 +58,6 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        [Ignore]
         public void Options_should_return_all_values()
         {
             Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second", "third" }));
