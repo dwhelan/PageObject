@@ -18,7 +18,7 @@ namespace PageObject.Elements
                 foreach (var option in OptionElements)
                 {
                     if (value.Contains(option.Text) != option.Selected)
-                        Toggle(option.Text);
+                        Click(option.Text);
                 }
             }
         }
@@ -26,21 +26,22 @@ namespace PageObject.Elements
         public void Select(string option)
         {
             if (!Selected(option))
-                Toggle(option);
+                Click(option);
         }
 
         public void Deselect(string option)
         {
             if (Selected(option))
-                Toggle(option);
+                Click(option);
+        }
+
+        public void Click(string option)
+        {
+            SearchScope.Select(option).From(Locator);
         }
 
         public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
 
-        private void Toggle(string option)
-        {
-            SearchScope.Select(option).From(Locator);
-        }
 
         private bool Selected(string option)
         {

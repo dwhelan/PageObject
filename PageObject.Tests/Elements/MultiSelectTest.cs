@@ -7,12 +7,12 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class MultiSelectTest : InputTest<TestPage<MultiSelect>, MultiSelect>
     {
-        protected override string ElementHtml =>
-            @"<select name='name' multiple=''>
+        protected override string ElementHtml =>@"
+            <select name='name' multiple=''>
                 <option value='one'>First</option>
                 <option value='two'>Second</option>
                 <option value='three'>Third</option>
-                </select>";
+            </select>";
 
         [Test]
         public void Value_should_be_empty_when_no_options_are_selected()
@@ -86,6 +86,21 @@ namespace PageObject.Tests.Elements
             Element.Select("First");
             Element.Deselect("First");
             Element.Deselect("First");
+            Assert.That(Element.Value, Is.Empty);
+        }
+
+        [Test]
+        public void Click_should_select_a_previously_unselected_option()
+        {
+            Element.Click("First");
+            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+        }
+
+        [Test]
+        public void Click_should_deselect_a_previously_selected_option()
+        {
+            Element.Click("First");
+            Element.Click("First");
             Assert.That(Element.Value, Is.Empty);
         }
 
