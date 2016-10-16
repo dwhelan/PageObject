@@ -97,11 +97,11 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Click_should_deselect_a_previously_selected_option()
+        public void Click_should_be_idempotent_()
         {
             Element.Click("First");
             Element.Click("First");
-            Assert.That(Element.Value, Is.Empty);
+            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
         }
 
         [Test]
