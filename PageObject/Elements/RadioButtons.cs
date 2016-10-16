@@ -15,12 +15,17 @@ namespace PageObject.Elements
                 var button = Buttons.FirstOrDefault(radioButton => radioButton.Selected);
                 return button == null ? string.Empty : ValueOf(button);
             }
-            set { Select(value); }
+            set { Click(value); }
         }
 
         public IList<string> Options => Buttons.Select(ValueOf).ToList();
 
         public void Select(string value)
+        {
+            Click(value);
+        }
+
+        public void Click(string value)
         {
             try
             {

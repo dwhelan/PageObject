@@ -146,5 +146,12 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second otherSecond", "third otherThird yetAnotherThird", "value4", "on"}));
         }
+
+        [Test]
+        public void Click_should_select()
+        {
+            Element.Click("first");
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
     }
 }
