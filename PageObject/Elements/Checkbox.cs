@@ -21,5 +21,10 @@ namespace PageObject.Elements
         {
             SearchScope.Uncheck(Locator);
         }
+
+        public void Click()
+        {
+           Scope.Click();
+        }
     }
 }

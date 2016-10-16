@@ -51,5 +51,20 @@ namespace PageObject.Tests.Elements
             Element.Value = false;
             Assert.That(Element.Value, Is.False);
         }
+
+        [Test]
+        public void Should_be_able_to_check_by_clicking()
+        {
+            Element.Click();
+            Assert.That(Element.Value, Is.True);
+        }
+
+        [Test]
+        public void Click_should_toggle_state()
+        {
+            Element.Click();
+            Element.Click();
+            Assert.That(Element.Value, Is.False);
+        }
     }
 }
