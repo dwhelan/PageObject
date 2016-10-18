@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject.Elements;
 
@@ -119,15 +118,6 @@ namespace PageObject.Tests.Elements
             Element.Click("First");
             Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
         }
-
-        //[Test]
-        //[Ignore]
-        //public void Extended_click_should_allow_multiple()
-        //{
-        //    Element.Click("First");
-        //    Element.ExtendedClick("Second");
-        //    Assert.That(Element.Value, Is.EqualTo(new List<string> { "First", "Second" }));
-        //}
 
         [Test]
         public void Options_should_return_all_options()

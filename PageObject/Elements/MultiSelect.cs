@@ -1,17 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace PageObject.Elements
 {
     public class MultiSelect : Input
     {
-        public MultiSelect(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
-        {
-        }
+        public MultiSelect(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
         public IList<string> Value
         {
@@ -36,7 +31,14 @@ namespace PageObject.Elements
             SetOptions(options, false);
         }
 
-        private void SetOptions(string[] options, bool selected)
+        public void Click(string option)
+        {
+            Select(option);
+        }
+
+        public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
+
+        private void SetOptions(IEnumerable<string> options, bool selected)
         {
             foreach (var option in options)
             {
@@ -44,32 +46,6 @@ namespace PageObject.Elements
                     Toggle(option);
             }
         }
-
-        public void Click(string option)
-        {
-            Select(option);
-        }
-
-        //public void ExtendedClick(string option)
-        //{
-        //    WithKey(Keys.Control, () => Click(option));
-        //}
-
-        public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
-
-        //protected void WithKey(string key, Action action)
-        //{
-        //    var actions = new Actions((IWebDriver)Driver.Native);
-        //    actions.KeyDown(Keys.Control);
-        //    try
-        //    {
-        //        action.Invoke();
-        //    }
-        //    finally
-        //    {
-        //        actions.KeyUp(Keys.Control);
-        //    }
-        //}
 
         private void Toggle(string option)
         {
