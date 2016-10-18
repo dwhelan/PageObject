@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Coypu;
 
 namespace PageObject.Elements
@@ -25,6 +26,11 @@ namespace PageObject.Elements
         public void Click()
         {
            Scope.Click();
+        }
+
+        public IList<bool> Options()
+        {
+            return new List<bool> {true, false};
         }
     }
 }

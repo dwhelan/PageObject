@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
@@ -57,6 +58,12 @@ namespace PageObject.Tests.Elements
         {
             Element.Click();
             Assert.That(Element.Value, Is.True);
+        }
+
+        [Test]
+        public void Options_should_return_list_of_true_and_false()
+        {
+            Assert.That(Element.Options, Is.EqualTo(new List<bool> { true, false }));
         }
 
         [Test]

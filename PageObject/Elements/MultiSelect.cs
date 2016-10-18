@@ -36,7 +36,7 @@ namespace PageObject.Elements
             Select(option);
         }
 
-        public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
+        public IList<string> Options => OptionElements.Select(option => option.Text).ToList();
 
         private void SetOptions(IEnumerable<string> options, bool selected)
         {
