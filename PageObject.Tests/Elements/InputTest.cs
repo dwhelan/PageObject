@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using Coypu;
-using Coypu.Drivers;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
@@ -17,7 +13,6 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        [Ignore]
         public void Should_be_disabled()
         {
             Session.Browser.ExecuteScript("document.getElementsByName('name')[0].disabled=true");

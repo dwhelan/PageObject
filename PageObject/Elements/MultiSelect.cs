@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace PageObject.Elements
 {
@@ -23,16 +26,22 @@ namespace PageObject.Elements
             }
         }
 
-        public void Select(string option)
+        public void Select(params string[] options)
         {
-            if (!Selected(option))
-                Toggle(option);
+            foreach (var option in options)
+            {
+                if (!Selected(option))
+                    Toggle(option);
+            }
         }
 
-        public void Deselect(string option)
+        public void Deselect(params string[] options)
         {
-            if (Selected(option))
-                Toggle(option);
+            foreach (var option in options)
+            {
+                if (Selected(option))
+                    Toggle(option);
+            }
         }
 
         public void Click(string option)
@@ -40,12 +49,31 @@ namespace PageObject.Elements
             Select(option);
         }
 
+        //public void ExtendedClick(string option)
+        //{
+        //    WithKey(Keys.Control, () => Click(option));
+        //}
+
+        public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
+
+        //protected void WithKey(string key, Action action)
+        //{
+        //    var actions = new Actions((IWebDriver)Driver.Native);
+        //    actions.KeyDown(Keys.Control);
+        //    try
+        //    {
+        //        action.Invoke();
+        //    }
+        //    finally
+        //    {
+        //        actions.KeyUp(Keys.Control);
+        //    }
+        //}
+
         private void Toggle(string option)
         {
             SearchScope.Select(option).From(Locator);
         }
-
-        public IList<string> Options => OptionElements.Select(o => o.Text).ToList();
 
         private bool Selected(string option)
         {
@@ -58,5 +86,7 @@ namespace PageObject.Elements
         }
 
         private IEnumerable<ElementScope> OptionElements => FindAllXPathOrThrow(".//option", "option");
+
+
     }
 }

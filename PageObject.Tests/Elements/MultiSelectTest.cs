@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Coypu.Drivers;
 using NUnit.Framework;
 using PageObject.Elements;
 
@@ -65,6 +66,13 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Select_should_support_multiple_options()
+        {
+            Element.Select("First", "Second");
+            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First", "Second" }));
+        }
+
+        [Test]
         public void Select_should_be_idempotent()
         {
             Element.Select("First");
@@ -90,6 +98,14 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Deselect_should_support_multiple_options()
+        {
+            Element.Select("First", "Second");
+            Element.Deselect("Second", "Third");
+            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+        }
+
+        [Test]
         public void Click_should_select_a_previously_unselected_option()
         {
             Element.Click("First");
@@ -97,12 +113,21 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Click_should_be_idempotent_()
+        public void Click_should_be_idempotent()
         {
             Element.Click("First");
             Element.Click("First");
             Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
         }
+
+        //[Test]
+        //[Ignore]
+        //public void Extended_click_should_allow_multiple()
+        //{
+        //    Element.Click("First");
+        //    Element.ExtendedClick("Second");
+        //    Assert.That(Element.Value, Is.EqualTo(new List<string> { "First", "Second" }));
+        //}
 
         [Test]
         public void Options_should_return_all_options()
