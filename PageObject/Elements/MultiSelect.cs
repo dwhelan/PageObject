@@ -28,18 +28,19 @@ namespace PageObject.Elements
 
         public void Select(params string[] options)
         {
-            foreach (var option in options)
-            {
-                if (!Selected(option))
-                    Toggle(option);
-            }
+            SetOptions(options, true);
         }
 
         public void Deselect(params string[] options)
         {
+            SetOptions(options, false);
+        }
+
+        private void SetOptions(string[] options, bool selected)
+        {
             foreach (var option in options)
             {
-                if (Selected(option))
+                if (Selected(option) != selected)
                     Toggle(option);
             }
         }
@@ -86,7 +87,5 @@ namespace PageObject.Elements
         }
 
         private IEnumerable<ElementScope> OptionElements => FindAllXPathOrThrow(".//option", "option");
-
-
     }
 }
