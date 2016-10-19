@@ -13,13 +13,13 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Scope.Value; }
+            get { return Element.Value; }
             set { SearchScope.FillIn(Locator).With(value);}
         }
 
         public void SendKeys(string keys)
         {
-            Scope.SendKeys(keys);
+            Element.SendKeys(keys);
         }
     }
 }

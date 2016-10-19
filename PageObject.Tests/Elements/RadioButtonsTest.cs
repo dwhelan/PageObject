@@ -7,6 +7,8 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class RadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
     {
+        private RadioButtons RadioButtons => Element;
+
         protected override string ElementHtml => $@"
             <div>
                 {RadioButtonForInputTests}Must be first!!!<br/>
@@ -60,97 +62,97 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Value_should_be_an_empty_string_when_no_radio_buttons_chosen()
         {
-            Assert.That(Element.Value, Is.EqualTo(string.Empty));
+            Assert.That(RadioButtons.Value, Is.EqualTo(string.Empty));
         }
 
         [Test]
         public void Select_should_select()
         {
-            Element.Select("value1");
-            Assert.That(Element.Value, Is.EqualTo("first"));
+            RadioButtons.Select("value1");
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
         }
 
         [Test]
         public void Setting_value_should_select_by_value_attribute()
         {
-            Element.Value = "value1";
-            Assert.That(Element.Value, Is.EqualTo("first"));
+            RadioButtons.Value = "value1";
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
         }
 
         [Test]
         public void Setting_value_should_select_by_id_attribute()
         {
-            Element.Value = "id1";
-            Assert.That(Element.Value, Is.EqualTo("first"));
+            RadioButtons.Value = "id1";
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
         }
 
         [Test]
         public void Setting_value_should_select_by_parent_label()
         {
-            Element.Value = "first";
-            Assert.That(Element.Value, Is.EqualTo("first"));
+            RadioButtons.Value = "first";
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
         }
 
         [Test]
         public void Setting_value_should_select_by_label()
         {
-            Element.Value = "second";
-            Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
+            RadioButtons.Value = "second";
+            Assert.That(RadioButtons.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
         public void Setting_value_should_select_by_any_label()
         {
-            Element.Value = "otherSecond";
-            Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
+            RadioButtons.Value = "otherSecond";
+            Assert.That(RadioButtons.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
         public void Setting_value_should_select_by_all_labels_together()
         {
-            Element.Value = "second otherSecond";
-            Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
+            RadioButtons.Value = "second otherSecond";
+            Assert.That(RadioButtons.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
         public void Setting_value_should_select_by_all_labels_together_removing_spaces()
         {
-            Element.Value = " \n\tsecond   otherSecond  ";
-            Assert.That(Element.Value, Is.EqualTo("second otherSecond"));
+            RadioButtons.Value = " \n\tsecond   otherSecond  ";
+            Assert.That(RadioButtons.Value, Is.EqualTo("second otherSecond"));
         }
 
         [Test]
         public void Value_should_combine_labels_for_and_parent_label()
         {
-            Element.Value = "third";
-            Assert.That(Element.Value, Is.EqualTo("third otherThird yetAnotherThird"));
+            RadioButtons.Value = "third";
+            Assert.That(RadioButtons.Value, Is.EqualTo("third otherThird yetAnotherThird"));
         }
 
         [Test]
         public void Value_should_return_value_attribute_if_no_labels_exist()
         {
-            Element.Value = "id4";
-            Assert.That(Element.Value, Is.EqualTo("value4"));
+            RadioButtons.Value = "id4";
+            Assert.That(RadioButtons.Value, Is.EqualTo("value4"));
         }
 
         [Test]
         public void Value_should_return_on_if_selected_and_no_value_attribute_if_no_labels_exist()
         {
-            Element.Value = "id5";
-            Assert.That(Element.Value, Is.EqualTo("on"));
+            RadioButtons.Value = "id5";
+            Assert.That(RadioButtons.Value, Is.EqualTo("on"));
         }
 
         [Test]
         public void Options_should_return_all_values()
         {
-            Assert.That(Element.Options, Is.EqualTo(new List<string> { "first", "second otherSecond", "third otherThird yetAnotherThird", "value4", "on"}));
+            Assert.That(RadioButtons.Options, Is.EqualTo(new List<string> { "first", "second otherSecond", "third otherThird yetAnotherThird", "value4", "on"}));
         }
 
         [Test]
         public void Click_should_select()
         {
-            Element.Click("first");
-            Assert.That(Element.Value, Is.EqualTo("first"));
+            RadioButtons.Click("first");
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
         }
     }
 }

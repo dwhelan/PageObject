@@ -7,7 +7,7 @@ namespace PageObject.Elements
         protected Input(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
         public bool Enabled => !Disabled;
-        public bool Disabled => Scope.Disabled;
+        public bool Disabled => Element.Disabled;
 
         protected string InputXPath(string type, string constraints = "")
         {

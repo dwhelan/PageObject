@@ -5,19 +5,21 @@ namespace PageObject.Tests.Elements
 {
     public abstract class InputTest<TP, TE> : HtmlElementTest<TP, TE> where TP : TestPage<TE> where TE : Input
     {
+        private Input Input => Element;
+
         [Test]
         public void Should_be_enabled()
         {
-            Assert.That(Element.Enabled, Is.True);
-            Assert.That(Element.Disabled, Is.False);
+            Assert.That(Input.Enabled, Is.True);
+            Assert.That(Input.Disabled, Is.False);
         }
 
         [Test]
         public void Should_be_disabled()
         {
             Session.Browser.ExecuteScript("document.getElementsByName('name')[0].disabled=true");
-            Assert.That(Element.Enabled, Is.False);
-            Assert.That(Element.Disabled, Is.True);
+            Assert.That(Input.Enabled, Is.False);
+            Assert.That(Input.Disabled, Is.True);
         }
     }
 }

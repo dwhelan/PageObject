@@ -8,8 +8,9 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class TextTest : InputTest<TestPage<Text>, Text>
     {
+        private Text Text => Element;
+
         protected override string ElementHtml => "<input name='name' value='initial' type='text'>";
-        protected Text Text => Element;
 
         [Test]
         public void Should_get_initial_value()

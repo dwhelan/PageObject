@@ -9,7 +9,7 @@ namespace PageObject.Elements
 
         public bool Value
         {
-            get { return Scope.Selected;}
+            get { return Element.Selected;}
             set { if (value) Select(); else Deselect(); }
         }
 
