@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Coypu.Drivers;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
@@ -7,6 +9,8 @@ namespace PageObject.Tests.Elements
     [TestFixture]
     public class MultiSelectTest : InputTest<TestPage<MultiSelect>, MultiSelect>
     {
+        private MultiSelect MultiSelect => Element;
+
         protected override string ElementHtml =>@"
             <select name='name' multiple=''>
                 <option value='one'>First</option>
@@ -17,118 +21,135 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Value_should_be_empty_when_no_options_are_selected()
         {
-            var selected = new List<string>();
-            Element.Value = selected;
-            Assert.That(Element.Value, Is.Empty);
+            MultiSelect.Value = new List<string>();
+            Assert.That(MultiSelect.Value, Is.Empty);
         }
 
         [Test]
         public void Setting_value_to_an_empty_list_should_deselect_previously_selected_options()
         {
-            Element.Select("First");
-            Element.Select("Second");
-            Element.Select("Third");
+            MultiSelect.Select("First");
+            MultiSelect.Select("Second");
+            MultiSelect.Select("Third");
 
-            Element.Value = new List<string>();
-            Assert.That(Element.Value, Is.Empty);
+            MultiSelect.Value = new List<string>();
+            Assert.That(MultiSelect.Value, Is.Empty);
         }
 
         [Test]
         public void Setting_value_should_allow_single_option_to_be_set()
         {
             var selected = new List<string> { "First" };
-            Element.Value = selected;
-            Assert.That(Element.Value, Is.EqualTo(selected));
+            MultiSelect.Value = selected;
+            Assert.That(MultiSelect.Value, Is.EqualTo(selected));
         }
 
         [Test]
         public void Setting_value_should_allow_multiple_options_to_be_set()
         {
             var selected = new List<string> { "First", "Second" };
-            Element.Value = selected;
-            Assert.That(Element.Value, Is.EqualTo(selected));
+            MultiSelect.Value = selected;
+            Assert.That(MultiSelect.Value, Is.EqualTo(selected));
         }
 
         [Test]
         public void Setting_empty_value_should_deselect_all_selections()
         {
-            Element.Value = new List<string> { "First", "Second" };
-            Element.Value = new List<string>();
-            Assert.That(Element.Value, Is.Empty);
+            MultiSelect.Value = new List<string> { "First", "Second" };
+            MultiSelect.Value = new List<string>();
+            Assert.That(MultiSelect.Value, Is.Empty);
         }
 
         [Test]
         public void Select_should_select_a_previously_unselected_option()
         {
-            Element.Select("First");
-            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+            MultiSelect.Select("First");
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First" }));
         }
 
         [Test]
         public void Select_should_support_multiple_options()
         {
-            Element.Select("First", "Second");
-            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First", "Second" }));
+            MultiSelect.Select("First", "Second");
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First", "Second" }));
         }
 
         [Test]
         public void Select_should_be_idempotent()
         {
-            Element.Select("First");
-            Element.Select("First");
-            Assert.That(Element.Value, Has.Exactly(1).EqualTo("First"));
+            MultiSelect.Select("First");
+            MultiSelect.Select("First");
+            Assert.That(MultiSelect.Value, Has.Exactly(1).EqualTo("First"));
         }
 
         [Test]
         public void Deselect_should_select_a_previously_unselected_option()
         {
-            Element.Select("First");
-            Element.Deselect("First");
-            Assert.That(Element.Value, Is.Empty);
+            MultiSelect.Select("First");
+            MultiSelect.Deselect("First");
+            Assert.That(MultiSelect.Value, Is.Empty);
         }
 
         [Test]
         public void Deselect_should_be_idempotent()
         {
-            Element.Select("First");
-            Element.Deselect("First");
-            Element.Deselect("First");
+            MultiSelect.Select("First");
+            MultiSelect.Deselect("First");
+            MultiSelect.Deselect("First");
             Assert.That(Element.Value, Is.Empty);
         }
 
         [Test]
         public void Deselect_should_support_multiple_options()
         {
-            Element.Select("First", "Second");
-            Element.Deselect("Second", "Third");
-            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+            MultiSelect.Select("First", "Second");
+            MultiSelect.Deselect("Second", "Third");
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First" }));
         }
 
         [Test]
         public void Click_should_select_a_previously_unselected_option()
         {
-            Element.Click("First");
-            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+            MultiSelect.Click("First");
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First" }));
         }
 
         [Test]
         public void Click_should_be_idempotent()
         {
-            Element.Click("First");
-            Element.Click("First");
-            Assert.That(Element.Value, Is.EqualTo(new List<string> { "First" }));
+            MultiSelect.Click("First");
+            MultiSelect.Click("First");
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First" }));
+        }
+
+        [Test]
+        [Ignore]
+        public void With_control_key_should_select_additional_options()
+        {
+            MultiSelect.Click("First");
+            MultiSelect.WithKeys(Keys.Control, () => MultiSelect.Select("Third"));
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First", "Third" }));
+        }
+
+        [Test]
+        [Ignore]
+        public void With_shift_key_should_select_all_intervening_options()
+        {
+            MultiSelect.Click("First");
+            MultiSelect.WithKeys(Keys.Shift, () => MultiSelect.Select("Third"));
+            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First", "Second", "Third" }));
         }
 
         [Test]
         public void Options_should_return_all_options()
         {
-            Assert.That(Element.Options, Is.EqualTo(new List<string> { "First", "Second", "Third"}));
+            Assert.That(MultiSelect.Options, Is.EqualTo(new List<string> { "First", "Second", "Third"}));
         }
 
         [Test]
         public void Should_get_text()
         {
-            Assert.That(Element.Text, Is.StringMatching(@"^\s*First\s*Second\s*Third\s*$"));
+            Assert.That(MultiSelect.Text, Is.StringMatching(@"^\s*First\s*Second\s*Third\s*$"));
         }
     }
 }
