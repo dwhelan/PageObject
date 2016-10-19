@@ -123,24 +123,6 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        [Ignore]
-        public void With_control_key_should_select_additional_options()
-        {
-            MultiSelect.Click("First");
-            MultiSelect.WithKeys(Keys.Control, () => MultiSelect.Select("Third"));
-            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First", "Third" }));
-        }
-
-        [Test]
-        [Ignore]
-        public void With_shift_key_should_select_all_intervening_options()
-        {
-            MultiSelect.Click("First");
-            MultiSelect.WithKeys(Keys.Shift, () => MultiSelect.Select("Third"));
-            Assert.That(MultiSelect.Value, Is.EqualTo(new List<string> { "First", "Second", "Third" }));
-        }
-
-        [Test]
         public void Options_should_return_all_options()
         {
             Assert.That(MultiSelect.Options, Is.EqualTo(new List<string> { "First", "Second", "Third"}));

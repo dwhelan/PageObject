@@ -41,19 +41,6 @@ namespace PageObject.Elements
             Select(option);
         }
 
-        // TODO: This does not work
-        // Note: hardcoded while trying to get this working to select all options
-        public void WithKeys(string keys, Action action)
-        {
-            var driver = new Actions((IWebDriver)Driver.Native);
-            driver
-                .KeyDown(keys)
-                .Click((IWebElement)OptionElements.First().Native)
-                .Click((IWebElement)OptionElements.Last().Native)
-                .KeyUp(keys)
-                .Build().Perform();
-        }
-
         public IList<string> Options => OptionElements.Select(option => option.Text).ToList();
 
         private void SetOptions(IEnumerable<string> options, bool selected)
