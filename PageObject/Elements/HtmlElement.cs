@@ -10,5 +10,10 @@ namespace PageObject.Elements
 
         public virtual ElementScope Scope => SearchScope.FindField(Locator);
         public string Text => Scope.Text;
+
+        public void Click()
+        {
+            Scope.Click();
+        }
     }
 }

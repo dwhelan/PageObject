@@ -23,11 +23,6 @@ namespace PageObject.Elements
             SearchScope.Uncheck(Locator);
         }
 
-        public void Click()
-        {
-           Scope.Click();
-        }
-
         public IList<bool> Options()
         {
             return new List<bool> {true, false};
