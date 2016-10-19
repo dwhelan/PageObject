@@ -3,7 +3,6 @@ using System.IO;
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
-using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {

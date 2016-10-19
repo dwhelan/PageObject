@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using Coypu.Drivers;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using PageObject.Elements;
 
 namespace PageObject.Tests.Elements

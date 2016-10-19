@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Coypu;
 using NUnit.Framework;
 using PageObject.Elements;
 
