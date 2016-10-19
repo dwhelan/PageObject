@@ -58,7 +58,7 @@ namespace PageObject.Elements
 
         private void Choose(Coypu.Element element)
         {
-            Driver.Choose(element);
+            Browser.Driver.Choose(element);
         }
     }
 }
