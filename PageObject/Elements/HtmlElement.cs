@@ -11,5 +11,10 @@ namespace PageObject.Elements
         public string Text => Element.Text;
 
         public void Click() { Element.Click(); }
+
+        public void SendKeys(string keys)
+        {
+            Element.SendKeys(keys);
+        }
     }
 }

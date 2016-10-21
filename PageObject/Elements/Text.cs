@@ -16,10 +16,5 @@ namespace PageObject.Elements
             get { return Element.Value; }
             set { SearchScope.FillIn(Locator).With(value);}
         }
-
-        public void SendKeys(string keys)
-        {
-            Element.SendKeys(keys);
-        }
     }
 }
