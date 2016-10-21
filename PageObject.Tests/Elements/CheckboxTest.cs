@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using static OpenQA.Selenium.Keys;
 using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
@@ -75,5 +76,14 @@ namespace PageObject.Tests.Elements
             Checkbox.Click();
             Assert.That(Checkbox.Value, Is.False);
         }
+
+        [Test]
+        public void Sendkeys_of_Space_should_toggle()
+        {
+            Checkbox.Click();
+            Checkbox.SendKeys(Home);
+            Assert.That(Checkbox.Value, Is.True);
+        }
+
     }
 }
