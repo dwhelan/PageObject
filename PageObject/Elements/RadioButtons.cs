@@ -48,7 +48,7 @@ namespace PageObject.Elements
 
         private ElementScope ButtonWith(string value)
         {
-            return FindXPath(ButtonsXpath($"and ( {WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
+            return FindXPath(ButtonsXpath($"and ({WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
         }
 
         private string ButtonsXpath(string constraints = "")

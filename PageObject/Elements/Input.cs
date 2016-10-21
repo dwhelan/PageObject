@@ -9,9 +9,6 @@ namespace PageObject.Elements
         public bool Enabled => !Disabled;
         public bool Disabled => Element.Disabled;
 
-        protected string InputXPath(string type, string constraints = "")
-        {
-            return $".//input[@type='{type}' {constraints}]";
-        }
+        public override ElementScope Element => SearchScope.FindField(Locator);
     }
 }

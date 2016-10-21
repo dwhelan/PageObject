@@ -6,7 +6,7 @@ namespace PageObject.Elements
     {
         protected HtmlElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
-        public ElementScope Element => SearchScope.FindField(Locator);
+        public abstract ElementScope Element { get; }
 
         public string Text => Element.Text;
 

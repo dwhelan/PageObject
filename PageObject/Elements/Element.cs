@@ -9,16 +9,15 @@ namespace PageObject.Elements
     {
         protected BrowserSession Browser { get; }
         protected string Locator => Attribute.Locator;
+        protected Scope SearchScope => Browser;
+
+        private ElementAttribute Attribute { get; }
 
         protected Element(ElementAttribute attribute, BrowserSession browser)
         {
             Attribute = attribute;
             Browser = browser;
         }
-
-        protected Scope SearchScope => Browser;
-
-        private ElementAttribute Attribute { get; }
 
         protected string LabelTextFor(ElementScope element)
         {
