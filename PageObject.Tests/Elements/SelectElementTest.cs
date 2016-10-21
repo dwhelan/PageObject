@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using PageObject.Elements;
+using static OpenQA.Selenium.Keys;
 
 namespace PageObject.Tests.Elements
 {
@@ -64,5 +65,38 @@ namespace PageObject.Tests.Elements
         {
             Assert.That(SelectElement.Options, Is.EqualTo(new List<string> { "first", "second", "third" }));
         }
+
+        [Test]
+        public void Sendkeys_of_Down_should_select_the_next_option()
+        {
+            SelectElement.Select("first");
+            SelectElement.SendKeys(Down);
+            Assert.That(Element.Value, Is.EqualTo("second"));
+        }
+
+        [Test]
+        public void Sendkeys_of_Up_should_select_the_next_option()
+        {
+            SelectElement.Select("second");
+            SelectElement.SendKeys(Up);
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Sendkeys_of_Home_should_select_the_first_option()
+        {
+            SelectElement.Select("third");
+            SelectElement.SendKeys(Home);
+            Assert.That(Element.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Sendkeys_of_single_character_should_select_the_option_starting_with_that_letter()
+        {
+            SelectElement.Select("first");
+            SelectElement.SendKeys("t");
+            Assert.That(Element.Value, Is.EqualTo("third"));
+        }
+
     }
 }
