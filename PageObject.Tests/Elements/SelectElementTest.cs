@@ -91,12 +91,19 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public void Sendkeys_of_End_should_select_the_last_option()
+        {
+            SelectElement.Select("first");
+            SelectElement.SendKeys(End);
+            Assert.That(Element.Value, Is.EqualTo("third"));
+        }
+
+        [Test]
         public void Sendkeys_of_single_character_should_select_the_option_starting_with_that_letter()
         {
             SelectElement.Select("first");
             SelectElement.SendKeys("t");
             Assert.That(Element.Value, Is.EqualTo("third"));
         }
-
     }
 }
