@@ -14,6 +14,12 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
+        public virtual void Should_provide_title()
+        {
+            Assert.That(HtmlElement.Title, Is.EqualTo(HtmlElement.Element.Title));
+        }
+
+        [Test]
         public virtual void Should_provide_lower_level_access_to_the_page_element()
         {
             Assert.That(HtmlElement.Element.OuterHTML, Is.EqualTo(NormalizeHtml(ElementHtml)));
