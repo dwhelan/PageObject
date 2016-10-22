@@ -73,7 +73,6 @@
     <Compile Include="Elements\Submit.cs" />
     <Compile Include="Elements\SelectElement.cs" />
     <Compile Include="Elements\Checkbox.cs" />
-    <Compile Include="Elements\TextArea.cs" />
     <Compile Include="Elements\Text.cs" />
     <Compile Include="EnvironmentVariables.cs" />
     <Compile Include="PageAtAttribute.cs" />

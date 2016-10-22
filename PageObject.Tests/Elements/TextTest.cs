@@ -49,13 +49,5 @@ namespace PageObject.Tests.Elements
             Text.SendKeys("XXX");
             Assert.That(Element.Value, Is.EqualTo("initialXXX"));
         }
-
-        [Test]
-        public void Click_should_position_cursor_at_end_of_text()
-        {
-            Text.Click();
-            Text.SendKeys("XXX");
-            Assert.That(Element.Value, new EndsWithConstraint("XXX"));
-        }
     }
 }
