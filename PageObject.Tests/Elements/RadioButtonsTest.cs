@@ -24,39 +24,39 @@ namespace PageObject.Tests.Elements
 
         private const string RadioButton1 = @"
             <label>
-              <input type='radio' name='name' id='id1' value='value1'/>first
+              <INPUT type='radio' name='name' id='id1' value='value1'/>first
             </label>
         ";
 
         private const string RadioButton2 = @"
-            <input type='radio' name='name' id='id2' value='value2'/>
+            <INPUT type='radio' name='name' id='id2' value='value2'/>
             <label for='id2'>second</label>
             <label for='id2'>otherSecond</label>
         ";
 
         private const string RadioButton3 = @"
             <label for='id3'>third</label>
-            <label><input type='radio' name='name' id='id3' value='value3'/>otherThird</label>
+            <label><INPUT type='radio' name='name' id='id3' value='value3'/>otherThird</label>
             <label for='id3'>yetAnotherThird</label>
         ";
 
         private const string RadioButton4 = @"
-             <input type ='radio' name='name' id='id4' value='value4'/>
+             <INPUT type ='radio' name='name' id='id4' value='value4'/>
         ";
 
         private const string RadioButton5 = @"
-             <input type='radio' name='name' id='id5'/>
+             <INPUT type='radio' name='name' id='id5'/>
         ";
 
         private const string OtherRadioButton = @"
             <label>
-                <input type='radio' name='other' id='id1' value='value1'/>other label1
+                <INPUT type='radio' name='other' id='id1' value='value1'/>other label1
             </label>
         ";
 
         private const string RadioButtonForInputTests = @"
             <label>
-                <input type='radio' name='other' id='name' value='value1'/>other label1
+                <INPUT type='radio' name='other' id='name' value='value1'/>other label1
             </label>
         ";
 
