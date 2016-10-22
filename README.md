@@ -42,6 +42,15 @@ namespace PageObject.Examples
 See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/wiki/Creating-Pages) wiki page.
 
 ## To Do
+ - complete all elements
+ - support option element
+ - update SelectElement to return nested option elements
+ - add tag to filter matching elements
+ - add input 'type' (perhaps generalized attribute matching)
+ - support css specification in element attribute
+ - support xpath specification in element attribute
+ - support Coypu matching options (static?, element, page, general + merging)
+ - remove session from Page by using a PageSession.ThreadLocale session
  - push to NuGet
  - support different .Net versions
     - support different Coypu versions (may be necessary for different .Net versions)
