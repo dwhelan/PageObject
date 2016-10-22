@@ -20,14 +20,9 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public virtual void Should_provide_lower_level_access_to_the_page_element()
+        public virtual void Should_provide_access_to_coypu_element()
         {
-            Assert.That(HtmlElement.Element.OuterHTML, Is.EqualTo(NormalizeHtml(ElementHtml)));
-        }
-
-        protected static string NormalizeHtml(string html)
-        {
-            return html.Trim().Replace("'", "\"");
+            Assert.That(HtmlElement.Element, Is.Not.Null);
         }
     }
 }
