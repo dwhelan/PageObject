@@ -142,7 +142,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Sendkeys_of_Up_should_select_the_next_option()
+        public void Sendkeys_of_Up_should_select_the_previous_option()
         {
             MultiSelect.Select("second");
             MultiSelect.SendKeys(Up);

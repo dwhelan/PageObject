@@ -84,6 +84,5 @@ namespace PageObject.Tests.Elements
             Checkbox.SendKeys(Home);
             Assert.That(Checkbox.Value, Is.True);
         }
-
     }
 }

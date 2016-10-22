@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using PageObject.Elements;
+using static OpenQA.Selenium.Keys;
 
 namespace PageObject.Tests.Elements
 {
@@ -153,6 +154,45 @@ namespace PageObject.Tests.Elements
         {
             RadioButtons.Click("first");
             Assert.That(RadioButtons.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Sendkeys_of_Down_should_select_the_next_option()
+        {
+            RadioButtons.Select("first");
+            RadioButtons.SendKeys(Down);
+            Assert.That(RadioButtons.Value, Is.EqualTo("second otherSecond"));
+        }
+
+        [Test]
+        public void Sendkeys_Up_should_select_the_next_option()
+        {
+            RadioButtons.Select("second");
+            RadioButtons.SendKeys(Up);
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Sendkeys_of_Right_should_select_the_next_option()
+        {
+            RadioButtons.Select("first");
+            RadioButtons.SendKeys(Right);
+            Assert.That(RadioButtons.Value, Is.EqualTo("second otherSecond"));
+        }
+
+        [Test]
+        public void Sendkeys_of_Left_should_select_the_previous_option()
+        {
+            RadioButtons.Select("second");
+            RadioButtons.SendKeys(Left);
+            Assert.That(RadioButtons.Value, Is.EqualTo("first"));
+        }
+
+        [Test]
+        public void Sendkeys_should_do_nothing_if_no_option_selected()
+        {
+            RadioButtons.SendKeys(Down);
+            Assert.That(RadioButtons.Value, Is.EqualTo(""));
         }
     }
 }

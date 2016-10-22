@@ -60,5 +60,11 @@ namespace PageObject.Elements
         {
             Browser.Driver.Choose(element);
         }
+
+        public void SendKeys(string keys)
+        {
+            var button = Buttons.FirstOrDefault(radioButton => radioButton.Selected);
+            button?.SendKeys(keys);
+        }
     }
 }
