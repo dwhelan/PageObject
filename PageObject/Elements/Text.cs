@@ -1,15 +1,10 @@
-using System;
 using Coypu;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace PageObject.Elements
 {
     public class Text : Input
     {
-        public Text(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
-        {
-        }
+        public Text(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 
         public string Value
         {

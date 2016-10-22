@@ -12,9 +12,6 @@ namespace PageObject.Elements
 
         public void Click() { Element.Click(); }
 
-        public void SendKeys(string keys)
-        {
-            Element.SendKeys(keys);
-        }
+        public void SendKeys(string keys) { Element.SendKeys(keys); }
     }
 }
