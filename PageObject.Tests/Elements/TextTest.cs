@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using static OpenQA.Selenium.Keys;
 using Text = PageObject.Elements.Text;
 
@@ -51,10 +50,13 @@ namespace PageObject.Tests.Elements
         }
     }
 
+    // Tes types other than "text" work with input fields assuming that if it works with password it works with them all.
+    // The following were manually tested with different initial values to match the type.
+    // "password", "email", "tel", "url", "number", "datetime", "datetime-local", "date", "month", "week", "time", "color", "search"
     [TestFixture]
-    public class PasswordTest : TextTest
+    public class TextTestForOtherTypes : TextTest
     {
-        protected override string ElementHtml => "<input name='name' value='initial' type='password'>";
+        protected override string ElementHtml => "<input name='name' value='initial' type='search'>";
     }
 
     [TestFixture]
