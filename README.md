@@ -4,16 +4,15 @@ The implementation is essentially a thin wrapper around [Coypu](https://github.c
 elements on web pages.
 
 ## Principles
-A key intent of the page object pattern is to  support maintable web tests through an object-oriented
+A key intent of the page object pattern is to support maintable web tests through an object-oriented
 representation of web pages. The following principles are adopted to support this intent: 
 * A `page object` focuses on what users can see and interact with on the
-page itself (e.g. it provides a mechanism to access any visible element on a page).
+page itself.
 * An `element` focuses on what users can see and interact with on a
-a specific element (e.g. an element's `id` is **not** accessible).
-* A `browser` focuses on how users interact with the browser itself
- (e.g. support for `forward` and `back` is provided).
+a specific element.
+* A `browser` focuses on how users interact with the browser itself.
 
-For all of the above there is a `backdoor` mechanism to support the developer in cases where they
+For all of the above there is a mechanism to support the developer in cases where they
 need to break these principles.
 
 ## Installation
