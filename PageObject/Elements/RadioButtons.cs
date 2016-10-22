@@ -10,11 +10,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get
-            {
-                var button = Buttons.FirstOrDefault(radioButton => radioButton.Selected);
-                return button == null ? string.Empty : ValueOf(button);
-            }
+            get { return Selection == null ? string.Empty : ValueOf(Selection); }
             set { Click(value); }
         }
 
@@ -38,6 +34,13 @@ namespace PageObject.Elements
             }
         }
 
+        public void SendKeys(string keys)
+        {
+            Selection?.SendKeys(keys);
+        }
+
+        private ElementScope Selection => Buttons.FirstOrDefault(radioButton => radioButton.Selected);
+    
         private string ValueOf(ElementScope radioButton)
         {
             var labelText = LabelTextFor(radioButton);
@@ -59,12 +62,6 @@ namespace PageObject.Elements
         private void Choose(Coypu.Element element)
         {
             Browser.Driver.Choose(element);
-        }
-
-        public void SendKeys(string keys)
-        {
-            var button = Buttons.FirstOrDefault(radioButton => radioButton.Selected);
-            button?.SendKeys(keys);
         }
     }
 }
