@@ -50,4 +50,16 @@ namespace PageObject.Tests.Elements
             Assert.That(Element.Value, Is.EqualTo("initialXXX"));
         }
     }
+
+    [TestFixture]
+    public class PasswordTest : TextTest
+    {
+        protected override string ElementHtml => "<input name='name' value='initial' type='password'>";
+    }
+
+    [TestFixture]
+    public class TextAreaTest : TextTest
+    {
+        protected override string ElementHtml => "<textarea name='name'>initial</textarea>";
+    }
 }
