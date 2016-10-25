@@ -21,7 +21,7 @@ namespace PageObject.Tests.Elements
         public void Should_set_value()
         {
             Text.Value = "new";
-            Assert.That(Element.Value, Is.EqualTo("new"));
+            Assert.That(Text.Value, Is.EqualTo("new"));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace PageObject.Tests.Elements
         {
             Text.SendKeys(Control + "a");
             Text.SendKeys(Backspace);
-            Assert.That(Element.Value, Is.EqualTo(""));
+            Assert.That(Text.Value, Is.EqualTo(""));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace PageObject.Tests.Elements
         {
             Text.SendKeys(Home);
             Text.SendKeys("XXX");
-            Assert.That(Element.Value, Is.EqualTo("XXXinitial"));
+            Assert.That(Text.Value, Is.EqualTo("XXXinitial"));
         }
 
         [Test]
@@ -46,11 +46,13 @@ namespace PageObject.Tests.Elements
             Text.SendKeys(Home);
             Text.SendKeys(End);
             Text.SendKeys("XXX");
-            Assert.That(Element.Value, Is.EqualTo("initialXXX"));
+            Assert.That(Text.Value, Is.EqualTo("initialXXX"));
         }
     }
 
-    // Tes types other than "text" work with input fields assuming that if it works with password it works with them all.
+    // Tes types other than "text" work with input fields assuming that if it works with a type'search'
+    // that it works with them all.
+    //
     // The following were manually tested with different initial values to match the type.
     // "password", "email", "tel", "url", "number", "datetime", "datetime-local", "date", "month", "week", "time", "color", "search"
     [TestFixture]
