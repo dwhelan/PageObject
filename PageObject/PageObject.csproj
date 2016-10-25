@@ -69,7 +69,7 @@
     <Compile Include="Elements\HtmlElement.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
     <Compile Include="Elements\ElementAttribute.cs" />
-    <Compile Include="Elements\MultiSelect.cs" />
+    <Compile Include="Elements\MultiList.cs" />
     <Compile Include="Elements\Submit.cs" />
     <Compile Include="Elements\List.cs" />
     <Compile Include="Elements\Checkbox.cs" />
