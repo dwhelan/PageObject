@@ -64,4 +64,17 @@ namespace PageObject.Tests.Elements
     {
         protected override string ElementHtml => "<textarea name='name'>initial</textarea>";
     }
+
+    [TestFixture]
+    public class DataListTest : TextTest
+    {
+        protected override string ElementHtml => @"
+            <input name='name' value='initial' list='datalist'>
+            <datalist id='datalist'>
+                <option value='first'>
+                <option value='second'>
+                <option value='third'>
+            </datalist >
+        ";
+    }
 }
