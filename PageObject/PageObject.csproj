@@ -71,7 +71,7 @@
     <Compile Include="Elements\ElementAttribute.cs" />
     <Compile Include="Elements\MultiSelect.cs" />
     <Compile Include="Elements\Submit.cs" />
-    <Compile Include="Elements\SelectElement.cs" />
+    <Compile Include="Elements\List.cs" />
     <Compile Include="Elements\Checkbox.cs" />
     <Compile Include="Elements\Text.cs" />
     <Compile Include="EnvironmentVariables.cs" />
