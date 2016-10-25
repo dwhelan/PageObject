@@ -3,7 +3,7 @@ using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
-    public abstract class HtmlElementTest<TP, TE> : ElementTest<TP, TE> where TP : TestPage<TE> where TE : HtmlElement
+    public abstract class HtmlElementTest<TP, TE> : BaseElementTest<TP, TE> where TP : TestPage<TE> where TE : HtmlElement
     {
         private HtmlElement HtmlElement => Element;
 

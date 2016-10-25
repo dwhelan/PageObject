@@ -4,7 +4,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class RadioButtons : Element
+    public class RadioButtons : BaseElement
     {
         public RadioButtons(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 

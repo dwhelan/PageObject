@@ -44,7 +44,7 @@ See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/
 ## To Do
  - complete all elements
  - support option element
- - update SelectElement to return nested option elements
+ - update List element to return nested option elements ?
  - add tag to filter matching elements
  - add input 'type' (perhaps generalized attribute matching)
  - support css specification in element attribute

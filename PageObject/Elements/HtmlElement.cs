@@ -2,7 +2,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public abstract class HtmlElement : Element
+    public abstract class HtmlElement : BaseElement
     {
         protected HtmlElement(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 

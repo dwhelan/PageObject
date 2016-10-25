@@ -6,7 +6,7 @@ using static OpenQA.Selenium.Keys;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class RadioButtonsTest : ElementTest<TestPage<RadioButtons>, RadioButtons>
+    public class RadioButtonsTest : BaseElementTest<TestPage<RadioButtons>, RadioButtons>
     {
         private RadioButtons RadioButtons => Element;
 

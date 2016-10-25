@@ -4,7 +4,7 @@ namespace PageObject.Elements
 {
     internal static class ElementFactory
     {
-        public static T ElementFor<T>(Page page, string propertyName) where T : Element
+        public static T ElementFor<T>(Page page, string propertyName) where T : BaseElement
         {
             var attribute = PropertyAttribute(page.GetType(), propertyName);
             return (T)Activator.CreateInstance(typeof(T), attribute, page.Browser);
