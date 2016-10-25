@@ -10,7 +10,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Element.SelectedOption; }
+            get { return ElementScope.SelectedOption; }
             set { Click(value); }
         }
 

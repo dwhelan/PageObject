@@ -4,7 +4,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class SubmitTest : HtmlElementTest<TestPage<Submit>, Submit>
+    public class SubmitTest : ElementTest<TestPage<Submit>, Submit>
     {
         private Submit Submit => Element;
 

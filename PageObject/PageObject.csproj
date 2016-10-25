@@ -66,7 +66,7 @@
     <Compile Include="Elements\BaseElement.cs" />
     <Compile Include="Elements\RadioButtons.cs" />
     <Compile Include="Elements\Input.cs" />
-    <Compile Include="Elements\HtmlElement.cs" />
+    <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
     <Compile Include="Elements\ElementAttribute.cs" />
     <Compile Include="Elements\MultiList.cs" />

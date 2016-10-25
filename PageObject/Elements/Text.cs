@@ -8,7 +8,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Element.Value; }
+            get { return ElementScope.Value; }
             set { SearchScope.FillIn(Locator).With(value);}
         }
     }
