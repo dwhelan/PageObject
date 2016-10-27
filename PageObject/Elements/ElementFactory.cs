@@ -7,7 +7,7 @@ namespace PageObject.Elements
         public static T ElementFor<T>(Page page, string propertyName) where T : BaseElement
         {
             var attribute = PropertyAttribute(page.GetType(), propertyName);
-            return (T)Activator.CreateInstance(typeof(T), attribute, page.Browser);
+            return (T) Activator.CreateInstance(typeof(T), attribute, page.Browser);
         }
 
         private static ElementAttribute PropertyAttribute(Type type, string name)
