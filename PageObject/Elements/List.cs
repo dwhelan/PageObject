@@ -4,7 +4,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class List : Input
+    public class List : Field
     {
         public List(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
 

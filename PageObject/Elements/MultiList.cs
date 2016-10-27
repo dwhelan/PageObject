@@ -4,7 +4,7 @@ using Coypu;
 
 namespace PageObject.Elements
 {
-    public class MultiList : Input
+    public class MultiList : Field
     {
         public MultiList(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
         {

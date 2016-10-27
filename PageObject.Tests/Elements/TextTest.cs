@@ -5,7 +5,7 @@ using Text = PageObject.Elements.Text;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class TextTest : InputTest<TestPage<Text>, Text>
+    public class TextTest : FieldTest<TestPage<Text>, Text>
     {
         private Text Text => Element;
 

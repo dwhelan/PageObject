@@ -6,7 +6,7 @@ using List = PageObject.Elements.List;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class ListTest : InputTest<TestPage<List>, List>
+    public class ListTest : FieldTest<TestPage<List>, List>
     {
         private List List => Element;
 

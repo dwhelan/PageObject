@@ -6,7 +6,7 @@ using static OpenQA.Selenium.Keys;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class MultiListTest : InputTest<TestPage<MultiList>, MultiList>
+    public class MultiListTest : FieldTest<TestPage<MultiList>, MultiList>
     {
         private MultiList MultiList => Element;
 

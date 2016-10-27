@@ -6,7 +6,7 @@ using PageObject.Elements;
 namespace PageObject.Tests.Elements
 {
     [TestFixture]
-    public class CheckboxTest : InputTest<TestPage<Checkbox>, Checkbox>
+    public class CheckboxTest : FieldTest<TestPage<Checkbox>, Checkbox>
     {
         private Checkbox Checkbox => Element;
 

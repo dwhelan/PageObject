@@ -3,23 +3,23 @@ using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
-    public abstract class InputTest<TP, TE> : ElementTest<TP, TE> where TP : TestPage<TE> where TE : Input
+    public abstract class FieldTest<TP, TE> : ElementTest<TP, TE> where TP : TestPage<TE> where TE : Field
     {
-        private Input Input => Element;
+        private Field Field => Element;
 
         [Test]
         public void Should_be_enabled()
         {
-            Assert.That(Input.Enabled, Is.True);
-            Assert.That(Input.Disabled, Is.False);
+            Assert.That(Field.Enabled, Is.True);
+            Assert.That(Field.Disabled, Is.False);
         }
 
         [Test]
         public void Should_be_disabled()
         {
             Session.Browser.ExecuteScript("document.getElementsByName('name')[0].disabled=true");
-            Assert.That(Input.Enabled, Is.False);
-            Assert.That(Input.Disabled, Is.True);
+            Assert.That(Field.Enabled, Is.False);
+            Assert.That(Field.Disabled, Is.True);
         }
     }
 }

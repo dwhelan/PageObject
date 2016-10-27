@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\BaseElementTest.cs" />
-    <Compile Include="Elements\InputTest.cs" />
+    <Compile Include="Elements\FieldTest.cs" />
     <Compile Include="Elements\RadioButtonsTest.cs" />
     <Compile Include="Elements\CheckboxTest.cs" />
     <Compile Include="Elements\ElementTest.cs" />
