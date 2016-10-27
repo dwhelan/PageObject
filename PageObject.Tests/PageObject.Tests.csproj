@@ -83,7 +83,7 @@
     <Compile Include="Elements\CheckboxTest.cs" />
     <Compile Include="Elements\ElementTest.cs" />
     <Compile Include="Elements\MultiListTest.cs" />
-    <Compile Include="Elements\SubmitTest.cs" />
+    <Compile Include="Elements\ButtonTest.cs" />
     <Compile Include="Elements\TestPage.cs" />
     <Compile Include="Elements\ListTest.cs" />
     <Compile Include="Elements\TextTest.cs" />
