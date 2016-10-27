@@ -43,10 +43,7 @@ See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/
 
 ## To Do
  - complete all elements
- - support option element
- - update List element to return nested option elements ?
  - add tag to filter matching elements
- - add input 'type' (perhaps generalized attribute matching)
  - support css specification in element attribute
  - support xpath specification in element attribute
  - support Coypu matching options (static?, element, page, general + merging)
@@ -56,5 +53,10 @@ See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/
     - support different Coypu versions (may be necessary for different .Net versions)
  - create PageObject.NUnit with page matchers and page object attributes
  - support MSTest
- - support xUnit  
+ - support xUnit
+
+### Likely not!
+ - support option element
+ - update List element to return nested option elements ?
+
 
