@@ -14,25 +14,24 @@ namespace PageObject.Tests.Elements
     public abstract class BaseElementTest<TP, TE> where TP : TestPage<TE> where TE : PageObject.Elements.BaseElement
     {
         protected virtual Browser Browser => Browser.PhantomJS;
-
-        protected TE Element => page.Element;
-        protected abstract string ElementHtml { get; }
-
         protected PageSession Session { get; private set; }
-        private TP page;
+        protected TP Page;
+        protected TE Element => Page.Element;
+
+        protected abstract string ElementHtml { get; }
 
         [TestFixtureSetUp]
         public void CreatePage()
         {
             Session = CreateSession();
-            page = CreatePage(Session);
+            Page = CreatePage(Session);
             WriteHtml();
         }
 
         [SetUp]
         public void VisitPage()
         {
-            page.Visit();
+            Page.Visit();
         }
 
         private void WriteHtml()

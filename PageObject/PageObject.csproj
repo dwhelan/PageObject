@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\BaseElement.cs" />
+    <Compile Include="Elements\Link.cs" />
     <Compile Include="Elements\RadioButtons.cs" />
     <Compile Include="Elements\Field.cs" />
     <Compile Include="Elements\Element.cs" />
