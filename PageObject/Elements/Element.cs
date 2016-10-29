@@ -10,6 +10,7 @@ namespace PageObject.Elements
 
         public string Text  => ElementScope.Text;
         public string Title => ElementScope.Title;
+        protected Driver Driver => Browser.Driver;
 
         public void Click() { ElementScope.Click(); }
         public void SendKeys(string keys) { ElementScope.SendKeys(keys); }

@@ -11,7 +11,7 @@ namespace PageObject.Elements
         public string Value
         {
             get { return CoypuElement.Value; }
-            set { Browser.Driver.Set(CoypuElement, value); }
+            set { Driver.Set(CoypuElement, value); }
         }
 
         protected Coypu.Element CoypuElement

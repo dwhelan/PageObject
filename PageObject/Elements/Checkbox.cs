@@ -5,7 +5,9 @@ namespace PageObject.Elements
 {
     public class Checkbox : Field
     {
-        public Checkbox(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
+        public Checkbox(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
+        {
+        }
 
         public bool Value
         {
@@ -15,12 +17,12 @@ namespace PageObject.Elements
 
         public void Select()
         {
-            SearchScope.Check(Locator);
+            Driver.Check(ElementScope);
         }
 
         public void Deselect()
         {
-            SearchScope.Uncheck(Locator);
+            Driver.Uncheck(ElementScope);
         }
 
         public IList<bool> Options()
