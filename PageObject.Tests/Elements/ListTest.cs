@@ -28,8 +28,8 @@ namespace PageObject.Tests.Elements
         [Test]
         public void Setting_value_should_select_option()
         {
-            List.Value = "first";
-            Assert.That(List.Value, Is.EqualTo("first"));
+            List.Value = "second";
+            Assert.That(List.Value, Is.EqualTo("second"));
         }
 
         [Test]

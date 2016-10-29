@@ -9,7 +9,7 @@ namespace PageObject.Elements
     {
         protected BrowserSession Browser { get; }
         protected string Locator => Attribute.Locator;
-        protected Scope SearchScope => Browser;
+        protected DriverScope SearchScope => Browser;
 
         private ElementAttribute Attribute { get; }
 
