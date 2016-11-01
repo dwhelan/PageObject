@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
+using OpenQA.Selenium;
 
 namespace PageObject.Elements
 {
     public class List : Field
     {
-        public List(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
+        public List(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element) { }
 
         public string Value
         {
-            get { return ElementScope.SelectedOption; }
+            get { return CoypuElement.SelectedOption; }
             set { Click(value); }
         }
 

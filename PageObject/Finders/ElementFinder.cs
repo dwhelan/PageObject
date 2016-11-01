@@ -6,7 +6,7 @@ using Coypu;
 
 namespace PageObject.Finders
 {
-    internal class ElementFinder
+    public class ElementFinder
     {
         protected readonly Coypu.Finders.ElementFinder finder;
         protected Type type;

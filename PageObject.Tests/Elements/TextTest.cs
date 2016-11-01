@@ -50,7 +50,7 @@ namespace PageObject.Tests.Elements
         }
     }
 
-    // Tes types other than "text" work with input fields assuming that if it works with a type'search'
+    // Test types other than "text" work with input fields assuming that if it works with a type'search'
     // that it works with them all.
     //
     // The following were manually tested with different initial values to match the type.

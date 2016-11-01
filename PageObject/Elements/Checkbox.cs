@@ -5,24 +5,24 @@ namespace PageObject.Elements
 {
     public class Checkbox : Field
     {
-        public Checkbox(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
+        public Checkbox(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element)
         {
         }
 
         public bool Value
         {
-            get { return ElementScope.Selected;}
+            get { return CoypuElement.Selected;}
             set { if (value) Select(); else Deselect(); }
         }
 
         public void Select()
         {
-            Driver.Check(ElementScope);
+            Driver.Check(CoypuElement);
         }
 
         public void Deselect()
         {
-            Driver.Uncheck(ElementScope);
+            Driver.Uncheck(CoypuElement);
         }
 
         public IList<bool> Options()

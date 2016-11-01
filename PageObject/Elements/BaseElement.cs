@@ -11,7 +11,7 @@ namespace PageObject.Elements
         protected string Locator => Attribute.Locator;
         protected DriverScope SearchScope => Browser;
 
-        private ElementAttribute Attribute { get; }
+        protected ElementAttribute Attribute { get; }
 
         protected BaseElement(ElementAttribute attribute, BrowserSession browser)
         {

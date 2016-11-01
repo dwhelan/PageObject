@@ -10,19 +10,19 @@ namespace PageObject.Tests.Elements
         [Test]
         public virtual void Should_provide_access_to_coypu_element()
         {
-            Assert.That(Element.ElementScope, Is.Not.Null);
+            Assert.That(Element.CoypuElement, Is.Not.Null);
         }
 
         [Test]
         public virtual void Should_provide_text()
         {
-            Assert.That(Element.Text, Is.EqualTo(Element.ElementScope.Text));
+            Assert.That(Element.Text, Is.EqualTo(Element.CoypuElement.Text));
         }
 
         [Test]
         public virtual void Should_provide_title()
         {
-            Assert.That(Element.Title, Is.EqualTo(Element.ElementScope.Title));
+            Assert.That(Element.Title, Is.EqualTo(Element.CoypuElement.Title));
         }
     }
 }

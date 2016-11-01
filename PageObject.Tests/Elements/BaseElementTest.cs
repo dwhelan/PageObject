@@ -3,6 +3,7 @@ using System.IO;
 using Coypu;
 using Coypu.Drivers;
 using NUnit.Framework;
+using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
@@ -17,6 +18,7 @@ namespace PageObject.Tests.Elements
         protected PageSession Session { get; private set; }
         protected TP Page;
         protected TE Element => Page.Element;
+        protected ElementList<TE> ElementList => Page.ElementList;
 
         protected abstract string ElementHtml { get; }
 

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Coypu;
 using PageObject.Elements;
@@ -33,6 +35,11 @@ namespace PageObject
         public T Element<T>([CallerMemberName]string propertyName = "") where T : BaseElement
         {
             return ElementFactory.ElementFor<T>(this, propertyName);
+        }
+
+        public ElementList<T> ElementList<T>([CallerMemberName]string propertyName = "") where T : BaseElement
+        {
+            return ElementFactory.ElementListFor<T>(this, propertyName);
         }
     }
 }

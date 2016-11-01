@@ -1,11 +1,12 @@
 using Coypu;
+using PageObject.Finders;
 
 namespace PageObject.Elements
 {
     public class Link : Element
     {
-        public Link(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser) { }
+        public Link(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element) { }
 
-        public override ElementScope ElementScope => SearchScope.FindLink(Locator);
+        protected override ElementFinder Finder => new LinkFinder(Browser.Driver, Locator, SearchScope, new Options());
     }
 }

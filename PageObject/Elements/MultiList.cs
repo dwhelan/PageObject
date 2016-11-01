@@ -6,7 +6,7 @@ namespace PageObject.Elements
 {
     public class MultiList : Field
     {
-        public MultiList(ElementAttribute attribute, BrowserSession browser) : base(attribute, browser)
+        public MultiList(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element)
         {
         }
 

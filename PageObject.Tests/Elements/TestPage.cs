@@ -1,4 +1,7 @@
-﻿using PageObject.Elements;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using PageObject.Elements;
+using WatiN.Core;
 
 namespace PageObject.Tests.Elements
 {
@@ -9,5 +12,8 @@ namespace PageObject.Tests.Elements
 
         [Element("name")]
         public T Element => Element<T>();
+
+        [Element("list[]")]
+        public ElementList<T> ElementList => ElementList<T>();
     }
 }
