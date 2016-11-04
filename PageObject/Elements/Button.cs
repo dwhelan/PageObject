@@ -1,5 +1,4 @@
 using Coypu;
-using PageObject.Finders;
 
 namespace PageObject.Elements
 {
@@ -7,6 +6,6 @@ namespace PageObject.Elements
     {
         public Button(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element) { }
 
-        protected override ElementFinder Finder => new ButtonFinder(Browser.Driver, Locator, SearchScope, new Options());
+        public override string FinderName => "Button";
     }
 }

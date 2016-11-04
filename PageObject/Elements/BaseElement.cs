@@ -12,6 +12,7 @@ namespace PageObject.Elements
         protected DriverScope SearchScope => Browser;
 
         protected ElementAttribute Attribute { get; }
+        public virtual string FinderName => "";
 
         protected BaseElement(ElementAttribute attribute, BrowserSession browser)
         {

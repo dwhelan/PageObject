@@ -8,18 +8,19 @@ namespace PageObject.Elements
     {
         public static T ElementFor<T>(Page page, string propertyName) where T : BaseElement
         {
-            var attribute = ElementAttributeFor(page.GetType().GetProperty(propertyName));
+            var attribute = ElementAttributeFor(page, propertyName);
             return (T) Activator.CreateInstance(typeof(T), attribute, page.Browser, null);
         }
 
         public static ElementList<T> ElementListFor<T>(Page page, string propertyName) where T : BaseElement
         {
-            var attribute = ElementAttributeFor(page.GetType().GetProperty(propertyName));
+            var attribute = ElementAttributeFor(page, propertyName);
             return new ElementList<T>(attribute, page.Browser);
         }
 
-        private static ElementAttribute ElementAttributeFor(PropertyInfo property)
+        private static ElementAttribute ElementAttributeFor(Page page, string propertyName)
         {
+            var property = page.GetType().GetProperty(propertyName);
             return (ElementAttribute) property.GetCustomAttributes(typeof(ElementAttribute), true)[0];
         }
     }

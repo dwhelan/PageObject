@@ -87,6 +87,7 @@
     <Compile Include="Elements\ButtonTest.cs" />
     <Compile Include="Elements\TestPage.cs" />
     <Compile Include="Elements\ListTest.cs" />
+    <Compile Include="Elements\LinkListTest.cs" />
     <Compile Include="Elements\TextListTest.cs" />
     <Compile Include="Elements\TextTest.cs" />
     <Compile Include="OnPageTests.cs" />

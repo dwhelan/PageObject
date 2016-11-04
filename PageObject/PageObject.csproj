@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElementFinder.cs" />
     <Compile Include="Elements\BaseElement.cs" />
     <Compile Include="Elements\ElementList.cs" />
     <Compile Include="Elements\Link.cs" />
@@ -77,10 +78,6 @@
     <Compile Include="Elements\Checkbox.cs" />
     <Compile Include="Elements\Text.cs" />
     <Compile Include="EnvironmentVariables.cs" />
-    <Compile Include="Finders\LinkFinder.cs" />
-    <Compile Include="Finders\ElementFinder.cs" />
-    <Compile Include="Finders\ButtonFinder.cs" />
-    <Compile Include="Finders\FieldFinder.cs" />
     <Compile Include="PageAtAttribute.cs" />
     <Compile Include="PageObjectException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

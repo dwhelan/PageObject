@@ -1,6 +1,5 @@
 using System.Linq;
 using Coypu;
-using PageObject.Finders;
 
 namespace PageObject.Elements
 {
@@ -8,9 +7,9 @@ namespace PageObject.Elements
     {
         protected Field(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element) { }
 
-        public bool Enabled => !Disabled;
+        public bool Enabled  => !Disabled;
         public bool Disabled => CoypuElement.Disabled;
 
-        protected override ElementFinder Finder => new FieldFinder(Browser.Driver, Locator, SearchScope, new Options());
+        public override string FinderName => "Field";
     }
 }

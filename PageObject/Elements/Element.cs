@@ -1,6 +1,5 @@
 using System.Linq;
 using Coypu;
-using PageObject.Finders;
 
 namespace PageObject.Elements
 {
@@ -27,7 +26,7 @@ namespace PageObject.Elements
             }
         }
 
-        protected abstract ElementFinder Finder { get; }
+        protected ElementFinder Finder => new ElementFinder(FinderName, Browser.Driver, Locator, SearchScope, new Options());
 
         public void Click() { Driver.Click(CoypuElement); }
         public void SendKeys(string keys) { Driver.SendKeys(CoypuElement, keys); }
