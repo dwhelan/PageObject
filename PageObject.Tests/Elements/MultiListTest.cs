@@ -10,12 +10,17 @@ namespace PageObject.Tests.Elements
     {
         private MultiList MultiList => Element;
 
-        protected override string ElementHtml =>@"
+        protected override string ElementHtml => @"
             <select name='name' multiple=''>
                 <option value='one'>first</option>
                 <option value='two'>second</option>
                 <option value='three'>third</option>
-            </select>";
+            </select>
+            <select name='other' multiple=''>
+                <option value='1'>a</option>
+                <option value='2'>b</option>
+                <option value='3'>c</option>
+            </select>        ";
 
         [Test]
         public void Value_should_be_empty_when_no_options_are_selected()

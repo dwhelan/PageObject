@@ -64,6 +64,6 @@ namespace PageObject.Elements
             return FindXPath($".//option[{WithText(option)}]");
         }
 
-        private IEnumerable<ElementScope> OptionElements => FindAllXPathOrThrow(".//option", "option");
+        private IEnumerable<ElementScope> OptionElements => ElementScope.FindAllXPath(".//option");
     }
 }

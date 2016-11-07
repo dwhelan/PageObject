@@ -23,18 +23,6 @@ namespace PageObject.Elements
             Click(value);
         }
 
-        private SnapshotElementScope ElementScope
-        {
-            get
-            {
-                const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-                var culture = CultureInfo.InvariantCulture;
-                var parameters = new object[] { CoypuElement, SearchScope, new Options() };
-
-                return (SnapshotElementScope) Activator.CreateInstance(typeof(SnapshotElementScope), flags, null, parameters, culture);
-            }
-        }
-
         public IList<string> Options => ElementScope.FindAllXPath(".//option").Select(option => option.Text).ToList();
 
         public void Click(string value)
