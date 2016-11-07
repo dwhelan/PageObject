@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using Coypu;
 using OpenQA.Selenium;
 
@@ -20,7 +23,19 @@ namespace PageObject.Elements
             Click(value);
         }
 
-        public IList<string> Options => FindAllXPathOrThrow(".//option", "option").Select(option => option.Text).ToList();
+        private SnapshotElementScope ElementScope
+        {
+            get
+            {
+                const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+                var culture = CultureInfo.InvariantCulture;
+                var parameters = new object[] { CoypuElement, SearchScope, new Options() };
+
+                return (SnapshotElementScope) Activator.CreateInstance(typeof(SnapshotElementScope), flags, null, parameters, culture);
+            }
+        }
+
+        public IList<string> Options => ElementScope.FindAllXPath(".//option").Select(option => option.Text).ToList();
 
         public void Click(string value)
         {
