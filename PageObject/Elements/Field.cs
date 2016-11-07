@@ -1,4 +1,3 @@
-using System.Linq;
 using Coypu;
 
 namespace PageObject.Elements

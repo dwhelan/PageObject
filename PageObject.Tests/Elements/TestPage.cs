@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using PageObject.Elements;
-using WatiN.Core;
+﻿using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {
