@@ -17,9 +17,9 @@ namespace PageObject.Tests.Elements
                 <option value='three'>third</option>
             </select>
             <select name='other' multiple=''>
-                <option value='1'>a</option>
-                <option value='2'>b</option>
-                <option value='3'>c</option>
+                <option value='one'>first</option>
+                <option value='two'>second</option>
+                <option value='three'>third</option>
             </select>        ";
 
         [Test]

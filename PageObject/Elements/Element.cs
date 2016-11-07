@@ -29,6 +29,11 @@ namespace PageObject.Elements
             }
         }
 
+        protected ElementScope FindXPath(string xPath, Options options = null)
+        {
+            return ElementScope.FindXPath(xPath, options);
+        }
+
         protected ElementFinder Finder => new ElementFinder(FinderName, Browser.Driver, Locator, SearchScope, new Options());
 
         protected SnapshotElementScope ElementScope

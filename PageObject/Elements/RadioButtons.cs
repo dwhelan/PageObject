@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Coypu;
@@ -10,7 +11,7 @@ namespace PageObject.Elements
 
         public string Value
         {
-            get { return Selection == null ? string.Empty : ValueOf(Selection); }
+            get { return Selection == null ? String.Empty : ValueOf(Selection); }
             set { Click(value); }
         }
 
@@ -44,14 +45,14 @@ namespace PageObject.Elements
         private string ValueOf(ElementScope radioButton)
         {
             var labelText = LabelTextFor(radioButton);
-            return string.IsNullOrEmpty(labelText) ? radioButton.Value : labelText;
+            return String.IsNullOrEmpty(labelText) ? radioButton.Value : labelText;
         }
 
         private IEnumerable<ElementScope> Buttons => FindAllXPathOrThrow(ButtonsXpath(), "radio button");
 
         private ElementScope ButtonWith(string value)
         {
-            return FindXPath(ButtonsXpath($"and ({WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"));
+            return FindXPath(ButtonsXpath($"and ({WithAncestorLabel(value)} or {WithLabelFor(value)} or {WithId(value)} or {WithValue(value)})"), SearchScope);
         }
 
         private string ButtonsXpath(string constraints = "")
@@ -63,5 +64,16 @@ namespace PageObject.Elements
         {
             Browser.Driver.Choose(element);
         }
+
+        protected static string LabelTextFor(ElementScope element)
+        {
+            var allLabels = element.FindAllXPath($"//label[@for='{element.Id}'] | .//parent::label");
+            return string.Join(" ", allLabels.Select(label => label.Text));
+        }
+
+        protected static string WithId(string id)              { return $"@id = '{id}'"; }
+        protected static string WithValue(string value)        { return $"@value = '{value}'"; }
+        protected static string WithAncestorLabel(string text) { return $"ancestor::label[{WithText(text)}]"; }
+        protected static string WithLabelFor(string id)        { return $"@id = //label[contains(normalize-space(),'{id}')]/@for"; }
     }
 }
