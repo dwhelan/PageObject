@@ -10,9 +10,9 @@ namespace PageObject.Elements
         {
         }
 
-        public IList<string> Value
+        public IEnumerable<string> Value
         {
-            get { return (from option in OptionElements where option.Selected select option.Text).ToList(); }
+            get { return from option in OptionElements where option.Selected select option.Text; }
             set
             {
                 foreach (var option in OptionElements)
@@ -38,7 +38,7 @@ namespace PageObject.Elements
             Select(option);
         }
 
-        public IList<string> Options => OptionElements.Select(option => option.Text).ToList();
+        public IEnumerable<string> Options => OptionElements.Select(option => option.Text);
 
         private void SetOptions(IEnumerable<string> options, bool selected)
         {

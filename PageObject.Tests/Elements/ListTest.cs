@@ -31,9 +31,16 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Setting_value_should_select_option()
+        public void Should_select_option_by_text()
         {
             List.Value = "second";
+            Assert.That(List.Value, Is.EqualTo("second"));
+        }
+
+        [Test]
+        public void Should_select_option_by_value()
+        {
+            List.Value = "two";
             Assert.That(List.Value, Is.EqualTo("second"));
         }
 
@@ -58,6 +65,7 @@ namespace PageObject.Tests.Elements
             Assert.That(List.Value, Is.EqualTo("first"));
         }
 
+        [Test]
         public void Should_keep_option_selected_when_clicked_multiple_times()
         {
             List.Click("first");
@@ -80,7 +88,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Sendkeys_of_Up_should_select_the_previous_option()
+        public void SendKeys_of_Up_should_select_the_previous_option()
         {
             List.Select("second");
             List.SendKeys(Up);
@@ -88,7 +96,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Sendkeys_of_Home_should_select_the_first_option()
+        public void SendKeys_of_Home_should_select_the_first_option()
         {
             List.Select("third");
             List.SendKeys(Home);
@@ -96,7 +104,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Sendkeys_of_End_should_select_the_last_option()
+        public void SendKeys_of_End_should_select_the_last_option()
         {
             List.Select("first");
             List.SendKeys(End);
@@ -104,7 +112,7 @@ namespace PageObject.Tests.Elements
         }
 
         [Test]
-        public void Sendkeys_of_single_character_should_select_the_option_starting_with_that_letter()
+        public void SendKeys_of_single_character_should_select_the_option_starting_with_that_letter()
         {
             List.Select("first");
             List.SendKeys("t");

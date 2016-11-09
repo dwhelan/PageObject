@@ -15,7 +15,7 @@ namespace PageObject.Elements
             set { Click(value); }
         }
 
-        public IList<string> Options => Buttons.Select(ValueOf).ToList();
+        public IEnumerable<string> Options => Buttons.Select(ValueOf);
 
         public void Select(string value)
         {

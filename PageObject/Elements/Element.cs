@@ -25,7 +25,7 @@ namespace PageObject.Elements
             get
             {
                 if (coypuElement != null) return coypuElement;
-                return Finder.Find(new Options()).ToList().First();
+                return Finder.Find(new Options()).First();
             }
         }
 
@@ -34,7 +34,7 @@ namespace PageObject.Elements
             return ElementScope.FindXPath(xPath, options);
         }
 
-        protected ElementFinder Finder => new ElementFinder(FinderName, Browser.Driver, Locator, SearchScope, new Options());
+        private ElementFinder Finder => new ElementFinder(FinderName, Browser.Driver, Locator, SearchScope, new Options());
 
         protected SnapshotElementScope ElementScope
         {

@@ -19,7 +19,7 @@ namespace PageObject.Elements
             Click(value);
         }
 
-        public IList<string> Options => ElementScope.FindAllXPath(".//option").Select(option => option.Text).ToList();
+        public IEnumerable<string> Options => ElementScope.FindAllXPath(".//option").Select(option => option.Text);
 
         public void Click(string value)
         {
