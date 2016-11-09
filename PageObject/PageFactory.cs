@@ -9,9 +9,7 @@ namespace PageObject
 {
     public class PageFactory
     {
-        public static PageFactory Instance { get { return instance; } }
-
-        private static readonly PageFactory instance = new PageFactory();
+        public static PageFactory Instance { get; } = new PageFactory();
 
         private readonly List<Type> pageClasses = new List<Type>();
 
@@ -56,6 +54,7 @@ namespace PageObject
             }
             catch (TargetInvocationException x)
             {
+                // ReSharper disable once PossibleNullReferenceException
                 throw x.InnerException;
             }
         }
@@ -66,7 +65,7 @@ namespace PageObject
 
             if (matches.Count == 0)
             {
-                throw new ArgumentException(string.Format("Could not find page class for '{0}'.", pageName));
+                throw new ArgumentException($"Could not find page class for '{pageName}'.");
             }
 
             if (matches.Count > 1)
