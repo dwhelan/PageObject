@@ -1,4 +1,5 @@
 ﻿using System;
+using Coypu;
 
 namespace PageObject.Elements
 {

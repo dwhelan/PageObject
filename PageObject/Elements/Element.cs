@@ -8,8 +8,8 @@ namespace PageObject.Elements
 {
     public abstract class Element : BaseElement
     {
-        protected Element(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null)
-            : base(attribute, browser)
+        protected Element(ElementAttribute attribute, BrowserSession browser, Options findOptions, Coypu.Element element = null)
+            : base(attribute, browser, findOptions)
         {
             coypuElement = element;
         }
@@ -25,7 +25,7 @@ namespace PageObject.Elements
             get
             {
                 if (coypuElement != null) return coypuElement;
-                return Finder.Find(new Options()).First();
+                return Finder.Find(FindOptions);
             }
         }
 

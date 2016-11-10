@@ -5,7 +5,7 @@ namespace PageObject.Elements
 {
     public class Checkbox : Field
     {
-        public Checkbox(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element)
+        public Checkbox(ElementAttribute attribute, BrowserSession browser, Options findOptions, Coypu.Element element = null) : base(attribute, browser, findOptions, element)
         {
         }
 

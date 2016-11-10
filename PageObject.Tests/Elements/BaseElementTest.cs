@@ -10,6 +10,7 @@ namespace PageObject.Tests.Elements
     public static class TestConstants
     {
         internal const string HtmlFileName = "ElementTestPage.html";
+        internal const string TestPageUrl  = "file:///${cd}/" + HtmlFileName;
     }
 
     public abstract class BaseElementTest<TP, TE> where TP : TestPage<TE> where TE : PageObject.Elements.BaseElement

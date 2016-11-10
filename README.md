@@ -56,7 +56,6 @@ See more examples at the [Creating Pages](https://github.com/dwhelan/PageObject/
  - support xUnit
 
 ### Likely not!
- - support option element
  - update List element to return nested option elements ?
 
 

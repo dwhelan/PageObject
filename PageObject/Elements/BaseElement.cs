@@ -12,12 +12,14 @@ namespace PageObject.Elements
         protected DriverScope SearchScope => Browser;
 
         protected ElementAttribute Attribute { get; }
+        protected Options FindOptions { get; }
         public virtual string FinderName => "";
 
-        protected BaseElement(ElementAttribute attribute, BrowserSession browser)
+        protected BaseElement(ElementAttribute attribute, BrowserSession browser, Options findOptions)
         {
-            Attribute = attribute;
-            Browser = browser;
+            Attribute   = attribute;
+            Browser     = browser;
+            FindOptions = findOptions;
         }
 
         protected ElementScope FindXPath(string xPath, DriverScope scope, Options options = null)

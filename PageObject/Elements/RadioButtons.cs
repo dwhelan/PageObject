@@ -7,7 +7,7 @@ namespace PageObject.Elements
 {
     public class RadioButtons : BaseElement
     {
-        public RadioButtons(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser) { }
+        public RadioButtons(ElementAttribute attribute, BrowserSession browser, Options findOptions, Coypu.Element element = null) : base(attribute, browser, findOptions) { }
 
         public string Value
         {

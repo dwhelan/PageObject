@@ -46,7 +46,7 @@ namespace PageObject
 
         public Page PageFor(Type pageClass, PageSession session = null)
         {
-            var bindingFlags = BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance | BindingFlags.OptionalParamBinding;
+            const BindingFlags bindingFlags = BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance | BindingFlags.OptionalParamBinding;
 
             try
             {

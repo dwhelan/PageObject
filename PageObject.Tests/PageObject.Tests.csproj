@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\BaseElementTest.cs" />
+    <Compile Include="Elements\ElementOptionsTest.cs" />
+    <Compile Include="Elements\CoypuElementTest.cs" />
     <Compile Include="Elements\LinkTest.cs" />
     <Compile Include="Elements\FieldTest.cs" />
     <Compile Include="Elements\RadioButtonsTest.cs" />

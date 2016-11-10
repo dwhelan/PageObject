@@ -14,7 +14,7 @@ namespace PageObject
         public bool IsActive => new UriMatcher(this, Browser.Location).Matches;
 
         protected internal BrowserSession Browser => Session.Browser;
-        protected PageSession Session { get; }
+        public PageSession Session { get; }
 
         internal PageAtAttribute Attribute => PageAtAttribute.For(GetType());
 
@@ -30,9 +30,9 @@ namespace PageObject
             Session.Page = this;
         }
 
-        public T Element<T>([CallerMemberName]string propertyName = "") where T : BaseElement
+        public T Element<T>(Options options = null, [CallerMemberName] string propertyName = "") where T : BaseElement
         {
-            return ElementFactory.ElementFor<T>(this, propertyName);
+            return ElementFactory.ElementFor<T>(this, propertyName, options);
         }
 
         public ElementList<T> ElementList<T>([CallerMemberName]string propertyName = "") where T : BaseElement

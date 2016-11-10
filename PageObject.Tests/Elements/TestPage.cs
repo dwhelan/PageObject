@@ -2,7 +2,7 @@
 
 namespace PageObject.Tests.Elements
 {
-    [PageAt("file:///${cd}/" + TestConstants.HtmlFileName)]
+    [PageAt(TestConstants.TestPageUrl)]
     public class TestPage<T> : Page where T : BaseElement
     {
         public TestPage(PageSession session) : base(session) {}

@@ -4,7 +4,8 @@ namespace PageObject.Elements
 {
     public abstract class Field : Element
     {
-        protected Field(ElementAttribute attribute, BrowserSession browser, Coypu.Element element = null) : base(attribute, browser, element) { }
+        protected Field(ElementAttribute attribute, BrowserSession browser, Options options, Coypu.Element element = null) 
+            : base(attribute, browser, options, element) { }
 
         public bool Enabled  => !Disabled;
         public bool Disabled => CoypuElement.Disabled;
