@@ -14,7 +14,7 @@ namespace PageObject.Elements
             {
                 var childElement = (T) Activator.CreateInstance(typeof(T), Attribute, Browser, new Options(), null);
                 var finder = new ElementFinder(childElement.FinderName, Browser.Driver, Locator, SearchScope, new Options());
-                var list = finder.FindAll(new Options()).ToList();
+                var list = finder.FindAll().ToList();
                 return (T) Activator.CreateInstance(typeof(T), Attribute, Browser, new Options(), list[index]);
             }
         }

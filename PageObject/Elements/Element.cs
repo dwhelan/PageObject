@@ -25,7 +25,7 @@ namespace PageObject.Elements
             get
             {
                 if (coypuElement != null) return coypuElement;
-                return Finder.Find(FindOptions);
+                return Finder.Find();
             }
         }
 
