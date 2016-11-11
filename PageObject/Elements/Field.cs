@@ -10,6 +10,6 @@ namespace PageObject.Elements
         public bool Enabled  => !Disabled;
         public bool Disabled => CoypuElement.Disabled;
 
-        public override string FinderName => "Field";
+        public override string FinderName => "FieldFinder";
     }
 }

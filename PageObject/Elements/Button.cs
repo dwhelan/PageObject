@@ -6,6 +6,6 @@ namespace PageObject.Elements
     {
         public Button(ElementAttribute attribute, BrowserSession browser, Options findOptions, Coypu.Element element = null) : base(attribute, browser, findOptions, element) { }
 
-        public override string FinderName => "Button";
+        public override string FinderName => "ButtonFinder";
     }
 }

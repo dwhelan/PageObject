@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using PageObject.Elements;
+﻿using PageObject.Elements;
 
 namespace PageObject.Tests.Elements
 {

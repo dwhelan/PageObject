@@ -3,43 +3,44 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using Coypu;
-using System.Linq;
 
 namespace PageObject
 {
     public class ElementFinder
     {
         private readonly Coypu.Finders.ElementFinder finder;
-        private readonly Type finderType;
+        private static readonly DisambiguationStrategy DisambiguationStrategy = (DisambiguationStrategy) CreateInstance("FinderOptionsDisambiguationStrategy");
 
         internal ElementFinder(string finderName, Driver driver, string locator, DriverScope scope, Options options)
         {
-            const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-            var culture = CultureInfo.InvariantCulture;
-            finderType = Type.GetType($"Coypu.Finders.{finderName}Finder, Coypu");
-            var parameters = new object[] { driver, locator, scope, options };
-            
-            // ReSharper disable once AssignNullToNotNullAttribute
-            finder = (Coypu.Finders.ElementFinder) Activator.CreateInstance(finderType, flags, null, parameters, culture);
+            finder = (Coypu.Finders.ElementFinder) CreateInstance(finderName, driver, locator, scope, options);
         }
 
         internal Element Find()
         {
-            const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-            var culture = CultureInfo.InvariantCulture;
-            var parameters = new object[] { };
-            var type = Type.GetType("Coypu.Finders.FinderOptionsDisambiguationStrategy, Coypu");
-
-            // ReSharper disable once AssignNullToNotNullAttribute
-            var foo = (DisambiguationStrategy) Activator.CreateInstance(type, flags, null, parameters, culture);
-            return foo.ResolveQuery(finder);
+            return DisambiguationStrategy.ResolveQuery(finder);
         }
 
         internal IEnumerable<Element> FindAll()
         {
-            const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-            var method = finderType.GetMethod("Find", flags);
-            return (IEnumerable<Element>)method.Invoke(finder, new object[] { finder.Options });
+            return (IEnumerable<Element>) Invoke(finder, "Find", finder.Options);
+        }
+
+        private const BindingFlags Flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+        private static readonly CultureInfo Culture = CultureInfo.InvariantCulture;
+
+        private static object CreateInstance(string typeName, params object[] parameters)
+        {
+            var type = Type.GetType($"Coypu.Finders.{typeName}, Coypu");
+
+            // ReSharper disable once AssignNullToNotNullAttribute
+            return Activator.CreateInstance(type, Flags, null, parameters, Culture);
+        }
+
+        internal static object Invoke(object obj, string methodName, params object[] parameters)
+        {
+            var method = obj.GetType().GetMethod(methodName, Flags);
+            return method.Invoke(obj, parameters);
         }
     }
 }

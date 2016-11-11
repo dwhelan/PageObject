@@ -6,6 +6,6 @@ namespace PageObject.Elements
     {
         public Link(ElementAttribute attribute, BrowserSession browser, Options findOptions, Coypu.Element element = null) : base(attribute, browser, findOptions, element) { }
 
-        public override string FinderName => "Link";
+        public override string FinderName => "LinkFinder";
     }
 }
