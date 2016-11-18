@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection;
 using Coypu;
+using PageObject.Util;
 
 namespace PageObject
 {
@@ -23,36 +21,12 @@ namespace PageObject
 
         internal IEnumerable<Element> FindAll()
         {
-            return (IEnumerable<Element>) Invoke(finder, "Find", finder.Options);
+            return (IEnumerable<Element>) Reflection.Invoke(finder, "Find", finder.Options);
         }
 
-        private const BindingFlags Flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-        private static readonly CultureInfo Culture = CultureInfo.InvariantCulture;
-
-        private static object CreateInstance(string typeName, params object[] parameters)
+        private static object CreateInstance(string finderTypeName, params object[] parameters)
         {
-            var type = Type.GetType($"Coypu.Finders.{typeName}, Coypu");
-
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return Reflection.CreateInstance(type, parameters);
-        }
-
-        internal static object Invoke(object obj, string methodName, params object[] parameters)
-        {
-            var method = obj.GetType().GetMethod(methodName, Flags);
-            return method.Invoke(obj, parameters);
-        }
-    }
-
-    internal static class Reflection
-    {
-        private const BindingFlags Flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-        private static readonly CultureInfo Culture = CultureInfo.InvariantCulture;
-
-        internal static object CreateInstance(Type type, params object[] parameters)
-        {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return Activator.CreateInstance(type, Flags, null, parameters, Culture);
+            return Reflection.CreateInstance($"Coypu.Finders.{finderTypeName}, Coypu", parameters);
         }
     }
 }

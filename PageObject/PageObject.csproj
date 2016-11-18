@@ -86,6 +86,7 @@
     <Compile Include="PageSession.cs" />
     <Compile Include="UriBuilder.cs" />
     <Compile Include="UriMatcher.cs" />
+    <Compile Include="Util\Reflection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
