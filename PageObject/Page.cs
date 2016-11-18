@@ -2,6 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Coypu;
 using PageObject.Elements;
+using PageObject.Util;
 
 namespace PageObject
 {

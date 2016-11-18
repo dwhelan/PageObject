@@ -84,9 +84,9 @@
     <Compile Include="Page.cs" />
     <Compile Include="PageFactory.cs" />
     <Compile Include="PageSession.cs" />
-    <Compile Include="UriBuilder.cs" />
-    <Compile Include="UriMatcher.cs" />
     <Compile Include="Util\Reflection.cs" />
+    <Compile Include="Util\UriBuilder.cs" />
+    <Compile Include="Util\UriMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
