@@ -34,13 +34,25 @@ namespace PageObject
             var type = Type.GetType($"Coypu.Finders.{typeName}, Coypu");
 
             // ReSharper disable once AssignNullToNotNullAttribute
-            return Activator.CreateInstance(type, Flags, null, parameters, Culture);
+            return Reflection.CreateInstance(type, parameters);
         }
 
         internal static object Invoke(object obj, string methodName, params object[] parameters)
         {
             var method = obj.GetType().GetMethod(methodName, Flags);
             return method.Invoke(obj, parameters);
+        }
+    }
+
+    internal static class Reflection
+    {
+        private const BindingFlags Flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+        private static readonly CultureInfo Culture = CultureInfo.InvariantCulture;
+
+        internal static object CreateInstance(Type type, params object[] parameters)
+        {
+            // ReSharper disable once AssignNullToNotNullAttribute
+            return Activator.CreateInstance(type, Flags, null, parameters, Culture);
         }
     }
 }
